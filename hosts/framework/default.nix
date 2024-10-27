@@ -13,6 +13,8 @@
     ../../modules/hyprland.nix
   ];
 
+  console.font = "ter-i32b";
+
   networking.hostName = "framework";
   networking.networkmanager.enable = true;
 

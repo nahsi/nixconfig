@@ -2,7 +2,7 @@
   programs.qutebrowser = {
     enable = true;
     settings = {
-      fonts.default_size = "13pt";
+      fonts.default_size = "12pt";
       colors.webpage.preferred_color_scheme = "dark";
       zoom.default = "125%";
     };
