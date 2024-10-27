@@ -9,4 +9,6 @@ let
 in
 {
   "fluence.age".publicKeys = users ++ systems;
+  "vault-agent/role_id.age".publicKeys = users ++ systems;
+  "vault-agent/secret_id.age".publicKeys = users ++ systems;
 }

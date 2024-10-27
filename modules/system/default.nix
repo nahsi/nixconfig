@@ -3,7 +3,7 @@
   imports = [
     ./doas.nix
     ./lanzaboote.nix
-    ../../common/secrets.nix
+    ../../fluence
   ];
 
   time.timeZone = "Europe/Athens";

@@ -40,6 +40,12 @@
     pkgs.tdesktop
     pkgs.slack
 
+    pkgs.nomad
+    pkgs.consul
+    pkgs.vault
+    pkgs.terraform
+    pkgs.packer
+
     # fonts
     pkgs.noto-fonts
     pkgs.noto-fonts-cjk
