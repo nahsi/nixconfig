@@ -81,6 +81,36 @@
               }
             ];
           };
+        system76 =
+          let
+          in
+          nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            specialArgs = {
+              inherit inputs;
+            };
+            modules = [
+              ./hosts/system76
+              lanzaboote.nixosModules.lanzaboote
+              home-manager.nixosModules.home-manager
+              ragenix.nixosModules.default
+              nixos-hardware.nixosModules.system76
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.extraSpecialArgs = {
+                  inherit inputs;
+                };
+                home-manager.users.nahsi = {
+                  imports = [
+                    ./home.nix
+                    catppuccin.homeManagerModules.catppuccin
+                    spicetify-nix.homeManagerModules.default
+                  ];
+                };
+              }
+            ];
+          };
       };
     };
 }

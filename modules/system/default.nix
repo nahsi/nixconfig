@@ -14,7 +14,7 @@
     font = "ter-i32b";
     packages = with pkgs; [ terminus_font ];
     useXkbConfig = true;
-    earlySetup = false;
+    earlySetup = true;
   };
 
   hardware.i2c.enable = true;
