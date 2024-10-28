@@ -37,7 +37,7 @@
       ###################
       ### AUTOSTART ###
       ###################
-      exec-once = [ "waybar" ];
+      # exec-once = [ "waybar" ];
 
       #####################
       ### LOOK AND FEEL ###
