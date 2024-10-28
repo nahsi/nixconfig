@@ -1,0 +1,75 @@
+* {
+    font-family: FantasqueSansMono Nerd Font;
+    font-size: 14px;
+    min-height: 0;
+  }
+
+  #waybar {
+    background: @base;
+    color: @text;
+    margin: 5px 5px;
+  }
+
+  #workspaces {
+    border-radius: 1rem;
+    margin: 5px;
+    background-color: @surface0;
+    margin-left: 1rem;
+  }
+
+  #workspaces button {
+    color: @lavender;
+    border-radius: 1rem;
+    padding: 0.4rem;
+  }
+
+  #workspaces button.active {
+    color: @sky;
+    border-radius: 1rem;
+  }
+
+  #workspaces button:hover {
+    color: @sapphire;
+    border-radius: 1rem;
+  }
+
+  #tray,
+  #backlight,
+  #clock,
+  #battery,
+  #usage,
+
+  language {
+    margin: 1rem;
+  }
+
+  #clock {
+    color: @blue;
+    border-radius: 0px 1rem 1rem 0px;
+    margin-right: 1rem;
+  }
+
+  #battery {
+    color: @green;
+  }
+
+  #battery.charging {
+    color: @green;
+  }
+
+  #battery.warning:not(.charging) {
+    color: @red;
+  }
+
+  #backlight {
+    color: @yellow;
+  }
+
+  #backlight, #battery {
+      border-radius: 0;
+  }
+
+  #tray {
+    margin-right: 1rem;
+    border-radius: 1rem;
+  }

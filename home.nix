@@ -7,13 +7,13 @@
 {
   imports = [
     programs/hyprland
+    programs/waybar
     programs/kitty.nix
     programs/nnn.nix
     programs/qutebrowser.nix
     programs/git.nix
     programs/bash.nix
     programs/starship.nix
-    programs/waybar.nix
     programs/fuzzel.nix
     programs/spicetify.nix
     programs/mako.nix
