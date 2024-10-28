@@ -71,11 +71,6 @@
 
   catppuccin.flavor = "mocha";
   catppuccin.enable = true;
-  catppuccin.accent = "blue";
+  #catppuccin.accent = "blue";
 
-  home.pointerCursor = {
-    size = 64;
-    package = pkgs.vanilla-dmz;
-    name = "Vanilla-DMZ";
-  };
 }

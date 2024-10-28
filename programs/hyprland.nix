@@ -1,9 +1,25 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
   home.sessionVariables = {
     HYPRCUROS_SIZE = 48;
     HYPRCUROR_THEME = "captuccin-mocha-blue-cursors";
     NIXOS_OZONE_WL = 1;
+  };
+
+  home.packages = [
+    pkgs.hyprpaper
+    pkgs.hyprcursor
+    pkgs.hyprpicker
+  ];
+
+  services = {
+    hyprpaper = {
+      enable = true;
+      settings = {
+        preload = [ "/home/nahsi/Wallpapers/wallhaven-m9wm98.jpg" ];
+        wallpaper = [ ", /home/nahsi/Wallpapers/wallhaven-m9wm98.jpg" ];
+      };
+    };
   };
 
   wayland.windowManager.hyprland = {
@@ -23,12 +39,6 @@
       ###################
       exec-once = [ "waybar" ];
 
-      #############################
-      ### ENVIRONMENT VARIABLES ###
-      #############################
-      #env = XCURSOR_SIZE,"24";
-      # env= HYPRCURSOR_SIZE,"24";
-
       #####################
       ### LOOK AND FEEL ###
       #####################
@@ -39,6 +49,10 @@
         resize_on_border = false;
         allow_tearing = false;
         layout = "dwindle";
+
+        "col.active_border" = "$accent";
+        "col.inactive_border" = "$base";
+
       };
 
       decoration = {
@@ -64,8 +78,14 @@
           "windows, 1, 7, myBezier"
           "windowsOut, 1, 7, default, popin 80%"
           "border, 1, 10, default"
+          "borderangle, 1, 8, default"
           "fade, 1, 7, default"
+          "workspaces, 1, 6, default"
         ];
+      };
+
+      master = {
+        new_status = "master";
       };
 
       dwindle = {
@@ -74,8 +94,8 @@
       };
 
       misc = {
-        force_default_wallpaper = -1;
-        disable_hyprland_logo = false;
+        force_default_wallpaper = 0;
+        disable_hyprland_logo = true;
       };
 
       #############
