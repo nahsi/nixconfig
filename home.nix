@@ -8,6 +8,7 @@
   imports = [
     programs/hyprland.nix
     programs/kitty.nix
+    programs/nnn.nix
     programs/qutebrowser.nix
     programs/git.nix
     programs/bash.nix
