@@ -34,19 +34,21 @@
   }
 
   #tray,
-  #backlight,
-  #clock,
-  #battery,
-  #usage,
+  #battery {
+    background-color: @surface0;
+    margin: 5px 0;
+  }
 
-  language {
-    margin: 1rem;
+  #language {
+    margin: 5px 0;
   }
 
   #clock {
     color: @blue;
     border-radius: 0px 1rem 1rem 0px;
-    margin-right: 1rem;
+    background-color: @surface0;
+    padding: 0.5rem 1rem;
+    margin: 5px 0;
   }
 
   #battery {
