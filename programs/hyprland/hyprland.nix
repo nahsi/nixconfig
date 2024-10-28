@@ -136,6 +136,7 @@
         "$mod, down, movefocus, d"
         "$secondMod, J, cyclenext"
         "$secondMod SHIFT, J, cyclenext, prev"
+        "$mod, L, exec, hyprlock"
 
         # Workspace bindings
         "$mod, 1, workspace, 1"
