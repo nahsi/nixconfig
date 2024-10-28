@@ -6,6 +6,7 @@
 }:
 {
   imports = [
+    programs/hyprland.nix
     programs/kitty.nix
     programs/qutebrowser.nix
     programs/git.nix
