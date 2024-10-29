@@ -8,6 +8,14 @@
       mode = "400";
     };
 
+    sshHcloud = {
+      file = secrets/ssh/hcloud.age;
+      path = "${config.users.users.nahsi.home}/.ssh/fluence/hcloud";
+      owner = config.users.users.nahsi.name;
+      group = config.users.users.nahsi.group;
+      mode = "400";
+    };
+
     vaultAgentFluenceRoleId = {
       file = secrets/vault-agent/role_id.age;
       owner = config.services.vault-agent.instances.fluence.user;

@@ -14,6 +14,8 @@ in
       template = [
         {
           destination = pki.ca_cert;
+          perms = "0400";
+          uid = config.users.users.nahsi.uid;
           contents = ''
             {{- with secret "pki/issue/internal" "ttl=30d" "common_name=framework.node.consul" -}}
             {{ .Data.issuing_ca }}{{ end }}
@@ -21,6 +23,8 @@ in
         }
         {
           destination = pki.cert;
+          perms = "0400";
+          uid = config.users.users.nahsi.uid;
           contents = ''
             {{- with secret "pki/issue/internal" "ttl=30d" "common_name=framework.node.consul" -}}
             {{ .Data.certificate }}{{ end }}
@@ -28,6 +32,8 @@ in
         }
         {
           destination = pki.key;
+          perms = "0400";
+          uid = config.users.users.nahsi.uid;
           contents = ''
             {{- with secret "pki/issue/internal" "ttl=30d" "common_name=framework.node.consul" -}}
             {{ .Data.private_key }}{{ end }}

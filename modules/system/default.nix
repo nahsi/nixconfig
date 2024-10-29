@@ -23,6 +23,7 @@
   users.users.nahsi = {
     isNormalUser = true;
     createHome = true;
+    uid = 1000;
     extraGroups = [
       "networkmanager"
       "wheel"
