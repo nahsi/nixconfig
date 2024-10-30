@@ -38,6 +38,7 @@
     pkgs.brightnessctl
     pkgs.just
     pkgs.wl-clipboard
+    pkgs.jq
 
     pkgs.tdesktop
     pkgs.slack
