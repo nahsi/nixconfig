@@ -1,10 +1,18 @@
 { pkgs, ... }:
 {
   programs.nixvim = {
-    extraPackages = with pkgs; [ nixfmt-rfc-style ];
+    extraPackages = with pkgs; [
+      nixfmt-rfc-style
+      prettierd
+    ];
 
     plugins.conform-nvim = {
       enable = true;
+      formattersByFt = {
+        markdown = [ "prettierd" ];
+        yaml = [ "prettierd" ];
+        nix = [ "nixpkgs_fmt" ];
+      };
     };
 
     keymaps = [
