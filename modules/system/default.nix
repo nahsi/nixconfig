@@ -20,6 +20,8 @@
   hardware.i2c.enable = true;
 
   services.libinput.enable = true;
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
 
   users.users.nahsi = {
     isNormalUser = true;
