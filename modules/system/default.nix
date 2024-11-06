@@ -32,6 +32,12 @@
       "wheel"
       "dialout"
     ];
+    openssh.authorizedKeys.keys = [
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDZ9opAts/fwt8NkGCtyJ4j9Rzw+WZICC1h91OdEpdK6mdyO4dIkb7mbQLRMNFdKoOnX3AervV5nzI0lEbM4aUVMAYya3V4OX7ZJWIPrnFBjsJuzXtk5qyFYa5ShuOqtWlyDMpY9u7hXaDSnxvMw+opP/CXhZOagBcCbr33IaqBmPxwyNz+9iU6ZNcCy/0AhYOMK8lt830Ekjtu0wreii5x7P6KYEAk6SryvUnnp34reGTftTf7XF6HBUGwFP9ggbPOzVfPH6CqbeUSAT6FHGjKRH8Xvn3bA+v0OdcDOOCZhDr0dPOnJlXDM3XltIDqn3H/ZxOoqabM4KIIIAVHOgov"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBoUu5hDFlvZgThaoAuoYvsI5wWETeQfHoR1UX2w0Xdc"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILd/6tTC0ZiExgsuvZnJzF32mjFVJBRwZDcUuKb3d5ia"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIISV8Fd1iZ8a3Lc9Cb3Ule2M47JGbG8xKMJTSq1ae7ae"
+    ];
   };
 
   environment.systemPackages = with pkgs; [
