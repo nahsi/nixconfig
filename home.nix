@@ -22,6 +22,7 @@
     programs/nixvim
     programs/ragenix.nix
     programs/direnv.nix
+    programs/mpv.nix
   ];
 
   home.username = "nahsi";
