@@ -9,6 +9,7 @@
   imports = [
     ./hardware-configuration.nix
     ./fprintd.nix
+    ./wireguard.nix
     ../../modules/system
     ../../modules/hyprland.nix
   ];

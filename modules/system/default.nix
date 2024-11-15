@@ -17,11 +17,15 @@
     earlySetup = true;
   };
 
+  networking.firewall.enable = false;
+
   hardware.i2c.enable = true;
 
   services.libinput.enable = true;
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
+
+  virtualisation.docker.enable = true;
 
   users.users.nahsi = {
     isNormalUser = true;
@@ -31,6 +35,7 @@
       "networkmanager"
       "wheel"
       "dialout"
+      "docker"
     ];
     openssh.authorizedKeys.keys = [
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDZ9opAts/fwt8NkGCtyJ4j9Rzw+WZICC1h91OdEpdK6mdyO4dIkb7mbQLRMNFdKoOnX3AervV5nzI0lEbM4aUVMAYya3V4OX7ZJWIPrnFBjsJuzXtk5qyFYa5ShuOqtWlyDMpY9u7hXaDSnxvMw+opP/CXhZOagBcCbr33IaqBmPxwyNz+9iU6ZNcCy/0AhYOMK8lt830Ekjtu0wreii5x7P6KYEAk6SryvUnnp34reGTftTf7XF6HBUGwFP9ggbPOzVfPH6CqbeUSAT6FHGjKRH8Xvn3bA+v0OdcDOOCZhDr0dPOnJlXDM3XltIDqn3H/ZxOoqabM4KIIIAVHOgov"

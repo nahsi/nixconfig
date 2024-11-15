@@ -1,6 +1,11 @@
 {
   programs.qutebrowser = {
     enable = true;
+    searchEngines = {
+      "yt" = "https://www.youtube.com/results?search_query={}";
+      "gg" = "http://www.google.com/search?hl=en&q={}";
+      "gh" = "https://github.com/search?q={}&type=Code";
+    };
     settings = {
       fonts.default_size = "12pt";
       colors.webpage.preferred_color_scheme = "dark";

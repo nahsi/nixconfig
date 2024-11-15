@@ -2,6 +2,7 @@
   inputs,
   config,
   pkgs,
+  lib,
   ...
 }:
 {
@@ -41,6 +42,11 @@
     pkgs.just
     pkgs.wl-clipboard
     pkgs.jq
+    pkgs.bitwarden-cli
+    pkgs.wireguard-tools
+
+    #pkgs.qbittorrent
+    pkgs.chromium
 
     pkgs.tdesktop
     pkgs.slack
