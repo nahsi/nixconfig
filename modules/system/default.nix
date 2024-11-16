@@ -19,6 +19,19 @@
 
   networking.firewall.enable = false;
 
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    publish = {
+      enable = true;
+      addresses = true;
+      domain = true;
+      hinfo = true;
+      userServices = true;
+      workstation = true;
+    };
+  };
+
   hardware.i2c.enable = true;
 
   services.libinput.enable = true;
