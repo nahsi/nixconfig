@@ -17,7 +17,14 @@
   console.font = "ter-i32b";
 
   networking.hostName = "framework";
-  networking.networkmanager.enable = true;
+
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [
+      8080
+      8443
+    ]; # unifi controller
+  };
 
   services.fwupd.enable = true;
   services.power-profiles-daemon.enable = true;

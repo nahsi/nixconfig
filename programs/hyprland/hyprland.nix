@@ -10,6 +10,7 @@
     pkgs.hyprpaper
     pkgs.hyprcursor
     pkgs.hyprpicker
+    pkgs.hyprshot
   ];
 
   services = {
@@ -37,7 +38,7 @@
       ###################
       ### AUTOSTART ###
       ###################
-      # exec-once = [ "waybar" ];
+      exec-once = [ "nm-applet" ];
 
       #####################
       ### LOOK AND FEEL ###
@@ -169,6 +170,10 @@
         "$mod, mouse_down, workspace, e+1"
         "$mod, mouse_up, workspace, e-1"
 
+        # Screenshot a monitor
+        "$mod, PRINT, exec, hyprshot -m output --clipboard-only"
+        # Screenshot a region
+        ",PRINT, exec, hyprshot -m region --clipboard-only"
       ];
       bindm = [
         # Move/resize windows with mouse dragging

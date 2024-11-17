@@ -17,7 +17,10 @@
     earlySetup = true;
   };
 
-  networking.firewall.enable = false;
+  networking.networkmanager = {
+    enable = true;
+    wifi.powersave = true;
+  };
 
   services.avahi = {
     enable = true;
@@ -62,6 +65,7 @@
     git
     pavucontrol
     ddcutil
+    networkmanagerapplet
   ];
 
   services.openssh = {
