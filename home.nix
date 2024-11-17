@@ -24,6 +24,7 @@
     programs/ragenix.nix
     programs/direnv.nix
     programs/mpv.nix
+    programs/gtk.nix
   ];
 
   home.username = "nahsi";
@@ -77,14 +78,6 @@
     defaultFonts.emoji = [ "Noto Color Emoji" ];
   };
 
-  programs.neomutt.enable = true;
-
   catppuccin.flavor = "mocha";
   catppuccin.enable = true;
-
-  home.pointerCursor = {
-    size = 64;
-    package = pkgs.vanilla-dmz;
-    name = "Vanilla-DMZ";
-  };
 }
