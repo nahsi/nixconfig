@@ -25,6 +25,8 @@
     programs/direnv.nix
     programs/mpv.nix
     programs/gtk.nix
+
+    languages/rust.nix
   ];
 
   home.username = "nahsi";

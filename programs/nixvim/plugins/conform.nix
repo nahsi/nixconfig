@@ -1,18 +1,21 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   programs.nixvim = {
     extraPackages = with pkgs; [
       nixfmt-rfc-style
       prettierd
+      rustfmt
     ];
 
     plugins.conform-nvim = {
       enable = true;
+      formatters.nixfmt.command = "${lib.getExe pkgs.nixfmt-rfc-style}";
       formattersByFt = {
         markdown = [ "prettierd" ];
         yaml = [ "prettierd" ];
         json = [ "prettierd" ];
-        nix = [ "nixpkgs_fmt" ];
+        nix = [ "nixfmt" ];
+        rust = [ "rustfmt" ];
       };
     };
 

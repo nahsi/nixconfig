@@ -4,14 +4,24 @@
     inputs.nixvim.homeManagerModules.nixvim
     ./colorscheme.nix
     ./plugins/lightline.nix
+    ./plugins/rainbow-delimeters.nix
     ./plugins/treesitter.nix
     ./plugins/conform.nix
-    ./plugins/rainbow-delimeters.nix
+    ./plugins/lsp.nix
+    ./plugins/nvim-cmp.nix
   ];
   programs.nixvim = {
     enable = true;
     globals.mapleader = ",";
     opts = {
+      swapfile = false;
+
+      # Spaces instead of tabs
+      expandtab = true;
+      shiftwidth = 4;
+      tabstop = 4;
+      softtabstop = 4;
+
       # Show line numbers and have relative-line numbers
       number = true;
       relativenumber = true;
@@ -35,21 +45,15 @@
 
       # Enable undo history
       undofile = true;
+      undolevels = 10000;
 
       # Case-insensitive searching UNLESS \C or capital in search
       ignorecase = true;
       smartcase = true;
 
       # Decrease update time
-      updatetime = 250;
+      updatetime = 100;
       timeoutlen = 300;
-
-      # Set completeopt to have a better completion experience
-      completeopt = [
-        "menuone"
-        "noinsert"
-        "noselect"
-      ];
     };
   };
 }
