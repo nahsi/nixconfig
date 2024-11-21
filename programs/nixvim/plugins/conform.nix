@@ -11,6 +11,7 @@
       formattersByFt = {
         markdown = [ "prettierd" ];
         yaml = [ "prettierd" ];
+        json = [ "prettierd" ];
         nix = [ "nixpkgs_fmt" ];
       };
     };

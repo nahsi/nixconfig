@@ -45,6 +45,8 @@
     pkgs.jq
     pkgs.bitwarden-cli
     pkgs.wireguard-tools
+    pkgs.talosctl
+    pkgs.hclfmt
 
     #pkgs.qbittorrent
     pkgs.chromium
