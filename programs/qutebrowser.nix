@@ -6,6 +6,7 @@
       "gg" = "http://www.google.com/search?hl=en&q={}";
       "gh" = "https://github.com/search?q={}&type=Code";
       "ghn" = "https://github.com/search?q=language%3Anix {}&type=Code";
+      "mn" = "https://mynixos.com/search?q={}";
     };
     settings = {
       fonts.default_size = "12pt";
