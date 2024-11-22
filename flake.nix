@@ -51,66 +51,60 @@
     {
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
       nixosConfigurations = {
-        framework =
-          let
-          in
-          nixpkgs.lib.nixosSystem {
-            system = "x86_64-linux";
-            specialArgs = {
-              inherit inputs;
-            };
-            modules = [
-              ./hosts/framework
-              lanzaboote.nixosModules.lanzaboote
-              nixos-hardware.nixosModules.framework-16-7040-amd
-              ragenix.nixosModules.default
-              home-manager.nixosModules.home-manager
-              {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.extraSpecialArgs = {
-                  inherit inputs;
-                };
-                home-manager.users.nahsi = {
-                  imports = [
-                    ./home.nix
-                    catppuccin.homeManagerModules.catppuccin
-                    spicetify-nix.homeManagerModules.default
-                  ];
-                };
-              }
-            ];
+        framework = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit inputs;
           };
-        system76 =
-          let
-          in
-          nixpkgs.lib.nixosSystem {
-            system = "x86_64-linux";
-            specialArgs = {
-              inherit inputs;
-            };
-            modules = [
-              ./hosts/system76
-              lanzaboote.nixosModules.lanzaboote
-              home-manager.nixosModules.home-manager
-              ragenix.nixosModules.default
-              nixos-hardware.nixosModules.system76
-              {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.extraSpecialArgs = {
-                  inherit inputs;
-                };
-                home-manager.users.nahsi = {
-                  imports = [
-                    ./home.nix
-                    catppuccin.homeManagerModules.catppuccin
-                    spicetify-nix.homeManagerModules.default
-                  ];
-                };
-              }
-            ];
+          modules = [
+            ./hosts/framework
+            lanzaboote.nixosModules.lanzaboote
+            nixos-hardware.nixosModules.framework-16-7040-amd
+            ragenix.nixosModules.default
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = {
+                inherit inputs;
+              };
+              home-manager.users.nahsi = {
+                imports = [
+                  ./home.nix
+                  catppuccin.homeManagerModules.catppuccin
+                  spicetify-nix.homeManagerModules.default
+                ];
+              };
+            }
+          ];
+        };
+        system76 = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit inputs;
           };
+          modules = [
+            ./hosts/system76
+            lanzaboote.nixosModules.lanzaboote
+            home-manager.nixosModules.home-manager
+            ragenix.nixosModules.default
+            nixos-hardware.nixosModules.system76
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = {
+                inherit inputs;
+              };
+              home-manager.users.nahsi = {
+                imports = [
+                  ./home.nix
+                  catppuccin.homeManagerModules.catppuccin
+                  spicetify-nix.homeManagerModules.default
+                ];
+              };
+            }
+          ];
+        };
       };
     };
 }

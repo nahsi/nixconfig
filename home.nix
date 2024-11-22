@@ -1,10 +1,4 @@
-{
-  inputs,
-  config,
-  pkgs,
-  lib,
-  ...
-}:
+{ pkgs, ... }:
 {
   imports = [
     programs/hyprland
@@ -73,15 +67,19 @@
 
   fonts.fontconfig = {
     enable = true;
-    defaultFonts.monospace = [
-      "Fira Code"
-      "FiraCode Nerd Font"
-    ];
-    defaultFonts.sansSerif = [ "Fira Sans" ];
-    defaultFonts.serif = [ "Roboto Slab" ];
-    defaultFonts.emoji = [ "Noto Color Emoji" ];
+    defaultFonts = {
+      monospace = [
+        "Fira Code"
+        "FiraCode Nerd Font"
+      ];
+      sansSerif = [ "Fira Sans" ];
+      serif = [ "Roboto Slab" ];
+      emoji = [ "Noto Color Emoji" ];
+    };
   };
 
-  catppuccin.flavor = "mocha";
-  catppuccin.enable = true;
+  catppuccin = {
+    enable = true;
+    flavor = "mocha";
+  };
 }

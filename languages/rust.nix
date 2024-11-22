@@ -7,6 +7,7 @@
     rustfmt
     rust-analyzer
     clippy
+    gcc
   ];
 
   home.sessionVariables = {
