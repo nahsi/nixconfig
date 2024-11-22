@@ -15,9 +15,9 @@
         modules-center = [ "hyprland/window" ];
         modules-right = [
           "tray"
+          "wireplumber"
           "cpu"
           "battery"
-          "wireplumber"
           "hyprland/language"
           "clock"
         ];
@@ -45,7 +45,21 @@
           };
         };
         "clock" = {
-          format = "{:%a, %b %d - %H:%M}";
+          format = "{:%H:%M}";
+          format-alt = "{:%a, %b %d, %Y - %R}";
+          tooltip-format = "<tt>{calendar}</tt>";
+          calendar = {
+            mode = "month";
+            on-scroll = 1;
+            format = {
+              today = "<b><u>{}</u></b>";
+            };
+          };
+          actions = {
+            on-click-right = "mode";
+            on-scroll-up = "shift_up";
+            on-scroll-down = "shift_down";
+          };
         };
         "wireplumber" = {
           format = "{icon} {volume}%";
@@ -82,6 +96,7 @@
           ];
           format-charging = " {capacity}%";
           format-alt = "{icon} {time}";
+          tooltip-format = "{timeTo}\n{power}W";
         };
         "tray" = {
           spacing = 10;
