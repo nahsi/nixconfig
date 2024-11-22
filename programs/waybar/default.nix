@@ -17,6 +17,7 @@
           "tray"
           "cpu"
           "battery"
+          "wireplumber"
           "hyprland/language"
           "clock"
         ];
@@ -46,11 +47,22 @@
         "clock" = {
           format = "{:%a, %b %d - %H:%M}";
         };
+        "wireplumber" = {
+          format = "{icon} {volume}%";
+          format-muted = "󰝟 {volume}%";
+          format-icons = [
+            "󰕿"
+            "󰖀"
+            "󰕾"
+          ];
+          reverse-scrolling = 1;
+          tooltip = false;
+        };
         "cpu" = {
           states = {
             critical = 75;
           };
-          format = "{usage}% ";
+          format = "  {usage}%";
           tooltip = false;
         };
         "battery" = {
@@ -60,7 +72,7 @@
             "warning" = 30;
             "critical" = 15;
           };
-          format = "{capacity}% {icon}";
+          format = "{icon} {capacity}%";
           format-icons = [
             ""
             ""
@@ -68,8 +80,8 @@
             ""
             ""
           ];
-          format-charging = "{capacity}% ";
-          format-alt = "{time} {icon}";
+          format-charging = " {capacity}%";
+          format-alt = "{icon} {time}";
         };
         "tray" = {
           spacing = 10;
