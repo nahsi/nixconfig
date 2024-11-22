@@ -70,7 +70,6 @@
           ];
           format-charging = "{capacity}% ";
           format-alt = "{time} {icon}";
-          format-awesome = "";
         };
         "tray" = {
           spacing = 10;
