@@ -1,10 +1,4 @@
-{
-  osConfig,
-  config,
-  pkgs,
-  lib,
-  ...
-}:
+{ pkgs, ... }:
 {
   programs.waybar = {
     enable = true;
@@ -21,6 +15,7 @@
         modules-center = [ "hyprland/window" ];
         modules-right = [
           "tray"
+          "cpu"
           "battery"
           "hyprland/language"
           "clock"
@@ -50,6 +45,32 @@
         };
         "clock" = {
           format = "{:%a, %b %d - %H:%M}";
+        };
+        "cpu" = {
+          states = {
+            critical = 75;
+          };
+          format = "{usage}% ";
+          tooltip = false;
+        };
+        "battery" = {
+          states = {
+            "awesome" = 90;
+            "good" = 80;
+            "warning" = 30;
+            "critical" = 15;
+          };
+          format = "{capacity}% {icon}";
+          format-icons = [
+            ""
+            ""
+            ""
+            ""
+            ""
+          ];
+          format-charging = "{capacity}% ";
+          format-alt = "{time} {icon}";
+          format-awesome = "";
         };
         "tray" = {
           spacing = 10;

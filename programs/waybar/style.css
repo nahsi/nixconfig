@@ -2,79 +2,65 @@
     font-family: FantasqueSansMono Nerd Font;
     font-size: 14px;
     min-height: 0;
-  }
+}
 
-  #waybar {
+#waybar {
     background: @base;
     color: @text;
     margin: 5px 5px;
-  }
+}
 
-  #workspaces {
+#workspaces {
     border-radius: 1rem;
     margin: 5px;
     background-color: @surface0;
     margin-left: 1rem;
-  }
+}
 
-  #workspaces button {
+#workspaces button {
     color: @lavender;
     border-radius: 1rem;
     padding: 0.4rem;
-  }
+}
 
-  #workspaces button.active {
+#workspaces button.active {
     color: @sky;
     border-radius: 1rem;
-  }
+}
 
-  #workspaces button:hover {
+#workspaces button:hover {
     color: @sapphire;
     border-radius: 1rem;
-  }
+}
 
-  #tray,
-  #battery {
+#tray,
+#cpu,
+#battery {
     background-color: @surface0;
     margin: 5px 0;
     padding: 0.5rem 1rem;
-  }
+    border-radius: 0;
+}
 
-  #language {
+#battery.charging {
+    color: @green;
+}
+
+#language {
     margin: 5px 0;
     padding: 0.5rem 1rem;
-  }
+}
 
-  #clock {
+#clock {
     color: @blue;
     border-radius: 1rem;
     background-color: @surface0;
     padding: 0.5rem 1rem;
     margin: 5px 0;
-  }
+}
 
-  #battery {
-    color: @green;
-  }
-
-  #battery.charging {
-    color: @green;
-  }
-
-  #battery.warning:not(.charging) {
-    color: @red;
-  }
-
-  #backlight {
-    color: @yellow;
-  }
-
-  #backlight, #battery {
-      border-radius: 0;
-  }
-
-  #tray {
+#tray {
     margin-right: 1rem;
     border-radius: 1rem;
     padding: 0.5rem 1rem;
-  }
+}
