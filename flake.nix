@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-harware.url = "github:nixOS/nixos-hardware/master";
 
     home-manager = {
@@ -71,6 +72,7 @@
               home-manager.users.nahsi = {
                 imports = [
                   ./home.nix
+                  ./hosts/framework/home.nix
                   catppuccin.homeManagerModules.catppuccin
                   spicetify-nix.homeManagerModules.default
                 ];
@@ -98,6 +100,7 @@
               home-manager.users.nahsi = {
                 imports = [
                   ./home.nix
+                  ./hosts/system76/home.nix
                   catppuccin.homeManagerModules.catppuccin
                   spicetify-nix.homeManagerModules.default
                 ];

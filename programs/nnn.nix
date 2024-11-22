@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 let
   # NNN colours - catppuccin
   # https://github.com/catppuccin/catppuccin/discussions/1955#discussion-4904597

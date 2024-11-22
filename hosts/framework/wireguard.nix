@@ -1,5 +1,4 @@
 { config, ... }:
-
 {
   networking.wireguard.interfaces = {
     relay = {

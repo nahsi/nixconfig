@@ -12,6 +12,7 @@
     };
     aliases = {
       c = "commit";
+      ci = "commit";
       co = "checkout";
       s = "status";
     };

@@ -9,7 +9,6 @@
     settings = {
       fonts.default_size = "12pt";
       colors.webpage.preferred_color_scheme = "dark";
-      zoom.default = "125%";
     };
     extraConfig = ''
       import os

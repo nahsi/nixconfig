@@ -37,15 +37,17 @@
   #battery {
     background-color: @surface0;
     margin: 5px 0;
+    padding: 0.5rem 1rem;
   }
 
   #language {
     margin: 5px 0;
+    padding: 0.5rem 1rem;
   }
 
   #clock {
     color: @blue;
-    border-radius: 0px 1rem 1rem 0px;
+    border-radius: 1rem;
     background-color: @surface0;
     padding: 0.5rem 1rem;
     margin: 5px 0;
@@ -74,4 +76,5 @@
   #tray {
     margin-right: 1rem;
     border-radius: 1rem;
+    padding: 0.5rem 1rem;
   }
