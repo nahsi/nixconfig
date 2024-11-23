@@ -5,8 +5,7 @@
     ./lanzaboote.nix
     ./hyprland.nix
     ./nix.nix
-    ../orgs/fluence
-    ../orgs/nahsilabs
+    ../orgs
   ];
 
   time.timeZone = "Europe/Athens";
