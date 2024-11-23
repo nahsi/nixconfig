@@ -86,7 +86,7 @@
             inherit inputs;
           };
           modules = [
-            ./hosts/system76
+            ./nixos/hosts/system76
             lanzaboote.nixosModules.lanzaboote
             nixos-hardware.nixosModules.system76
             ragenix.nixosModules.default
