@@ -3,6 +3,7 @@
     ./hardware-configuration.nix
     ./fprintd.nix
     ./wireguard.nix
+    ./plymouth.nix
     ../../modules/system
     ../../modules/hyprland.nix
   ];

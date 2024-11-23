@@ -6,6 +6,19 @@
   ];
 
   console.font = "ter-i24b";
+  services.system76-scheduler = {
+    enable = true;
+    assignments = {
+      nix-builds = {
+        nice = 15;
+        class = "batch";
+        ioClass = "idle";
+        matchers = [
+          "nix-daemon"
+        ];
+      };
+    };
+  };
 
   networking.hostName = "system76";
   # This option defines the first version of NixOS you have installed on this particular machine,
