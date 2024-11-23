@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   home.sessionVariables = {
     HYPRCUROS_SIZE = 48;

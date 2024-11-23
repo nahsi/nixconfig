@@ -43,6 +43,8 @@
     pkgs.wireguard-tools
     pkgs.talosctl
     pkgs.hclfmt
+    pkgs.pwgen
+    pkgs.fastfetch
     #pkgs.qbittorrent
     pkgs.chromium
 
