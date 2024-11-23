@@ -1,8 +1,9 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./doas.nix
     ./lanzaboote.nix
+    ./playmouth.nix
     ../../orgs/fluence
     ../../orgs/nahsilabs
   ];

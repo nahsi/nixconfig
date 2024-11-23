@@ -5,7 +5,7 @@
     {
       users = [ "nahsi" ];
       keepEnv = true;
-      persist = true;
+      noPass = true;
     }
   ];
 }

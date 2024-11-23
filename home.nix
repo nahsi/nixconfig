@@ -9,6 +9,8 @@
     programs/zathura.nix
     programs/git.nix
     programs/bash.nix
+    programs/fzf.nix
+    programs/ripgrep.nix
     programs/starship.nix
     programs/fuzzel.nix
     programs/spicetify.nix
