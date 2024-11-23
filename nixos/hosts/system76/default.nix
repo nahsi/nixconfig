@@ -1,11 +1,9 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/system
-    ../../modules/hyprland.nix
+    ../../system
   ];
 
-  console.font = "ter-i24b";
   services.system76-scheduler = {
     enable = true;
     assignments = {
@@ -13,9 +11,7 @@
         nice = 15;
         class = "batch";
         ioClass = "idle";
-        matchers = [
-          "nix-daemon"
-        ];
+        matchers = [ "nix-daemon" ];
       };
     };
   };

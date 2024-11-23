@@ -3,8 +3,10 @@
   imports = [
     ./doas.nix
     ./lanzaboote.nix
-    ../../orgs/fluence
-    ../../orgs/nahsilabs
+    ./hyprland.nix
+    ./nix.nix
+    ../orgs/fluence
+    ../orgs/nahsilabs
   ];
 
   time.timeZone = "Europe/Athens";
@@ -102,18 +104,4 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-  nixpkgs.config.allowUnfree = true;
-  # Reducing disk usage
-  boot.loader.systemd-boot.configurationLimit = 10;
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 1w";
-  };
-  nix.settings.auto-optimise-store = true;
 }

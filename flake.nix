@@ -1,5 +1,5 @@
 {
-  description = "NixOS config";
+  description = "nahsi NixOS config";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
@@ -58,7 +58,7 @@
             inherit inputs;
           };
           modules = [
-            ./hosts/framework
+            ./nixos/hosts/framework
             lanzaboote.nixosModules.lanzaboote
             nixos-hardware.nixosModules.framework-16-7040-amd
             ragenix.nixosModules.default
@@ -71,10 +71,8 @@
               };
               home-manager.users.nahsi = {
                 imports = [
-                  ./home.nix
-                  ./hosts/framework/home.nix
-                  catppuccin.homeManagerModules.catppuccin
-                  spicetify-nix.homeManagerModules.default
+                  ./home-manager
+                  ./home-manager/hosts/framework.nix
                 ];
               };
             }
@@ -88,9 +86,9 @@
           modules = [
             ./hosts/system76
             lanzaboote.nixosModules.lanzaboote
-            home-manager.nixosModules.home-manager
-            ragenix.nixosModules.default
             nixos-hardware.nixosModules.system76
+            ragenix.nixosModules.default
+            home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
@@ -99,10 +97,8 @@
               };
               home-manager.users.nahsi = {
                 imports = [
-                  ./home.nix
-                  ./hosts/system76/home.nix
-                  catppuccin.homeManagerModules.catppuccin
-                  spicetify-nix.homeManagerModules.default
+                  ./home-manager
+                  ./home-manager/hosts/system76.nix
                 ];
               };
             }

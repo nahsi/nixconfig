@@ -1,6 +1,8 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
   imports = [
+    inputs.catppuccin.homeManagerModules.catppuccin
+
     programs/hyprland
     programs/waybar
     programs/kitty.nix
@@ -32,10 +34,6 @@
 
   home.language.base = "en_US.UTF-8";
 
-  xresources.properties = {
-    "Xft.dpi" = 259;
-  };
-
   home.packages = [
     pkgs.brightnessctl
     pkgs.just
@@ -45,18 +43,12 @@
     pkgs.wireguard-tools
     pkgs.talosctl
     pkgs.hclfmt
-
     #pkgs.qbittorrent
     pkgs.chromium
 
+    # messaging
     pkgs.tdesktop
     pkgs.slack
-
-    pkgs.nomad
-    pkgs.consul
-    pkgs.vault
-    pkgs.terraform
-    pkgs.packer
 
     # fonts
     pkgs.noto-fonts

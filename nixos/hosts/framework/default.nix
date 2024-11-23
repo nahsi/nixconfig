@@ -4,8 +4,7 @@
     ./fprintd.nix
     ./wireguard.nix
     ./plymouth.nix
-    ../../modules/system
-    ../../modules/hyprland.nix
+    ../../system
   ];
 
   console.font = "ter-i32b";
