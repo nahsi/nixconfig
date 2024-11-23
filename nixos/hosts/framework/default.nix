@@ -7,8 +7,6 @@
     ../../system
   ];
 
-  console.font = "ter-i32b";
-
   networking.hostName = "framework";
 
   networking.firewall = {

@@ -1,3 +1,4 @@
+{ hostConfig, ... }:
 {
   programs.qutebrowser = {
     enable = true;
@@ -9,6 +10,8 @@
       "mn" = "https://mynixos.com/search?q={}";
     };
     settings = {
+
+      zoom.default = "${hostConfig.qutebrowserZoom}";
       fonts.default_size = "12pt";
       colors.webpage.preferred_color_scheme = "dark";
     };

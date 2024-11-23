@@ -61,6 +61,7 @@
             ./nixos/hosts/framework
             lanzaboote.nixosModules.lanzaboote
             nixos-hardware.nixosModules.framework-16-7040-amd
+            nixos-hardware.nixosModules.common-hidpi
             ragenix.nixosModules.default
             home-manager.nixosModules.home-manager
             {
@@ -68,12 +69,13 @@
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = {
                 inherit inputs;
+                hostConfig = {
+                  fontSize = "14";
+                  qutebrowserZoom = "125%";
+                };
               };
               home-manager.users.nahsi = {
-                imports = [
-                  ./home-manager
-                  ./home-manager/hosts/framework.nix
-                ];
+                imports = [ ./home-manager ];
               };
             }
           ];
@@ -94,12 +96,13 @@
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = {
                 inherit inputs;
+                hostConfig = {
+                  fontSize = "12";
+                  qutebrowserZoom = "100%";
+                };
               };
               home-manager.users.nahsi = {
-                imports = [
-                  ./home-manager
-                  ./home-manager/hosts/system76.nix
-                ];
+                imports = [ ./home-manager ];
               };
             }
           ];
