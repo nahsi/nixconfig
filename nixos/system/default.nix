@@ -5,6 +5,7 @@
     ./lanzaboote.nix
     ./hyprland.nix
     ./nix.nix
+    ./nix-ld.nix
     ../orgs
   ];
 
