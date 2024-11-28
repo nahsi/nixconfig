@@ -47,6 +47,7 @@
     pkgs.fastfetch
     #pkgs.qbittorrent
     pkgs.chromium
+    pkgs.blanket
 
     # messaging
     pkgs.tdesktop
