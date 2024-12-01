@@ -9,8 +9,8 @@
 
     plugins.conform-nvim = {
       enable = true;
-      formatters.nixfmt.command = "${lib.getExe pkgs.nixfmt-rfc-style}";
-      formattersByFt = {
+      settings.formatters.nixfmt.command = "${lib.getExe pkgs.nixfmt-rfc-style}";
+      settings.formatters_by_ft = {
         markdown = [ "prettierd" ];
         yaml = [ "prettierd" ];
         json = [ "prettierd" ];

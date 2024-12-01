@@ -1,5 +1,8 @@
 {
   programs.nixvim.plugins = {
-    lightline.enable = true;
+    lightline = {
+      enable = true;
+      settings.colorscheme = "catppuccin";
+    };
   };
 }

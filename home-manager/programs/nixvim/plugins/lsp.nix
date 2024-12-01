@@ -5,10 +5,10 @@
         lsp = {
           enable = true;
           servers = {
-            rust-analyzer.enable = true;
-            rust-analyzer.installCargo = false;
-            rust-analyzer.installRustc = false;
-            nil-ls.enable = true;
+            rust_analyzer.enable = true;
+            rust_analyzer.installCargo = false;
+            rust_analyzer.installRustc = false;
+            nil_ls.enable = true;
           };
         };
       };

@@ -55,7 +55,7 @@
 
     # fonts
     pkgs.noto-fonts
-    pkgs.noto-fonts-cjk
+    pkgs.noto-fonts-cjk-sans
     pkgs.fira-code
     pkgs.nerdfonts
     pkgs.roboto
