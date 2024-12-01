@@ -5,7 +5,6 @@
     ./wireguard.nix
     ./plymouth.nix
     ../../system
-    ../../steam.nix
   ];
 
   networking.hostName = "framework";
