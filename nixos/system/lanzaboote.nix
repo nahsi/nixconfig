@@ -13,7 +13,6 @@
         if !config.boot.lanzaboote.enable then
           {
             enable = true;
-            consoleMode = "0";
           }
         else
           { enable = lib.mkForce false; };

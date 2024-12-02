@@ -3,6 +3,11 @@
     treesitter = {
       enable = true;
       nixGrammars = true;
+      settings = {
+        highlight.enable = true;
+        indent.enable = true;
+      };
+      folding = true;
     };
     treesitter-context = {
       enable = true;

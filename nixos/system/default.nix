@@ -13,12 +13,6 @@
 
   i18n.defaultLocale = "en_DK.UTF-8";
 
-  console = {
-    packages = with pkgs; [ terminus_font ];
-    useXkbConfig = true;
-    earlySetup = true;
-  };
-
   networking.networkmanager = {
     enable = true;
     wifi.powersave = true;

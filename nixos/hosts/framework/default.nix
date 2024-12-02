@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -17,6 +18,14 @@
     ]; # unifi controller
   };
 
+  console = {
+    font = "${pkgs.terminus_font}/share/consolefonts/ter-132n.psf.gz";
+    packages = with pkgs; [ terminus_font ];
+    useXkbConfig = true;
+    earlySetup = true;
+  };
+
+  boot.loader.systemd-boot.consoleMode = "auto";
   services.fwupd.enable = true;
   services.power-profiles-daemon.enable = true;
   # This option defines the first version of NixOS you have installed on this particular machine,
