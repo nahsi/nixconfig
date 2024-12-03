@@ -7,7 +7,7 @@
         highlight.enable = true;
         indent.enable = true;
       };
-      folding = true;
+      folding = false;
     };
     treesitter-context = {
       enable = true;

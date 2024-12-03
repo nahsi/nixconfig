@@ -10,10 +10,12 @@
       "mn" = "https://mynixos.com/search?q={}";
     };
     settings = {
-
       zoom.default = "${hostConfig.qutebrowserZoom}";
       fonts.default_size = "12pt";
       colors.webpage.preferred_color_scheme = "dark";
+      colors.webpage.bg = "white";
+      url.start_pages = [ "https://home.nahsi.dev" ];
+      url.default_page = "https://home.nahsi.dev";
     };
     extraConfig = ''
       import os
