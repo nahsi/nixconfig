@@ -17,7 +17,7 @@ let
 in
 {
   "fluence.age".publicKeys = users ++ systems;
-  "ssh/hcloud.age".publicKeys = users ++ systems; # ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMLreheKTTpymlwjdj4g7p4YpYL+PjaseeEHaqIKRRUE
+  "ssh/fluence.age".publicKeys = users ++ systems;
   "vault-agent/role_id.age".publicKeys = users ++ systems;
   "vault-agent/secret_id.age".publicKeys = users ++ systems;
 }

@@ -8,9 +8,9 @@
       mode = "400";
     };
 
-    sshHcloud = {
-      file = secrets/ssh/hcloud.age;
-      path = "${config.users.users.nahsi.home}/.ssh/fluence/hcloud";
+    sshFluence = {
+      file = secrets/ssh/fluence.age;
+      path = "${config.users.users.nahsi.home}/.ssh/fluence/id_rsa";
       owner = config.users.users.nahsi.name;
       group = config.users.users.nahsi.group;
       mode = "400";
