@@ -48,6 +48,7 @@
     #pkgs.qbittorrent
     pkgs.chromium
     pkgs.blanket
+    pkgs.stremio
 
     # messaging
     pkgs.tdesktop
