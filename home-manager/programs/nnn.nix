@@ -68,5 +68,6 @@ in
     NNN_PREVIEWDIR = "${config.xdg.cacheHome}/nnn/previews";
     NNN_OPENER = "${pkgs.nnn}/share/plugins/nuke";
     NNN_SPLIT = "v";
+    GUI = "1";
   };
 }
