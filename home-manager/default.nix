@@ -38,6 +38,7 @@
     pkgs.brightnessctl
     pkgs.just
     pkgs.wl-clipboard
+    pkgs.unzip
     pkgs.jq
     pkgs.bitwarden-cli
     pkgs.wireguard-tools
