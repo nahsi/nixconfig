@@ -18,24 +18,47 @@
     wifi.powersave = true;
   };
 
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    publish = {
+  services = {
+    avahi = {
       enable = true;
-      addresses = true;
-      domain = true;
-      hinfo = true;
-      userServices = true;
-      workstation = true;
+      nssmdns4 = true;
+      publish = {
+        enable = true;
+        addresses = true;
+        domain = true;
+        hinfo = true;
+        userServices = true;
+        workstation = true;
+      };
     };
+    libinput.enable = true;
+    blueman.enable = true;
+
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
+
+    openssh = {
+      enable = true;
+      ports = [ 22 ];
+      settings = {
+        PasswordAuthentication = false;
+        AllowUsers = [ "nahsi" ];
+        UseDns = true;
+        X11Forwarding = false;
+        PermitRootLogin = "no";
+      };
+    };
+
   };
 
-  hardware.i2c.enable = true;
-
-  services.libinput.enable = true;
-  hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
+  hardware = {
+    i2c.enable = true;
+    bluetooth.enable = true;
+  };
 
   virtualisation.docker.enable = true;
 
@@ -64,18 +87,6 @@
     networkmanagerapplet
   ];
 
-  services.openssh = {
-    enable = true;
-    ports = [ 22 ];
-    settings = {
-      PasswordAuthentication = false;
-      AllowUsers = [ "nahsi" ];
-      UseDns = true;
-      X11Forwarding = false;
-      PermitRootLogin = "no";
-    };
-  };
-
   programs.neovim = {
     enable = true;
     vimAlias = true;
@@ -91,10 +102,4 @@
   };
 
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
 }

@@ -65,17 +65,19 @@
             ragenix.nixosModules.default
             home-manager.nixosModules.home-manager
             {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = {
-                inherit inputs;
-                hostConfig = {
-                  fontSize = "14";
-                  qutebrowserZoom = "125%";
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = {
+                  inherit inputs;
+                  hostConfig = {
+                    fontSize = "14";
+                    qutebrowserZoom = "125%";
+                  };
                 };
-              };
-              home-manager.users.nahsi = {
-                imports = [ ./home-manager ];
+                users.nahsi = {
+                  imports = [ ./home-manager ];
+                };
               };
             }
           ];
@@ -92,17 +94,19 @@
             ragenix.nixosModules.default
             home-manager.nixosModules.home-manager
             {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = {
-                inherit inputs;
-                hostConfig = {
-                  fontSize = "12";
-                  qutebrowserZoom = "100%";
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = {
+                  inherit inputs;
+                  hostConfig = {
+                    fontSize = "12";
+                    qutebrowserZoom = "100%";
+                  };
                 };
-              };
-              home-manager.users.nahsi = {
-                imports = [ ./home-manager ];
+                users.nahsi = {
+                  imports = [ ./home-manager ];
+                };
               };
             }
           ];

@@ -1,14 +1,18 @@
 {
-  programs.nixvim.plugins.copilot-cmp = {
-    enable = true;
-  };
-  programs.nixvim.plugins.copilot-lua = {
-    enable = true;
-    suggestion = {
-      enabled = false;
+  programs.nixvim.plugins = {
+    copilot-cmp = {
+      enable = true;
+
     };
-    panel = {
-      enabled = false;
+
+    copilot-lua = {
+      enable = true;
+      suggestion = {
+        enabled = false;
+      };
+      panel = {
+        enabled = false;
+      };
     };
   };
 

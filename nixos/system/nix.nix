@@ -1,8 +1,12 @@
 {
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  nix.settings = {
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    auto-optimise-store = true;
+    trusted-users = [ "@wheel" ];
+  };
   nixpkgs.config.allowUnfree = true;
   # Reducing disk usage
   boot.loader.systemd-boot.configurationLimit = 10;
@@ -11,6 +15,4 @@
     dates = "weekly";
     options = "--delete-older-than 1w";
   };
-  nix.settings.auto-optimise-store = true;
-  nix.settings.trusted-users = [ "@wheel" ];
 }

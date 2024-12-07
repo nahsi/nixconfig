@@ -27,46 +27,48 @@
     languages/rust.nix
   ];
 
-  home.username = "nahsi";
-  home.homeDirectory = "/home/nahsi";
-  home.stateVersion = "24.05";
   programs.home-manager.enable = true;
 
-  home.language.base = "en_US.UTF-8";
+  home = {
+    stateVersion = "24.05";
+    username = "nahsi";
+    homeDirectory = "/home/nahsi";
+    language.base = "en_US.UTF-8";
 
-  home.packages = [
-    pkgs.brightnessctl
-    pkgs.just
-    pkgs.wl-clipboard
-    pkgs.unzip
-    pkgs.jq
-    pkgs.bitwarden-cli
-    pkgs.wireguard-tools
-    pkgs.talosctl
-    pkgs.hclfmt
-    pkgs.pwgen
-    pkgs.fastfetch
-    #pkgs.qbittorrent
-    pkgs.chromium
-    pkgs.blanket
-    pkgs.stremio
+    packages = [
+      pkgs.brightnessctl
+      pkgs.just
+      pkgs.wl-clipboard
+      pkgs.unzip
+      pkgs.jq
+      pkgs.bitwarden-cli
+      pkgs.wireguard-tools
+      pkgs.talosctl
+      pkgs.hclfmt
+      pkgs.pwgen
+      pkgs.fastfetch
+      #pkgs.qbittorrent
+      pkgs.chromium
+      pkgs.blanket
+      pkgs.stremio
 
-    # messaging
-    pkgs.tdesktop
-    pkgs.slack
+      # messaging
+      pkgs.tdesktop
+      pkgs.slack
 
-    # nix
-    pkgs.nix-melt
-    pkgs.statix
+      # nix
+      pkgs.nix-melt
+      pkgs.statix
 
-    # fonts
-    pkgs.noto-fonts
-    pkgs.noto-fonts-cjk-sans
-    pkgs.fira-code
-    pkgs.nerdfonts
-    pkgs.roboto
-    pkgs.roboto-slab
-  ];
+      # fonts
+      pkgs.noto-fonts
+      pkgs.noto-fonts-cjk-sans
+      pkgs.fira-code
+      pkgs.nerdfonts
+      pkgs.roboto
+      pkgs.roboto-slab
+    ];
+  };
 
   fonts.fontconfig = {
     enable = true;

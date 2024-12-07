@@ -4,7 +4,7 @@
     nahsilabs = {
       file = secrets/nahsilabs.age;
       owner = config.users.users.nahsi.name;
-      group = config.users.users.nahsi.group;
+      inherit (config.users.users.nahsi) group;
       mode = "400";
     };
   };
