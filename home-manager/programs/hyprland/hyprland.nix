@@ -38,22 +38,25 @@
       ###################
       ### AUTOSTART ###
       ###################
-      exec-once = [ "nm-applet" ];
+      exec-once = [
+        "nm-applet"
+        "slack"
+        "telegram-desktop"
+      ];
 
       #####################
       ### LOOK AND FEEL ###
       #####################
       general = {
         gaps_in = 5;
-        gaps_out = 20;
+        gaps_out = 10;
         border_size = 2;
-        resize_on_border = false;
+        resize_on_border = true;
         allow_tearing = false;
         layout = "dwindle";
 
         "col.active_border" = "$accent";
         "col.inactive_border" = "$base";
-
       };
 
       decoration = {
@@ -99,6 +102,8 @@
       misc = {
         force_default_wallpaper = 0;
         disable_hyprland_logo = true;
+        mouse_move_enables_dpms = true;
+        key_press_enables_dpms = true;
       };
 
       #############
@@ -111,11 +116,15 @@
         sensitivity = 0;
         touchpad = {
           natural_scroll = false;
+          clickfinger_behavior = true;
+          drag_lock = true;
         };
+
       };
 
-      gestures.workspace_swipe = true;
-
+      gestures = {
+        workspace_swipe = true;
+      };
       ###################
       ### KEYBINDINGS ###
       ###################
@@ -165,8 +174,8 @@
         "$mod SHIFT, 0, movetoworkspace, 10"
 
         # Special workspace
-        "$mod, S, togglespecialworkspace, magic"
-        "$mod SHIFT, S, movetoworkspace, special:magic"
+        "$mod, S, togglespecialworkspace, scratch"
+        "$mod SHIFT, S, movetoworkspace, special:scratch"
 
         # Scroll through existing workspaces
         "$mod, mouse_down, workspace, e+1"
@@ -217,6 +226,10 @@
 
         # Fix dragging issues with XWayland
         "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
+
+        # Pin apps to workspaces
+        "workspace 3 silent,class:^(Slack)$"
+        "workspace 4 silent,class:^(telegram-desktop)$"
       ];
     };
   };
