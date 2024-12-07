@@ -22,6 +22,7 @@
       kernelModules = [
         "dm-snapshot"
         "cryptd"
+        "kvm-amd"
       ];
       luks.devices."cryptsetup".device = "/dev/disk/by-label/NIXOS_LUKS";
     };
@@ -30,8 +31,6 @@
       efi.canTouchEfiVariables = true;
     };
     bootspec.enable = true;
-
-    kernelModules = [ "kvm-amd" ];
     extraModulePackages = [ ];
   };
 
