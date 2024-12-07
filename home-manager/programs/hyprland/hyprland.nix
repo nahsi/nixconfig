@@ -229,7 +229,7 @@
 
         # Pin apps to workspaces
         "workspace 3 silent,class:^(Slack)$"
-        "workspace 4 silent,class:^(telegram-desktop)$"
+        "workspace 4 silent,class:^(org.telegram.desktop)$"
       ];
     };
   };
