@@ -55,6 +55,10 @@
     pkgs.tdesktop
     pkgs.slack
 
+    # nix
+    pkgs.nix-melt
+    pkgs.statix
+
     # fonts
     pkgs.noto-fonts
     pkgs.noto-fonts-cjk-sans
