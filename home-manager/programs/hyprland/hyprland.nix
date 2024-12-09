@@ -119,12 +119,12 @@
           clickfinger_behavior = true;
           drag_lock = true;
         };
-
       };
 
       gestures = {
         workspace_swipe = true;
       };
+
       ###################
       ### KEYBINDINGS ###
       ###################
@@ -186,6 +186,7 @@
         # Screenshot a region
         ",PRINT, exec, hyprshot -m region --clipboard-only"
       ];
+
       bindm = [
         # Move/resize windows with mouse dragging
         "$mod, mouse:272, movewindow"
