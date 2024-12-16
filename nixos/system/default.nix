@@ -9,7 +9,8 @@
     ../orgs
   ];
 
-  time.timeZone = "Europe/Athens";
+  time.timeZone = "Europe/Moscow";
+  # time.timeZone = "Europe/Athens";
 
   i18n.defaultLocale = "en_DK.UTF-8";
 
