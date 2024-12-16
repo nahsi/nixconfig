@@ -51,6 +51,7 @@
       pkgs.chromium
       pkgs.blanket
       pkgs.stremio
+      pkgs.wireshark
 
       # messaging
       pkgs.tdesktop
