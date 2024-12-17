@@ -74,7 +74,10 @@
     ];
   };
 
-  services.mpris-proxy.enable = true;
+  services = {
+    mpris-proxy.enable = true;
+    blueman-applet.enable = true;
+  };
 
   fonts.fontconfig = {
     enable = true;
