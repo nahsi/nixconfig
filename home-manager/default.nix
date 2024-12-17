@@ -53,6 +53,9 @@
       pkgs.stremio
       pkgs.wireshark
 
+      pkgs.talosctl
+      pkgs.kubectl
+
       # messaging
       pkgs.tdesktop
       pkgs.slack
@@ -70,6 +73,8 @@
       pkgs.roboto-slab
     ];
   };
+
+  services.mpris-proxy.enable = true;
 
   fonts.fontconfig = {
     enable = true;

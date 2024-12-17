@@ -58,7 +58,14 @@
 
   hardware = {
     i2c.enable = true;
-    bluetooth.enable = true;
+    bluetooth = {
+      enable = true;
+      settings = {
+        General = {
+          Experimental = true;
+        };
+      };
+    };
   };
 
   virtualisation.docker.enable = true;
