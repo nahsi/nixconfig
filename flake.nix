@@ -34,6 +34,11 @@
       url = "github:nix-community/nixvim/nixos-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    inputmodule-control = {
+      url = "github:caffineehacker/nix?dir=flakes/inputmodule-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

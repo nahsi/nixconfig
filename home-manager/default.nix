@@ -23,6 +23,7 @@
     programs/direnv.nix
     programs/mpv.nix
     programs/gtk.nix
+    programs/fw-inputmodule.nix
 
     languages/rust.nix
   ];
