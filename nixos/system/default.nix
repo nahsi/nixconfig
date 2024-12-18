@@ -6,10 +6,11 @@
     ./hyprland.nix
     ./nix.nix
     ./nix-ld.nix
+    ./virtualization.nix
     ../orgs
   ];
 
-  time.timeZone = "Europe/Moscow";
+  time.timeZone = "Europe/Minsk";
   # time.timeZone = "Europe/Athens";
 
   i18n.defaultLocale = "en_DK.UTF-8";
@@ -67,8 +68,6 @@
       };
     };
   };
-
-  virtualisation.docker.enable = true;
 
   users.users.nahsi = {
     isNormalUser = true;
