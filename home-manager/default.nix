@@ -48,6 +48,7 @@
       pkgs.hclfmt
       pkgs.pwgen
       pkgs.fastfetch
+      pkgs.terraform
       #pkgs.qbittorrent
       pkgs.chromium
       pkgs.blanket
