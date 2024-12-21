@@ -54,6 +54,7 @@
       pkgs.blanket
       pkgs.stremio
       pkgs.wireshark
+      pkgs.yt-dlp
 
       pkgs.talosctl
       pkgs.kubectl

@@ -6,8 +6,8 @@
       osd-bar = "no";
     };
     bindings = {
-      "l" = "seek 60";
-      "h" = "seek -60";
+      "l" = "seek 30";
+      "h" = "seek -30";
       "k" = "seek -5";
       "j" = "seek 5";
     };
