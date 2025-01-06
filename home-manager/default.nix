@@ -98,5 +98,6 @@
   catppuccin = {
     enable = true;
     flavor = "mocha";
+    gtk.enable = true;
   };
 }
