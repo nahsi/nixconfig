@@ -45,11 +45,9 @@
       pkgs.jq
       pkgs.bitwarden-cli
       pkgs.wireguard-tools
-      pkgs.talosctl
       pkgs.hclfmt
       pkgs.pwgen
       pkgs.fastfetch
-      pkgs.terraform
       #pkgs.qbittorrent
       pkgs.chromium
       pkgs.blanket
@@ -59,6 +57,11 @@
 
       pkgs.talosctl
       pkgs.kubectl
+      pkgs.nomad
+      pkgs.consul
+      pkgs.vault
+      pkgs.terraform
+      pkgs.talosctl
 
       # messaging
       pkgs.tdesktop
