@@ -24,6 +24,7 @@
     programs/mpv.nix
     programs/gtk.nix
     programs/fw-inputmodule.nix
+    programs/aerc.nix
 
     languages/rust.nix
   ];

@@ -1,0 +1,5 @@
+{
+  programs.aerc = {
+    enable = true;
+  };
+}
