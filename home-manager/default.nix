@@ -54,6 +54,7 @@
       pkgs.stremio
       pkgs.wireshark
       pkgs.yt-dlp
+      pkgs.mtr
 
       pkgs.talosctl
       pkgs.kubectl
