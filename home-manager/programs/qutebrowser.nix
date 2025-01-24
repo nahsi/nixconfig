@@ -1,5 +1,35 @@
-{ hostConfig, ... }:
 {
+  hostConfig,
+  config,
+  pkgs,
+  ...
+}:
+let
+  qutebrowser-setup = pkgs.writeShellScript "qutebrowser-setup" (
+    builtins.concatStringsSep "\n" (
+      builtins.map (
+        n: "${config.programs.qutebrowser.package}/share/qutebrowser/scripts/dictcli.py install ${n}"
+      ) config.programs.qutebrowser.settings.spellcheck.languages
+    )
+  );
+in
+{
+
+  systemd.user.services.qutebrowser-setup = {
+    Unit = {
+      Description = "Fetch qutebrowser dicts for my languages";
+      After = [ "network-online.target" ];
+      Wants = [ "network-online.target" ];
+    };
+    Service = {
+      Type = "oneshot";
+      ExecStart = qutebrowser-setup;
+    };
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
+  };
+
   programs.qutebrowser = {
     enable = true;
     searchEngines = {
@@ -16,6 +46,26 @@
       colors.webpage.bg = "white";
       url.start_pages = [ "https://home.nahsi.dev" ];
       url.default_page = "https://home.nahsi.dev";
+      spellcheck.languages = [
+        "en-US"
+        "ru-RU"
+      ];
+      content = {
+        autoplay = false;
+        geolocation = false;
+        notifications = {
+          enabled = false;
+        };
+        cookies.accept = "no-3rdparty";
+        javascript = {
+          clipboard = "access";
+        };
+        tls = {
+          certificate_errors = "ask-block-thirdparty";
+        };
+        # don't register handlers for things like mail and calendar
+        register_protocol_handler = false;
+      };
     };
     extraConfig = ''
       import os
@@ -33,6 +83,8 @@
       if os.path.exists(config.configdir / "theme.py"):
         import theme
         theme.setup(c, 'mocha', True)
+
+      c.colors.webpage.bg = "white"
 
       c.bindings.key_mappings = {
       'Й': 'Q', 'й': 'q',
