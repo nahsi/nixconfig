@@ -30,6 +30,7 @@
   ];
 
   programs.home-manager.enable = true;
+  nixpkgs.config.allowUnfree = true;
 
   home = {
     stateVersion = "24.05";
@@ -47,6 +48,7 @@
       pkgs.wireguard-tools
       pkgs.hclfmt
       pkgs.pwgen
+      pkgs.mkpasswd
       pkgs.fastfetch
       #pkgs.qbittorrent
       pkgs.chromium
@@ -55,6 +57,8 @@
       pkgs.wireshark
       pkgs.yt-dlp
       pkgs.mtr
+      pkgs.dmidecode
+      pkgs.iperf
 
       pkgs.talosctl
       pkgs.kubectl
@@ -67,6 +71,7 @@
       # messaging
       pkgs.tdesktop
       pkgs.slack
+      pkgs.zoom-us
 
       # nix
       pkgs.nix-melt

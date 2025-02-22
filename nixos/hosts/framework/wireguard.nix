@@ -1,6 +1,5 @@
 { config, ... }:
 {
-
   networking.firewall.checkReversePath = "loose";
   networking.wireguard.interfaces = {
     relay = {

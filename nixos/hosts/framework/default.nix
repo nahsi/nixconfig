@@ -5,6 +5,7 @@
     ./fprintd.nix
     ./wireguard.nix
     ./plymouth.nix
+    ./nfs.nix
     ../../system
   ];
 
@@ -15,6 +16,8 @@
     allowedTCPPorts = [
       8080
       8443
+      8880
+      8843
     ]; # unifi controller
   };
 
