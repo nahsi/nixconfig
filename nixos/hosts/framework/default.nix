@@ -3,7 +3,6 @@
   imports = [
     ./hardware-configuration.nix
     ./fprintd.nix
-    ./wireguard.nix
     ./plymouth.nix
     ./nfs.nix
     ../../system
@@ -13,12 +12,6 @@
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [
-      8080
-      8443
-      8880
-      8843
-    ]; # unifi controller
   };
 
   console = {

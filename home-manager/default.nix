@@ -50,7 +50,6 @@
       pkgs.pwgen
       pkgs.mkpasswd
       pkgs.fastfetch
-      #pkgs.qbittorrent
       pkgs.chromium
       pkgs.blanket
       pkgs.stremio
