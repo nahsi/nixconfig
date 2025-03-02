@@ -8,8 +8,6 @@ let
       "x-systemd.automount"
       "retrans=10"
       "timeo=30"
-      "rsize=1048576"
-      "wsize=1048576"
       "nfsvers=4.2"
       "noatime"
     ];
