@@ -8,18 +8,18 @@ let
       "x-systemd.automount"
       "retrans=10"
       "timeo=30"
-      "nfsvers=4.2"
       "noatime"
     ];
   };
 in
 {
   fileSystems = {
-    "/home/nahsi/nfs/media/video" = nfsMount "/home/nahsi/nfs/media/video" "/share/media/video";
-    "/home/nahsi/nfs/film" = nfsMount "/home/nahsi/nfs/film" "/share/media/film";
+    "/home/nahsi/nfs/media/video" = nfsMount "/home/nahsi/nfs/media/video" "/mnt/storage/media/video";
+    "/home/nahsi/nfs/film" = nfsMount "/home/nahsi/nfs/film" "/mnt/storage/media/film";
     "/home/nahsi/nfs/media/audiobooks" =
-      nfsMount "/home/nahsi/nfs/media/audiobooks" "/share/media/audiobooks";
+      nfsMount "/home/nahsi/nfs/media/audiobooks" "/mnt/storage/media/audiobooks";
     "/home/nahsi/nfs/media/podcasts" =
-      nfsMount "/home/nahsi/nfs/media/podcasts" "/share/media/podcasts";
+      nfsMount "/home/nahsi/nfs/media/podcasts" "/mnt/storage/media/podcasts";
+    "/home/nahsi/nfs/media/music" = nfsMount "/home/nahsi/nfs/media/music" "/mnt/storage/media/music";
   };
 }

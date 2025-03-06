@@ -58,6 +58,7 @@
       pkgs.mtr
       pkgs.dmidecode
       pkgs.iperf
+      pkgs.powertop
 
       pkgs.talosctl
       pkgs.kubectl
@@ -66,6 +67,9 @@
       pkgs.vault
       pkgs.terraform
       pkgs.talosctl
+      pkgs.kubevirt
+      pkgs.cilium-cli
+      pkgs.hubble
 
       # messaging
       pkgs.tdesktop
