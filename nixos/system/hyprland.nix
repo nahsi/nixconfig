@@ -10,8 +10,10 @@
     xdgOpenUsePortal = true;
     extraPortals = [
       pkgs.xdg-desktop-portal-hyprland
-      pkgs.xdg-desktop-portal-gtk
     ];
+    config.hyprland = {
+      "org.freedesktop.impl.portal.ScreenCast" = "hyprland";
+    };
   };
 
   boot.kernelParams = [ "console=tty1" ];
@@ -31,5 +33,6 @@
   environment.sessionVariables = {
     QT_SCALE_FACTOR_ROUNDING_POLICY = "RoundPreferFloor";
     NIXOS_OZONE_WL = "1";
+    QT_QPA_PLATFORM = "wayland";
   };
 }

@@ -5,6 +5,7 @@
     ./fprintd.nix
     ./plymouth.nix
     ./nfs.nix
+    ./wireguard.nix
     ../../system
   ];
 
