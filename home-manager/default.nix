@@ -1,5 +1,6 @@
 { inputs, pkgs, ... }:
 let
+  unstablePkgs = inputs.nixpkgs-unstable.legacyPackages.x86_64-linux;
   pinnedZoomPkgs =
     import
       (builtins.fetchTarball {
@@ -75,13 +76,12 @@ in
       pkgs.powertop
       pkgs.ncdu
 
-      pkgs.talosctl
+      unstablePkgs.talosctl
       pkgs.kubectl
       pkgs.nomad
       pkgs.consul
       pkgs.vault
       pkgs.terraform
-      pkgs.talosctl
       pkgs.kubevirt
       pkgs.cilium-cli
       pkgs.hubble
@@ -95,6 +95,9 @@ in
       # nix
       pkgs.nix-melt
       pkgs.statix
+      pkgs.deadnix
+      pkgs.nom
+      pkgs.nixos-generators
 
       # fonts
       pkgs.noto-fonts
