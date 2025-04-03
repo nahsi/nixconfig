@@ -4,7 +4,7 @@
     ./hardware-configuration.nix
     ./fprintd.nix
     ./plymouth.nix
-    # ./nfs.nix
+    ./nfs.nix
     ./wireguard.nix
     ../../system
   ];

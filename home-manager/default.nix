@@ -16,7 +16,7 @@ let
 in
 {
   imports = [
-    inputs.catppuccin.homeManagerModules.catppuccin
+    inputs.catppuccin.homeModules.catppuccin
 
     programs/hyprland
     programs/waybar
@@ -75,6 +75,7 @@ in
       pkgs.iperf
       pkgs.powertop
       pkgs.ncdu
+      pkgs.mkvtoolnix
 
       unstablePkgs.talosctl
       pkgs.kubectl
