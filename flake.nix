@@ -45,7 +45,6 @@
     inputs@{
       self,
       nixpkgs,
-      nixpkgs-unstable,
       nixos-hardware,
       lanzaboote,
       home-manager,
@@ -55,11 +54,20 @@
       nixvim,
       ...
     }:
+    let
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
+    in
     {
-      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
+      packages.${system} = {
+        kroki-cli = pkgs.callPackage ./pkgs/kroki-cli { };
+      };
+
+      formatter.${system} = pkgs.nixfmt-rfc-style;
+
       nixosConfigurations = {
         framework = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+          system = system;
           specialArgs = {
             inherit inputs;
           };
@@ -75,7 +83,7 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 extraSpecialArgs = {
-                  inherit inputs;
+                  inherit inputs system;
                   hostConfig = {
                     fontSize = "14";
                     qutebrowserZoom = "125%";
@@ -88,8 +96,9 @@
             }
           ];
         };
+
         system76 = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+          system = system;
           specialArgs = {
             inherit inputs;
           };
@@ -104,7 +113,7 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 extraSpecialArgs = {
-                  inherit inputs;
+                  inherit inputs system;
                   hostConfig = {
                     fontSize = "12";
                     qutebrowserZoom = "100%";

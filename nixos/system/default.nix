@@ -103,6 +103,7 @@
 
   environment.variables = {
     EDITOR = "nvim";
+    KROKI_ENDPOINT = "https://kroki.nahsi.dev";
   };
 
   fonts.fontconfig = {

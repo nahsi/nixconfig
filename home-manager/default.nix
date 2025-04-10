@@ -1,5 +1,11 @@
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  pkgs,
+  system,
+  ...
+}:
 let
+  localPkgs = inputs.self.packages."${system}";
   unstablePkgs = inputs.nixpkgs-unstable.legacyPackages.x86_64-linux;
   pinnedZoomPkgs =
     import
@@ -86,6 +92,7 @@ in
       pkgs.kubevirt
       pkgs.cilium-cli
       pkgs.hubble
+      localPkgs.kroki-cli
 
       # messaging
       pkgs.tdesktop
