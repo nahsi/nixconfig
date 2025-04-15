@@ -82,6 +82,7 @@ in
       pkgs.powertop
       pkgs.ncdu
       pkgs.mkvtoolnix
+      pkgs.pdftk
 
       unstablePkgs.talosctl
       pkgs.kubectl
