@@ -83,6 +83,9 @@ in
       pkgs.ncdu
       pkgs.mkvtoolnix
       pkgs.pdftk
+      pkgs.okular
+      localPkgs.kroki-cli
+      pkgs.tcpdump
 
       unstablePkgs.talosctl
       pkgs.kubectl
@@ -93,13 +96,12 @@ in
       pkgs.kubevirt
       pkgs.cilium-cli
       pkgs.hubble
-      localPkgs.kroki-cli
+      pkgs.kdash
 
       # messaging
       pkgs.tdesktop
       pkgs.slack
-      #pkgs.zoom-us
-      pinnedZoom
+      # pinnedZoom
 
       # nix
       pkgs.nix-melt

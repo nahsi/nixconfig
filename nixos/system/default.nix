@@ -7,6 +7,7 @@
     ./nix.nix
     ./nix-ld.nix
     ./virtualization.nix
+    ./zoom.nix
     ../orgs
   ];
 
