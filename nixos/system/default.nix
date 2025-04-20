@@ -12,7 +12,7 @@
   ];
 
   # time.timeZone = "Europe/Minsk";
-  time.timeZone = "Europe/Athens";
+  time.timeZone = "Europe/Belgrade";
 
   i18n.defaultLocale = "en_DK.UTF-8";
 
