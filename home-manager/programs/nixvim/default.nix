@@ -9,7 +9,6 @@
     ./plugins/conform.nix
     ./plugins/lsp.nix
     ./plugins/nvim-cmp.nix
-    ./plugins/copilot.nix
     ./plugins/comment.nix
   ];
   programs.nixvim = {

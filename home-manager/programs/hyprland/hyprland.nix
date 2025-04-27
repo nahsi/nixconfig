@@ -36,8 +36,8 @@
       ################
       monitor = [
         "eDP-1,preferred,auto,1.6"
-        "DP-2,preferred,auto,1.875"
-        "DP-3,preferred,auto,1.875"
+        # "DP-2,preferred,auto,1,mirror,eDP-1"
+        "DP-2,preferred,auto,2"
       ];
 
       ###################

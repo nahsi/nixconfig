@@ -6,7 +6,6 @@
         sources = [
           { name = "nvim_lsp"; }
           { name = "buffer"; }
-          { name = "copilot"; }
         ];
         completion = {
           max_item_count = 5;
