@@ -10,7 +10,9 @@
     ./plugins/lsp.nix
     ./plugins/nvim-cmp.nix
     ./plugins/comment.nix
+    ./plugins/neorg.nix
   ];
+
   programs.nixvim = {
     enable = true;
     globals.mapleader = ",";
