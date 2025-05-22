@@ -70,6 +70,8 @@ in
       pkgs.powertop
       pkgs.ncdu
       pkgs.mkvtoolnix
+      pkgs.mediainfo
+      pkgs.ffmpeg
       pkgs.pdftk
       pkgs.okular
       localPkgs.kroki-cli
@@ -86,6 +88,7 @@ in
       pkgs.cilium-cli
       pkgs.hubble
       pkgs.kdash
+      pkgs.keymapp
 
       # messaging
       pkgs.tdesktop
