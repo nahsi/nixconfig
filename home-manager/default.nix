@@ -39,7 +39,6 @@ in
   ];
 
   programs.home-manager.enable = true;
-  nixpkgs.config.allowUnfree = true;
 
   home = {
     stateVersion = "24.05";
@@ -72,8 +71,6 @@ in
       pkgs.mkvtoolnix
       pkgs.mediainfo
       pkgs.ffmpeg
-      pkgs.pdftk
-      pkgs.okular
       localPkgs.kroki-cli
       pkgs.tcpdump
       pkgs.awscli2
@@ -105,7 +102,8 @@ in
       pkgs.noto-fonts
       pkgs.noto-fonts-cjk-sans
       pkgs.fira-code
-      pkgs.nerdfonts
+      pkgs.nerd-fonts.fantasque-sans-mono
+      pkgs.nerd-fonts.fira-code
       pkgs.roboto
       pkgs.roboto-slab
     ];
