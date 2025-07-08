@@ -30,6 +30,12 @@ in
     };
   };
 
+  xdg.mimeApps.defaultApplications = {
+    "text/html" = "qutebrowser.desktop";
+    "x-scheme-handler/http" = "qutebrowser.desktop";
+    "x-scheme-handler/https" = "qutebrowser.desktop";
+  };
+
   programs.qutebrowser = {
     enable = true;
     searchEngines = {
