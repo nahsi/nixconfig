@@ -2,19 +2,28 @@
 {
   programs.hyprland = {
     enable = true;
+    withUWSM = true;
   };
 
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
-    xdgOpenUsePortal = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-hyprland
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-hyprland
     ];
-    config.hyprland = {
-      "org.freedesktop.impl.portal.ScreenCast" = "hyprland";
+    config = {
+      common = {
+        default = [ "gtk" ];
+      };
+      hyprland = {
+        default = [ "gtk" ];
+        "org.freedesktop.impl.portal.ScreenCast" = [ "hyprland" ];
+        "org.freedesktop.impl.portal.Screenshot" = [ "hyprland" ];
+      };
     };
   };
+
+  services.dbus.enable = true;
 
   boot.kernelParams = [ "console=tty1" ];
   boot.consoleLogLevel = 0;
