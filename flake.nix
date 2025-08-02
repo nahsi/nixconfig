@@ -25,11 +25,6 @@
       url = "github:catppuccin/nix";
     };
 
-    spicetify-nix = {
-      url = "github:Gerg-L/spicetify-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nixvim = {
       url = "github:nix-community/nixvim/nixos-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -50,7 +45,6 @@
       home-manager,
       ragenix,
       catppuccin,
-      spicetify-nix,
       nixvim,
       ...
     }:

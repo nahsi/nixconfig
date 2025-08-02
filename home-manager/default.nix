@@ -24,7 +24,6 @@ in
     programs/ripgrep.nix
     programs/starship.nix
     programs/fuzzel.nix
-    programs/spicetify.nix
     programs/mako.nix
     programs/btop.nix
     programs/nixvim
@@ -130,6 +129,6 @@ in
   catppuccin = {
     enable = true;
     flavor = "mocha";
-    gtk.enable = true;
+    # gtk.enable = true;
   };
 }
