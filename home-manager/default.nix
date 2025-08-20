@@ -51,6 +51,7 @@ in
       pkgs.wl-clipboard
       pkgs.unzip
       pkgs.jq
+      pkgs.tree
       pkgs.bitwarden-cli
       pkgs.wireguard-tools
       pkgs.hclfmt
@@ -75,6 +76,8 @@ in
       pkgs.awscli2
 
       unstablePkgs.talosctl
+      pkgs.kustomize
+      pkgs.kubernetes-helm
       pkgs.kubectl
       pkgs.nomad
       pkgs.consul
