@@ -15,6 +15,9 @@ let
 in
 {
 
+  nixpkgs.config.permittedInsecurePackages = [
+    pkgs.qtwebengine
+  ];
   systemd.user.services.qutebrowser-setup = {
     Unit = {
       Description = "Fetch qutebrowser dicts for my languages";

@@ -39,6 +39,7 @@
         # "DP-2,preferred,auto,1,mirror,eDP-1"
         "DP-2,preferred,auto,2"
         "DP-3,preferred,auto-up,2"
+        "DP-4,preferred,auto-up,2"
       ];
 
       ###################
@@ -127,9 +128,9 @@
         };
       };
 
-      gestures = {
-        workspace_swipe = true;
-      };
+      # gestures = {
+      #   workspace_swipe = true;
+      # };
 
       ###################
       ### KEYBINDINGS ###

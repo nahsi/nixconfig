@@ -1,6 +1,6 @@
 { inputs, pkgs, ... }:
 let
-  ragenix = inputs.ragenix.packages.${pkgs.system}.default;
+  ragenix = inputs.ragenix.packages.${pkgs.stdenv.hostPlatform.system}.default;
 in
 {
   home.packages = [ ragenix ];

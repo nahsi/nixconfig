@@ -41,7 +41,7 @@ in
       imagemagick
       mediainfo
       mktemp
-      poppler_utils
+      poppler-utils
       unzip
     ];
     plugins = {
