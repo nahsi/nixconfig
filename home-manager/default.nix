@@ -6,7 +6,6 @@
 }:
 let
   localPkgs = inputs.self.packages."${system}";
-  unstablePkgs = inputs.nixpkgs-unstable.legacyPackages.x86_64-linux;
 in
 {
   imports = [
@@ -32,6 +31,7 @@ in
     programs/mpv.nix
     programs/gtk.nix
     programs/aerc.nix
+    programs/anki.nix
 
     languages/rust.nix
   ];
