@@ -74,7 +74,7 @@ in
       pkgs.tcpdump
       pkgs.awscli2
 
-      unstablePkgs.talosctl
+      pkgs.talosctl
       pkgs.kustomize
       pkgs.kubernetes-helm
       pkgs.kubectl
@@ -98,6 +98,7 @@ in
       pkgs.deadnix
       pkgs.nom
       pkgs.nixos-generators
+      pkgs.devenv
 
       # fonts
       pkgs.noto-fonts

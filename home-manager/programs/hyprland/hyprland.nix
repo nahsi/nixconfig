@@ -19,8 +19,8 @@
     hyprpaper = {
       enable = true;
       settings = {
-        preload = [ "/home/nahsi/Wallpapers/wallhaven-m9wm98.jpg" ];
-        wallpaper = [ ", /home/nahsi/Wallpapers/wallhaven-m9wm98.jpg" ];
+        preload = [ "/home/nahsi/Wallpapers/wallhaven-o36epm.png" ];
+        wallpaper = [ ", /home/nahsi/Wallpapers/wallhaven-o36epm.png" ];
       };
     };
   };
@@ -48,7 +48,7 @@
       exec-once = [
         "nm-applet"
         "slack"
-        "telegram-desktop"
+        "telegram"
       ];
 
       #####################
