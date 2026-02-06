@@ -48,7 +48,7 @@
       exec-once = [
         "nm-applet"
         "slack"
-        "telegram"
+        "Telegram"
       ];
 
       #####################
