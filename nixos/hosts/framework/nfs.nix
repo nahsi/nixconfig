@@ -25,5 +25,6 @@ in
 
     "/home/nahsi/nfs/film" = nfsMount "/home/nahsi/nfs/film" "/mnt/storage/media/film";
     "/home/nahsi/nfs/downloads" = nfsMount "/home/nahsi/nfs/downloads" "/mnt/storage/downloads";
+    "/home/nahsi/nfs/games/PS2" = nfsMount "/home/nahsi/nfs/games/PS2" "/mnt/storage/games/PS2";
   };
 }
