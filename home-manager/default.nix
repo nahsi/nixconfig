@@ -73,20 +73,16 @@ in
       localPkgs.kroki-cli
       pkgs.tcpdump
       pkgs.awscli2
-
       pkgs.talosctl
       pkgs.kustomize
       pkgs.kubernetes-helm
       pkgs.kubectl
-      pkgs.nomad
-      pkgs.consul
       pkgs.vault
       pkgs.terraform
       pkgs.kubevirt
-      pkgs.cilium-cli
-      pkgs.hubble
       pkgs.kdash
       pkgs.keymapp
+      pkgs.logseq
 
       # messaging
       pkgs.telegram-desktop
