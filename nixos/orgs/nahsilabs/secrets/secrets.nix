@@ -17,4 +17,5 @@ let
 in
 {
   "nahsilabs.age".publicKeys = users ++ systems;
+  "singbox.age".publicKeys = users ++ systems;
 }

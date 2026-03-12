@@ -7,6 +7,12 @@
       inherit (config.users.users.nahsi) group;
       mode = "400";
     };
+    singbox = {
+      file = secrets/singbox.age;
+      owner = config.users.users.nahsi.name;
+      inherit (config.users.users.nahsi) group;
+      mode = "400";
+    };
   };
 
   environment.variables = {
