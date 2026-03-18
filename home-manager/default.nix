@@ -83,6 +83,8 @@ in
       pkgs.kdash
       pkgs.keymapp
       pkgs.logseq
+      pkgs.qwen-code
+      pkgs.codex
 
       # messaging
       pkgs.telegram-desktop
