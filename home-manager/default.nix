@@ -34,6 +34,7 @@ in
     programs/anki.nix
 
     languages/rust.nix
+    languages/python.nix
   ];
 
   programs.home-manager.enable = true;
@@ -83,8 +84,11 @@ in
       pkgs.kdash
       pkgs.keymapp
       pkgs.logseq
+      pkgs.openssl
+
       pkgs.qwen-code
       pkgs.codex
+      pkgs.claude-code
 
       # messaging
       pkgs.telegram-desktop
