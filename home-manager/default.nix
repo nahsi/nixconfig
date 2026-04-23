@@ -85,6 +85,12 @@ in
       pkgs.keymapp
       pkgs.logseq
       pkgs.openssl
+      pkgs.nsxiv
+      pkgs.super-productivity
+
+      pkgs.darktable
+      pkgs.rawtherapee
+      pkgs.exiftool
 
       pkgs.qwen-code
       pkgs.codex
