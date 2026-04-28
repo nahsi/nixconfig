@@ -8,6 +8,7 @@
     rust-analyzer
     clippy
     gcc
+    rustlings
   ];
 
   home.sessionVariables = {
