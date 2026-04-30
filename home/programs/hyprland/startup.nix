@@ -26,8 +26,8 @@
     enable = true;
     settings.exec-once = [
       "nm-applet"
-      "slack"
       "Telegram"
+      "super-productivity"
     ];
   };
 }
