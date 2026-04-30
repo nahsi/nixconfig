@@ -5,7 +5,7 @@
       nixGrammars = true;
       settings = {
         highlight.enable = true;
-        indent.enable = true;
+        indent.enable = false;
       };
       folding = false;
     };
