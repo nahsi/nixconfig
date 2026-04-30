@@ -32,7 +32,7 @@
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --time --time-format '%H:%M | %a • %h | %F' --cmd Hyprland";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --time-format '%H:%M | %a • %h | %F' --cmd 'uwsm start hyprland-uwsm.desktop'";
         user = "greeter";
       };
     };

@@ -1,5 +1,4 @@
 {
-
   programs.virt-manager.enable = true;
   users.groups.libvirtd.members = [ "nahsi" ];
   virtualisation = {

@@ -140,7 +140,7 @@
 
       bind = [
         # Standard keybindings
-        "$mod, return, exec, kitty"
+        "$mod, return, exec, ghostty +new-window"
         "$mod, Q, exec, qutebrowser"
         "$mod, C, killactive"
         "$mod, M, exit"

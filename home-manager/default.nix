@@ -14,6 +14,7 @@ in
     programs/hyprland
     programs/waybar
     programs/kitty.nix
+    programs/ghostty.nix
     programs/nnn.nix
     programs/qutebrowser.nix
     programs/zathura.nix
