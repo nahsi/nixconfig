@@ -22,6 +22,7 @@ in
     programs/nixvim
     programs/ragenix.nix
     programs/mpv.nix
+    programs/meli
 
     languages/rust.nix
     languages/python.nix

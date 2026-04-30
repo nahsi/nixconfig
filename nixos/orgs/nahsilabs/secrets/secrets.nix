@@ -14,4 +14,6 @@ in
 {
   "nahsilabs.age".publicKeys = users ++ systems;
   "singbox.age".publicKeys = users ++ systems;
+  "meli-personal-password.age".publicKeys = users ++ systems;
+  "meli-trash-password.age".publicKeys = users ++ systems;
 }
