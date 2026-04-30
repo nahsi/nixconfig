@@ -1,4 +1,9 @@
-{ lib, osConfig, ... }:
+{
+  lib,
+  pkgs,
+  osConfig,
+  ...
+}:
 let
   server = "mail.nahsi.dev";
 
@@ -15,10 +20,11 @@ let
       identity = address;
       display_name = realName;
       subscribed_mailboxes = [
-        "INBOX"
+        "Inbox"
         "Sent"
         "Drafts"
         "Trash"
+        "Junk"
       ];
       server_hostname = server;
       server_port = 993;
@@ -47,6 +53,8 @@ let
 in
 {
   xdg.configFile."meli/themes/catppuccin-mocha.toml".source = ./catppuccin-mocha.toml;
+
+  home.packages = [ pkgs.w3m ];
 
   programs.meli = {
     enable = true;
