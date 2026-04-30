@@ -1,5 +1,4 @@
 {
-  hostConfig,
   config,
   pkgs,
   ...
@@ -14,10 +13,6 @@ let
   );
 in
 {
-
-  nixpkgs.config.permittedInsecurePackages = [
-    pkgs.qtwebengine
-  ];
   systemd.user.services.qutebrowser-setup = {
     Unit = {
       Description = "Fetch qutebrowser dicts for my languages";
@@ -50,7 +45,7 @@ in
       "mn" = "https://mynixos.com/search?q={}";
     };
     settings = {
-      zoom.default = "${hostConfig.qutebrowserZoom}";
+      zoom.default = "125%";
       fonts.default_size = "12pt";
       colors.webpage.preferred_color_scheme = "dark";
       colors.webpage.bg = "white";

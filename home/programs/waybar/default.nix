@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   programs.waybar = {
     enable = true;
@@ -6,7 +6,7 @@
       enable = true;
       target = "graphical-session.target";
     };
-    style = pkgs.lib.readFile ./style.css;
+    style = lib.readFile ./style.css;
     settings = {
       mainBar = {
         layer = "top";

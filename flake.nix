@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:nixOS/nixos-hardware/master";
 
     home-manager = {
@@ -47,7 +46,7 @@
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
-        system = system;
+        inherit system;
         config.allowUnfree = true;
       };
     in
@@ -77,48 +76,15 @@
                 useUserPackages = true;
                 extraSpecialArgs = {
                   inherit inputs system;
-                  hostConfig = {
-                    fontSize = "14";
-                    qutebrowserZoom = "125%";
-                  };
                 };
                 users.nahsi = {
-                  imports = [ ./home-manager ];
+                  imports = [ ./home ];
                 };
               };
             }
           ];
         };
 
-        system76 = nixpkgs.lib.nixosSystem {
-          system = system;
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            ./nixos/hosts/system76
-            lanzaboote.nixosModules.lanzaboote
-            nixos-hardware.nixosModules.system76
-            ragenix.nixosModules.default
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = {
-                  inherit inputs system;
-                  hostConfig = {
-                    fontSize = "12";
-                    qutebrowserZoom = "100%";
-                  };
-                };
-                users.nahsi = {
-                  imports = [ ./home-manager ];
-                };
-              };
-            }
-          ];
-        };
       };
     };
 }

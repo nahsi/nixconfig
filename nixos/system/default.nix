@@ -5,12 +5,14 @@
     ./lanzaboote.nix
     ./hyprland.nix
     ./nix.nix
-    ./nix-ld.nix
     ./virtualization.nix
     ./zoom.nix
-    ./zsa.nix
     ../orgs
   ];
+
+  programs.nix-ld.enable = true;
+
+  hardware.keyboard.zsa.enable = true;
 
   time.timeZone = "Europe/Athens";
 
@@ -20,10 +22,6 @@
     enable = true;
     wifi.powersave = true;
   };
-
-  nixpkgs.config.permittedInsecurePackages = [
-    "qtwebengine-5.15.19"
-  ];
 
   services = {
     avahi = {
