@@ -17,6 +17,7 @@
           "tray"
           "wireplumber"
           "cpu"
+          "memory"
           "battery"
           "hyprland/language"
           "clock"
@@ -25,7 +26,7 @@
           format = "{short}";
         };
         "hyprland/workspaces" = {
-          format = "{icon}";
+          format = "{name}";
           show-special = true;
           on-scroll-up = "hyprctl dispatch workspace r-1";
           on-scroll-down = "hyprctl dispatch workspace r+1";
@@ -72,21 +73,23 @@
           reverse-scrolling = 1;
           tooltip = false;
         };
+        "memory" = {
+          format = "󰍛 {used:0.1f}G";
+          tooltip = false;
+        };
         "cpu" = {
           states = {
             critical = 75;
           };
-          format = "  {usage}%";
+          format = " {usage}%";
           tooltip = false;
         };
         "battery" = {
           states = {
-            "awesome" = 90;
-            "good" = 80;
             "warning" = 30;
             "critical" = 15;
           };
-          format = "{icon}  {capacity}%";
+          format = "{icon} {capacity}%";
           format-icons = [
             ""
             ""

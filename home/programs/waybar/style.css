@@ -7,35 +7,29 @@
 #waybar {
     background: @base;
     color: @text;
-    margin: 5px 5px;
+    margin: 5px 10px;
 }
 
 #workspaces {
-    border-radius: 1rem;
-    margin: 5px;
+    margin: 5px 5px 5px 0.5rem;
     background-color: @surface0;
-    margin-left: 1rem;
 }
 
 #workspaces button {
     color: @lavender;
-    border-radius: 1rem;
-    padding: 0.4rem;
+    padding: 0.5rem;
 }
 
 #workspaces button.active {
     color: @sky;
-    border-radius: 1rem;
 }
 
 #workspaces button:hover {
     color: @sapphire;
-    border-radius: 1rem;
 }
 
-#tray,
-#wireplumber,
 #cpu,
+#memory,
 #battery {
     background-color: @surface0;
     margin: 5px 0;
@@ -43,25 +37,41 @@
     border-radius: 0;
 }
 
+#wireplumber {
+    background-color: transparent;
+    margin: 5px 0.5rem;
+    padding: 0.5rem;
+}
+
+#battery.warning {
+    color: @peach;
+}
+
+#battery.critical {
+    color: @red;
+}
+
 #battery.charging {
     color: @green;
 }
 
 #language {
+    background-color: transparent;
     margin: 5px 0;
     padding: 0.5rem;
 }
 
 #clock {
     color: @blue;
-    border-radius: 1rem;
     background-color: @surface0;
+    border-radius: 0 1rem 1rem 0;
     padding: 0.5rem 1rem;
-    margin: 5px 0;
+    margin: 5px 0.5rem 5px 0;
 }
 
 #tray {
-    margin-right: 1rem;
-    border-radius: 1rem;
+    background-color: @surface0;
+    margin: 5px 0;
     padding: 0.5rem 1rem;
+    border-radius: 1rem 0 0 1rem;
 }
