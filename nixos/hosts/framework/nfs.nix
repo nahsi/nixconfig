@@ -19,6 +19,7 @@ in
     "/home/nahsi/nfs/media/video" = nfsMount "/home/nahsi/nfs/media/video" "/mnt/storage/media/video";
     "/home/nahsi/nfs/media/audiobooks" =
       nfsMount "/home/nahsi/nfs/media/audiobooks" "/mnt/storage/media/audiobooks";
+    "/home/nahsi/nfs/media/books" = nfsMount "/home/nahsi/nfs/media/books" "/mnt/storage/media/books";
     "/home/nahsi/nfs/media/podcasts" =
       nfsMount "/home/nahsi/nfs/media/podcasts" "/mnt/storage/media/podcasts";
     "/home/nahsi/nfs/media/music" = nfsMount "/home/nahsi/nfs/media/music" "/mnt/storage/media/music";
