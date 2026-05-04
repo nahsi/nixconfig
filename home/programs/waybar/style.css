@@ -11,8 +11,9 @@
 }
 
 #workspaces {
-    margin: 5px 5px 5px 0.5rem;
+    margin: 5px 0 5px 0.5rem;
     background-color: @surface0;
+    border-radius: 1rem;
 }
 
 #workspaces button {
@@ -39,7 +40,7 @@
 
 #wireplumber {
     background-color: transparent;
-    margin: 5px 0.5rem;
+    margin: 5px 0;
     padding: 0.5rem;
 }
 
@@ -65,13 +66,13 @@
     color: @blue;
     background-color: @surface0;
     border-radius: 0 1rem 1rem 0;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem;
     margin: 5px 0.5rem 5px 0;
 }
 
 #tray {
     background-color: @surface0;
-    margin: 5px 0;
-    padding: 0.5rem 1rem;
+    margin: 5px 0 5px 0.5rem;
+    padding: 0.5rem;
     border-radius: 1rem 0 0 1rem;
 }
