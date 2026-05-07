@@ -53,6 +53,7 @@
     {
       packages.${system} = {
         kroki-cli = pkgs.callPackage ./pkgs/kroki-cli { };
+        vuescan = pkgs.callPackage ./pkgs/vuescan { };
       };
 
       formatter.${system} = pkgs.nixfmt-tree;
@@ -65,6 +66,7 @@
           };
           modules = [
             ./nixos/hosts/framework
+            ./nixos/modules/vuescan.nix
             lanzaboote.nixosModules.lanzaboote
             nixos-hardware.nixosModules.framework-16-7040-amd
             nixos-hardware.nixosModules.common-hidpi

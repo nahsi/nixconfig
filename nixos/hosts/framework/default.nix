@@ -11,6 +11,8 @@
 
   networking.hostName = "framework";
 
+  programs.vuescan.enable = true;
+
   networking.firewall = {
     enable = true;
   };
