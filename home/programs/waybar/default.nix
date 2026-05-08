@@ -97,7 +97,8 @@
             ""
             ""
           ];
-          format-charging = " {capacity}%";
+          format-charging = "󱐋 {capacity}%";
+          format-plugged = " {capacity}%";
           format-alt = "{icon} {time}";
           tooltip-format = "{timeTo}\n{power}W";
         };
