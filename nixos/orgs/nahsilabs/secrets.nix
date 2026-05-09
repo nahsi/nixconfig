@@ -13,14 +13,14 @@
       inherit (config.users.users.nahsi) group;
       mode = "400";
     };
-    meli-personal-password = {
-      file = secrets/meli-personal-password.age;
+    mail-personal-password = {
+      file = secrets/mail-personal-password.age;
       owner = config.users.users.nahsi.name;
       inherit (config.users.users.nahsi) group;
       mode = "400";
     };
-    meli-trash-password = {
-      file = secrets/meli-trash-password.age;
+    mail-trash-password = {
+      file = secrets/mail-trash-password.age;
       owner = config.users.users.nahsi.name;
       inherit (config.users.users.nahsi) group;
       mode = "400";

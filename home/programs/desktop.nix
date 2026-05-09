@@ -46,5 +46,4 @@
   # apps
   programs.anki.enable = true;
   programs.zathura.enable = true;
-  programs.aerc.enable = true;
 }
