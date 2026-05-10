@@ -23,6 +23,7 @@ in
     programs/ragenix.nix
     programs/mpv.nix
     programs/aerc.nix
+    programs/ferrosonic.nix
 
     languages/rust.nix
     languages/python.nix

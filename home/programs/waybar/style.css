@@ -10,6 +10,11 @@
     margin: 5px 10px;
 }
 
+#window {
+    margin: 5px 0 5px 0.5rem;
+    padding: 0.5rem;
+}
+
 #workspaces {
     margin: 5px 0 5px 0.5rem;
     background-color: @surface0;
@@ -68,6 +73,18 @@
     border-radius: 0 1rem 1rem 0;
     padding: 0.5rem;
     margin: 5px 0.5rem 5px 0;
+}
+
+#mpris {
+    background-color: @surface0;
+    border-radius: 1rem;
+    margin: 5px 0 5px 0.5rem;
+    padding: 0.5rem 1rem;
+    color: @mauve;
+}
+
+#mpris.paused {
+    color: @overlay0;
 }
 
 #tray {

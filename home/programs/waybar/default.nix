@@ -11,8 +11,11 @@
       mainBar = {
         layer = "top";
         position = "top";
-        modules-left = [ "hyprland/workspaces" ];
-        modules-center = [ "hyprland/window" ];
+        modules-left = [
+          "hyprland/workspaces"
+          "hyprland/window"
+        ];
+        modules-center = [ "mpris" ];
         modules-right = [
           "tray"
           "wireplumber"
@@ -22,6 +25,12 @@
           "hyprland/language"
           "clock"
         ];
+        "mpris" = {
+          player = "ferrosonic";
+          format = "󰎆  {title} — {artist}";
+          format-paused = "󰏤  {title} — {artist}";
+          tooltip-format = "{title}\n{artist}\n{album}";
+        };
         "hyprland/language" = {
           format = "{short}";
         };

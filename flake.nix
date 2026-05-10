@@ -54,6 +54,7 @@
       packages.${system} = {
         kroki-cli = pkgs.callPackage ./pkgs/kroki-cli { };
         vuescan = pkgs.callPackage ./pkgs/vuescan { };
+        ferrosonic-ng = pkgs.callPackage ./pkgs/ferrosonic-ng { };
       };
 
       formatter.${system} = pkgs.nixfmt-tree;

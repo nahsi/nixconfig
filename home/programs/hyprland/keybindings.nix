@@ -50,6 +50,9 @@
       "$mod, S, togglespecialworkspace, scratch"
       "$mod SHIFT, S, movetoworkspace, special:scratch"
 
+      # Ferrosonic music scratchpad
+      "$mod, F, togglespecialworkspace, music"
+
       # Scroll through existing workspaces
       "$mod, mouse_down, workspace, e+1"
       "$mod, mouse_up, workspace, e-1"
