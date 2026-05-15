@@ -3,8 +3,12 @@
     experimental-features = [
       "nix-command"
       "flakes"
+      "auto-allocate-uids"
+      "cgroups"
     ];
+    system-features = [ "uid-range" ];
     auto-optimise-store = true;
+    auto-allocate-uids = true;
     trusted-users = [ "@wheel" ];
   };
   nixpkgs.config.allowUnfree = true;
