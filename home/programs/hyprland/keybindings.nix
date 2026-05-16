@@ -59,8 +59,10 @@
 
       # Screenshot a monitor
       "$mod, PRINT, exec, hyprshot -m output --clipboard-only"
+      "$secondMod SHIFT, P, exec, hyprshot -m output --clipboard-only"
       # Screenshot a region
       ",PRINT, exec, hyprshot -m region --clipboard-only"
+      "$secondMod, P, exec, hyprshot -m region --clipboard-only"
     ];
 
     bindm = [
