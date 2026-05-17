@@ -1,6 +1,8 @@
+{ pkgs, ... }:
 {
   programs.mpv = {
     enable = true;
+    scripts = [ pkgs.mpvScripts.mpris ];
     config = {
       osc = "no";
       osd-bar = "no";

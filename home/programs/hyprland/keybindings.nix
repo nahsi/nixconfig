@@ -85,10 +85,10 @@
 
     bindl = [
       # Player controls
-      ", XF86AudioNext, exec, playerctl next"
-      ", XF86AudioPause, exec, playerctl play-pause"
-      ", XF86AudioPlay, exec, playerctl play-pause"
-      ", XF86AudioPrev, exec, playerctl previous"
+      ", XF86AudioNext, exec, playerctl -p ferrosonic next"
+      ", XF86AudioPause, exec, playerctl -p ferrosonic play-pause"
+      ", XF86AudioPlay, exec, playerctl -p ferrosonic play-pause"
+      ", XF86AudioPrev, exec, playerctl -p ferrosonic previous"
 
       # Laptop lid triggers
       ", switch:on:Lid Switch, exec, hyprctl keyword monitor \"eDP-1, disable\""

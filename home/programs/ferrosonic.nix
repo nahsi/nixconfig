@@ -11,5 +11,6 @@ in
   home.packages = [
     localPkgs.ferrosonic-ng
     pkgs.cava
+    pkgs.playerctl
   ];
 }
