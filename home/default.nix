@@ -24,6 +24,7 @@ in
     programs/mpv.nix
     programs/aerc.nix
     programs/ferrosonic.nix
+    programs/iamb.nix
 
     languages/rust.nix
     languages/python.nix
