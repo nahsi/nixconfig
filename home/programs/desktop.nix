@@ -44,6 +44,7 @@
   };
 
   # apps
+  programs.element-desktop.enable = true;
   programs.anki.enable = true;
   programs.zathura.enable = true;
 }
