@@ -13,7 +13,7 @@
 
       # Pin apps to workspaces
       "workspace 3 silent,class:^(superProductivity)$"
-      "workspace 4 silent,class:^(org.telegram.desktop)$"
+      "workspace 4 silent,initialTitle:^(Element)$"
       "workspace 5 silent,class:^(Slack)$"
     ];
   };

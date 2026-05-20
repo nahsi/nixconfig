@@ -26,7 +26,7 @@
     enable = true;
     settings.exec-once = [
       "nm-applet"
-      "Telegram"
+      "element-desktop"
       "super-productivity"
     ];
   };
