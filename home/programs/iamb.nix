@@ -7,6 +7,7 @@
       settings = {
         notifications.enabled = true;
         image_preview.protocol.type = "kitty";
+        username_display = "displayname";
       };
     };
   };
