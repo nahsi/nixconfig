@@ -10,16 +10,16 @@
 
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "ferrosonic";
-  version = "0.7.0";
+  version = "0.8.1";
 
   src = fetchFromGitHub {
     owner = "Jamie098";
     repo = "ferrosonic-ng";
     rev = "v${finalAttrs.version}";
-    hash = "sha256-AmSZkxQ12SFo8hHfHi7eXr+LF6Z8TCajA1hr9S+ivjk=";
+    hash = "sha256-3M7Pskgutm9tbcTONvQ44rpuBD/MlAivZRBRMxq0BKg=";
   };
 
-  cargoHash = "sha256-NhB6ztyveC73oCwYRCfuuvazl3gYavB7igrRBrhRi9c=";
+  cargoHash = "sha256-KN+Lg+N/XOvAg3+TTeoJLW/y0rgY0ji6ubTzoU6oLdI=";
 
   nativeBuildInputs = [
     pkg-config
