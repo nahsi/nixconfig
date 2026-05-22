@@ -34,9 +34,13 @@ in
     "x-scheme-handler/https" = "qutebrowser.desktop";
   };
 
+  xdg.configFile."qutebrowser/userstyles/searxng.css".source = ./userstyles/searxng.css;
+
   programs.qutebrowser = {
     enable = true;
     searchEngines = {
+      "DEFAULT" = "https://search.nahsi.dev/search?q={}";
+      "ddg" = "https://duckduckgo.com/?q={}";
       "yt" = "https://www.youtube.com/results?search_query={}";
       "gg" = "http://www.google.com/search?hl=en&q={}";
       "gh" = "https://github.com/search?q={}&type=Code";
@@ -90,6 +94,9 @@ in
         theme.setup(c, 'mocha', True)
 
       c.colors.webpage.bg = "white"
+
+      with config.pattern('https://search.nahsi.dev/*'):
+        config.set('content.user_stylesheets', ['~/.config/qutebrowser/userstyles/searxng.css'])
 
       c.bindings.key_mappings = {
       'Й': 'Q', 'й': 'q',

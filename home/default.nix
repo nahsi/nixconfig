@@ -15,7 +15,7 @@ in
     programs/waybar
     programs/ghostty
     programs/nnn.nix
-    programs/qutebrowser.nix
+    programs/qutebrowser
     programs/git.nix
     programs/shell.nix
     programs/desktop.nix
