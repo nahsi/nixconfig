@@ -1,6 +1,7 @@
 {
   imports = [
     ./fluence
+    ./bidpoint
     ./nahsilabs
   ];
 }

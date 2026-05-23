@@ -12,6 +12,5 @@ let
   ];
 in
 {
-  "fluence.age".publicKeys = users ++ systems;
-  "ssh/fluence.age".publicKeys = users ++ systems;
+  "bidpoint-infra.age".publicKeys = users ++ systems;
 }

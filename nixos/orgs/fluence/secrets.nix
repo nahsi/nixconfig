@@ -15,19 +15,6 @@
       inherit (config.users.users.nahsi) group;
       mode = "400";
     };
-
-    vaultAgentFluenceRoleId = {
-      file = secrets/vault-agent/role_id.age;
-      owner = config.services.vault-agent.instances.fluence.user;
-      inherit (config.services.vault-agent.instances.fluence) group;
-      mode = "400";
-    };
-    vaultAgentFluenceSecretId = {
-      file = secrets/vault-agent/secret_id.age;
-      owner = config.services.vault-agent.instances.fluence.user;
-      inherit (config.services.vault-agent.instances.fluence) group;
-      mode = "400";
-    };
   };
 
   environment.variables = {
