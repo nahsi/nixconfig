@@ -102,6 +102,9 @@ in
       hclfmt
       bitwarden-cli
 
+      # mcp
+      terraform-mcp-server
+
       # ai
       qwen-code
       codex
