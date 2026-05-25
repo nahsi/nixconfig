@@ -55,6 +55,7 @@ in
       openssl
       ncdu
       dust
+      skopeo
 
       # network
       wireguard-tools
