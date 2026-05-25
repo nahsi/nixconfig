@@ -41,7 +41,7 @@ in
     searchEngines = {
       "DEFAULT" = "https://search.nahsi.dev/search?q={}";
       "ddg" = "https://duckduckgo.com/?q={}";
-      "yt" = "https://www.youtube.com/results?search_query={}";
+      "yt" = "https://yt.nahsi.dev/search/{}";
       "gg" = "http://www.google.com/search?hl=en&q={}";
       "gh" = "https://github.com/search?q={}&type=Code";
       "ghn" = "https://github.com/search?q=language%3Anix {}&type=Code";
