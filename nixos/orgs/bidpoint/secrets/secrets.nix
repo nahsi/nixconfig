@@ -13,4 +13,6 @@ let
 in
 {
   "bidpoint-infra.age".publicKeys = users ++ systems;
+  "bidpoint-bidpoint.age".publicKeys = users ++ systems;
+  "bidpoint-ansible-vault.age".publicKeys = users ++ systems;
 }
