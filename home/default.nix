@@ -40,6 +40,7 @@ in
 
     packages = [
       localPkgs.kroki-cli
+      localPkgs.mcp-victorialogs
     ]
     ++ (with pkgs; [
       # utilities
