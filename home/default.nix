@@ -25,6 +25,7 @@ in
     programs/aerc.nix
     programs/ferrosonic.nix
     programs/iamb.nix
+    programs/kdeconnect.nix
 
     languages/rust.nix
     languages/python.nix
