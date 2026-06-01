@@ -13,6 +13,7 @@ in
 
     programs/hyprland
     programs/waybar
+    programs/ashell.nix
     programs/ghostty
     programs/nnn.nix
     programs/qutebrowser
@@ -130,8 +131,6 @@ in
 
   services = {
     mpris-proxy.enable = true;
-    blueman-applet.enable = true;
-    network-manager-applet.enable = true;
   };
 
   fonts.fontconfig = {
