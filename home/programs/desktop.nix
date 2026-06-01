@@ -3,7 +3,7 @@
   # launcher
   programs.fuzzel.enable = true;
 
-  # notifications
+  # notifications: stays on mako until ashell 0.9.0 adds the Notifications module
   services.mako = {
     enable = true;
     settings = {
