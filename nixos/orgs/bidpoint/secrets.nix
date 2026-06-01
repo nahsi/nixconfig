@@ -25,7 +25,7 @@
 
   environment.variables = {
     BIDPOINT_SECRETS_infra = "${config.age.secrets.bidpointInfra.path}";
-    BIDPOINT_SECRETS_staging = "${config.age.secrets.bidpointInfra.path}";
-    BIDPOINT_SECRETS_bidpoint = "${config.age.secrets.bidpointInfra.path}";
+    BIDPOINT_SECRETS_staging = "${config.age.secrets.bidpointStaging.path}";
+    BIDPOINT_SECRETS_bidpoint = "${config.age.secrets.bidpointBidpoint.path}";
   };
 }

@@ -15,5 +15,4 @@ in
   "bidpoint-bidpoint.age".publicKeys = users ++ systems;
   "bidpoint-infra.age".publicKeys = users ++ systems;
   "bidpoint-staging.age".publicKeys = users ++ systems;
-  "bidpoint-ansible-vault.age".publicKeys = users ++ systems;
 }
