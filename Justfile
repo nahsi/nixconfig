@@ -1,8 +1,17 @@
-deploy:
-  doas nixos-rebuild switch --flake .
+default:
+  @just --list
+
+build:
+  nom build .#nixosConfigurations.framework.config.system.build.toplevel
+
+boot:
+  nixos-rebuild boot --flake . --sudo |& nom
+
+switch:
+  nixos-rebuild switch --flake . --sudo |& nom
 
 debug:
-  doas nixos-rebuild switch --flake . --show-trace --verbose
+  nixos-rebuild switch --flake . --sudo --show-trace --verbose |& nom
 
 up:
   nix flake update

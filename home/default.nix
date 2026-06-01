@@ -24,7 +24,6 @@ in
     programs/mpv.nix
     programs/aerc.nix
     programs/ferrosonic.nix
-    programs/iamb.nix
     programs/kdeconnect.nix
 
     languages/rust.nix
@@ -34,7 +33,7 @@ in
   programs.home-manager.enable = true;
 
   home = {
-    stateVersion = "24.05";
+    stateVersion = "26.05";
     username = "nahsi";
     homeDirectory = "/home/nahsi";
     language.base = "en_US.UTF-8";
@@ -76,7 +75,6 @@ in
       mediainfo
       ffmpeg
       blanket
-      stremio
       nsxiv
 
       # photo
@@ -89,7 +87,6 @@ in
       keymapp
 
       # messaging
-      telegram-desktop
       slack
 
       # devops stuff
@@ -101,9 +98,7 @@ in
       vault
       terraform
       kubevirt
-      kdash
       hclfmt
-      bitwarden-cli
 
       # mcp
       terraform-mcp-server
@@ -117,7 +112,8 @@ in
       nix-melt
       statix
       deadnix
-      nom
+      nix-output-monitor
+      nix-update
       nixos-generators
       devenv
 
@@ -135,6 +131,7 @@ in
   services = {
     mpris-proxy.enable = true;
     blueman-applet.enable = true;
+    network-manager-applet.enable = true;
   };
 
   fonts.fontconfig = {

@@ -4,7 +4,7 @@
     enable = true;
     systemd = {
       enable = true;
-      target = "graphical-session.target";
+      targets = [ "graphical-session.target" ];
     };
     style = lib.readFile ./style.css;
     settings = {
@@ -58,6 +58,7 @@
           format = "{:%H:%M}";
           format-alt = "{:%a, %b %d, %Y - %R}";
           tooltip-format = "<tt>{calendar}</tt>";
+          locale = "en_DK.UTF-8";
           calendar = {
             mode = "month";
             on-scroll = 1;

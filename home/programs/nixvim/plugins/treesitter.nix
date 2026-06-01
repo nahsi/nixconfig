@@ -1,4 +1,7 @@
+{ pkgs, ... }:
 {
+  programs.nixvim.extraPackages = [ pkgs.tree-sitter ];
+
   programs.nixvim.plugins = {
     treesitter = {
       enable = true;
@@ -7,7 +10,7 @@
         highlight.enable = true;
         indent.enable = false;
       };
-      folding = false;
+      folding.enable = false;
     };
     treesitter-context = {
       enable = true;

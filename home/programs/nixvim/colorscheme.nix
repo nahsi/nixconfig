@@ -14,6 +14,7 @@
         transparent_background = true;
         integrations = {
           treesitter = true;
+          lualine = { };
           native_lsp = {
             enabled = true;
             inlay_hints = {

@@ -14,7 +14,10 @@
       "j" = "seek 5";
     };
   };
-  wayland.windowManager.hyprland.settings.windowrulev2 = [
-    "float,class:^(mpv)$"
+  wayland.windowManager.hyprland.settings.window_rule = [
+    {
+      match.class = "^(mpv)$";
+      float = true;
+    }
   ];
 }

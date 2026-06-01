@@ -2,14 +2,14 @@
 {
   programs.nixvim = {
     extraPackages = with pkgs; [
-      nixfmt-rfc-style
+      nixfmt
       prettierd
       rustfmt
     ];
 
     plugins.conform-nvim = {
       enable = true;
-      settings.formatters.nixfmt.command = "${lib.getExe pkgs.nixfmt-rfc-style}";
+      settings.formatters.nixfmt.command = "${lib.getExe pkgs.nixfmt}";
       settings.formatters_by_ft = {
         markdown = [ "prettierd" ];
         yaml = [ "prettierd" ];

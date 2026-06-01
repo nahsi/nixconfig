@@ -1,20 +1,43 @@
 { ... }:
 {
-  wayland.windowManager.hyprland.settings = {
-    windowrulev2 = [
-      # Ignore maximize requests from apps
-      "suppressevent maximize, class:.*"
+  wayland.windowManager.hyprland.settings.window_rule = [
+    # Ignore maximize requests from apps
+    {
+      match.class = ".*";
+      suppress_event = "maximize";
+    }
 
-      # Fix dragging issues with XWayland
-      "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
+    # Fix dragging issues with XWayland
+    {
+      match = {
+        class = "^$";
+        title = "^$";
+        xwayland = true;
+        float = true;
+        fullscreen = false;
+        pin = false;
+      };
+      no_focus = true;
+    }
 
-      # Ferrosonic scratchpad
-      "workspace special:music silent, class:^(ferrosonic)$"
+    # Ferrosonic scratchpad
+    {
+      match.class = "^(ferrosonic)$";
+      workspace = "special:music silent";
+    }
 
-      # Pin apps to workspaces
-      "workspace 3 silent,class:^(superProductivity)$"
-      "workspace 4 silent,initialTitle:^(Element)$"
-      "workspace 5 silent,class:^(Slack)$"
-    ];
-  };
+    # Pin apps to workspaces
+    {
+      match.class = "^superproductivity$";
+      workspace = "3 silent";
+    }
+    {
+      match.class = "^element$";
+      workspace = "4 silent";
+    }
+    {
+      match.class = "^slack$";
+      workspace = "5 silent";
+    }
+  ];
 }

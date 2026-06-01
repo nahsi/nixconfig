@@ -3,14 +3,13 @@
   imports = [
     inputs.nixvim.homeModules.nixvim
     ./colorscheme.nix
-    ./plugins/lightline.nix
+    ./plugins/lualine.nix
     ./plugins/rainbow-delimeters.nix
     ./plugins/treesitter.nix
     ./plugins/conform.nix
     ./plugins/lsp.nix
     ./plugins/nvim-cmp.nix
     ./plugins/comment.nix
-    ./plugins/neorg.nix
   ];
 
   programs.nixvim = {

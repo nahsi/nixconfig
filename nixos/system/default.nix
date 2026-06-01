@@ -23,10 +23,6 @@
     wifi.powersave = true;
   };
 
-  nixpkgs.config.permittedInsecurePackages = [
-    "qtwebengine-5.15.19"
-  ];
-
   services = {
     avahi = {
       enable = true;
@@ -42,6 +38,7 @@
     };
     libinput.enable = true;
     blueman.enable = true;
+    upower.enable = true;
 
     pipewire = {
       enable = true;
