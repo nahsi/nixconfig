@@ -120,8 +120,8 @@
     --color-base-font: #cdd6f4;
     --color-base-background: #1e1e2e;
     --color-base-background-mobile: #1e1e2e;
-    --color-url-font: #cba6f7;
-    --color-url-visited-font: #cba6f7;
+    --color-url-font: #b4befe;
+    --color-url-visited-font: #b4befe;
     --color-header-background: #181825;
     --color-header-border: #181825;
     --color-footer-background: #181825;
@@ -132,15 +132,15 @@
     --color-backtotop-font: #bac2de;
     --color-backtotop-border: #313244;
     --color-backtotop-background: #313244;
-    --color-btn-background: #cba6f7;
+    --color-btn-background: #b4befe;
     --color-btn-font: #1e1e2e;
-    --color-show-btn-background: #cba6f7;
+    --color-show-btn-background: #b4befe;
     --color-show-btn-font: #1e1e2e;
     --color-search-border: #313244;
     --color-search-shadow: 0 2px 8px #11111b;
     --color-search-background: #313244;
     --color-search-font: #cdd6f4;
-    --color-search-background-hover: #cba6f7;
+    --color-search-background-hover: #b4befe;
     --color-error: #f38ba8;
     --color-error-background: #313244;
     --color-warning: #f9e2af;
@@ -148,7 +148,7 @@
     --color-success: #a6e3a1;
     --color-success-background: #313244;
     --color-categories-item-selected-font: #cdd6f4;
-    --color-categories-item-border-selected: #cba6f7;
+    --color-categories-item-border-selected: #b4befe;
     --color-autocomplete-font: #bac2de;
     --color-autocomplete-border: #313244;
     --color-autocomplete-shadow: 0 2px 8px #11111b;
@@ -160,11 +160,11 @@
     --color-result-border: #1e1e2e;
     --color-result-url-font: #bac2de;
     --color-result-vim-selected: #313244;
-    --color-result-vim-arrow: #cba6f7;
+    --color-result-vim-arrow: #b4befe;
     --color-result-description-highlight-font: #cdd6f4;
-    --color-result-link-font: #cba6f7;
-    --color-result-link-font-highlight: #cba6f7;
-    --color-result-link-visited-font: #cba6f7;
+    --color-result-link-font: #b4befe;
+    --color-result-link-font-highlight: #b4befe;
+    --color-result-link-visited-font: #b4befe;
     --color-result-publishdate-font: #585b70;
     --color-result-engines-font: #585b70;
     --color-result-search-url-border: #585b70;
@@ -173,7 +173,7 @@
     --color-result-detail-label-font: #a6adc8;
     --color-result-detail-background: #1e1e2e;
     --color-result-detail-hr: #1e1e2e;
-    --color-result-detail-link: #cba6f7;
+    --color-result-detail-link: #b4befe;
     --color-result-detail-loader-border: rgba(255, 255, 255, 0.2);
     --color-result-detail-loader-borderleft: #11111b;
     --color-result-image-span-font: #cdd6f4;
@@ -202,7 +202,7 @@
     --color-toolkit-checkbox-onoff-off-mark-color: #181825;
     --color-toolkit-checkbox-label-background: #1e1e2e;
     --color-toolkit-checkbox-label-border: #181825;
-    --color-toolkit-checkbox-input-border: #cba6f7;
+    --color-toolkit-checkbox-input-border: #b4befe;
     --color-toolkit-engine-tooltip-border: #313244;
     --color-toolkit-engine-tooltip-background: #313244;
     --color-toolkit-loader-border: rgba(255, 255, 255, 0.2);
@@ -218,10 +218,10 @@
     color: #a6adc8 !important;
   }
   :root.theme-auto #search_logo svg :not([fill="none"]) {
-    fill: #cba6f7;
+    fill: #b4befe;
   }
   :root.theme-auto #search_logo svg :not([stroke="none"]) {
-    stroke: #cba6f7;
+    stroke: #b4befe;
   }
   :root.theme-auto .index .title {
     filter: brightness(0) saturate(100%) invert(63%) sepia(71%) saturate(1021%) hue-rotate(208deg) brightness(110%) contrast(94%);
@@ -232,8 +232,8 @@
   --color-base-font: #cdd6f4;
   --color-base-background: #1e1e2e;
   --color-base-background-mobile: #1e1e2e;
-  --color-url-font: #cba6f7;
-  --color-url-visited-font: #cba6f7;
+  --color-url-font: #b4befe;
+  --color-url-visited-font: #b4befe;
   --color-header-background: #181825;
   --color-header-border: #181825;
   --color-footer-background: #181825;
@@ -244,15 +244,15 @@
   --color-backtotop-font: #bac2de;
   --color-backtotop-border: #313244;
   --color-backtotop-background: #313244;
-  --color-btn-background: #cba6f7;
+  --color-btn-background: #b4befe;
   --color-btn-font: #1e1e2e;
-  --color-show-btn-background: #cba6f7;
+  --color-show-btn-background: #b4befe;
   --color-show-btn-font: #1e1e2e;
   --color-search-border: #313244;
   --color-search-shadow: 0 2px 8px #11111b;
   --color-search-background: #313244;
   --color-search-font: #cdd6f4;
-  --color-search-background-hover: #cba6f7;
+  --color-search-background-hover: #b4befe;
   --color-error: #f38ba8;
   --color-error-background: #313244;
   --color-warning: #f9e2af;
@@ -260,7 +260,7 @@
   --color-success: #a6e3a1;
   --color-success-background: #313244;
   --color-categories-item-selected-font: #cdd6f4;
-  --color-categories-item-border-selected: #cba6f7;
+  --color-categories-item-border-selected: #b4befe;
   --color-autocomplete-font: #bac2de;
   --color-autocomplete-border: #313244;
   --color-autocomplete-shadow: 0 2px 8px #11111b;
@@ -272,11 +272,11 @@
   --color-result-border: #1e1e2e;
   --color-result-url-font: #bac2de;
   --color-result-vim-selected: #313244;
-  --color-result-vim-arrow: #cba6f7;
+  --color-result-vim-arrow: #b4befe;
   --color-result-description-highlight-font: #cdd6f4;
-  --color-result-link-font: #cba6f7;
-  --color-result-link-font-highlight: #cba6f7;
-  --color-result-link-visited-font: #cba6f7;
+  --color-result-link-font: #b4befe;
+  --color-result-link-font-highlight: #b4befe;
+  --color-result-link-visited-font: #b4befe;
   --color-result-publishdate-font: #585b70;
   --color-result-engines-font: #585b70;
   --color-result-search-url-border: #585b70;
@@ -285,7 +285,7 @@
   --color-result-detail-label-font: #a6adc8;
   --color-result-detail-background: #1e1e2e;
   --color-result-detail-hr: #1e1e2e;
-  --color-result-detail-link: #cba6f7;
+  --color-result-detail-link: #b4befe;
   --color-result-detail-loader-border: rgba(255, 255, 255, 0.2);
   --color-result-detail-loader-borderleft: #11111b;
   --color-result-image-span-font: #cdd6f4;
@@ -314,7 +314,7 @@
   --color-toolkit-checkbox-onoff-off-mark-color: #181825;
   --color-toolkit-checkbox-label-background: #1e1e2e;
   --color-toolkit-checkbox-label-border: #181825;
-  --color-toolkit-checkbox-input-border: #cba6f7;
+  --color-toolkit-checkbox-input-border: #b4befe;
   --color-toolkit-engine-tooltip-border: #313244;
   --color-toolkit-engine-tooltip-background: #313244;
   --color-toolkit-loader-border: rgba(255, 255, 255, 0.2);
@@ -330,10 +330,10 @@
   color: #a6adc8 !important;
 }
 :root.theme-dark #search_logo svg :not([fill="none"]) {
-  fill: #cba6f7;
+  fill: #b4befe;
 }
 :root.theme-dark #search_logo svg :not([stroke="none"]) {
-  stroke: #cba6f7;
+  stroke: #b4befe;
 }
 :root.theme-dark .index .title {
   filter: brightness(0) saturate(100%) invert(63%) sepia(71%) saturate(1021%) hue-rotate(208deg) brightness(110%) contrast(94%);

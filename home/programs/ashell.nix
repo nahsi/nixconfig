@@ -98,11 +98,10 @@
         text_color = "#cdd6f4";
         workspace_colors = [
           "#f5c2e7"
-          "#cba6f7"
           "#b4befe"
         ];
         primary_color = {
-          base = "#cba6f7";
+          base = "#b4befe";
           text = "#1e1e2e";
         };
         background_color = {

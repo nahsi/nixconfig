@@ -12,7 +12,6 @@ in
     inputs.catppuccin.homeModules.catppuccin
 
     programs/hyprland
-    programs/waybar
     programs/ashell.nix
     programs/ghostty
     programs/nnn.nix

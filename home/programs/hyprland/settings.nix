@@ -22,7 +22,7 @@
         allow_tearing = false;
         layout = "dwindle";
         col = {
-          active_border = lib.generators.mkLuaInline "colors.mauve";
+          active_border = lib.generators.mkLuaInline "colors.lavender";
           inactive_border = lib.generators.mkLuaInline "colors.base";
         };
       };
