@@ -37,17 +37,20 @@ in
     enable = true;
     settings = {
       splash = false;
-      preload = [ "/home/nahsi/Wallpapers/wallhaven-o36epm.png" ];
+      preload = [ "/home/nahsi/Wallpapers/wallhaven-w5m6yr.jpg" ];
       wallpaper = [
         {
           monitor = "";
-          path = "/home/nahsi/Wallpapers/wallhaven-o36epm.png";
+          path = "/home/nahsi/Wallpapers/wallhaven-w5m6yr.jpg";
         }
       ];
     };
   };
 
-  wayland.windowManager.hyprland.enable = true;
+  wayland.windowManager.hyprland = {
+    enable = true;
+    systemd.enableXdgAutostart = true;
+  };
 
   systemd.user.services = {
     hypr-apply-lid-state = {
