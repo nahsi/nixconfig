@@ -6,6 +6,7 @@
 }:
 {
   boot = {
+    plymouth.enable = true;
     bootspec.enable = true;
     supportedFilesystems = [ "ntfs" ];
     loader = {

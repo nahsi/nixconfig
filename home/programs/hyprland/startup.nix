@@ -20,8 +20,6 @@ let
 in
 {
   home.sessionVariables = {
-    HYPRCURSOR_SIZE = 48;
-    HYPRCURSOR_THEME = "catppuccin-mocha-blue-cursors";
     GDK_SCALE = 2;
     XCURSOR_SIZE = 32;
   };

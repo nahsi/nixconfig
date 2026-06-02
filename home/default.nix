@@ -15,7 +15,6 @@ in
     programs/hyprland
     programs/ashell.nix
     programs/ghostty
-    programs/nnn.nix
     programs/qutebrowser
     programs/git.nix
     programs/shell.nix
@@ -44,55 +43,30 @@ in
       localPkgs.mcp-victorialogs
     ]
     ++ (with pkgs; [
-      # utilities
-      brightnessctl
-      just
-      wl-clipboard
-      unzip
-      jq
-      tree
-      fd
-      file
-      pwgen
-      mkpasswd
-      fastfetch
-      openssl
-      ncdu
-      dust
-      skopeo
-
       # network
       wireguard-tools
-      mtr
       iperf
       tcpdump
-      wireshark
+      termshark
+      xh
+      doggo
+      gping
 
       # hardware
       dmidecode
       powertop
 
-      # media
-      yt-dlp
-      mkvtoolnix
-      mediainfo
-      ffmpeg
-      blanket
-      nsxiv
+      # nix
+      nix-melt
+      statix
+      deadnix
+      nix-output-monitor
+      nix-update
+      nixos-generators
+      devenv
+      comma
 
-      # photo
-      rawtherapee
-      exiftool
-
-      # productivity
-      super-productivity
-      chromium
-      keymapp
-
-      # messaging
-      slack
-
-      # devops stuff
+      # devops
       awscli2
       talosctl
       kustomize
@@ -103,23 +77,20 @@ in
       kubevirt
       hclfmt
       lazygit
-
-      # mcp
-      terraform-mcp-server
+      dive
 
       # ai
       qwen-code
       codex
       claude-code
+      terraform-mcp-server
 
-      # nix
-      nix-melt
-      statix
-      deadnix
-      nix-output-monitor
-      nix-update
-      nixos-generators
-      devenv
+      # media
+      yt-dlp
+      mkvtoolnix
+      mediainfo
+      ffmpeg
+      exiftool
 
       # fonts
       noto-fonts

@@ -2,7 +2,7 @@ default:
   @just --list
 
 build:
-  nom build .#nixosConfigurations.framework.config.system.build.toplevel
+  nh os build
 
 check:
   nix flake check |& nom
@@ -11,21 +11,21 @@ fmt:
   nix fmt
 
 boot:
-  nixos-rebuild boot --flake . --sudo |& nom
+  nh os boot
 
 switch:
-  nixos-rebuild switch --flake . --sudo |& nom
+  nh os switch
 
 debug:
-  nixos-rebuild switch --flake . --sudo --show-trace --verbose |& nom
+  nh os switch --show-trace --verbose
 
 up:
   nix flake update
 
 # Update specific input
-# usage: make upp i=home-manager
-upp:
-  nix flake update $(i)
+# usage: just upp i=home-manager
+upp i:
+  nix flake update {{i}}
 
 history:
   nix profile history --profile /nix/var/nix/profiles/system
@@ -40,4 +40,3 @@ clean:
 gc:
   # garbage collect all unused nix store entries
   doas nix-collect-garbage --delete-old
-

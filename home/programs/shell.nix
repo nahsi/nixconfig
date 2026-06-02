@@ -1,8 +1,50 @@
-_: {
+{ pkgs, ... }:
+{
+  home.packages = with pkgs; [
+    jq
+    yq-go
+    fd
+    file
+    dust
+    duf
+    procs
+    tlrc
+    hyperfine
+    sd
+    ast-grep
+    viddy
+    fastfetch
+    just
+    pwgen
+    mkpasswd
+    openssl
+    skopeo
+
+    # archive
+    atool
+    p7zip
+    zip
+    unzip
+    unrar
+
+    # preview
+    poppler-utils
+    imagemagick
+    glow
+  ];
+
   programs = {
     bash = {
       enable = true;
       enableCompletion = true;
+
+      shellAliases = {
+        l = "eza";
+        ll = "eza -l --git";
+        la = "eza -lah --git";
+        lt = "eza --tree --git-ignore";
+        llt = "eza -lT --git --git-ignore";
+      };
 
       # https://github.com/mrzool/bash-sensible
       initExtra = ''
@@ -96,6 +138,33 @@ _: {
 
     ripgrep.enable = true;
     starship.enable = true;
+    bat.enable = true;
+
+    btop = {
+      enable = true;
+      settings = {
+        show_coretemp = false;
+      };
+    };
+    eza.enable = true;
+    k9s.enable = true;
+    yazi.enable = true;
+
+    nh = {
+      enable = true;
+      flake = "/home/nahsi/nixfiles";
+    };
+
+    zoxide = {
+      enable = true;
+      enableBashIntegration = true;
+    };
+
+    atuin = {
+      enable = true;
+      enableBashIntegration = true;
+      flags = [ "--disable-up-arrow" ];
+    };
 
     direnv = {
       enable = true;
@@ -103,4 +172,6 @@ _: {
       nix-direnv.enable = true;
     };
   };
+
+  services.pueue.enable = true;
 }

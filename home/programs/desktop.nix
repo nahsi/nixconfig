@@ -1,5 +1,17 @@
 { pkgs, ... }:
 {
+  home.packages = with pkgs; [
+    wl-clipboard
+    brightnessctl
+    chromium
+    slack
+    super-productivity
+    blanket
+    imv
+    rawtherapee
+    keymapp
+  ];
+
   # launcher
   programs.fuzzel.enable = true;
 
@@ -30,20 +42,8 @@
     };
   };
 
-  # system monitor
-  programs.btop = {
-    enable = true;
-    settings = {
-      show_coretemp = false;
-    };
-  };
-
-  # gtk theming
-  home.pointerCursor = {
-    size = 64;
-    package = pkgs.vanilla-dmz;
-    name = "Vanilla-DMZ";
-  };
+  catppuccin.cursors.enable = true;
+  home.pointerCursor.size = 64;
 
   gtk = {
     enable = true;
