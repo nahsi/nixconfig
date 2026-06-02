@@ -27,13 +27,13 @@
 
       workspaces = {
         visibility_mode = "All";
-        group_by_monitor = false;
-        enable_workspace_filling = true;
+        group_by_monitor = true;
+        disable_special_workspaces = true;
       };
 
       window_title = {
         mode = "Title";
-        truncate_title_after_length = 80;
+        truncate_title_after_length = 75;
       };
 
       system_info = {
@@ -58,7 +58,15 @@
       };
 
       tempo = {
-        clock_format = "%a %d %b %R";
+        clock_format = "%R";
+        timezones = [
+          "Europe/Athens"
+          "Europe/Berlin"
+        ];
+        weather_location = {
+          City = "Thessaloniki";
+        };
+        weather_indicator = "Icon";
       };
 
       settings = {
@@ -97,7 +105,6 @@
         danger_color = "#f38ba8";
         text_color = "#cdd6f4";
         workspace_colors = [
-          "#f5c2e7"
           "#b4befe"
         ];
         primary_color = {
