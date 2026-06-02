@@ -53,7 +53,6 @@ in
       tree
       fd
       file
-      tree-sitter
       pwgen
       mkpasswd
       fastfetch
@@ -112,7 +111,6 @@ in
       qwen-code
       codex
       claude-code
-      claude-agent-acp
 
       # nix
       nix-melt
