@@ -110,6 +110,7 @@
             lazygit.enabled = true;
             terminal.enabled = true;
             notifier.enabled = true;
+            indent.enabled = true;
             words.enabled = true;
             input.enabled = true;
             statuscolumn.enabled = true;
