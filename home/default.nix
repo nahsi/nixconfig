@@ -10,6 +10,7 @@ in
 {
   imports = [
     inputs.catppuccin.homeModules.catppuccin
+    inputs.nvf.homeManagerModules.default
 
     programs/hyprland
     programs/ashell.nix
@@ -50,6 +51,8 @@ in
       unzip
       jq
       tree
+      fd
+      tree-sitter
       pwgen
       mkpasswd
       fastfetch

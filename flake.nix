@@ -102,5 +102,14 @@
         };
 
       };
+
+      homeConfigurations.nahsi = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [ ./home ];
+        extraSpecialArgs = {
+          inherit inputs system;
+          osConfig = self.nixosConfigurations.framework.config;
+        };
+      };
     };
 }

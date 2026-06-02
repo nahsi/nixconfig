@@ -1,7 +1,5 @@
-{ inputs, ... }:
+_:
 {
-  imports = [ inputs.nvf.homeManagerModules.default ];
-
   programs.nvf = {
     enable = true;
     settings.vim = {
@@ -55,7 +53,13 @@
       lsp = {
         enable = true;
         inlayHints.enable = true;
-        trouble.enable = true;
+        servers.nixd.settings.nixd = {
+          nixpkgs.expr = ''import (builtins.getFlake "/home/nahsi/nixfiles").inputs.nixpkgs.outPath { }'';
+          options = {
+            nixos.expr = ''(builtins.getFlake "/home/nahsi/nixfiles").nixosConfigurations.framework.options'';
+            home-manager.expr = ''(builtins.getFlake "/home/nahsi/nixfiles").homeConfigurations.nahsi.options'';
+          };
+        };
       };
 
       diagnostics = {
@@ -65,13 +69,14 @@
 
       autocomplete.blink-cmp = {
         enable = true;
-        # workaround: blink 1.10.1 crashes on vim.NIL documentation (nixd).
-        # Remove once nixpkgs nixos-26.05 ships blink-cmp >= 1.10.2.
-        setupOpts.completion.documentation.auto_show = false;
+        setupOpts.keymap.preset = "enter";
       };
       statusline.lualine.enable = true;
 
-      treesitter.textobjects.enable = true;
+      treesitter = {
+        textobjects.enable = true;
+        context.enable = true;
+      };
 
       languages = {
         enableTreesitter = true;
