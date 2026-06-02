@@ -10,7 +10,11 @@
       searchCase = "smart";
       preventJunkFiles = true;
       undoFile.enable = true;
-      clipboard.enable = true;
+      clipboard = {
+        enable = true;
+        registers = "unnamedplus";
+        providers.wl-copy.enable = true;
+      };
 
       theme = {
         enable = true;
