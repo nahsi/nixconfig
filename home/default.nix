@@ -52,6 +52,7 @@ in
       jq
       tree
       fd
+      file
       tree-sitter
       pwgen
       mkpasswd
@@ -111,6 +112,7 @@ in
       qwen-code
       codex
       claude-code
+      claude-agent-acp
 
       # nix
       nix-melt

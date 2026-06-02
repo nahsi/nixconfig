@@ -1,5 +1,4 @@
-_:
-{
+_: {
   programs.nvf = {
     enable = true;
     settings.vim = {
@@ -47,7 +46,6 @@ _:
         };
 
         grepprg = "rg --vimgrep";
-        winborder = "rounded";
       };
 
       lsp = {
@@ -101,6 +99,16 @@ _:
 
       git.gitsigns.enable = true;
       binds.whichKey.enable = true;
+
+      assistant.codecompanion-nvim = {
+        enable = true;
+        setupOpts = {
+          strategies = {
+            chat.adapter = "claude_code";
+            inline.adapter = "claude_code";
+          };
+        };
+      };
 
       utility = {
         surround.enable = true;
@@ -194,6 +202,33 @@ _:
           mode = "n";
           action = "<cmd>lua Snacks.picker.help()<cr>";
           desc = "Help";
+          silent = true;
+        }
+        {
+          key = "<leader>aa";
+          mode = [
+            "n"
+            "v"
+          ];
+          action = "<cmd>CodeCompanionActions<cr>";
+          desc = "AI: actions";
+          silent = true;
+        }
+        {
+          key = "<leader>ac";
+          mode = [
+            "n"
+            "v"
+          ];
+          action = "<cmd>CodeCompanionChat Toggle<cr>";
+          desc = "AI: toggle chat";
+          silent = true;
+        }
+        {
+          key = "<leader>ad";
+          mode = "v";
+          action = "<cmd>CodeCompanionChat Add<cr>";
+          desc = "AI: add selection to chat";
           silent = true;
         }
       ];
