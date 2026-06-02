@@ -4,6 +4,12 @@ default:
 build:
   nom build .#nixosConfigurations.framework.config.system.build.toplevel
 
+check:
+  nix flake check |& nom
+
+fmt:
+  nix fmt
+
 boot:
   nixos-rebuild boot --flake . --sudo |& nom
 

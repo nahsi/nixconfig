@@ -4,7 +4,6 @@
   cmake,
   pkg-config,
   hyprlandPlugins,
-  hyprland,
   qt6,
   kdePackages,
   nlohmann_json,

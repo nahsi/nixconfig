@@ -19,7 +19,7 @@ in
     programs/git.nix
     programs/shell.nix
     programs/desktop.nix
-    programs/nixvim
+    programs/nvim
     programs/ragenix.nix
     programs/mpv.nix
     programs/aerc.nix
@@ -99,6 +99,7 @@ in
       terraform
       kubevirt
       hclfmt
+      lazygit
 
       # mcp
       terraform-mcp-server

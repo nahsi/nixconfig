@@ -25,8 +25,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixvim = {
-      url = "github:nix-community/nixvim/nixos-26.05";
+    nvf = {
+      url = "github:NotAShelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -39,8 +44,7 @@
       lanzaboote,
       home-manager,
       ragenix,
-      catppuccin,
-      nixvim,
+      treefmt-nix,
       ...
     }:
     let
@@ -48,6 +52,14 @@
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
+      };
+      treefmtEval = treefmt-nix.lib.evalModule pkgs {
+        projectRootFile = "flake.nix";
+        programs = {
+          nixfmt.enable = true;
+          statix.enable = true;
+          deadnix.enable = true;
+        };
       };
     in
     {
@@ -57,11 +69,13 @@
         mcp-victorialogs = pkgs.callPackage ./pkgs/mcp-victorialogs { };
       };
 
-      formatter.${system} = pkgs.nixfmt-tree;
+      formatter.${system} = treefmtEval.config.build.wrapper;
+
+      checks.${system}.formatting = treefmtEval.config.build.check self;
 
       nixosConfigurations = {
         framework = nixpkgs.lib.nixosSystem {
-          system = system;
+          inherit system;
           specialArgs = {
             inherit inputs;
           };

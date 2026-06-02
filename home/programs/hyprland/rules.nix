@@ -1,5 +1,4 @@
-{ ... }:
-{
+_: {
   wayland.windowManager.hyprland.settings.window_rule = [
     # Ignore maximize requests from apps
     {
