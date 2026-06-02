@@ -9,7 +9,7 @@
       };
       user = {
         name = "nahsi";
-        email = "nahsi@nahsi.dev";
+        email = "git@nahsi.dev";
       };
       alias = {
         c = "commit";
