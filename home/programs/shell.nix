@@ -171,6 +171,9 @@
       enableBashIntegration = true;
       nix-direnv.enable = true;
     };
+
+    nix-index.enable = true;
+    nix-index-database.comma.enable = true;
   };
 
   services.pueue.enable = true;

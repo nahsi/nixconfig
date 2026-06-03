@@ -11,6 +11,7 @@ in
   imports = [
     inputs.catppuccin.homeModules.catppuccin
     inputs.nvf.homeManagerModules.default
+    inputs.nix-index-database.homeModules.default
 
     programs/hyprland
     programs/ashell.nix
@@ -64,7 +65,6 @@ in
       nix-update
       nixos-generators
       devenv
-      comma
 
       # devops
       awscli2
