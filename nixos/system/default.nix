@@ -46,7 +46,6 @@
       };
     };
     libinput.enable = true;
-    blueman.enable = true;
     upower.enable = true;
 
     pipewire = {
@@ -107,7 +106,6 @@
     git
     pavucontrol
     ddcutil
-    networkmanagerapplet
   ];
 
   programs.neovim = {
