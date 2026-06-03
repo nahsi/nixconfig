@@ -43,7 +43,7 @@
   };
 
   catppuccin.cursors.enable = true;
-  home.pointerCursor.size = 64;
+  home.pointerCursor.size = 32;
 
   gtk = {
     enable = true;

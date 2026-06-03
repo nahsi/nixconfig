@@ -19,11 +19,6 @@ let
   };
 in
 {
-  home.sessionVariables = {
-    GDK_SCALE = 2;
-    XCURSOR_SIZE = 32;
-  };
-
   home.packages = [
     pkgs.hyprpaper
     pkgs.hyprcursor

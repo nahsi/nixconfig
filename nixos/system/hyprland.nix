@@ -42,5 +42,6 @@
     QT_SCALE_FACTOR_ROUNDING_POLICY = "RoundPreferFloor";
     NIXOS_OZONE_WL = "1";
     QT_QPA_PLATFORM = "wayland";
+    GDK_SCALE = 2;
   };
 }
