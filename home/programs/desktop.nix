@@ -6,7 +6,6 @@
     chromium
     slack
     super-productivity
-    blanket
     imv
     rawtherapee
     keymapp

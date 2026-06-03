@@ -13,6 +13,8 @@ in
     inputs.nvf.homeManagerModules.default
     inputs.nix-index-database.homeModules.default
 
+    modules/tanin.nix
+
     programs/hyprland
     programs/ashell.nix
     programs/ghostty
@@ -32,6 +34,7 @@ in
   ];
 
   programs.home-manager.enable = true;
+  programs.tanin.enable = true;
 
   home = {
     stateVersion = "26.05";

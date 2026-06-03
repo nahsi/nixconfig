@@ -72,6 +72,7 @@
         kroki-cli = pkgs.callPackage ./pkgs/kroki-cli { };
         ferrosonic-ng = pkgs.callPackage ./pkgs/ferrosonic-ng { };
         mcp-victorialogs = pkgs.callPackage ./pkgs/mcp-victorialogs { };
+        tanin = pkgs.callPackage ./pkgs/tanin { };
       };
 
       formatter.${system} = treefmtEval.config.build.wrapper;
