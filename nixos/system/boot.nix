@@ -5,8 +5,14 @@
   ...
 }:
 {
+  catppuccin.plymouth.enable = false;
+
   boot = {
-    plymouth.enable = true;
+    plymouth = {
+      enable = true;
+      theme = "nixos-bgrt";
+      themePackages = [ pkgs.nixos-bgrt-plymouth ];
+    };
     bootspec.enable = true;
     supportedFilesystems = [ "ntfs" ];
     loader = {
