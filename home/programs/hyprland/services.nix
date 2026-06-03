@@ -20,8 +20,6 @@ let
 in
 {
   home.packages = [
-    pkgs.hyprpaper
-    pkgs.hyprcursor
     pkgs.hyprpicker
     pkgs.hyprshot
   ];
@@ -38,11 +36,6 @@ in
         }
       ];
     };
-  };
-
-  wayland.windowManager.hyprland = {
-    enable = true;
-    systemd.enableXdgAutostart = true;
   };
 
   systemd.user.services = {
