@@ -3,6 +3,7 @@
   home.packages = with pkgs; [
     wl-clipboard
     brightnessctl
+    playerctl
     chromium
     slack
     super-productivity
@@ -65,4 +66,6 @@
   programs.element-desktop.enable = true;
   programs.anki.enable = true;
   programs.zathura.enable = true;
+  programs.ferrosonic.enable = true;
+  programs.tanin.enable = true;
 }

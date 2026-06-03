@@ -13,6 +13,7 @@ in
     inputs.nvf.homeManagerModules.default
     inputs.nix-index-database.homeModules.default
 
+    modules/ferrosonic.nix
     modules/tanin.nix
 
     programs/hyprland
@@ -26,7 +27,6 @@ in
     programs/ragenix.nix
     programs/mpv.nix
     programs/aerc.nix
-    programs/ferrosonic.nix
     programs/kdeconnect.nix
 
     languages/rust.nix
@@ -34,7 +34,6 @@ in
   ];
 
   programs.home-manager.enable = true;
-  programs.tanin.enable = true;
 
   home = {
     stateVersion = "26.05";
