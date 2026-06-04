@@ -39,7 +39,7 @@ in
     stateVersion = "26.05";
     username = "nahsi";
     homeDirectory = "/home/nahsi";
-    language.base = "en_US.UTF-8";
+    language.base = "en_DK.UTF-8";
 
     packages = [
       localPkgs.kroki-cli
