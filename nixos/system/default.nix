@@ -48,6 +48,12 @@
     libinput.enable = true;
     upower.enable = true;
 
+    logind.settings.Login = {
+      HandleLidSwitch = "suspend-then-hibernate";
+      HandleLidSwitchDocked = "ignore";
+      HandleLidSwitchExternalPower = "suspend-then-hibernate";
+    };
+
     pipewire = {
       enable = true;
       alsa.enable = true;
@@ -124,4 +130,6 @@
   };
 
   security.rtkit.enable = true;
+
+  systemd.sleep.settings.Sleep.HibernateDelaySec = "30min";
 }

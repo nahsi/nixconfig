@@ -1,23 +1,4 @@
 { pkgs, ... }:
-let
-  applyLidState = pkgs.writeShellApplication {
-    name = "hypr-apply-lid-state";
-    runtimeInputs = [
-      pkgs.dbus
-      pkgs.hyprland
-    ];
-    text = ''
-      closed=$(dbus-send --print-reply=literal --system \
-        --dest=org.freedesktop.UPower /org/freedesktop/UPower \
-        org.freedesktop.DBus.Properties.Get \
-        string:org.freedesktop.UPower string:LidIsClosed \
-        | awk '{print $NF}')
-      if [ "$closed" = "true" ]; then
-        hyprctl eval 'hl.monitor({output="eDP-1", disabled=true})'
-      fi
-    '';
-  };
-in
 {
   home.packages = [
     pkgs.hyprpicker
@@ -38,20 +19,16 @@ in
     };
   };
 
-  systemd.user.services = {
-    hypr-apply-lid-state = {
-      Unit = {
-        Description = "Apply Hyprland monitor config based on lid state at startup";
-        PartOf = [ "graphical-session.target" ];
-        After = [ "graphical-session.target" ];
-      };
-      Service = {
-        Type = "oneshot";
-        ExecStart = "${applyLidState}/bin/hypr-apply-lid-state";
-      };
-      Install.WantedBy = [ "graphical-session.target" ];
+  services.hypridle = {
+    enable = true;
+    settings.general = {
+      lock_cmd = "pidof hyprlock || hyprlock";
+      before_sleep_cmd = "loginctl lock-session";
+      after_sleep_cmd = ''hyprctl dispatch dpms on && hyprctl keyword monitor "eDP-1, preferred, 0x0, 1.6"'';
     };
+  };
 
+  systemd.user.services = {
     super-productivity = {
       Unit = {
         Description = "Super Productivity";

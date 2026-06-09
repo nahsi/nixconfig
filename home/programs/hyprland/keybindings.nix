@@ -137,11 +137,11 @@ in
 
     # Lid switch: close = disable eDP-1, open = re-enable
     (bindOpts "switch:on:Lid Switch"
-      (mkLuaInline ''function() hl.monitor({output="eDP-1", disabled=true}) end'')
+      (mkLuaInline ''function() hl.dsp.exec_cmd([[hyprctl keyword monitor "eDP-1, disable"]]) end'')
       { locked = true; }
     )
     (bindOpts "switch:off:Lid Switch"
-      (mkLuaInline ''function() hl.monitor({output="eDP-1", mode="preferred", position="0x0", scale=1.6, disabled=false}) end'')
+      (mkLuaInline ''function() hl.dsp.exec_cmd([[hyprctl keyword monitor "eDP-1, preferred, 0x0, 1.6"]]) end'')
       { locked = true; }
     )
   ];
