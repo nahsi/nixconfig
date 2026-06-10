@@ -72,6 +72,7 @@
       packages.${system} = {
         kroki-cli = pkgs.callPackage ./pkgs/kroki-cli { };
         ferrosonic-ng = pkgs.callPackage ./pkgs/ferrosonic-ng { };
+        kubernetes-mcp-server = pkgs.callPackage ./pkgs/kubernetes-mcp-server { };
         mcp-victorialogs = pkgs.callPackage ./pkgs/mcp-victorialogs { };
         tanin = pkgs.callPackage ./pkgs/tanin { };
       };
