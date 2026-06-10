@@ -14,6 +14,7 @@
       "j" = "seek 5";
     };
   };
+  xdg.mimeApps.defaultApplicationPackages = [ pkgs.mpv ];
   wayland.windowManager.hyprland.settings.window_rule = [
     {
       match.class = "^(mpv)$";

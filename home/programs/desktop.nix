@@ -7,10 +7,11 @@
     chromium
     slack
     super-productivity
-    imv
     rawtherapee
     keymapp
   ];
+
+  programs.imv.enable = true;
 
   # launcher
   programs.fuzzel.enable = true;
@@ -68,4 +69,13 @@
   programs.zathura.enable = true;
   programs.ferrosonic.enable = true;
   programs.tanin.enable = true;
+
+  xdg.mimeApps.enable = true;
+  xdg.mimeApps.defaultApplications = {
+    "x-scheme-handler/slack" = "slack.desktop";
+  };
+  xdg.mimeApps.defaultApplicationPackages = [
+    pkgs.imv
+    pkgs.zathura
+  ];
 }

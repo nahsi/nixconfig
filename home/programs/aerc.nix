@@ -17,7 +17,7 @@
         "text/x-patch" = "hldiff";
       };
       openers = {
-        "image/*" = "nsxiv {}";
+        "image/*" = "imv {}";
         "application/pdf" = "zathura {}";
         "x-scheme-handler/http" = "qutebrowser {}";
         "x-scheme-handler/https" = "qutebrowser {}";
