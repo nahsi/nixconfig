@@ -12,6 +12,7 @@
   ];
 
   programs.nix-ld.enable = true;
+  programs.zsh.enable = true;
 
   programs.bandwhich.enable = true;
   programs.sniffnet.enable = true;
@@ -95,6 +96,7 @@
   users.users.nahsi = {
     isNormalUser = true;
     createHome = true;
+    shell = pkgs.zsh;
     uid = 1000;
     extraGroups = [
       "networkmanager"

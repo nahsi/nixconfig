@@ -1,7 +1,7 @@
 _: {
   programs.ghostty = {
     enable = true;
-    enableBashIntegration = true;
+    enableZshIntegration = true;
 
     settings = {
       font-family = "Fira Code";
