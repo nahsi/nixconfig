@@ -28,6 +28,7 @@ in
     programs/mpv.nix
     programs/aerc.nix
     programs/kdeconnect.nix
+    programs/ai.nix
 
     languages/rust.nix
     languages/python.nix
@@ -80,12 +81,6 @@ in
       hclfmt
       lazygit
       dive
-
-      # ai
-      qwen-code
-      codex
-      claude-code
-      terraform-mcp-server
 
       # media
       yt-dlp
