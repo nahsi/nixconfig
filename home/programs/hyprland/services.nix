@@ -24,7 +24,7 @@
     settings.general = {
       lock_cmd = "pidof hyprlock || hyprlock";
       before_sleep_cmd = "loginctl lock-session";
-      after_sleep_cmd = ''hyprctl dispatch dpms on && hyprctl keyword monitor "eDP-1, preferred, 0x0, 1.6"'';
+      after_sleep_cmd = "hyprctl dispatch dpms on && hyprctl reload";
     };
   };
 

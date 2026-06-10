@@ -135,14 +135,11 @@ in
     (bindOpts "XF86AudioPlay" (exec "playerctl -p ferrosonic play-pause") { locked = true; })
     (bindOpts "XF86AudioPrev" (exec "playerctl -p ferrosonic previous") { locked = true; })
 
-    # Lid switch: close = disable eDP-1, open = re-enable
+    # Lid switch: disable eDP-1 on close; reload on open (runtime re-enable is broken, #1274)
     (bindOpts "switch:on:Lid Switch"
-      (mkLuaInline ''function() hl.dsp.exec_cmd([[hyprctl keyword monitor "eDP-1, disable"]]) end'')
+      (mkLuaInline ''function() hl.monitor({ output = "eDP-1", disabled = true }) end'')
       { locked = true; }
     )
-    (bindOpts "switch:off:Lid Switch"
-      (mkLuaInline ''function() hl.dsp.exec_cmd([[hyprctl keyword monitor "eDP-1, preferred, 0x0, 1.6"]]) end'')
-      { locked = true; }
-    )
+    (bindOpts "switch:off:Lid Switch" (exec "hyprctl reload") { locked = true; })
   ];
 }

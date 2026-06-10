@@ -46,7 +46,12 @@
       };
     };
     libinput.enable = true;
-    upower.enable = true;
+    upower = {
+      enable = true;
+      criticalPowerAction = "Hibernate";
+      usePercentageForPolicy = true;
+      percentageAction = 5;
+    };
 
     logind.settings.Login = {
       HandleLidSwitch = "suspend-then-hibernate";
