@@ -35,6 +35,7 @@ in
       remoteControlAtStartup = false;
       includeCoAuthoredBy = false;
       enabledPlugins."rust-analyzer-lsp@claude-plugins-official" = true;
+      enabledPlugins."skill-creator@claude-plugins-official" = true;
 
       env = {
         DISABLE_TELEMETRY = "1";
