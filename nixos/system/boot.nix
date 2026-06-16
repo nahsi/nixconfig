@@ -15,6 +15,7 @@
     };
     bootspec.enable = true;
     supportedFilesystems = [ "ntfs" ];
+    tmp.cleanOnBoot = true;
     loader = {
       systemd-boot =
         if !config.boot.lanzaboote.enable then
