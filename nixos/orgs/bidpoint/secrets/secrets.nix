@@ -15,4 +15,5 @@ in
   "bidpoint-bidpoint.age".publicKeys = users ++ systems;
   "bidpoint-infra.age".publicKeys = users ++ systems;
   "bidpoint-staging.age".publicKeys = users ++ systems;
+  "bidpoint-production.age".publicKeys = users ++ systems;
 }
