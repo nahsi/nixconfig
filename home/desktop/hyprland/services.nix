@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  inputs,
+  system,
+  ...
+}:
 {
   home.packages = [
     pkgs.hyprpicker
@@ -36,7 +41,7 @@
         After = [ "graphical-session.target" ];
       };
       Service = {
-        ExecStart = "${pkgs.super-productivity}/bin/super-productivity";
+        ExecStart = "${inputs.self.packages.${system}.super-productivity}/bin/superproductivity";
         Restart = "on-failure";
         RestartSec = 5;
       };
