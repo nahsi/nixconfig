@@ -5,6 +5,7 @@
     ./mpv.nix
     ./aerc.nix
     ./kdeconnect.nix
+    ./taskwarrior.nix
   ];
 
   programs.imv.enable = true;

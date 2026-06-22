@@ -93,9 +93,10 @@ in
       - Verify before asserting — read docs/source/`--help`. Don't guess APIs, flags, or options.
 
       # Comments
-      - Comment *why*, not *what*. Never restate code.
-      - Only when non-obvious: rationale, trade-off, edge case, workaround, assumption.
-      - Prefer clear names over comments. No TODOs (open issue), no commented-out code (use git).
+      - Default to ZERO comments. Write self-explanatory code, not annotated code.
+      - Add a comment ONLY for genuinely non-obvious rationale, trade-off, edge case, workaround, or assumption — never to restate what the code does.
+      - Never narrate edits or config values (e.g. "set X to 0", "neutralizes default"). If it's visible in the code, don't comment it.
+      - No TODOs (open issue), no commented-out code (use git).
       - Don't write a comment a likely code change would make stale.
     '';
 
