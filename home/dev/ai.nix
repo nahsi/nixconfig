@@ -16,11 +16,6 @@ in
     servers = {
       terraform.command = pkgs.lib.getExe pkgs.terraform-mcp-server;
       nixos.command = pkgs.lib.getExe pkgs.mcp-nixos;
-      kubernetes.command = pkgs.lib.getExe inputs.self.packages.${system}.kubernetes-mcp-server;
-      flux = {
-        command = pkgs.lib.getExe pkgs.fluxcd-operator-mcp;
-        args = [ "serve" ];
-      };
     };
   };
 
