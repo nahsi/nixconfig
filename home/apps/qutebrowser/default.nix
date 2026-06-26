@@ -85,6 +85,10 @@ in
       # load your autoconfig, use this, if the rest of your config is empty!
       config.load_autoconfig()
 
+      # QtWebEngine 6.11.x flickers web video on AMD+Wayland via its GBM path;
+      # qutebrowser's built-in workaround only triggers on exactly 6.11.0.
+      c.qt.environ = {"QTWEBENGINE_FORCE_USE_GBM": "0"}
+
       if not os.path.exists(config.configdir / "theme.py"):
         theme = "https://raw.githubusercontent.com/catppuccin/qutebrowser/main/setup.py"
         with urlopen(theme) as themehtml:
