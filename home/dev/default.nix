@@ -2,7 +2,7 @@
 {
   imports = [
     ./git.nix
-    ./ai.nix
+    ./ai
     ./nvim
     ./rust.nix
     ./python.nix

@@ -45,6 +45,8 @@
       url = "github:mattpocock/skills/694fa30311e02c2639942308513555e61ee84a6f";
       flake = false;
     };
+
+    llm-agents.url = "github:numtide/llm-agents.nix";
   };
 
   outputs =
