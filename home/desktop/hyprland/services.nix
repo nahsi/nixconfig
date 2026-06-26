@@ -1,7 +1,5 @@
 {
   pkgs,
-  inputs,
-  system,
   ...
 }:
 {
@@ -30,22 +28,6 @@
       lock_cmd = "pidof hyprlock || hyprlock";
       before_sleep_cmd = "loginctl lock-session";
       after_sleep_cmd = "hyprctl dispatch dpms on && hyprctl reload";
-    };
-  };
-
-  systemd.user.services = {
-    super-productivity = {
-      Unit = {
-        Description = "Super Productivity";
-        PartOf = [ "graphical-session.target" ];
-        After = [ "graphical-session.target" ];
-      };
-      Service = {
-        ExecStart = "${inputs.self.packages.${system}.super-productivity}/bin/superproductivity";
-        Restart = "on-failure";
-        RestartSec = 5;
-      };
-      Install.WantedBy = [ "graphical-session.target" ];
     };
   };
 }

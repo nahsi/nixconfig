@@ -27,10 +27,6 @@ _: {
 
     # Pin apps to workspaces
     {
-      match.class = "^superproductivity$";
-      workspace = "3 silent";
-    }
-    {
       match.class = "^element$";
       workspace = "4 silent";
     }

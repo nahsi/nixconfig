@@ -82,7 +82,6 @@
         kubernetes-mcp-server = pkgs.callPackage ./pkgs/kubernetes-mcp-server { };
         mcp-victorialogs = pkgs.callPackage ./pkgs/mcp-victorialogs { };
         tanin = pkgs.callPackage ./pkgs/tanin { };
-        super-productivity = pkgs.callPackage ./pkgs/super-productivity { };
       };
 
       formatter.${system} = treefmtEval.config.build.wrapper;

@@ -11,7 +11,6 @@ in
   home.packages = [
     localPkgs.kroki-cli
     localPkgs.mcp-victorialogs
-    localPkgs.super-productivity
   ]
   ++ (with pkgs; [
     # network
