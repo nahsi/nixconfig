@@ -5,12 +5,15 @@ let
     options = [
       "rw"
       "async"
-      "tcp"
-      "hard"
-      "x-systemd.automount"
-      "retrans=10"
-      "timeo=30"
       "noatime"
+      "_netdev"
+      "nofail"
+      "soft"
+      "timeo=30"
+      "retrans=3"
+      "x-systemd.automount"
+      "x-systemd.idle-timeout=600"
+      "x-systemd.mount-timeout=10s"
     ];
   };
 in
