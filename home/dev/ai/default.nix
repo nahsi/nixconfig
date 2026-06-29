@@ -2,9 +2,12 @@
   pkgs,
   lib,
   inputs,
+  system,
   ...
 }:
 let
+  localPkgs = inputs.self.packages.${system};
+
   shared = {
     rules = ''
       # Tools
@@ -56,4 +59,11 @@ in
     enable = true;
     servers = shared.mcpServers;
   };
+
+  home.packages = [
+    pkgs.mcp-grafana
+    pkgs.fluxcd-operator-mcp
+    localPkgs.mcp-victorialogs
+    localPkgs.mcp-victoriametrics
+  ];
 }

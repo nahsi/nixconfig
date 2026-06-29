@@ -81,6 +81,7 @@
         ferrosonic-ng = pkgs.callPackage ./pkgs/ferrosonic-ng { };
         kubernetes-mcp-server = pkgs.callPackage ./pkgs/kubernetes-mcp-server { };
         mcp-victorialogs = pkgs.callPackage ./pkgs/mcp-victorialogs { };
+        mcp-victoriametrics = pkgs.callPackage ./pkgs/mcp-victoriametrics { };
         tanin = pkgs.callPackage ./pkgs/tanin { };
       };
 

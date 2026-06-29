@@ -10,7 +10,6 @@ in
 {
   home.packages = [
     localPkgs.kroki-cli
-    localPkgs.mcp-victorialogs
   ]
   ++ (with pkgs; [
     # network
