@@ -107,8 +107,9 @@
         vpn_more_cmd = "nm-connection-editor";
         bluetooth_more_cmd = "blueberry";
         battery_format = "IconAndPercentage";
+        remove_airplane_btn = true;
+        remove_idle_btn = true;
         indicators = [
-          "IdleInhibitor"
           "PowerProfile"
           "Audio"
           "Microphone"
