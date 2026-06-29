@@ -1,11 +1,20 @@
 {
+  inputs,
+  system,
+  ...
+}:
+{
   programs.ashell = {
     enable = true;
     systemd.enable = true;
+    package = inputs.nixpkgs-unstable.legacyPackages.${system}.ashell;
 
     settings = {
       log_level = "warn";
       position = "Top";
+      language = "en-US";
+      region = "GR";
+      enable_esc_key = true;
 
       modules = {
         left = [
@@ -18,16 +27,17 @@
           "KeyboardLayout"
           [
             "Tray"
-            "Tempo"
             "Privacy"
+            "Notifications"
             "Settings"
+            "Tempo"
           ]
         ];
       };
 
       workspaces = {
         visibility_mode = "All";
-        group_by_monitor = true;
+        group_by_monitor = false;
         disable_special_workspaces = true;
       };
 
@@ -50,6 +60,13 @@
           warn_threshold = 70;
           alert_threshold = 85;
         };
+        disk = {
+          mounts = [
+            "/"
+            "/home"
+          ];
+          format = "Fraction";
+        };
       };
 
       keyboard_layout.labels = {
@@ -67,6 +84,19 @@
           City = "Thessaloniki";
         };
         weather_indicator = "Icon";
+      };
+
+      notifications = {
+        toast = true;
+        toast_position = "top_right";
+        toast_timeout = 4000;
+        toast_limit = 5;
+        toast_max_height = 150;
+        grouped = true;
+        show_bodies = true;
+        show_timestamps = true;
+        format = "%H:%M";
+        blocklist = [ ];
       };
 
       settings = {
