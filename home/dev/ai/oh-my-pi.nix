@@ -136,7 +136,7 @@ in
           name = "DeepSeek V4 Flash";
           reasoning = false;
           input = [ "text" ];
-          contextWindow = 262144;
+          contextWindow = 1048576;
           maxTokens = 32768;
           cost = {
             input = 0.10;
@@ -154,8 +154,8 @@ in
           name = "DeepSeek V4 Pro";
           reasoning = true;
           input = [ "text" ];
-          contextWindow = 262144;
-          maxTokens = 65536;
+          contextWindow = 1048576;
+          maxTokens = 131072;
           cost = {
             input = 0.435;
             output = 0.87;
