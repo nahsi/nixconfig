@@ -8,17 +8,42 @@
 }:
 let
   localPkgs = inputs.self.packages.${system};
-  skillsSrc = inputs.mattpocock-skills;
 
-  skills = {
-    diagnose = skillsSrc + "/skills/engineering/diagnose";
-    zoom-out = skillsSrc + "/skills/engineering/zoom-out";
-    tdd = skillsSrc + "/skills/engineering/tdd";
-    grill-me = skillsSrc + "/skills/productivity/grill-me";
-    handoff = skillsSrc + "/skills/productivity/handoff";
-    teach = skillsSrc + "/skills/productivity/teach";
-    caveman = skillsSrc + "/skills/productivity/caveman";
-    write-a-skill = skillsSrc + "/skills/productivity/write-a-skill";
+  mp = "${inputs.mattpocock-skills}";
+  mpSkills = lib.mapAttrs (_: sub: "${mp}/skills/${sub}") {
+    diagnosing-bugs = "engineering/diagnosing-bugs";
+    tdd = "engineering/tdd";
+    codebase-design = "engineering/codebase-design";
+    domain-modeling = "engineering/domain-modeling";
+    prototype = "engineering/prototype";
+    resolving-merge-conflicts = "engineering/resolving-merge-conflicts";
+    grill-with-docs = "engineering/grill-with-docs";
+    improve-codebase-architecture = "engineering/improve-codebase-architecture";
+    implement = "engineering/implement";
+    ask-matt = "engineering/ask-matt";
+    grilling = "productivity/grilling";
+    grill-me = "productivity/grill-me";
+    handoff = "productivity/handoff";
+    teach = "productivity/teach";
+    writing-great-skills = "productivity/writing-great-skills";
+  };
+
+  cavemanSkills = {
+    caveman = "${inputs.caveman}/plugins/caveman/skills/caveman";
+  };
+
+  skills = mpSkills // cavemanSkills;
+
+  ompSkills = lib.mapAttrs (_: p: {
+    src = p;
+    subdir = "";
+  }) skills;
+
+  cmd =
+    name: (builtins.fromTOML (builtins.readFile "${inputs.caveman}/commands/${name}.toml")).prompt;
+  commands = {
+    caveman-commit = cmd "caveman-commit";
+    caveman = cmd "caveman";
   };
 in
 {
@@ -36,11 +61,14 @@ in
       };
     };
 
-    claude-code.skills = skills;
+    claude-code = {
+      inherit skills commands;
+    };
   };
 
   oh-my-pi = {
-    inherit skills;
+    inherit commands;
+    skills = ompSkills;
     mcp.mcpServers = config.programs.mcp.servers;
   };
 

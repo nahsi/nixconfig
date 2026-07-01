@@ -45,6 +45,23 @@
         "type": "github"
       }
     },
+    "caveman": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1778615072,
+        "narHash": "sha256-Jlfas2MPoQx3pOw+yKCta8kYlOEY27SP5NXJtSL+GGI=",
+        "owner": "juliusbrussee",
+        "repo": "caveman",
+        "rev": "63a91ecadbf4c4719a4602a5abb00883f9966034",
+        "type": "github"
+      },
+      "original": {
+        "owner": "juliusbrussee",
+        "ref": "v1.8.2",
+        "repo": "caveman",
+        "type": "github"
+      }
+    },
     "crane": {
       "locked": {
         "lastModified": 1765145449,
@@ -261,17 +278,17 @@
     "mattpocock-skills": {
       "flake": false,
       "locked": {
-        "lastModified": 1781103704,
-        "narHash": "sha256-NGRKdnHSBKoR48zGotmJ3zGXnQ58ogudv8T4Va/2DSY=",
+        "lastModified": 1781734059,
+        "narHash": "sha256-nuHQ+SG5UerKs334Yk5nsxHOncGXQKF1yVdnwwVpLZ8=",
         "owner": "mattpocock",
         "repo": "skills",
-        "rev": "694fa30311e02c2639942308513555e61ee84a6f",
+        "rev": "2454c95dc305c158b21a0cdafeb728879dd0359a",
         "type": "github"
       },
       "original": {
         "owner": "mattpocock",
+        "ref": "v1.0.1",
         "repo": "skills",
-        "rev": "694fa30311e02c2639942308513555e61ee84a6f",
         "type": "github"
       }
     },
@@ -482,6 +499,7 @@
     "root": {
       "inputs": {
         "catppuccin": "catppuccin",
+        "caveman": "caveman",
         "home-manager": "home-manager",
         "lanzaboote": "lanzaboote",
         "mattpocock-skills": "mattpocock-skills",

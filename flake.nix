@@ -42,7 +42,12 @@
     };
 
     mattpocock-skills = {
-      url = "github:mattpocock/skills/694fa30311e02c2639942308513555e61ee84a6f";
+      url = "github:mattpocock/skills/v1.0.1";
+      flake = false;
+    };
+
+    caveman = {
+      url = "github:juliusbrussee/caveman/v1.8.2";
       flake = false;
     };
 
