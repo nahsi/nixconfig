@@ -39,8 +39,7 @@ let
     subdir = "";
   }) skills;
 
-  cmd =
-    name: (builtins.fromTOML (builtins.readFile "${inputs.caveman}/commands/${name}.toml")).prompt;
+  cmd = name: (fromTOML (builtins.readFile "${inputs.caveman}/commands/${name}.toml")).prompt;
   commands = {
     caveman-commit = cmd "caveman-commit";
     caveman = cmd "caveman";
