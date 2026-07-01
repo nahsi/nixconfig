@@ -46,7 +46,7 @@
       flake = false;
     };
 
-    llm-agents.url = "github:numtide/llm-agents.nix";
+    omp-nix.url = "git+https://git.molez.org/mandlm/omp-nix";
   };
 
   outputs =

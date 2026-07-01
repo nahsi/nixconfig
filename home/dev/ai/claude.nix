@@ -3,7 +3,6 @@
   lib,
   inputs,
   system,
-  aiShared,
   ...
 }:
 let
@@ -71,10 +70,6 @@ in
         DISABLE_ERROR_REPORTING = "1";
       };
     };
-
-    context = aiShared.rules;
-
-    inherit (aiShared) skills;
 
     lspServers.nix = {
       command = lib.getExe pkgs.nixd;
