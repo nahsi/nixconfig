@@ -21,6 +21,11 @@ let
     improve-codebase-architecture = "engineering/improve-codebase-architecture";
     implement = "engineering/implement";
     ask-matt = "engineering/ask-matt";
+    to-prd = "engineering/to-prd";
+    to-issues = "engineering/to-issues";
+    triage = "engineering/triage";
+    code-review = "engineering/code-review";
+    setup-matt-pocock-skills = "engineering/setup-matt-pocock-skills";
     grilling = "productivity/grilling";
     grill-me = "productivity/grill-me";
     handoff = "productivity/handoff";
