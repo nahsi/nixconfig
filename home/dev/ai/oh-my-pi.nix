@@ -1,6 +1,8 @@
 {
   pkgs,
   inputs,
+  lib,
+  config,
   ...
 }:
 let
@@ -90,6 +92,14 @@ in
       display.showTokenUsage = true;
 
       startup.checkUpdate = false;
+
+      mcp.mcpServers = lib.mapAttrs (
+        _: server:
+        lib.hm.mcp.transformMcpServer {
+          inherit server;
+          extraTransforms = [ lib.hm.mcp.addType ];
+        }
+      ) config.programs.mcp.servers;
     };
 
     models.providers.${provider} = endpoint // {
