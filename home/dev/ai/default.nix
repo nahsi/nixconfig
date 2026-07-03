@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  config,
   inputs,
   system,
   ...
@@ -73,6 +74,7 @@ in
   oh-my-pi = {
     inherit commands;
     skills = ompSkills;
+    mcp.mcpServers = config.programs.mcp.servers;
   };
 
   home.packages = [
