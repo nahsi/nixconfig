@@ -22,7 +22,6 @@ in
       effortLevel = "xhigh";
       remoteControlAtStartup = false;
       includeCoAuthoredBy = false;
-      enabledPlugins."rust-analyzer-lsp@claude-plugins-official" = true;
 
       autoMemoryEnabled = false;
 
