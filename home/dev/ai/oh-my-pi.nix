@@ -35,9 +35,10 @@ in
     settings = {
       modelRoles = {
         default = ref "default";
-        smol = ref "smol";
+        smol = "${ref "smol"}:low";
         slow = ref "slow";
         plan = ref "slow";
+        task = "${ref "smol"}:medium";
         tiny = ref "tiny";
       };
       retry.fallbackChains.${ref "default"} = [ (ref "slow") ];
@@ -146,7 +147,7 @@ in
           name = "DeepSeek V4 Flash";
           reasoning = true;
           thinking = {
-            minLevel = "medium";
+            minLevel = "low";
             maxLevel = "high";
             mode = "effort";
           };
