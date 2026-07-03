@@ -60,7 +60,6 @@ in
     mcp = {
       enable = true;
       servers = {
-        terraform.command = lib.getExe pkgs.terraform-mcp-server;
         nixos.command = lib.getExe pkgs.mcp-nixos;
         exa.url = "https://mcp.exa.ai/mcp";
       };

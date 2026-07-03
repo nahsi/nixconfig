@@ -72,7 +72,7 @@ in
         streamFirstEventTimeoutSeconds = 300;
       };
       searxng.endpoint = "https://search.nahsi.dev";
-      exa.enabled = false;
+      exa.enabled = true;
 
       compaction = {
         remoteEnabled = false;
