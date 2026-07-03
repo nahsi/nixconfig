@@ -42,7 +42,7 @@ in
       };
       retry.fallbackChains.${ref "default"} = [ (ref "slow") ];
 
-      defaultThinkingLevel = "medium";
+      defaultThinkingLevel = "high";
       disabledProviders = [
         "claude"
         "codex"
@@ -121,7 +121,7 @@ in
             cacheWrite = 0;
           };
           thinking = {
-            minLevel = "minimal";
+            minLevel = "medium";
             maxLevel = "high";
             mode = "effort";
           };
@@ -144,7 +144,12 @@ in
         {
           id = ids.smol;
           name = "DeepSeek V4 Flash";
-          reasoning = false;
+          reasoning = true;
+          thinking = {
+            minLevel = "medium";
+            maxLevel = "high";
+            mode = "effort";
+          };
           input = [ "text" ];
           contextWindow = 1048576;
           maxTokens = 32768;
@@ -156,14 +161,32 @@ in
           };
           compat = {
             supportsDeveloperRole = false;
+            supportsReasoningEffort = true;
+            reasoningContentField = "reasoning_content";
             maxTokensField = "max_tokens";
+            reasoningEffortMap = {
+              high = "high";
+              xhigh = "max";
+            };
+            supportsToolChoice = false;
+            requiresReasoningContentForToolCalls = true;
+            requiresAssistantContentForToolCalls = true;
+            extraBody.thinking.type = "enabled";
           };
         }
         {
           id = ids.slow;
           name = "DeepSeek V4 Pro";
           reasoning = true;
-          input = [ "text" ];
+          thinking = {
+            minLevel = "high";
+            maxLevel = "xhigh";
+            mode = "effort";
+          };
+          input = [
+            "text"
+            "image"
+          ];
           contextWindow = 1048576;
           maxTokens = 131072;
           cost = {
@@ -172,16 +195,15 @@ in
             cacheRead = 0.003625;
             cacheWrite = 0;
           };
-          thinking = {
-            minLevel = "medium";
-            maxLevel = "high";
-            mode = "effort";
-          };
           compat = {
             supportsDeveloperRole = false;
             supportsReasoningEffort = true;
             reasoningContentField = "reasoning_content";
             maxTokensField = "max_tokens";
+            reasoningEffortMap = {
+              high = "high";
+              xhigh = "max";
+            };
             supportsToolChoice = false;
             requiresReasoningContentForToolCalls = true;
             requiresAssistantContentForToolCalls = true;
@@ -205,11 +227,12 @@ in
             supportsDeveloperRole = false;
             maxTokensField = "max_tokens";
             extraBody = {
-              temperature = 0.5;
-              top_p = 0.9;
+              temperature = 1.0;
+              top_p = 1.0;
               top_k = 20;
               min_p = 0;
-              presence_penalty = 0.5;
+              presence_penalty = 2.0;
+              repetition_penalty = 1.0;
             };
           };
         }
