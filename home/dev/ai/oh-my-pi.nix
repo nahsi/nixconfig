@@ -66,7 +66,7 @@ in
       edit.mode = "hashline";
 
       providers = {
-        webSearch = "searxng";
+        webSearch = "exa";
         fetch = "trafilatura";
         tinyModel = "online";
         streamFirstEventTimeoutSeconds = 300;
