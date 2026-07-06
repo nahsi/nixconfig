@@ -137,6 +137,7 @@ in
               top_p = 0.95;
               top_k = 20;
               min_p = 0;
+              presence_penalty = 1.0;
             };
           };
         }
