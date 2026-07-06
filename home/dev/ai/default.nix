@@ -77,6 +77,7 @@ in
   };
 
   home.packages = [
+    pkgs.terraform-mcp-server
     pkgs.mcp-grafana
     pkgs.fluxcd-operator-mcp
     localPkgs.mcp-victorialogs
