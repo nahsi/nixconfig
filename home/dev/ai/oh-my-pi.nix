@@ -38,6 +38,7 @@ in
         plan = ref "slow";
         task = "${ref "smol"}:medium";
         tiny = ref "tiny";
+        advisor = ref "slow";
       };
       retry.fallbackChains.${ref "default"} = [ (ref "slow") ];
 
