@@ -79,6 +79,13 @@ in
         reserveTokens = 16384;
       };
 
+      memory.backend = "hindsight";
+      hindsight = {
+        apiUrl = "https://hindsight.nahsi.dev";
+        bankId = "agents";
+        scoping = "per-project-tagged";
+      };
+
       branchSummary.enabled = true;
 
       steeringMode = "all";

@@ -17,6 +17,20 @@ in
     package = pkgs-unstable.claude-code;
     enableMcpIntegration = true;
 
+    mcpServers.hindsight = {
+      type = "http";
+      url = "https://hindsight.nahsi.dev/mcp/agents/";
+    };
+
+    context = ''
+      # Memory (Hindsight)
+
+      Long-term memory is available via the Hindsight MCP tools (`recall` / `retain` / `reflect`), backed by the shared `agents` bank.
+
+      When I ask you to remember/store/save something, or to recall past context — or when prior project context would clearly help — use the **hindsight-memory** skill for how to do it correctly. Most importantly: pass **full context** to `retain` and **never pre-summarize** (the server extracts the facts itself).
+    '';
+    skills.hindsight-memory = ./skills/hindsight-memory/SKILL.md;
+
     settings = {
       theme = "auto";
       effortLevel = "xhigh";
