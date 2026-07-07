@@ -18,10 +18,10 @@ _: {
       quit-after-last-window-closed-delay = "5m";
 
       keybind = [
-        "ctrl+alt+h=goto_split:left"
-        "ctrl+alt+j=goto_split:down"
-        "ctrl+alt+k=goto_split:up"
-        "ctrl+alt+l=goto_split:right"
+        "ctrl+shift+h=previous_tab"
+        "ctrl+shift+l=next_tab"
+        "ctrl+shift+j=goto_split:next"
+        "ctrl+shift+k=goto_split:previous"
       ];
     };
 
