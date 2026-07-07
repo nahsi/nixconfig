@@ -53,7 +53,7 @@ in
         "agents-md"
       ];
 
-      tools.approvalMode = "write";
+      tools.approvalMode = "read";
       task.maxConcurrency = 4;
       task.agentModelOverrides.Tester = ref "slow";
       bash.autoBackground.enabled = true;
