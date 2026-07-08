@@ -62,8 +62,8 @@ in
           icons = {
             "^work" = "🍅";
             "^idle" = "🍅";
-            "^break" = "☕";
-            "^long-break" = "☕";
+            "^break" = "🍵";
+            "^long-break" = "🍵";
           };
         }
       ];
