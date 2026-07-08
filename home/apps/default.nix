@@ -6,6 +6,7 @@
     ./aerc.nix
     ./kdeconnect.nix
     ./taskwarrior.nix
+    ./tomat.nix
   ];
 
   programs.imv.enable = true;

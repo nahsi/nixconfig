@@ -3,7 +3,7 @@
   imports = [
     ./hyprland
     ./ghostty
-    ./ashell.nix
+    ./ashell
   ];
 
   programs.fuzzel.enable = true;

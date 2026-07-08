@@ -1,8 +1,25 @@
 {
   inputs,
   system,
+  pkgs,
   ...
 }:
+let
+  tomat = inputs.nixpkgs-unstable.legacyPackages.${system}.tomat;
+
+  # TODO: ashell stubs "(pot tooltip)" and "appearance etc" on CustomModuleDef.
+  # If upstream lands tooltip/class support, drop this transform and pass through
+  # tomat's native tooltip + percentage for a full waybar-style pill.
+  pomodoro-pill = pkgs.writeShellApplication {
+    name = "pomodoro-pill";
+    runtimeInputs = [
+      tomat
+      pkgs.taskwarrior3
+      pkgs.python3
+    ];
+    text = "exec python3 ${./pomodoro-pill.py}";
+  };
+in
 {
   programs.ashell = {
     enable = true;
@@ -23,6 +40,7 @@
         ];
         center = [ "MediaPlayer" ];
         right = [
+          "Pomodoro"
           "SystemInfo"
           "KeyboardLayout"
           [
@@ -34,6 +52,21 @@
           ]
         ];
       };
+
+      CustomModule = [
+        {
+          name = "Pomodoro";
+          icon = "🍅";
+          listen_cmd = "${pomodoro-pill}/bin/pomodoro-pill";
+          command = "${tomat}/bin/tomat toggle";
+          icons = {
+            "^work" = "🍅";
+            "^idle" = "🍅";
+            "^break" = "☕";
+            "^long-break" = "☕";
+          };
+        }
+      ];
 
       workspaces = {
         visibility_mode = "All";
