@@ -7,6 +7,11 @@
   ...
 }:
 let
+  pkgs-unstable = import inputs.nixpkgs-unstable {
+    inherit system;
+    config.allowUnfree = true;
+  };
+
   localPkgs = inputs.self.packages.${system};
 
   mp = "${inputs.mattpocock-skills}";
@@ -62,6 +67,7 @@ in
       servers = {
         nixos.command = lib.getExe pkgs.mcp-nixos;
         exa.url = "https://mcp.exa.ai/mcp";
+        codebase-memory.command = lib.getExe pkgs-unstable.codebase-memory-mcp;
       };
     };
 
@@ -77,6 +83,7 @@ in
   };
 
   home.packages = [
+    pkgs-unstable.codebase-memory-mcp
     pkgs.terraform-mcp-server
     pkgs.mcp-grafana
     pkgs.fluxcd-operator-mcp
