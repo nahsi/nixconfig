@@ -4,15 +4,6 @@
   ...
 }:
 let
-  provider = "nahsilabs";
-  ids = {
-    default = "Qwen/Qwen3.6-27B";
-    smol = "deepseek-ai/DeepSeek-V4-Flash";
-    slow = "deepseek-ai/DeepSeek-V4-Pro";
-    tiny = "Qwen/Qwen3.5-2B";
-  };
-  ref = role: "${provider}/${ids.${role}}";
-
   trafilatura = pkgs.runCommandLocal "trafilatura" { } ''
     mkdir -p $out/bin
     ln -s ${pkgs.python3.withPackages (ps: [ ps.trafilatura ])}/bin/trafilatura $out/bin/
@@ -32,15 +23,16 @@ in
 
     settings = {
       modelRoles = {
-        default = ref "default";
-        smol = "${ref "smol"}:low";
-        slow = ref "slow";
-        plan = ref "slow";
-        task = "${ref "smol"}:medium";
-        tiny = ref "tiny";
-        advisor = ref "slow";
+        default = "openai-codex/gpt-5.6-terra";
+        slow = "openai-codex/gpt-5.6-sol";
+        plan = "openai-codex/gpt-5.6-sol:xhigh";
+        smol = "nahsilabs/Qwen/Qwen3.6-27B";
+        task = "nahsilabs/deepseek-ai/DeepSeek-V4-Flash";
+        tiny = "nahsilabs/Qwen/Qwen3.5-2B";
+        advisor = "nahsilabs/deepseek-ai/DeepSeek-V4-Pro";
       };
-      retry.fallbackChains.${ref "default"} = [ (ref "slow") ];
+      retry.fallbackChains."nahsilabs/Qwen/Qwen3.6-27B" = [ "nahsilabs/deepseek-ai/DeepSeek-V4-Flash" ];
+      task.agentModelOverrides.Tester = "openai-codex/gpt-5.6-terra:high";
 
       defaultThinkingLevel = "high";
       disabledProviders = [
@@ -54,8 +46,9 @@ in
       ];
 
       tools.approvalMode = "read";
-      task.maxConcurrency = 4;
-      task.agentModelOverrides.Tester = ref "slow";
+      task.maxConcurrency = 2;
+
+      advisor.subagents = false;
       bash.autoBackground.enabled = true;
       browser.enabled = false;
       astEdit.enabled = false;
@@ -102,10 +95,10 @@ in
       startup.checkUpdate = false;
     };
 
-    models.providers.${provider} = endpoint // {
+    models.providers.nahsilabs = endpoint // {
       models = [
         {
-          id = ids.default;
+          id = "Qwen/Qwen3.6-27B";
           name = "Qwen3.6 27B";
           reasoning = true;
           input = [
@@ -142,7 +135,7 @@ in
           };
         }
         {
-          id = ids.smol;
+          id = "deepseek-ai/DeepSeek-V4-Flash";
           name = "DeepSeek V4 Flash";
           reasoning = true;
           thinking = {
@@ -175,7 +168,7 @@ in
           };
         }
         {
-          id = ids.slow;
+          id = "deepseek-ai/DeepSeek-V4-Pro";
           name = "DeepSeek V4 Pro";
           reasoning = true;
           thinking = {
@@ -211,7 +204,7 @@ in
           };
         }
         {
-          id = ids.tiny;
+          id = "Qwen/Qwen3.5-2B";
           name = "Qwen3.5 2B";
           reasoning = false;
           input = [ "text" ];
