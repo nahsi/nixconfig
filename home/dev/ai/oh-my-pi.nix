@@ -45,7 +45,8 @@ in
         "agents-md"
       ];
 
-      tools.approvalMode = "read";
+      tools.approvalMode = "always-ask";
+      secrets.enabled = true;
       task.maxConcurrency = 2;
 
       advisor.subagents = false;
