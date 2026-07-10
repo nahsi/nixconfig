@@ -40,6 +40,10 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    mcp-servers-nix = {
+      url = "github:natsukium/mcp-servers-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     mattpocock-skills = {
       url = "github:mattpocock/skills/v1.0.1";
@@ -71,6 +75,11 @@
         inherit system;
         config.allowUnfree = true;
       };
+      mcpConfig = inputs.mcp-servers-nix.lib.mkConfig pkgs {
+        flavor = "claude-code";
+        programs.nixos.enable = true;
+      };
+
       treefmtEval = treefmt-nix.lib.evalModule pkgs {
         projectRootFile = "flake.nix";
         programs = {
@@ -93,6 +102,12 @@
       formatter.${system} = treefmtEval.config.build.wrapper;
 
       checks.${system}.formatting = treefmtEval.config.build.check self;
+
+      devShells.${system}.default = pkgs.mkShell {
+        shellHook = ''
+          nix-store --add-root .mcp.json --indirect --realise ${mcpConfig}
+        '';
+      };
 
       nixosConfigurations = {
         framework = nixpkgs.lib.nixosSystem {

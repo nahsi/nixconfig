@@ -65,8 +65,6 @@ in
     mcp = {
       enable = true;
       servers = {
-        nixos.command = lib.getExe pkgs.mcp-nixos;
-        exa.url = "https://mcp.exa.ai/mcp";
         codebase-memory.command = lib.getExe pkgs-unstable.codebase-memory-mcp;
       };
     };
