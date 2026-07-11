@@ -24,17 +24,17 @@ in
     settings = {
       modelRoles = {
         default = "openai-codex/gpt-5.6-terra";
-        slow = "openai-codex/gpt-5.6-sol";
-        plan = "openai-codex/gpt-5.6-sol:xhigh";
-        smol = "nahsilabs/Qwen/Qwen3.6-27B";
-        task = "nahsilabs/deepseek-ai/DeepSeek-V4-Flash";
+        slow = "openai-codex/gpt-5.6-sol:high";
+        plan = "openai-codex/gpt-5.6-sol:high";
+        # smol = "nahsilabs/Qwen/Qwen3.6-27B";
+        smol = "openai-codex/gpt-5.6-luna";
         tiny = "nahsilabs/Qwen/Qwen3.5-2B";
         advisor = "nahsilabs/deepseek-ai/DeepSeek-V4-Pro";
       };
-      retry.fallbackChains."nahsilabs/Qwen/Qwen3.6-27B" = [ "nahsilabs/deepseek-ai/DeepSeek-V4-Flash" ];
+      # retry.fallbackChains."nahsilabs/Qwen/Qwen3.6-27B" = [ "openai-codex/gpt-5.6-luna" ];
       task.agentModelOverrides.Tester = "openai-codex/gpt-5.6-terra:high";
 
-      defaultThinkingLevel = "high";
+      defaultThinkingLevel = "medium";
       disabledProviders = [
         "claude"
         "codex"
