@@ -50,11 +50,6 @@
       flake = false;
     };
 
-    caveman = {
-      url = "github:juliusbrussee/caveman/v1.8.2";
-      flake = false;
-    };
-
     omp-nix.url = "git+https://git.molez.org/mandlm/omp-nix?ref=refs/tags/v16.4.6";
   };
 

@@ -14,8 +14,7 @@ let
 
   localPkgs = inputs.self.packages.${system};
 
-  mp = "${inputs.mattpocock-skills}";
-  mpSkills = lib.mapAttrs (_: sub: "${mp}/skills/${sub}") {
+  skills = lib.mapAttrs (_: sub: "${inputs.mattpocock-skills}/skills/${sub}") {
     diagnosing-bugs = "engineering/diagnosing-bugs";
     tdd = "engineering/tdd";
     codebase-design = "engineering/codebase-design";
@@ -38,22 +37,11 @@ let
     writing-great-skills = "productivity/writing-great-skills";
   };
 
-  cavemanSkills = {
-    caveman = "${inputs.caveman}/plugins/caveman/skills/caveman";
-  };
-
-  skills = mpSkills // cavemanSkills;
-
   ompSkills = lib.mapAttrs (_: p: {
     src = p;
     subdir = "";
   }) skills;
 
-  cmd = name: (fromTOML (builtins.readFile "${inputs.caveman}/commands/${name}.toml")).prompt;
-  commands = {
-    caveman-commit = cmd "caveman-commit";
-    caveman = cmd "caveman";
-  };
 in
 {
   imports = [
@@ -70,12 +58,11 @@ in
     };
 
     claude-code = {
-      inherit skills commands;
+      inherit skills;
     };
   };
 
   oh-my-pi = {
-    inherit commands;
     skills = ompSkills;
     mcp.mcpServers = config.programs.mcp.servers;
   };
