@@ -34,7 +34,7 @@ in
       # retry.fallbackChains."nahsilabs/Qwen/Qwen3.6-27B" = [ "openai-codex/gpt-5.6-luna" ];
       task.agentModelOverrides.Tester = "openai-codex/gpt-5.6-terra:high";
 
-      defaultThinkingLevel = "medium";
+      defaultThinkingLevel = "high";
       disabledProviders = [
         "claude"
         "codex"
@@ -47,7 +47,7 @@ in
 
       tools.approvalMode = "always-ask";
       secrets.enabled = true;
-      task.maxConcurrency = 2;
+      task.maxConcurrency = 8;
 
       advisor.subagents = false;
       bash.autoBackground.enabled = true;
