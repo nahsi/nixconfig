@@ -12,7 +12,7 @@
     };
 
     lanzaboote = {
-      url = "github:nix-community/lanzaboote/v1.0.0";
+      url = "github:nix-community/lanzaboote/v1.1.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -46,11 +46,11 @@
     };
 
     mattpocock-skills = {
-      url = "github:mattpocock/skills/v1.0.1";
+      url = "github:mattpocock/skills/v1.1.0";
       flake = false;
     };
 
-    omp-nix.url = "git+https://git.molez.org/mandlm/omp-nix?ref=refs/tags/v16.4.6";
+    omp-nix.url = "git+https://git.molez.org/mandlm/omp-nix?ref=refs/tags/v17.0.2";
   };
 
   outputs =
@@ -88,7 +88,6 @@
       packages.${system} = {
         kroki-cli = pkgs.callPackage ./pkgs/kroki-cli { };
         ferrosonic-ng = pkgs.callPackage ./pkgs/ferrosonic-ng { };
-        kubernetes-mcp-server = pkgs.callPackage ./pkgs/kubernetes-mcp-server { };
         mcp-victorialogs = pkgs.callPackage ./pkgs/mcp-victorialogs { };
         mcp-victoriametrics = pkgs.callPackage ./pkgs/mcp-victoriametrics { };
         tanin = pkgs.callPackage ./pkgs/tanin { };
