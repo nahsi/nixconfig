@@ -40,6 +40,7 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     mcp-servers-nix = {
       url = "github:natsukium/mcp-servers-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -50,7 +51,7 @@
       flake = false;
     };
 
-    omp-nix.url = "git+https://git.molez.org/mandlm/omp-nix?ref=refs/tags/v17.0.2";
+    omp-nix.url = "git+https://git.molez.org/mandlm/omp-nix?ref=refs/tags/v17.0.5";
   };
 
   outputs =

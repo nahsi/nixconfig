@@ -4,9 +4,19 @@
   ...
 }:
 let
+  # Python 3.13.14's urllib.robotparser dropped the `groups` attribute before
+  # parse(), which breaks courlan 1.3.2's test_from_html. Skip that test.
+  python = pkgs.python3.override {
+    packageOverrides = _final: prev: {
+      courlan = prev.courlan.overridePythonAttrs (old: {
+        disabledTests = (old.disabledTests or [ ]) ++ [ "test_from_html" ];
+      });
+    };
+  };
+
   trafilatura = pkgs.runCommandLocal "trafilatura" { } ''
     mkdir -p $out/bin
-    ln -s ${pkgs.python3.withPackages (ps: [ ps.trafilatura ])}/bin/trafilatura $out/bin/
+    ln -s ${python.withPackages (ps: [ ps.trafilatura ])}/bin/trafilatura $out/bin/
   '';
 
   endpoint = {
