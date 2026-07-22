@@ -244,6 +244,10 @@ in
     };
   };
 
+  programs.zsh.zsh-abbr.abbreviations = {
+    ompy = "omp --approval-mode yolo";
+  };
+
   home.packages = [
     trafilatura
     pkgs.nixd
@@ -251,5 +255,9 @@ in
     pkgs.yaml-language-server
     pkgs.terraform-ls
     pkgs.bash-language-server
+    pkgs.typescript-language-server
+    pkgs.typescript
+    pkgs.lua-language-server
+    pkgs.marksman
   ];
 }
