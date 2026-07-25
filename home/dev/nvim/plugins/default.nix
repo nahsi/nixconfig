@@ -3,7 +3,6 @@ _: {
     ./completion.nix
     ./treesitter.nix
     ./snacks.nix
-    ./assistant.nix
     ./editor.nix
   ];
 

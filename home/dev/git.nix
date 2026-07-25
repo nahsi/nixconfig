@@ -14,6 +14,7 @@
     lfs.enable = true;
     ignores = [
       ".codebase-memory"
+      ".omp/"
       ".scratch/"
       ".teach/"
       "AGENTS.md"

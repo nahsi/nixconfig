@@ -1,9 +1,48 @@
 {
   pkgs,
+  lib,
   inputs,
+  system,
   ...
 }:
 let
+  pkgs-unstable = import inputs.nixpkgs-unstable {
+    inherit system;
+    config.allowUnfree = true;
+  };
+
+  localPkgs = inputs.self.packages.${system};
+
+  skills =
+    lib.mapAttrs
+      (_: path: {
+        src = "${inputs.mattpocock-skills}/skills/${path}";
+        subdir = "";
+      })
+      {
+        diagnosing-bugs = "engineering/diagnosing-bugs"; # diagnosis loop for hard bugs & perf regressions
+        tdd = "engineering/tdd"; # test-first: red → green
+        codebase-design = "engineering/codebase-design"; # design deep modules & interfaces
+        domain-modeling = "engineering/domain-modeling"; # pin down domain terms / ubiquitous language
+        prototype = "engineering/prototype"; # throwaway prototype to answer a design question
+        resolving-merge-conflicts = "engineering/resolving-merge-conflicts"; # resolve in-progress merge/rebase conflicts
+        grill-with-docs = "engineering/grill-with-docs"; # grilling interview that also writes ADRs/glossary
+        improve-codebase-architecture = "engineering/improve-codebase-architecture"; # scan for deepening opportunities, report + grill
+        implement = "engineering/implement"; # implement work from a spec or tickets
+        ask-matt = "engineering/ask-matt"; # router: which skill/flow fits the situation
+        to-spec = "engineering/to-spec"; # synthesize the conversation into a spec
+        to-tickets = "engineering/to-tickets"; # break a plan/spec into tracer-bullet tickets
+        wayfinder = "engineering/wayfinder"; # map a huge multi-session effort as investigation tickets
+        research = "engineering/research"; # background agent research against primary sources
+        triage = "engineering/triage"; # move issues/PRs through a triage state machine
+        code-review = "engineering/code-review"; # review the diff vs repo standards + spec
+        setup-matt-pocock-skills = "engineering/setup-matt-pocock-skills"; # one-time repo setup for these skills
+        grilling = "productivity/grilling"; # relentlessly grill a plan/design to stress-test it
+        handoff = "productivity/handoff"; # compact the conversation into a handoff doc
+        teach = "productivity/teach"; # teach a concept/skill in this workspace
+        writing-great-skills = "productivity/writing-great-skills"; # reference for writing skills well
+      };
+
   # Python 3.13.14's urllib.robotparser dropped the `groups` attribute before
   # parse(), which breaks courlan 1.3.2's test_from_html. Skip that test.
   python = pkgs.python3.override {
@@ -30,6 +69,30 @@ in
 
   oh-my-pi = {
     enable = true;
+    inherit skills;
+    mcp.mcpServers.codebase-memory.command = lib.getExe pkgs-unstable.codebase-memory-mcp;
+
+    appendSystemPrompt = ''
+      After delegating a work slice, treat it as exclusively owned by that subagent until it
+      finishes. Continue only work with a genuinely independent scope; otherwise wait, then
+      verify and integrate the subagent's result.
+
+      Prefer codebase-memory for codebase-wide structural exploration and relationship tracing.
+      Treat its graph as an index: verify current source before editing or making exact claims.
+    '';
+
+    rules = {
+      no-unsolicited-memory-retention = ''
+        ---
+        name: no-unsolicited-memory-retention
+        description: "Do not retain long-term memories without explicit user or system authorization"
+        condition: "xd://retain"
+        scope: "tool:write(xd://retain)"
+        ---
+
+        Do not write to long-term memory proactively. Retention incurs processing cost and creates cleanup work. Continue only when the user explicitly asks to remember, store, or save the information, or when a system/developer instruction explicitly authorizes this specific retention; otherwise keep it session-local.
+      '';
+    };
 
     settings = {
       modelRoles = {
@@ -249,6 +312,12 @@ in
   };
 
   home.packages = [
+    pkgs-unstable.codebase-memory-mcp
+    pkgs.terraform-mcp-server
+    pkgs.mcp-grafana
+    pkgs.fluxcd-operator-mcp
+    localPkgs.mcp-victorialogs
+    localPkgs.mcp-victoriametrics
     trafilatura
     pkgs.nixd
     pkgs.rust-analyzer
