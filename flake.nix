@@ -87,6 +87,7 @@
     in
     {
       packages.${system} = {
+        ketch = pkgs.callPackage ./pkgs/ketch { };
         kroki-cli = pkgs.callPackage ./pkgs/kroki-cli { };
         ferrosonic-ng = pkgs.callPackage ./pkgs/ferrosonic-ng { };
         mcp-victorialogs = pkgs.callPackage ./pkgs/mcp-victorialogs { };

@@ -25,6 +25,7 @@
       "NOTES.md"
       "docs/adr/"
       "docs/agents/"
+      "docs/research/"
       "tickets.md"
     ];
     settings = {

@@ -14,7 +14,7 @@ let
   localPkgs = inputs.self.packages.${system};
 
   skills =
-    lib.mapAttrs
+    (lib.mapAttrs
       (_: path: {
         src = "${inputs.mattpocock-skills}/skills/${path}";
         subdir = "";
@@ -41,7 +41,13 @@ let
         handoff = "productivity/handoff"; # compact the conversation into a handoff doc
         teach = "productivity/teach"; # teach a concept/skill in this workspace
         writing-great-skills = "productivity/writing-great-skills"; # reference for writing skills well
+      })
+    // {
+      ketch = {
+        src = ./skills/ketch;
+        subdir = "";
       };
+    };
 
   # Python 3.13.14's urllib.robotparser dropped the `groups` attribute before
   # parse(), which breaks courlan 1.3.2's test_from_html. Skip that test.
@@ -65,34 +71,52 @@ let
   };
 in
 {
-  imports = [ inputs.omp-nix.homeManagerModules.omp ];
+  imports = [
+    inputs.omp-nix.homeManagerModules.omp
+  ];
 
   oh-my-pi = {
     enable = true;
     inherit skills;
-    mcp.mcpServers.codebase-memory.command = lib.getExe pkgs-unstable.codebase-memory-mcp;
+    agents = {
+      scout = ./agents/scout.md;
+      librarian = ./agents/librarian.md;
+      reviewer = ./agents/reviewer.md;
+    };
+    mcp.mcpServers = {
+      codebase-memory.command = lib.getExe pkgs-unstable.codebase-memory-mcp;
+      ketch = {
+        command = lib.getExe localPkgs.ketch;
+        args = [
+          "mcp"
+          "serve"
+        ];
+      };
+    };
 
     appendSystemPrompt = ''
-      After delegating a work slice, treat it as exclusively owned by that subagent until it
-      finishes. Continue only work with a genuinely independent scope; otherwise wait, then
-      verify and integrate the subagent's result.
+      Delegation transfers execution ownership of that work slice to the subagent.
+      Until it finishes, the parent MUST NOT investigate, edit, validate, or redelegate the same scope.
+      The parent may work only on explicitly disjoint slices; if none exist, it MUST wait.
 
       Prefer codebase-memory for codebase-wide structural exploration and relationship tracing.
       Treat its graph as an index: verify current source before editing or making exact claims.
+
+      Use Ketch for web discovery.
+      Handle Ketch provider failures with Ketch random fallback. Use read for ordinary known URLs.
     '';
 
-    rules = {
-      no-unsolicited-memory-retention = ''
-        ---
-        name: no-unsolicited-memory-retention
-        description: "Do not retain long-term memories without explicit user or system authorization"
-        condition: "xd://retain"
-        scope: "tool:write(xd://retain)"
-        ---
+    rules.prohibit-memory-retention = ''
+      ---
+      name: prohibit-memory-retention
+      description: "Prohibit writes to long-term memory"
+      condition: "xd://retain"
+      scope: "tool:write"
+      interruptMode: always
+      ---
 
-        Do not write to long-term memory proactively. Retention incurs processing cost and creates cleanup work. Continue only when the user explicitly asks to remember, store, or save the information, or when a system/developer instruction explicitly authorizes this specific retention; otherwise keep it session-local.
-      '';
-    };
+      Long-term memory retention is prohibited. Never invoke retain.
+    '';
 
     settings = {
       modelRoles = {
@@ -119,12 +143,16 @@ in
       ];
 
       tools.approvalMode = "always-ask";
+      tools.approval.retain = "deny";
+      ttsr.repeatMode = "after-gap";
+      ttsr.repeatGap = 10;
       secrets.enabled = true;
       task.maxConcurrency = 8;
 
       advisor.subagents = false;
       bash.autoBackground.enabled = true;
       browser.enabled = false;
+      web_search.enabled = false;
       astEdit.enabled = false;
       eval = {
         py = false;
@@ -134,7 +162,10 @@ in
       edit.mode = "hashline";
 
       providers = {
-        webSearch = "exa";
+        webSearchOrder = [
+          "tavily"
+          "exa"
+        ];
         fetch = "trafilatura";
         tinyModel = "online";
         streamFirstEventTimeoutSeconds = 300;
@@ -318,6 +349,7 @@ in
     pkgs.fluxcd-operator-mcp
     localPkgs.mcp-victorialogs
     localPkgs.mcp-victoriametrics
+    localPkgs.ketch
     trafilatura
     pkgs.nixd
     pkgs.rust-analyzer
