@@ -41,7 +41,8 @@ let
         handoff = "productivity/handoff"; # compact the conversation into a handoff doc
         teach = "productivity/teach"; # teach a concept/skill in this workspace
         writing-great-skills = "productivity/writing-great-skills"; # reference for writing skills well
-      })
+      }
+    )
     // {
       ketch = {
         src = ./skills/ketch;
@@ -178,12 +179,12 @@ in
         reserveTokens = 16384;
       };
 
-      memory.backend = "hindsight";
-      hindsight = {
-        apiUrl = "https://hindsight.nahsi.dev";
-        bankId = "agents";
-        scoping = "per-project-tagged";
-      };
+      # memory.backend = "hindsight";
+      # hindsight = {
+      #   apiUrl = "https://hindsight.nahsi.dev";
+      #   bankId = "agents";
+      #   scoping = "per-project-tagged";
+      # };
 
       branchSummary.enabled = true;
 
