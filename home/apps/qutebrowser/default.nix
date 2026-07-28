@@ -77,6 +77,9 @@ in
         # don't register handlers for things like mail and calendar
         register_protocol_handler = false;
       };
+      # QtWebEngine's WebAuthn capability probe hangs and blocks ChatGPT login:
+      # https://github.com/qutebrowser/qutebrowser/issues/8930
+      qt.args = [ "disable-features=WebAuth" ];
     };
     extraConfig = ''
       import os
