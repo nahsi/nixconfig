@@ -10,6 +10,7 @@ in
 {
   home.packages = [
     localPkgs.kroki-cli
+    localPkgs.negpy
   ]
   ++ (with pkgs; [
     # network
