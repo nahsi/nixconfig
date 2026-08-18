@@ -44,10 +44,10 @@ let
       }
     )
     // {
-      ketch = {
-        src = ./skills/ketch;
-        subdir = "";
-      };
+      # ketch = {
+      #   src = ./skills/ketch;
+      #   subdir = "";
+      # };
     };
 
   # Python 3.13.14's urllib.robotparser dropped the `groups` attribute before
@@ -86,13 +86,13 @@ in
     };
     mcp.mcpServers = {
       codebase-memory.command = lib.getExe pkgs-unstable.codebase-memory-mcp;
-      ketch = {
-        command = lib.getExe localPkgs.ketch;
-        args = [
-          "mcp"
-          "serve"
-        ];
-      };
+      # ketch = {
+      #   command = lib.getExe localPkgs.ketch;
+      #   args = [
+      #     "mcp"
+      #     "serve"
+      #   ];
+      # };
     };
 
     appendSystemPrompt = ''
@@ -103,8 +103,6 @@ in
       Prefer codebase-memory for codebase-wide structural exploration and relationship tracing.
       Treat its graph as an index: verify current source before editing or making exact claims.
 
-      Use Ketch for web discovery.
-      Handle Ketch provider failures with Ketch random fallback. Use read for ordinary known URLs.
     '';
 
     rules.prohibit-memory-retention = ''
@@ -153,7 +151,7 @@ in
       advisor.subagents = false;
       bash.autoBackground.enabled = true;
       browser.enabled = false;
-      web_search.enabled = false;
+      # web_search.enabled = false;
       astEdit.enabled = false;
       eval = {
         py = false;
@@ -163,10 +161,7 @@ in
       edit.mode = "hashline";
 
       providers = {
-        webSearchOrder = [
-          "tavily"
-          "exa"
-        ];
+        webSearchOrder = [ "exa" ];
         fetch = "trafilatura";
         tinyModel = "online";
         streamFirstEventTimeoutSeconds = 300;
@@ -350,7 +345,7 @@ in
     pkgs.fluxcd-operator-mcp
     localPkgs.mcp-victorialogs
     localPkgs.mcp-victoriametrics
-    localPkgs.ketch
+    # localPkgs.ketch
     trafilatura
     pkgs.nixd
     pkgs.rust-analyzer
