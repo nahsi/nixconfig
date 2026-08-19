@@ -47,11 +47,16 @@
     };
 
     mattpocock-skills = {
-      url = "github:mattpocock/skills/v1.1.0";
+      url = "github:mattpocock/skills/v1.2.3";
       flake = false;
     };
 
-    omp-nix.url = "git+https://git.molez.org/mandlm/omp-nix?ref=refs/tags/v17.2.12";
+    pstack-skills = {
+      url = "github:cursor/plugins/60c641e4fad674784b30abcf9f8915dea39df38d";
+      flake = false;
+    };
+
+    omp-nix.url = "git+https://git.molez.org/mandlm/omp-nix?ref=refs/tags/v17.3.8";
   };
 
   outputs =
