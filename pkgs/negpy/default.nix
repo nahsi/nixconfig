@@ -6,11 +6,11 @@
 
 let
   pname = "negpy";
-  version = "0.51.0";
+  version = "0.52.0";
 
   src = fetchurl {
     url = "https://github.com/marcinz606/NegPy/releases/download/${version}/NegPy-${version}-x86_64.AppImage";
-    hash = "sha256-lu/3oy+SArDKFK9JG7g+OV56OffkrhkdJneDPbAJLTM=";
+    hash = "sha256-nDqxvyQB5U4EJjn9STXn+qvn19cdwW503VpUaeN8Vt8=";
   };
 
   appimageContents = appimageTools.extractType2 {
