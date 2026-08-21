@@ -56,7 +56,7 @@
       flake = false;
     };
 
-    omp-nix.url = "git+https://git.molez.org/mandlm/omp-nix?ref=refs/tags/v17.3.8";
+    omp-nix.url = "git+https://git.molez.org/mandlm/omp-nix?ref=refs/tags/v17.4.1";
   };
 
   outputs =

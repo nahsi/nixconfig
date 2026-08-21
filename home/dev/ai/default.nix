@@ -75,20 +75,8 @@ in
   oh-my-pi = {
     enable = true;
     inherit skills;
-    agents = {
-      scout = ./agents/scout.md;
-      librarian = ./agents/librarian.md;
-      reviewer = ./agents/reviewer.md;
-    };
     mcp.mcpServers = {
       codebase-memory.command = lib.getExe pkgs-unstable.codebase-memory-mcp;
-      # ketch = {
-      #   command = lib.getExe localPkgs.ketch;
-      #   args = [
-      #     "mcp"
-      #     "serve"
-      #   ];
-      # };
     };
 
     appendSystemPrompt = ''
@@ -98,7 +86,6 @@ in
 
       Prefer codebase-memory for codebase-wide structural exploration and relationship tracing.
       Treat its graph as an index: verify current source before editing or making exact claims.
-
     '';
 
     rules.prohibit-memory-retention = ''
@@ -115,18 +102,17 @@ in
 
     settings = {
       modelRoles = {
-        default = "openai-codex/gpt-5.6-terra";
-        slow = "openai-codex/gpt-5.6-sol:high";
-        plan = "openai-codex/gpt-5.6-sol:high";
-        # smol = "nahsilabs/Qwen/Qwen3.6-27B";
+        default = "nahsilabs/Qwen/Qwen3.8-27B:medium";
+        slow = "openai-codex/gpt-5.6-sol:xhigh";
+        plan = "openai-codex/gpt-5.6-sol:max";
+        task = "openai-codex/gpt-5.6-terra:high";
         smol = "openai-codex/gpt-5.6-luna";
         tiny = "nahsilabs/Qwen/Qwen3.5-2B";
-        advisor = "nahsilabs/deepseek-ai/DeepSeek-V4-Pro";
+        advisor = "openai-codex/gpt-5.6-sol:xhigh";
       };
-      # retry.fallbackChains."nahsilabs/Qwen/Qwen3.6-27B" = [ "openai-codex/gpt-5.6-luna" ];
-      task.agentModelOverrides.Tester = "openai-codex/gpt-5.6-terra:high";
+      retry.fallbackChains."nahsilabs/Qwen/Qwen3.8-27B" = [ "openai-codex/gpt-5.6-luna" ];
 
-      defaultThinkingLevel = "high";
+      defaultThinkingLevel = "medium";
       disabledProviders = [
         "claude"
         "codex"
@@ -140,14 +126,11 @@ in
       tools.approvalMode = "always-ask";
       tools.approval.retain = "deny";
       ttsr.repeatMode = "after-gap";
-      ttsr.repeatGap = 10;
       secrets.enabled = true;
       task.maxConcurrency = 8;
 
-      advisor.subagents = false;
       bash.autoBackground.enabled = true;
       browser.enabled = false;
-      # web_search.enabled = false;
       astEdit.enabled = false;
       eval = {
         py = false;
@@ -159,23 +142,19 @@ in
       providers = {
         webSearchOrder = [ "exa" ];
         fetch = "trafilatura";
-        tinyModel = "online";
         streamFirstEventTimeoutSeconds = 300;
       };
       searxng.endpoint = "https://search.nahsi.dev";
-      exa.enabled = true;
 
       compaction = {
-        remoteEnabled = false;
+        methodOrder = [
+          "snapcompact"
+          "handoff"
+          "shake"
+          "soft"
+        ];
         reserveTokens = 16384;
       };
-
-      # memory.backend = "hindsight";
-      # hindsight = {
-      #   apiUrl = "https://hindsight.nahsi.dev";
-      #   bankId = "agents";
-      #   scoping = "per-project-tagged";
-      # };
 
       branchSummary.enabled = true;
 
@@ -195,14 +174,15 @@ in
     models.providers.nahsilabs = endpoint // {
       models = [
         {
-          id = "Qwen/Qwen3.6-27B";
-          name = "Qwen3.6 27B";
+          id = "Qwen/Qwen3.8-27B";
+          name = "Qwen3.8 27B";
           reasoning = true;
+          tokenizer = "qwen3";
           input = [
             "text"
             "image"
           ];
-          contextWindow = 131072;
+          contextWindow = 262144;
           maxTokens = 32768;
           cost = {
             input = 0;
@@ -211,34 +191,37 @@ in
             cacheWrite = 0;
           };
           thinking = {
-            minLevel = "medium";
-            maxLevel = "high";
             mode = "effort";
+            efforts = [
+              "low"
+              "medium"
+              "xhigh"
+            ];
           };
           compat = {
-            supportsDeveloperRole = false;
-            supportsReasoningEffort = false;
-            thinkingFormat = "qwen-chat-template";
-            qwenPreserveThinking = true;
-            reasoningContentField = "reasoning";
+            supportsDeveloperRole = true;
+            supportsReasoningEffort = true;
+            thinkingFormat = "openai";
+            qwenTemplateReasoningEffort = false;
+            reasoningContentField = "reasoning_content";
             maxTokensField = "max_tokens";
-            extraBody = {
-              temperature = 0.6;
-              top_p = 0.95;
-              top_k = 20;
-              min_p = 0;
-              presence_penalty = 1.0;
-            };
+            supportsForcedToolChoice = false;
+            supportsStrictMode = false;
+            extraBody.chat_template_kwargs.preserve_thinking = true;
           };
         }
         {
           id = "deepseek-ai/DeepSeek-V4-Flash";
           name = "DeepSeek V4 Flash";
           reasoning = true;
+          tokenizer = "deepseek-v3";
           thinking = {
-            minLevel = "low";
-            maxLevel = "high";
             mode = "effort";
+            efforts = [
+              "low"
+              "medium"
+              "high"
+            ];
           };
           input = [ "text" ];
           contextWindow = 1048576;
@@ -268,10 +251,13 @@ in
           id = "deepseek-ai/DeepSeek-V4-Pro";
           name = "DeepSeek V4 Pro";
           reasoning = true;
+          tokenizer = "deepseek-v3";
           thinking = {
-            minLevel = "high";
-            maxLevel = "xhigh";
             mode = "effort";
+            efforts = [
+              "high"
+              "xhigh"
+            ];
           };
           input = [
             "text"
@@ -304,6 +290,7 @@ in
           id = "Qwen/Qwen3.5-2B";
           name = "Qwen3.5 2B";
           reasoning = false;
+          tokenizer = "qwen3";
           input = [ "text" ];
           contextWindow = 16384;
           maxTokens = 2048;
@@ -341,7 +328,6 @@ in
     pkgs.fluxcd-operator-mcp
     localPkgs.mcp-victorialogs
     localPkgs.mcp-victoriametrics
-    # localPkgs.ketch
     trafilatura
     pkgs.nixd
     pkgs.rust-analyzer

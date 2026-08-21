@@ -416,16 +416,16 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1787141022,
-        "narHash": "sha256-KgYAnxr/jVzB5QDTFF95GiuY68kTqZuBmYT8odgr7mw=",
-        "ref": "refs/tags/v17.3.8",
-        "rev": "ee94019c35504fd16d8a845d4925198d885fef80",
-        "revCount": 397,
+        "lastModified": 1787324680,
+        "narHash": "sha256-p1mvxEAb61giZLhy24+X+XAlZVpYVZAroth+JHzcuIY=",
+        "ref": "refs/tags/v17.4.1",
+        "rev": "c03e35da6070a02aa9c571e86a40d4c8fb31e318",
+        "revCount": 403,
         "type": "git",
         "url": "https://git.molez.org/mandlm/omp-nix"
       },
       "original": {
-        "ref": "refs/tags/v17.3.8",
+        "ref": "refs/tags/v17.4.1",
         "type": "git",
         "url": "https://git.molez.org/mandlm/omp-nix"
       }
