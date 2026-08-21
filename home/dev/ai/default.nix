@@ -168,7 +168,12 @@ in
       symbolPreset = "nerd";
       display.showTokenUsage = true;
 
-      startup.checkUpdate = false;
+      setupVersion = 2;
+      composer.shape = "box";
+      startup = {
+        checkUpdate = false;
+        setupWizard = false;
+      };
     };
 
     models.providers.nahsilabs = endpoint // {
