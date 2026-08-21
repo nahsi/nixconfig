@@ -3,7 +3,7 @@
 ## What this source contains
 
 - Commit history (messages, dates, authors, diffs)
-- PR descriptions, review comments, and discussion threads (via `gh`)
+- PR descriptions, review comments, and discussion threads through `pr://` or the OMP `github` tool when available
 - Inline code comments, TODOs, FIXMEs, deprecation notes
 - ADRs (architectural decision records) if the repo keeps them
 - Tests. Names and assertions often encode the edge cases that motivated a change
@@ -37,30 +37,13 @@ git show <hash>
 git log <old>..<new> -p -- <file>
 ```
 
-For each substantive commit, pull the PR context:
+For each substantive commit, find the PR number from the merge commit or branch with `git log -1 --format=%B <hash>`. Then read the full PR body, review comments, linked issues, and changed files through `pr://<number>` or OMP's `github` tool. If neither resolves, record PR discussion as an evidence gap.
 
-```bash
-# Find the PR number from the merge commit or branch
-git log -1 --format=%B <hash>
+Look for out-of-band docs with OMP tools:
 
-# Full PR context: body, review comments, linked issues
-gh pr view <number> --json title,body,author,createdAt,mergedAt,labels,closingIssuesReferences,comments,reviews,files
-
-# The --json reviews and comments fields are where the real signal is
-```
-
-Look for out-of-band docs:
-
-```bash
-# ADRs often live in docs/adr/ or similar
-rg -l -i 'architecture.decision' --glob '*.md'
-
-# TODOs and FIXMEs near the target
-rg -n -C2 '(TODO|FIXME|HACK|XXX|NOTE)' <target_file>
-
-# Related tests. Names often encode the "why"
-rg -l '<symbol>' --glob '*test*'
-```
+- Use `glob` to locate ADR directories and related tests.
+- Use `grep` for architecture-decision text, nearby `TODO` / `FIXME` / `HACK` / `XXX` / `NOTE` markers, and the target symbol in test files.
+- Read only the matching regions and cite exact paths and lines.
 
 ## What good evidence looks like here
 
