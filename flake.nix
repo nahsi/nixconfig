@@ -92,7 +92,6 @@
     in
     {
       packages.${system} = {
-        ketch = pkgs.callPackage ./pkgs/ketch { };
         negpy = pkgs.callPackage ./pkgs/negpy { };
         kroki-cli = pkgs.callPackage ./pkgs/kroki-cli { };
         ferrosonic-ng = pkgs.callPackage ./pkgs/ferrosonic-ng { };
