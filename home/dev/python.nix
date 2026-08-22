@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs; [
-    python3
+    (python3.withPackages (ps: [ ps.pyyaml ]))
     uv
   ];
 }

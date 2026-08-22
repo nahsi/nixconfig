@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   lib,
   inputs,
@@ -12,37 +13,73 @@ let
   };
 
   localPkgs = inputs.self.packages.${system};
+  yamlFormat = pkgs.formats.yaml { };
+  ompConfig = yamlFormat.generate "omp-config.yml" (
+    { setupVersion = 1; } // config.oh-my-pi.settings
+  );
+
+  localSkillNames = [
+    "architect"
+    "arena"
+    "automate-me"
+    "blast-radius"
+    "bro"
+    "create-skill"
+    "deslop"
+    "figure-it-out"
+    "how"
+    "interrogate"
+    "nahsi-mode"
+    "no-comments"
+    "poteto-mode"
+    "principle-boundary-discipline"
+    "principle-build-the-lever"
+    "principle-encode-lessons-in-structure"
+    "principle-exhaust-the-design-space"
+    "principle-experience-first"
+    "principle-fix-root-causes"
+    "principle-foundational-thinking"
+    "principle-guard-the-context-window"
+    "principle-laziness-protocol"
+    "principle-make-operations-idempotent"
+    "principle-migrate-callers-then-delete-legacy-apis"
+    "principle-minimize-reader-load"
+    "principle-model-the-domain"
+    "principle-never-block-on-the-human"
+    "principle-outcome-oriented-execution"
+    "principle-prove-it-works"
+    "principle-redesign-from-first-principles"
+    "principle-separate-before-serializing-shared-state"
+    "principle-sequence-verifiable-units"
+    "principle-subtract-before-you-add"
+    "principle-type-system-discipline"
+    "recall"
+    "reflect"
+    "resolving-merge-conflicts"
+    "show-me-your-work"
+    "swarm"
+    "tdd"
+    "teach"
+    "technical-writing"
+    "unslop"
+    "why"
+  ];
 
   skills =
-    (lib.mapAttrs
+    lib.genAttrs localSkillNames (name: {
+      src = ./skills;
+      subdir = name;
+    })
+    // (lib.mapAttrs
       (_: path: {
         src = "${inputs.mattpocock-skills}/skills/${path}";
         subdir = "";
       })
       {
-        diagnosing-bugs = "engineering/diagnosing-bugs";
-        tdd = "engineering/tdd";
-        codebase-design = "engineering/codebase-design";
-        resolving-merge-conflicts = "engineering/resolving-merge-conflicts";
-
-        wizard = "engineering/wizard";
         grilling = "productivity/grilling";
-        handoff = "productivity/handoff";
-        wait-what = "productivity/wait-what";
         to-questionnaire = "productivity/to-questionnaire";
+        wizard = "engineering/wizard";
         writing-for-agents = "productivity/writing-for-agents";
-      }
-    )
-    // (lib.mapAttrs
-      (_: path: {
-        src = "${inputs.pstack-skills}/pstack/skills/${path}";
-        subdir = "";
-      })
-      {
-        blast-radius = "blast-radius";
-        why = "why";
-        unslop = "unslop";
-        how = "how";
       }
     );
 
@@ -75,6 +112,8 @@ in
   oh-my-pi = {
     enable = true;
     inherit skills;
+    agents.comment-sicko = ./agents/comment-sicko.md;
+    agents.poteto-agent = ./agents/poteto-agent.md;
     mcp.mcpServers = {
       codebase-memory.command = lib.getExe pkgs-unstable.codebase-memory-mcp;
     };
@@ -128,6 +167,7 @@ in
       ttsr.repeatMode = "after-gap";
       secrets.enabled = true;
       task.maxConcurrency = 8;
+      task.isolation.mode = "auto";
 
       bash.autoBackground.enabled = true;
       browser.enabled = false;
@@ -321,6 +361,13 @@ in
       ];
     };
   };
+  # omp-nix installs config.yml as a Nix store symlink, but OMP resolves the
+  # link before atomically saving settings. Install a writable copy instead.
+  home.file.".omp/agent/config.yml".enable = lib.mkForce false;
+  home.activation.ompWritableConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    $DRY_RUN_CMD mkdir -p "$HOME/.omp/agent"
+    $DRY_RUN_CMD install -m 600 ${ompConfig} "$HOME/.omp/agent/config.yml"
+  '';
 
   programs.zsh.zsh-abbr.abbreviations = {
     ompy = "omp --approval-mode yolo";
