@@ -193,7 +193,7 @@ in
           "shake"
           "soft"
         ];
-        reserveTokens = 16384;
+        thresholdPercent = 87.5;
       };
 
       branchSummary.enabled = true;
@@ -223,10 +223,7 @@ in
           name = "Qwen3.8 27B";
           reasoning = true;
           tokenizer = "qwen3";
-          input = [
-            "text"
-            "image"
-          ];
+          input = [ "text" ];
           contextWindow = 262144;
           maxTokens = 32768;
           cost = {
