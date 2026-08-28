@@ -180,7 +180,7 @@ in
       edit.mode = "hashline";
 
       providers = {
-        webSearchOrder = [ "exa" ];
+        webSearchOrder = [ "tavily" ];
         fetch = "trafilatura";
         streamFirstEventTimeoutSeconds = 300;
       };
