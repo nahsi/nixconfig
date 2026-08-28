@@ -6,11 +6,11 @@
 
 let
   pname = "negpy";
-  version = "0.52.0";
+  version = "0.54.0";
 
   src = fetchurl {
     url = "https://github.com/marcinz606/NegPy/releases/download/${version}/NegPy-${version}-x86_64.AppImage";
-    hash = "sha256-nDqxvyQB5U4EJjn9STXn+qvn19cdwW503VpUaeN8Vt8=";
+    hash = "sha256-hF7ftCK3d6y81zzcq3RJ8k1b3zwQdLCigK9vsaGqe+Q=";
   };
 
   appimageContents = appimageTools.extractType2 {
@@ -21,12 +21,11 @@ appimageTools.wrapType2 {
   inherit pname version src;
 
   extraInstallCommands = ''
-    install -Dm444 ${appimageContents}/negpy.desktop $out/share/applications/negpy.desktop
-    install -Dm444 ${appimageContents}/icon.png $out/share/icons/hicolor/512x512/apps/negpy.png
+    install -Dm444 ${appimageContents}/NegPy.desktop $out/share/applications/negpy.desktop
+    install -Dm444 ${appimageContents}/negpy.png $out/share/icons/hicolor/512x512/apps/negpy.png
 
     substituteInPlace $out/share/applications/negpy.desktop \
-      --replace-fail "Exec=NegPy" "Exec=negpy" \
-      --replace-fail "Icon=icon" "Icon=negpy"
+      --replace-fail "Exec=NegPy" "Exec=negpy"
   '';
 
   meta = {
