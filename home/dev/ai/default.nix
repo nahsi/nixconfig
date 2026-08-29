@@ -111,6 +111,7 @@ in
 
   oh-my-pi = {
     enable = true;
+    package = inputs.omp-upstream.packages.${system}.default;
     inherit skills;
     agents.comment-sicko = ./agents/comment-sicko.md;
     agents.poteto-agent = ./agents/poteto-agent.md;
