@@ -1,6 +1,8 @@
 {
   config,
+  inputs,
   pkgs,
+  system,
   ...
 }:
 let
@@ -40,6 +42,7 @@ in
 
   programs.qutebrowser = {
     enable = true;
+    package = inputs.nixpkgs-unstable.legacyPackages.${system}.qutebrowser;
     searchEngines = {
       "DEFAULT" = "https://search.nahsi.dev/search?q={}";
       "ddg" = "https://duckduckgo.com/?q={}";
