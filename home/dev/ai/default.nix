@@ -151,6 +151,7 @@ in
         advisor = "openai-codex/gpt-5.6-sol:xhigh";
       };
       retry.fallbackChains."nahsilabs/Qwen/Qwen3.8-27B" = [ "openai-codex/gpt-5.6-luna" ];
+      extendedContext = true;
 
       defaultThinkingLevel = "medium";
       disabledProviders = [
