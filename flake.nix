@@ -51,8 +51,8 @@
       flake = false;
     };
 
-    omp-nix.url = "git+https://git.molez.org/mandlm/omp-nix?ref=refs/tags/v18.0.8";
-    omp-upstream.url = "github:can1357/oh-my-pi/v18.0.8";
+    omp-nix.url = "git+https://git.molez.org/mandlm/omp-nix?ref=refs/tags/v18.1.2";
+    omp-upstream.url = "github:can1357/oh-my-pi/v18.1.2";
   };
 
   outputs =
