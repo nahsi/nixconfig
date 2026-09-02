@@ -63,5 +63,6 @@ in
     slack
     rawtherapee
     keymapp
+    inputs.nixpkgs-unstable.legacyPackages.${system}.super-productivity
   ]);
 }
