@@ -147,7 +147,7 @@ in
         plan = "openai-codex/gpt-5.6-sol:max";
         task = "openai-codex/gpt-5.6-terra:high";
         smol = "openai-codex/gpt-5.6-luna";
-        tiny = "nahsilabs/Qwen/Qwen3.5-2B";
+        tiny = "nahsilabs/LiquidAI/LFM2.5-8B-A1B";
         advisor = "openai-codex/gpt-5.6-sol:xhigh";
       };
       retry.fallbackChains."nahsilabs/Qwen/Qwen3.8-27B" = [ "openai-codex/gpt-5.6-luna" ];
@@ -331,13 +331,12 @@ in
           };
         }
         {
-          id = "Qwen/Qwen3.5-2B";
-          name = "Qwen3.5 2B";
-          reasoning = false;
-          tokenizer = "qwen3";
+          id = "LiquidAI/LFM2.5-8B-A1B";
+          name = "LFM2.5 8B A1B";
+          reasoning = true;
           input = [ "text" ];
-          contextWindow = 16384;
-          maxTokens = 2048;
+          contextWindow = 32768;
+          maxTokens = 8192;
           cost = {
             input = 0;
             output = 0;
@@ -345,16 +344,13 @@ in
             cacheWrite = 0;
           };
           compat = {
+            supportsStore = false;
             supportsDeveloperRole = false;
+            supportsReasoningEffort = false;
+            supportsReasoningParams = false;
+            reasoningContentField = "reasoning_content";
             maxTokensField = "max_tokens";
-            extraBody = {
-              temperature = 1.0;
-              top_p = 1.0;
-              top_k = 20;
-              min_p = 0;
-              presence_penalty = 2.0;
-              repetition_penalty = 1.0;
-            };
+            supportsForcedToolChoice = false;
           };
         }
       ];
