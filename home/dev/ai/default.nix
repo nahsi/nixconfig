@@ -168,7 +168,7 @@ in
       tools.approval.retain = "deny";
       ttsr.repeatMode = "after-gap";
       secrets.enabled = true;
-      task.maxConcurrency = 8;
+      task.maxConcurrency = 4;
       task.isolation.mode = "auto";
 
       bash.autoBackground.enabled = true;
@@ -225,7 +225,10 @@ in
           name = "Qwen3.8 27B";
           reasoning = true;
           tokenizer = "qwen3";
-          input = [ "text" ];
+          input = [
+            "text"
+            "image"
+          ];
           contextWindow = 262144;
           maxTokens = 32768;
           cost = {
@@ -292,50 +295,11 @@ in
           };
         }
         {
-          id = "deepseek-ai/DeepSeek-V4-Pro";
-          name = "DeepSeek V4 Pro";
-          reasoning = true;
-          tokenizer = "deepseek-v3";
-          thinking = {
-            mode = "effort";
-            efforts = [
-              "high"
-              "xhigh"
-            ];
-          };
-          input = [
-            "text"
-            "image"
-          ];
-          contextWindow = 1048576;
-          maxTokens = 131072;
-          cost = {
-            input = 0.435;
-            output = 0.87;
-            cacheRead = 0.003625;
-            cacheWrite = 0;
-          };
-          compat = {
-            supportsDeveloperRole = false;
-            supportsReasoningEffort = true;
-            reasoningContentField = "reasoning_content";
-            maxTokensField = "max_tokens";
-            reasoningEffortMap = {
-              high = "high";
-              xhigh = "max";
-            };
-            supportsToolChoice = false;
-            requiresReasoningContentForToolCalls = true;
-            requiresAssistantContentForToolCalls = true;
-            extraBody.thinking.type = "enabled";
-          };
-        }
-        {
           id = "LiquidAI/LFM2.5-8B-A1B";
           name = "LFM2.5 8B A1B";
           reasoning = true;
           input = [ "text" ];
-          contextWindow = 32768;
+          contextWindow = 128000;
           maxTokens = 8192;
           cost = {
             input = 0;
