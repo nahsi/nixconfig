@@ -147,7 +147,7 @@ in
         plan = "openai-codex/gpt-5.6-sol:max";
         task = "openai-codex/gpt-5.6-terra:high";
         smol = "openai-codex/gpt-5.6-luna";
-        tiny = "nahsilabs/LiquidAI/LFM2.5-8B-A1B";
+        tiny = "nahsilabs/google/gemma-4-12B-it";
         advisor = "openai-codex/gpt-5.6-sol:xhigh";
       };
       retry.fallbackChains."nahsilabs/Qwen/Qwen3.8-27B" = [ "openai-codex/gpt-5.6-luna" ];
@@ -295,12 +295,12 @@ in
           };
         }
         {
-          id = "LiquidAI/LFM2.5-8B-A1B";
-          name = "LFM2.5 8B A1B";
-          reasoning = true;
+          id = "google/gemma-4-12B-it";
+          name = "Gemma 4 12B IT";
+          reasoning = false;
           input = [ "text" ];
-          contextWindow = 128000;
-          maxTokens = 8192;
+          contextWindow = 16384;
+          maxTokens = 16384;
           cost = {
             input = 0;
             output = 0;
@@ -312,7 +312,6 @@ in
             supportsDeveloperRole = false;
             supportsReasoningEffort = false;
             supportsReasoningParams = false;
-            reasoningContentField = "reasoning_content";
             maxTokensField = "max_tokens";
             supportsForcedToolChoice = false;
           };
