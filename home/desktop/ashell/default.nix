@@ -27,7 +27,10 @@ in
     package = inputs.nixpkgs-unstable.legacyPackages.${system}.ashell;
 
     settings = {
-      log_level = "warn";
+      logging = {
+        level = "warn";
+        target = "stderr";
+      };
       position = "Top";
       language = "en-US";
       region = "GR";
@@ -53,6 +56,15 @@ in
         ];
       };
 
+      media_player = {
+        indicator_format = "IconAndText";
+        indicator_fields = [ "Title" ];
+        max_text_length = 50;
+        indicator_visualizer = "Background";
+        menu_visualizer = true;
+        visualizer_framerate = 30;
+      };
+
       CustomModule = [
         {
           name = "Pomodoro";
@@ -69,6 +81,7 @@ in
       ];
 
       workspaces = {
+        indicator_format = "NameAndIcons";
         visibility_mode = "All";
         group_by_monitor = false;
         disable_special_workspaces = true;
@@ -121,7 +134,7 @@ in
 
       notifications = {
         toast = true;
-        toast_position = "top_right";
+        toast_position = "TopRight";
         toast_timeout = 4000;
         toast_limit = 5;
         toast_max_height = 150;
@@ -157,12 +170,14 @@ in
       osd = {
         enabled = true;
         timeout = 1500;
+        show_volume_percentage = true;
+        show_brightness_percentage = true;
       };
 
       animations.enabled = true;
 
       appearance = {
-        style = "Solid";
+        bar.surface = "solid";
         scale_factor = 1.2;
         success_color = "#a6e3a1";
         warning_color = "#f9e2af";
@@ -183,4 +198,6 @@ in
       };
     };
   };
+
+  home.packages = [ pkgs.cava ];
 }

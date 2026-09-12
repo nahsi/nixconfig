@@ -142,16 +142,15 @@ in
 
     settings = {
       modelRoles = {
-        default = "nahsilabs/Qwen/Qwen3.8-27B:medium";
+        default = "openai-codex/gpt-5.6-sol:medium";
         slow = "openai-codex/gpt-5.6-sol:xhigh";
-        plan = "openai-codex/gpt-5.6-sol:max";
+        plan = "openai-codex/gpt-6-astra:high";
         task = "openai-codex/gpt-5.6-terra:high";
-        smol = "openai-codex/gpt-5.6-luna";
+        smol = "openai-codex/gpt-5.6-luna:high";
         tiny = "nahsilabs/google/gemma-4-12B-it";
-        advisor = "openai-codex/gpt-5.6-sol:xhigh";
+        advisor = "openai-codex/gpt-5.6-astra:high";
       };
-      retry.fallbackChains."nahsilabs/Qwen/Qwen3.8-27B" = [ "openai-codex/gpt-5.6-luna" ];
-      extendedContext = true;
+      extendedContext = false;
 
       defaultThinkingLevel = "medium";
       disabledProviders = [
