@@ -115,6 +115,8 @@ in
     inherit skills;
     agents.comment-sicko = ./agents/comment-sicko.md;
     agents.poteto-agent = ./agents/poteto-agent.md;
+    agents.researcher = ./agents/researcher.md;
+    agents.evidence-auditor = ./agents/evidence-auditor.md;
     mcp.mcpServers = {
       codebase-memory.command = lib.getExe pkgs-unstable.codebase-memory-mcp;
     };
@@ -142,15 +144,15 @@ in
 
     settings = {
       modelRoles = {
-        default = "openai-codex/gpt-5.6-sol:medium";
+        default = "openai-codex/gpt-6-astra:medium";
         slow = "openai-codex/gpt-5.6-sol:xhigh";
         plan = "openai-codex/gpt-6-astra:high";
-        task = "openai-codex/gpt-5.6-terra:high";
-        smol = "openai-codex/gpt-5.6-luna:high";
+        task = "openai-codex/gpt-5.6-sol:high";
+        smol = "openai-codex/gpt-5.6-luna:low";
         tiny = "nahsilabs/google/gemma-4-12B-it";
-        advisor = "openai-codex/gpt-5.6-astra:high";
+        advisor = "openai-codex/gpt-6-astra:high";
       };
-      extendedContext = false;
+      extendedContext = true;
 
       defaultThinkingLevel = "medium";
       disabledProviders = [
@@ -169,19 +171,25 @@ in
       secrets.enabled = true;
       task.maxConcurrency = 4;
       task.isolation.mode = "auto";
+      task.agentModelOverrides = {
+        scout = "openai-codex/gpt-5.6-luna:high";
+        reviewer = "openai-codex/gpt-6-astra:high";
+        security-reviewer = "openai-codex/gpt-6-astra:high";
+      };
 
       bash.autoBackground.enabled = true;
-      browser.enabled = false;
+      browser.enabled = true;
+      computer.enabled = true;
       astEdit.enabled = false;
       eval = {
         py = false;
-        js = false;
+        js = true;
       };
 
       edit.mode = "hashline";
 
       providers = {
-        webSearchOrder = [ "tavily" ];
+        webSearchOrder = [ "exa" ];
         fetch = "trafilatura";
         streamFirstEventTimeoutSeconds = 300;
       };
