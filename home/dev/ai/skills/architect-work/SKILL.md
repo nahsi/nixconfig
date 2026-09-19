@@ -25,7 +25,7 @@ Design from observed friction and the intended end state. Prefer deeper modules,
    - operational and concurrency safety.
 7. **Choose and pressure-test.** Walk two real scenarios and one edge/failure scenario through the proposed shape.
 8. **Plan the transition.** Characterize current behavior where needed; migrate callers; delete the old API and residue in the same bounded wave when safe. Use expand→migrate→contract only for genuinely wide changes.
-9. **Hand off.** Use `skill://verticalize-work` when execution spans multiple independently verifiable units.
+9. **Hand off.** A recommendation that depends on user priorities remains proposed until shape-work's Shared understanding discussion confirms it. Use `skill://verticalize-work` when execution spans multiple independently verifiable units.
 
 ## Design heuristics
 

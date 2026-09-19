@@ -20,9 +20,9 @@ A prototype buys a decision. It is not an early production implementation.
 4. **Build the smallest observable artifact.** Reuse the real project's vocabulary and constraints where they affect the question.
 5. **Compare alternatives only when materially different.** For genuine design breadth, use `skill://prime-delegate` arena mode with identical question, constraints, and judging criteria. Give every candidate a separate output path.
 6. **Exercise scenarios.** Include the normal path, one edge/failure state, and any transition central to the decision.
-7. **Record the answer.** State what was observed, which option wins, why, what remains unknown, and which prototype assumptions must not leak into production.
+7. **Record the findings.** State what was observed, which option the evidence favors and why, what remains unknown, and which prototype assumptions must not leak into production. Separate a recommendation from a confirmed user choice.
 8. **Dispose or preserve intentionally.** Default to reporting the artifact and recommended disposition. Delete files, branches, or worktrees only when that cleanup was in the approved prototype scope or the user confirms it; otherwise preserve them in an explicitly non-production location.
-9. **Shape production work separately.** Feed the decision to `skill://shape-work` or `skill://verticalize-work`; never promote prototype code by inertia.
+9. **Return to the decision.** Feed the result to `skill://shape-work` or `skill://verticalize-work`. A user-facing choice remains open until shape-work's Shared understanding discussion confirms it; a working demo is not that confirmation. Shape production work separately; never promote prototype code by inertia.
 
 ## Guardrails
 
