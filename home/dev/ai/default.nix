@@ -54,7 +54,6 @@ let
         writing-for-agents = "productivity/writing-for-agents";
       }
     );
-
   # Python 3.13.14's urllib.robotparser dropped the `groups` attribute before
   # parse(), which breaks courlan 1.3.2's test_from_html. Skip that test.
   python = pkgs.python3.override {
@@ -70,11 +69,6 @@ let
     ln -s ${python.withPackages (ps: [ ps.trafilatura ])}/bin/trafilatura $out/bin/
   '';
 
-  endpoint = {
-    baseUrl = "https://ai.nahsi.dev/v1";
-    apiKey = "AI_GATEWAY_KEY";
-    api = "openai-completions";
-  };
 in
 {
   imports = [
@@ -85,13 +79,15 @@ in
     enable = true;
     package = inputs.omp-upstream.packages.${system}.default;
     inherit skills;
-    agents.scout = ./agents/scout.md;
-    agents.scout-deep = ./agents/scout-deep.md;
-    agents.task = ./agents/task.md;
-    agents.sonic = ./agents/sonic.md;
-    agents.reviewer = ./agents/reviewer.md;
-    agents.researcher = ./agents/researcher.md;
-    agents.researcher-deep = ./agents/researcher-deep.md;
+    agents = {
+      scout = ./agents/scout.md;
+      scout-deep = ./agents/scout-deep.md;
+      task = ./agents/task.md;
+      sonic = ./agents/sonic.md;
+      reviewer = ./agents/reviewer.md;
+      researcher = ./agents/researcher.md;
+      researcher-deep = ./agents/researcher-deep.md;
+    };
     mcp.mcpServers = {
       codebase-memory.command = lib.getExe pkgs-unstable.codebase-memory-mcp;
     };
@@ -129,8 +125,6 @@ in
         tiny = "nahsilabs/google/gemma-4-12B-it";
         advisor = "openai-codex/gpt-6-astra:high";
       };
-      extendedContext = true;
-
       defaultThinkingLevel = "medium";
       disabledProviders = [
         "claude"
@@ -141,17 +135,19 @@ in
         "github"
       ];
 
-      tools.approvalMode = "always-ask";
-      tools.approval.retain = "deny";
-      ttsr.repeatMode = "after-gap";
+      tools = {
+        approvalMode = "always-ask";
+        approval.retain = "deny";
+      };
       secrets.enabled = true;
-      task.maxConcurrency = 4;
-      task.enableEffort = true;
-      task.maxEffort = "high";
-      task.isolation.enabled = true;
-      task.showResolvedModelBadge = true;
-      task.agentModelOverrides = {
-        security-reviewer = "@review";
+
+      task = {
+        maxConcurrency = 4;
+        enableEffort = true;
+        maxEffort = "high";
+        isolation.enabled = true;
+        agentModelOverrides.security-reviewer = "@review";
+        showResolvedModelBadge = true;
       };
 
       bash.autoBackground.enabled = true;
@@ -165,6 +161,7 @@ in
       };
       searxng.endpoint = "https://search.nahsi.dev";
 
+      extendedContext = true;
       compaction = {
         methodOrder = [
           "snapcompact"
@@ -173,11 +170,10 @@ in
           "soft"
         ];
       };
-
       branchSummary.enabled = true;
-
       steeringMode = "all";
       followUpMode = "all";
+      ttsr.repeatMode = "after-gap";
 
       theme = {
         dark = "dark-catppuccin";
@@ -186,143 +182,48 @@ in
       symbolPreset = "nerd";
       display.showTokenUsage = true;
 
-      setupVersion = 2;
       composer.shape = "box";
+
+      setupVersion = 2;
       startup = {
         checkUpdate = false;
         setupWizard = false;
       };
     };
 
-    models.providers.nahsilabs = endpoint // {
-      models = [
-        {
-          id = "Qwen/Qwen3.8-27B";
-          name = "Qwen3.8 27B";
-          reasoning = true;
-          tokenizer = "qwen3";
-          input = [
-            "text"
-            "image"
-          ];
-          contextWindow = 262144;
-          maxTokens = 32768;
-          cost = {
-            input = 0;
-            output = 0;
-            cacheRead = 0;
-            cacheWrite = 0;
-          };
-          thinking = {
-            mode = "effort";
-            efforts = [
-              "low"
-              "medium"
-              "xhigh"
-            ];
-          };
-          compat = {
-            supportsDeveloperRole = true;
-            supportsReasoningEffort = true;
-            thinkingFormat = "openai";
-            qwenTemplateReasoningEffort = false;
-            reasoningContentField = "reasoning_content";
-            maxTokensField = "max_tokens";
-            supportsForcedToolChoice = false;
-            supportsStrictMode = false;
-            extraBody.chat_template_kwargs.preserve_thinking = true;
-          };
-        }
-        {
-          id = "deepseek-ai/DeepSeek-V4-Flash";
-          name = "DeepSeek V4 Flash";
-          reasoning = true;
-          tokenizer = "deepseek-v3";
-          thinking = {
-            mode = "effort";
-            efforts = [
-              "low"
-              "medium"
-              "high"
-            ];
-          };
-          input = [ "text" ];
-          contextWindow = 1048576;
-          maxTokens = 32768;
-          cost = {
-            input = 0.10;
-            output = 0.20;
-            cacheRead = 0.02;
-            cacheWrite = 0;
-          };
-          compat = {
-            supportsDeveloperRole = false;
-            supportsReasoningEffort = true;
-            reasoningContentField = "reasoning_content";
-            maxTokensField = "max_tokens";
-            reasoningEffortMap = {
-              high = "high";
-              xhigh = "max";
-            };
-            supportsToolChoice = false;
-            requiresReasoningContentForToolCalls = true;
-            requiresAssistantContentForToolCalls = true;
-            extraBody.thinking.type = "enabled";
-          };
-        }
-        {
-          id = "google/gemma-4-12B-it";
-          name = "Gemma 4 12B IT";
-          reasoning = false;
-          input = [ "text" ];
-          contextWindow = 16384;
-          maxTokens = 16384;
-          cost = {
-            input = 0;
-            output = 0;
-            cacheRead = 0;
-            cacheWrite = 0;
-          };
-          compat = {
-            supportsStore = false;
-            supportsDeveloperRole = false;
-            supportsReasoningEffort = false;
-            supportsReasoningParams = false;
-            maxTokensField = "max_tokens";
-            supportsForcedToolChoice = false;
-          };
-        }
-      ];
-    };
+    models = import ./models.nix;
   };
-  # omp-nix installs config.yml as a Nix store symlink, but OMP resolves the
-  # link before atomically saving settings. Install a writable copy instead.
-  home.file.".omp/agent/config.yml".enable = lib.mkForce false;
-  home.activation.ompWritableConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    $DRY_RUN_CMD mkdir -p "$HOME/.omp/agent"
-    $DRY_RUN_CMD install -m 600 ${ompConfig} "$HOME/.omp/agent/config.yml"
-  '';
 
   programs.zsh.zsh-abbr.abbreviations = {
     ompy = "omp --approval-mode yolo";
   };
 
-  home.packages = [
-    pkgs-unstable.codebase-memory-mcp
-    pkgs.terraform-mcp-server
-    pkgs.mcp-grafana
-    pkgs.fluxcd-operator-mcp
-    localPkgs.mcp-victorialogs
-    localPkgs.mcp-victoriametrics
-    trafilatura
-    pkgs.nixd
-    pkgs.rust-analyzer
-    pkgs.yaml-language-server
-    pkgs.terraform-ls
-    pkgs.bash-language-server
-    pkgs.typescript-language-server
-    pkgs.typescript
-    pkgs.lua-language-server
-    pkgs.marksman
-  ];
+  home = {
+    # omp-nix installs config.yml as a Nix store symlink, but OMP resolves the
+    # link before atomically saving settings. Install a writable copy instead.
+    file.".omp/agent/config.yml".enable = lib.mkForce false;
+    activation.ompWritableConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      $DRY_RUN_CMD mkdir -p "$HOME/.omp/agent"
+      $DRY_RUN_CMD install -m 600 ${ompConfig} "$HOME/.omp/agent/config.yml"
+    '';
+
+    packages = [
+      pkgs-unstable.codebase-memory-mcp
+      pkgs.terraform-mcp-server
+      pkgs.mcp-grafana
+      pkgs.fluxcd-operator-mcp
+      localPkgs.mcp-victorialogs
+      localPkgs.mcp-victoriametrics
+      trafilatura
+      pkgs.nixd
+      pkgs.rust-analyzer
+      pkgs.yaml-language-server
+      pkgs.terraform-ls
+      pkgs.bash-language-server
+      pkgs.typescript-language-server
+      pkgs.typescript
+      pkgs.lua-language-server
+      pkgs.marksman
+    ];
+  };
 }
