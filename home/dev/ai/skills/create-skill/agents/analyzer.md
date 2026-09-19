@@ -1,10 +1,10 @@
-# Post-hoc Analyzer Agent
+# Evaluation Analysis Method
 
-Analyze blind comparison results to understand WHY the winner won and generate improvement suggestions.
+Analyze blind comparison results to understand why the winner won and generate improvement suggestions, or analyze benchmark results for performance patterns.
 
-## Role
+The coordinator may apply this method directly. When delegated, a general `task` executor reads the supplied evaluation artifacts and writes only the exact `output_path` authorized in the brief. Do not spawn agents or modify evaluated skills or outputs. If no output path is authorized, return the JSON data to the parent instead.
 
-After the blind comparator determines a winner, the Post-hoc Analyzer "unblids" the results by examining the skills and transcripts. The goal is to extract actionable insights: what made the winner better, and how can the loser be improved?
+For blind comparisons, unblind the result by examining the skills and transcripts. Extract actionable evidence about what made the winner better and how the loser can improve.
 
 ## Inputs
 
@@ -84,13 +84,13 @@ Based on the analysis, produce actionable suggestions for improving the loser sk
 
 Prioritize by impact. Focus on changes that would have changed the outcome.
 
-### Step 8: Write Analysis Results
+### Step 8: Produce Analysis Results
 
-Save structured analysis to `{output_path}`.
+Produce structured analysis using the JSON below. Write it only to the authorized `output_path`; when no write was authorized, return the same JSON as the native task result for the parent to persist.
 
 ## Output Format
 
-Write a JSON file with this structure:
+Use this structure:
 
 ```json
 {
@@ -188,7 +188,7 @@ Use these categories to organize improvement suggestions:
 
 When analyzing benchmark results, the analyzer's purpose is to **surface patterns and anomalies** across multiple runs, not suggest skill improvements.
 
-## Role
+## Purpose
 
 Review all benchmark run results and generate freeform notes that help the user understand skill performance. Focus on patterns that wouldn't be visible from aggregate metrics alone.
 
@@ -246,9 +246,9 @@ Examples:
 - "Token usage is 80% higher with skill, primarily due to script output parsing"
 - "All 3 without-skill runs for eval 1 produced empty output"
 
-### Step 6: Write Notes
+### Step 6: Produce Notes
 
-Save notes to `{output_path}` as a JSON array of strings:
+Produce the notes as a JSON array of strings at the authorized `output_path`, or return the same array as the native task result when no write was authorized:
 
 ```json
 [

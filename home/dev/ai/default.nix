@@ -17,50 +17,23 @@ let
   ompConfig = yamlFormat.generate "omp-config.yml" config.oh-my-pi.settings;
 
   localSkillNames = [
-    "architect"
-    "arena"
-    "automate-me"
-    "blast-radius"
-    "bro"
+    "architect-work"
+    "context-map"
+    "contract-review"
     "create-skill"
-    "deslop"
-    "figure-it-out"
-    "how"
-    "interrogate"
-    "nahsi-mode"
-    "no-comments"
-    "poteto-mode"
-    "principle-boundary-discipline"
-    "principle-build-the-lever"
-    "principle-encode-lessons-in-structure"
-    "principle-exhaust-the-design-space"
-    "principle-experience-first"
-    "principle-fix-root-causes"
-    "principle-foundational-thinking"
-    "principle-guard-the-context-window"
-    "principle-laziness-protocol"
-    "principle-make-operations-idempotent"
-    "principle-migrate-callers-then-delete-legacy-apis"
-    "principle-minimize-reader-load"
-    "principle-model-the-domain"
-    "principle-never-block-on-the-human"
-    "principle-outcome-oriented-execution"
-    "principle-prove-it-works"
-    "principle-redesign-from-first-principles"
-    "principle-separate-before-serializing-shared-state"
-    "principle-sequence-verifiable-units"
-    "principle-subtract-before-you-add"
-    "principle-type-system-discipline"
+    "implement"
+    "prime-delegate"
+    "primestack"
+    "proof-repair"
+    "prototype"
     "recall"
     "reflect"
     "resolving-merge-conflicts"
-    "show-me-your-work"
-    "swarm"
+    "shape-work"
     "tdd"
-    "teach"
     "technical-writing"
     "unslop"
-    "why"
+    "verticalize-work"
   ];
 
   skills =
@@ -74,8 +47,8 @@ let
         subdir = "";
       })
       {
-        grilling = "productivity/grilling";
         to-questionnaire = "productivity/to-questionnaire";
+        wait-what = "productivity/wait-what";
         wizard = "engineering/wizard";
         writing-for-agents = "productivity/writing-for-agents";
       }
@@ -111,10 +84,13 @@ in
     enable = true;
     package = inputs.omp-upstream.packages.${system}.default;
     inherit skills;
-    agents.comment-sicko = ./agents/comment-sicko.md;
-    agents.poteto-agent = ./agents/poteto-agent.md;
+    agents.scout = ./agents/scout.md;
+    agents.scout-deep = ./agents/scout-deep.md;
+    agents.task = ./agents/task.md;
+    agents.sonic = ./agents/sonic.md;
+    agents.reviewer = ./agents/reviewer.md;
     agents.researcher = ./agents/researcher.md;
-    agents.evidence-auditor = ./agents/evidence-auditor.md;
+    agents.researcher-deep = ./agents/researcher-deep.md;
     mcp.mcpServers = {
       codebase-memory.command = lib.getExe pkgs-unstable.codebase-memory-mcp;
     };
@@ -147,6 +123,8 @@ in
         plan = "openai-codex/gpt-6-astra:high";
         task = "openai-codex/gpt-5.6-sol:high";
         smol = "openai-codex/gpt-5.6-luna:low";
+        fast = "openai-codex/gpt-5.6-terra:medium";
+        review = "openai-codex/gpt-6-astra:high";
         tiny = "nahsilabs/google/gemma-4-12B-it";
         advisor = "openai-codex/gpt-6-astra:high";
       };
@@ -167,12 +145,12 @@ in
       ttsr.repeatMode = "after-gap";
       secrets.enabled = true;
       task.maxConcurrency = 4;
+      task.enableEffort = true;
+      task.maxEffort = "high";
       task.isolation.enabled = true;
       task.showResolvedModelBadge = true;
       task.agentModelOverrides = {
-        scout = "openai-codex/gpt-5.6-luna:high";
-        reviewer = "openai-codex/gpt-6-astra:high";
-        security-reviewer = "openai-codex/gpt-6-astra:high";
+        security-reviewer = "@review";
       };
 
       bash.autoBackground.enabled = true;

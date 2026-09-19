@@ -1,0 +1,5 @@
+{
+  "repository": "https://github.com/erik-kroon/primestack",
+  "revision": "684d6aba48fd443777aeb4e5f9bacf015f062c68",
+  "adaptation": "PrimeStack suite adapted for Oh My Pi: model-callable router, skill:// references, task/hub delegation, native todos and session continuation."
+}

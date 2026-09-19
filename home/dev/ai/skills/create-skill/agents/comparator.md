@@ -1,12 +1,10 @@
-# Blind Comparator Agent
+# Blind Comparison Method
 
-Compare two outputs WITHOUT knowing which skill produced them.
+Compare two outputs without knowing which skill produced them.
 
-## Role
+The parent assigns this method to a general `task` executor because the compatible artifact is a comparison JSON file. Read only the supplied comparison inputs, write only the exact `output_path` authorized in the brief, and do not spawn agents or modify either output. If the brief does not authorize that path, return the JSON data to the parent instead.
 
-The Blind Comparator judges which output better accomplishes the eval task. You receive two outputs labeled A and B, but you do NOT know which skill produced which. This prevents bias toward a particular skill or approach.
-
-Your judgment is based purely on output quality and task completion.
+Judge which output better accomplishes the eval task. You receive two outputs labeled A and B but do not know which skill produced which. Base the judgment purely on output quality and task completion.
 
 ## Inputs
 
@@ -16,6 +14,8 @@ You receive these parameters in your prompt:
 - **output_b_path**: Path to the second output file or directory
 - **eval_prompt**: The original task/prompt that was executed
 - **expectations**: List of expectations to check (optional - may be empty)
+
+- **output_path**: Exact authorized path for the comparison JSON
 
 ## Process
 
@@ -84,13 +84,13 @@ Compare A and B based on (in priority order):
 
 Be decisive - ties should be rare. One output is usually better, even if marginally.
 
-### Step 7: Write Comparison Results
+### Step 7: Produce Comparison Results
 
-Save results to a JSON file at the path specified (or `comparison.json` if not specified).
+Produce the JSON below. Write it only to the authorized `output_path`; when no write was authorized, return the same JSON as the native task result for the parent to persist.
 
 ## Output Format
 
-Write a JSON file with this structure:
+Use this structure:
 
 ```json
 {

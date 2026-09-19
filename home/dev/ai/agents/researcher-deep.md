@@ -1,7 +1,7 @@
 ---
-name: researcher
-description: Research focused external technical questions using primary sources; use researcher-deep for conflicting evidence or consequential conclusions.
-model: "@fast"
+name: researcher-deep
+description: Resolve difficult external technical questions, conflicting sources, or decision-critical evidence audits; use researcher for focused lookups.
+model: "@task"
 tools: [read, grep, glob, web_search]
 spawns: []
 ---

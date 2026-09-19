@@ -41,7 +41,7 @@ Ask only for missing product or preference decisions. Infer repository facts fro
 
 ### Interview and research
 
-Resolve edge cases, input and output formats, examples, success criteria, and dependencies before writing tests. Use mounted MCPs and parallel OMP `task` agents when independent research slices exist.
+Resolve edge cases, input and output formats, examples, success criteria, and dependencies before writing tests. Use mounted MCPs directly. When independent research slices exist, use `scout` for local repository evidence and `researcher` for external evidence, giving each a bounded question and any applicable parent-named method or reference.
 
 ### Write the SKILL.md
 
@@ -170,12 +170,12 @@ Keep the workspace untracked unless the user wants the evaluation trail committe
 
 `task.isolation.mode` must be enabled so each task item accepts `isolated: true`. If the field is unavailable, report the configuration prerequisite instead of claiming an isolated evaluation.
 
-For every test prompt, launch two built-in OMP `task` agents in one batch:
+For every test prompt, launch a matched pair in one OMP `task` batch. Both items use the general `task` profile because an executor may need artifact writes or evaluation tools:
 
-- **Primary:** `isolated: true`; give the exact draft skill path and require the agent to read it before executing the prompt.
-- **Baseline:** `isolated: true`; use no skill for a new skill, or a snapshot of the old version for an existing skill.
+- **Primary:** `isolated: true`; name the exact draft skill path as the assigned method and require the executor to read it before running the prompt.
+- **Baseline:** `isolated: true`; for a new skill, explicitly state that this is a no-skill baseline and assign no skill or implicit method. For an existing skill, name the snapshot of the old version as the assigned method.
 
-Use the same configured `task` model. This workflow measures the skill, not model differences. Give both runs the same task prompt and inputs. Assign disjoint output paths. Prose-only results may stay in `agent://<id>` artifacts; file-producing tasks write into their assigned workspace paths.
+Keep profile, configured model tier, tool authority, prompt, inputs, and effort identical; only the skill condition and disjoint output destination differ. When the live `task` schema supports per-item effort, set the same effort on both items. Otherwise omit the field and preserve the profile default. Never escalate only one side, pass provider/model IDs, or claim cross-tier comparability. Prose-only results may stay in `agent://<id>` artifacts; file-producing tasks write only into their assigned workspace paths.
 
 For an existing skill, snapshot the baseline before editing:
 
@@ -215,7 +215,7 @@ Read full outputs from `agent://<id>` before grading. A completed task status is
 
 ### Step 4: Grade, aggregate, and generate the review
 
-1. **Grade each run.** Spawn an OMP `task` agent with `skill://create-skill/agents/grader.md`, the assertions, and the output paths. For programmatically checkable assertions, write and run a deterministic script. Save `grading.json` with `text`, `passed`, and `evidence` fields.
+1. **Grade each run.** Spawn a general OMP `task` executor and explicitly assign `skill://create-skill/agents/grader.md` as its method. Authorize reads of the assertions, transcript, and run outputs, plus a write only to that run's `grading.json`. For programmatically checkable assertions, write and run a deterministic script within the assigned run workspace. Preserve the schema's `text`, `passed`, and `evidence` fields.
 2. **Aggregate the benchmark.**
 
    ```bash
@@ -223,7 +223,7 @@ Read full outputs from `agent://<id>` before grading. A completed task status is
    ```
 
    Every eval has matched, non-empty `primary` and `baseline` `run-N` sets. Each run contains `outputs/`, `grading.json`, and `timing.json`; each eval contains `eval_metadata.json`. Aggregation writes `benchmark.json` and `benchmark.md` with primary before baseline and numeric primary-minus-baseline deltas.
-3. **Analyze the result.** Read the benchmark and apply `skill://create-skill/agents/analyzer.md`. Save its JSON array to `<workspace>/iteration-N/analysis.json`, then regenerate the benchmark with those notes:
+3. **Analyze the result.** The coordinator reads the benchmark and applies `skill://create-skill/agents/analyzer.md` in benchmark-analysis mode. Save its JSON array only to `<workspace>/iteration-N/analysis.json`, then regenerate the benchmark with those notes:
 
    ```bash
    python skill://create-skill/scripts/aggregate_benchmark.py \
@@ -300,7 +300,7 @@ After improving the skill:
 
 1. Apply your improvements to the skill
 2. Rerun all test cases into a new `iteration-<N+1>/` directory, creating matched `primary` and `baseline` runs. For a new skill, primary uses the revised skill and baseline uses no skill. For an existing skill, choose the original version or previous iteration as baseline.
-3. Launch the reviewer with `--previous-workspace` pointing at the previous iteration
+3. Generate the static review file with `--previous-workspace` pointing at the previous iteration
 4. Wait for the user to review and tell you they're done
 5. Read the new feedback, improve again, repeat
 
@@ -313,9 +313,9 @@ Keep going until:
 
 ## Advanced: Blind comparison
 
-For a rigorous comparison between two skill versions, read `skill://create-skill/agents/comparator.md` and `skill://create-skill/agents/analyzer.md`. Give anonymous outputs to an independent OMP `task` agent, then analyze why the winner won.
+For a rigorous comparison between two skill versions, explicitly assign `skill://create-skill/agents/comparator.md` to a general OMP `task` executor with anonymous outputs and one authorized comparison JSON path. Then explicitly assign `skill://create-skill/agents/analyzer.md` to another general `task` executor with the comparison artifacts and one authorized analysis JSON path.
 
-This is optional. It compares skill versions using the configured `task` model; it does not claim cross-model agreement.
+This is optional. Both compared executions use the same configured `task` profile and effort under the matching rules above; the comparison does not claim cross-model or cross-tier agreement.
 
 ---
 
@@ -347,9 +347,9 @@ Bad queries produce bad descriptions; do not optimize against an unreviewed set.
 
 ### Step 3: Review the description qualitatively
 
-The upstream automated optimizer depended on fresh external CLI processes. It is intentionally not ported: this OMP setup uses `task` agents and does not launch headless OMP processes for trigger benchmarks.
+The upstream automated optimizer depended on fresh external CLI processes. It is intentionally not ported: this OMP setup does not launch headless OMP processes for trigger benchmarks.
 
-Use `skill://writing-for-agents/SKILL-MECHANICS.md` to inspect branch coverage, leading words, false-positive near misses, and whether the skill should be model- or user-invoked. You may ask OMP `task` agents to critique the query set against the name and description, but label that result qualitative. Do not report a measured trigger rate.
+Use `skill://writing-for-agents/SKILL-MECHANICS.md` to inspect branch coverage, leading words, false-positive near misses, and whether the skill should be model- or user-invoked. For an independent critique, use the read-only `reviewer` profile, explicitly assign that reference and the query-set lens, and have it return data for coordinator synthesis. Label the result qualitative; do not report a measured trigger rate.
 
 ### Step 4: Apply the result
 
@@ -358,11 +358,11 @@ Show the description before and after. Update it only after the user accepts the
 
 ## Reference files
 
-The agents/ directory contains instructions for specialized subagents. Read them when you need to spawn the relevant subagent.
+The `agents/` directory contains reusable evaluation methods, not capability profiles. Assign the relevant resource explicitly to a general `task` executor and narrowly authorize its compatible output write.
 
-- `skill://create-skill/agents/grader.md` — How to evaluate assertions against outputs
-- `skill://create-skill/agents/comparator.md` — How to do blind A/B comparison between two outputs
-- `skill://create-skill/agents/analyzer.md` — How to analyze why one version beat another
+- `skill://create-skill/agents/grader.md` — Evaluate assertions against outputs
+- `skill://create-skill/agents/comparator.md` — Blindly compare two outputs
+- `skill://create-skill/agents/analyzer.md` — Analyze comparison causes or benchmark patterns
 
 The reference schema is `skill://create-skill/references/schemas.md`.
 

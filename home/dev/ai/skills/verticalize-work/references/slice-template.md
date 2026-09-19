@@ -1,0 +1,64 @@
+# S<NN> — <outcome-oriented title>
+
+- **Status:** ready | active | blocked | done
+- **Owner:** unassigned
+- **Risk:** low | medium | high | critical
+- **Method:** `<skill/reference URI or direct procedure>`
+- **Validation owner:** `<child-scoped checks; parent integration checks>`
+
+## Value
+
+What becomes observably possible, correct, simpler, or safer when this slice lands?
+
+## Context pointers
+
+- `<path or durable document>` — why it matters
+
+## Scope
+
+### Included
+
+- <behavior or ownership surface>
+
+### Non-goals
+
+- <explicitly excluded work>
+
+### Ownership
+
+- Files/areas this worker may edit: `<disjoint paths or worktree>`
+- Shared state constraints: `<none or explicit coordination>`
+
+## Acceptance criteria
+
+- [ ] <observable result>
+- [ ] <integration condition>
+
+## Verification
+
+```text
+<exact command, script, or real user surface>
+```
+
+Expected signal: `<what proves this slice works>`
+
+## Dependencies
+
+- Blocked by: `<slice ids or none>`
+- Unlocks: `<slice ids or none>`
+
+## Decisions and risks
+
+- Decided: <facts already fixed>
+- Blocker: <human/product/architecture decision that must not be guessed>
+- Residual risk: <what this slice cannot prove alone>
+
+## Child completion contract
+
+Reply to the parent with:
+
+- status: done | blocked | failed
+- changed files or artifact paths
+- verification command and result
+- deviations from this contract
+- integration risks or follow-up slices

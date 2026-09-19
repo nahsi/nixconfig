@@ -28,31 +28,31 @@ Order candidates by modification time. Read the physical title slot, session hea
 
 ### 2. Spawn three reviewers in parallel
 
-Use one OMP `task` batch with three review items. The prompt forbids writes; the parent applies edits.
+Use one OMP `task` batch with three read-only review items. Set `agent: reviewer` on every item, name the corresponding reference below as the parent-supplied method and lens, and state that the reference's numbered-list contract controls the result format. Forbid writes and subdelegation; the coordinator owns synthesis and edits.
 
-| Lens | OMP agent | Prompt template |
+| Lens | Profile | Assigned method and lens |
 |---|---|---|
-| Judgment | `task` | `skill://reflect/references/judgment-reviewer.md` |
-| Tooling | `task` | `skill://reflect/references/tooling-reviewer.md` |
-| Divergent | `task` | `skill://reflect/references/divergent-reviewer.md` |
+| Judgment | `reviewer` | `skill://reflect/references/judgment-reviewer.md` |
+| Tooling | `reviewer` | `skill://reflect/references/tooling-reviewer.md` |
+| Divergent | `reviewer` | `skill://reflect/references/divergent-reviewer.md` |
 
-These are independent review contexts using the configured `task` role, not model-diverse reviewers.
+These are independent lenses using the same configured reviewer profile. The lens reference is the only intended difference; model routing stays in profile configuration.
 
-Pass each template verbatim, substituting the transcript path or digest where marked. Reviewers return findings through their `task` results and `agent://` artifacts.
+Pass each reference verbatim, substituting the transcript path or digest where marked. Reviewers return findings through their native task results and `agent://` artifacts.
 
 ### 3. Synthesize
 
-Spawn one OMP `task` item for synthesis. Use `skill://reflect/references/synthesizer.md` verbatim, with each reviewer's full output inlined where marked. The synthesizer returns a structured Accepted / Rejected / Backlog list.
+The coordinator reads all three full results and applies `skill://reflect/references/synthesizer.md` directly, substituting the reviewer outputs where marked. Do not spawn a fourth worker merely to combine results: disposition and routing remain coordinator decisions. Preserve the reference's structured Accepted / Rejected / Backlog output.
 
 ### 4. Structural enforcement check
 
-Sanity-check the synthesizer's Accepted list. For any item that would be enforced more reliably by a lint rule, script, metadata flag, or runtime check, move it from Accepted to Backlog. The synthesizer already applies this criterion; this is a final pass before edits land. See the **encode-lessons-in-structure** principle skill.
+Sanity-check the Accepted list. For any item that would be enforced more reliably by a lint rule, script, metadata flag, or runtime check, move it from Accepted to Backlog. The synthesis reference already applies this criterion; this is a final pass before edits land.
 
 ### 5. Apply
 
-Before applying any Accepted edit, present the synthesizer's full Accepted/Rejected/Backlog output to the user and wait for explicit approval. The user picks which subset to apply and may redirect routings. Skill changes affect every future agent in the org; do not auto-apply.
+Before applying any Accepted edit, present the full Accepted/Rejected/Backlog output to the user and wait for explicit approval. The user picks which subset to apply and may redirect routings. Skill changes affect every future agent in the org; do not auto-apply.
 
-Backlog items file to whatever devex / backlog tracker your team uses automatically. Those are tracker submissions, not skill edits. Only the Accepted list waits for approval.
+Backlog rows remain proposals until the user explicitly approves filing them to a devex or backlog tracker. Tracker submissions are external writes, so never file them implicitly.
 
 For each approved Accepted item, follow the Routing field exactly:
 
@@ -69,5 +69,5 @@ Short list, no preamble:
 
 - Edits applied: `<skill path>`. What changed, one line each.
 - New skills created: `<skill path>`. One line each (rare).
-- Backlog filed to the devex tracker: `<issue title>` (`<tags>`). One line each.
+- Backlog: `<issue title>` (`<tags>`), marked as filed only when the user approved the tracker submission.
 - Dropped: one line per rejected finding + reason from the synthesizer.

@@ -1,12 +1,10 @@
-# Grader Agent
+# Grading Method
 
 Evaluate expectations against an execution transcript and outputs.
 
-## Role
+The parent assigns this method to a general `task` executor because the compatible artifact is a `grading.json` file. Read only the supplied run inputs, write only the exact sibling `grading.json` path authorized in the brief, and do not spawn agents or modify the evaluated outputs. If the brief does not authorize that path, return the JSON data to the parent instead.
 
-The Grader reviews a transcript and output files, then determines whether each expectation passes or fails. Provide clear evidence for each judgment.
-
-You have two jobs: grade the outputs, and critique the evals themselves. A passing grade on a weak assertion is worse than useless — it creates false confidence. When you notice an assertion that's trivially satisfied, or an important outcome that no assertion checks, say so.
+Grade the outputs and critique the evals themselves. A passing grade on a weak assertion is worse than useless — it creates false confidence. When an assertion is trivially satisfied or an important outcome is unchecked, say so.
 
 ## Inputs
 
@@ -78,9 +76,9 @@ Suggestions worth raising:
 
 Keep the bar high. The goal is to flag things the eval author would say "good catch" about, not to nitpick every assertion.
 
-### Step 7: Write Grading Results
+### Step 7: Apply the Grading Criteria
 
-Save results to `{outputs_dir}/../grading.json` (sibling to outputs_dir).
+Use the pass/fail criteria below before producing the result.
 
 ## Grading Criteria
 
@@ -105,7 +103,7 @@ Save results to `{outputs_dir}/../grading.json` (sibling to outputs_dir).
 
 ## Output Format
 
-Write a JSON file with this structure:
+Produce the JSON structure below. Write it to the run's authorized sibling `grading.json`; when no write was authorized, return the same JSON as the native task result for the parent to persist.
 
 ```json
 {
