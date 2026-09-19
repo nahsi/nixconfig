@@ -22,6 +22,7 @@ let
     "contract-review"
     "create-skill"
     "implement"
+    "in-depth-research"
     "prime-delegate"
     "primestack"
     "proof-repair"

@@ -1,0 +1,52 @@
+{
+  "skill_name": "in-depth-research",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I have local Markdown notes and saved web articles on Linux. I want to find relevant material even when I do not remember the wording. I would rather adopt an existing local-first tool than build a search system. Research the approaches worth considering, including alternatives I may not know to ask for. Do not install anything. Give me a concise recommendation with sources.",
+      "expected_output": "A source-grounded map of distinct approaches, at least one useful source-derived discovery, and a recommendation that respects local-first adoption rather than inventing infrastructure.",
+      "expectations": [
+        "Compares substantively different retrieval approaches and ties the recommendation to local-first use on Linux rather than proposing a new search engine.",
+        "At least one follow-up read or search originates in material actually encountered, yields a relevant alternative or distinction, and is traceable in the execution evidence.",
+        "Consequential tool capabilities and limitations in the recommendation are supported by sources actually read, with uncertainty where verification is missing.",
+        "Explains significant gaps or why further exploration stopped without claiming exhaustive coverage from the call limit."
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "What do people who actually use nvk/llm-wiki say about it? I am interested in adoption, complaints, and ongoing experience before trying it. Separate this exact implementation from the general LLM-wiki idea and other projects with similar names. Give a concise assessment with links; do not install anything.",
+      "expected_output": "An adoption assessment grounded in actual discussions or issue reports, distinguishing firsthand use, promotion, design concerns, confirmed fixes, and missing evidence.",
+      "expectations": [
+        "Findings attributed to nvk/llm-wiki actually concern that repository; experiences with the general pattern or other implementations are kept separate.",
+        "Reads at least one firsthand user discussion or issue report and preserves what the user actually experienced rather than treating promotion as adoption.",
+        "Distinguishes reported problems, design risks, and confirmed resolutions; does not infer prevalence from stars, votes, or a selected complaint sample.",
+        "Reports sparse or inaccessible evidence as a coverage limitation rather than proof of absent adoption or community activity."
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Which GNU tar option lists the contents of an archive without extracting it? Give the command for backup.tar and a link to the official documentation. Keep it short.",
+      "expected_output": "A direct official-source lookup with the correct list command, no exploratory research loop, and no execution against an archive.",
+      "expectations": [
+        "Gives tar -tf backup.tar or an equivalent GNU tar list command without extraction.",
+        "Supports the answer with official GNU tar documentation actually read.",
+        "Answers directly without unrelated alternative research, a domain map, file mutations, or executing tar against an archive."
+      ],
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "I want to keep files between a Linux laptop and an Android phone without a commercial cloud. I am not sure whether sync is even the right framing. Explore existing options starting from a relevant curated or awesome list, then read what users actually do. Explain which approaches you discovered and how the research changed the question. Do not install anything.",
+      "expected_output": "A traceable discovery loop from a curated category through a project and practitioner discussion to a new lead that is followed and changes the map of approaches, without inventing novelty.",
+      "expectations": [
+        "Actually browses a relevant curated list or index and uses its categories or entries to choose an investigation path, rather than merely citing the index.",
+        "Reads a practitioner discussion and follows a concrete new lead from it into another source or query; the source, lead, follow-up, and finding are traceable.",
+        "Revises the framing or map of approaches from those discoveries while retaining the Linux/Android and no-commercial-cloud goal.",
+        "Keeps leads distinct from verified capabilities and first-hand experience distinct from general adoption claims, with evidence for the final practical distinctions."
+      ],
+      "files": []
+    }
+  ]
+}

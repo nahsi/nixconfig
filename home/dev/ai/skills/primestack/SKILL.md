@@ -28,7 +28,7 @@ On activation:
 | New or changed behavior | [feature](playbooks/feature.md) |
 | Bug, regression, flake, incident, performance | [bug](playbooks/bug.md) |
 | Behavior-preserving redesign/migration | [refactor](playbooks/refactor.md) |
-| Read-only “how/why/impact” | [investigation](playbooks/investigation.md) |
+| Local “how/why/impact” or exploratory external research | [investigation](playbooks/investigation.md) |
 | Empirical design fork | [prototype](playbooks/prototype.md) |
 | Existing artifact needs judgment or release readiness | [review-and-ship](playbooks/review-and-ship.md) |
 | Plan must become local worker-ready slices | [verticalized-delivery](playbooks/verticalized-delivery.md) |
@@ -40,6 +40,7 @@ When several match, pick the playbook for the current uncertainty. A feature wit
 
 - [`shape-work`](skill://shape-work) — outcome, domain language, scope, decisions, risk, proof level.
 - [`context-map`](skill://context-map) — how/why/impact evidence before change.
+- [`in-depth-research`](skill://in-depth-research) — source-driven external discovery, practitioner experience, alternatives, and evolving domain understanding.
 - [`verticalize-work`](skill://verticalize-work) — tracker-neutral local slices and dependency waves.
 - [`implement`](skill://implement) — ordinary incremental non-TDD implementation and integration.
 - [`prime-delegate`](skill://prime-delegate) — OMP task fan-out, arena, review panel, or pipeline.
