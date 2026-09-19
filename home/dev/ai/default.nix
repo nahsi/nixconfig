@@ -136,7 +136,7 @@ in
       ];
 
       tools = {
-        approvalMode = "always-ask";
+        approvalMode = "yolo";
         approval.retain = "deny";
       };
       secrets.enabled = true;
@@ -192,10 +192,6 @@ in
     };
 
     models = import ./models.nix;
-  };
-
-  programs.zsh.zsh-abbr.abbreviations = {
-    ompy = "omp --approval-mode yolo";
   };
 
   home = {
