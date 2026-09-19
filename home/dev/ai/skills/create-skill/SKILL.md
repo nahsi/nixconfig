@@ -349,7 +349,7 @@ Bad queries produce bad descriptions; do not optimize against an unreviewed set.
 
 The upstream automated optimizer depended on fresh external CLI processes. It is intentionally not ported: this OMP setup does not launch headless OMP processes for trigger benchmarks.
 
-Use `skill://writing-for-agents/SKILL-MECHANICS.md` to inspect branch coverage, leading words, false-positive near misses, and whether the skill should be model- or user-invoked. For an independent critique, use the read-only `reviewer` profile, explicitly assign that reference and the query-set lens, and have it return data for coordinator synthesis. Label the result qualitative; do not report a measured trigger rate.
+Use `skill://writing-for-agents/SKILL-MECHANICS.md` to inspect branch coverage, leading words, false-positive near misses, and whether the skill should be model- or user-invoked. For an independent critique, select the read-only review profile through `skill://prime-delegate`, explicitly assign that reference and the query-set lens, and have it return data for coordinator synthesis. Label the result qualitative; do not report a measured trigger rate.
 
 ### Step 4: Apply the result
 

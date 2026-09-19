@@ -70,6 +70,7 @@ in
       task = ./agents/task.md;
       sonic = ./agents/sonic.md;
       reviewer = ./agents/reviewer.md;
+      reviewer-deep = ./agents/reviewer-deep.md;
       researcher = ./agents/researcher.md;
       researcher-deep = ./agents/researcher-deep.md;
     };
@@ -101,12 +102,11 @@ in
     settings = {
       modelRoles = {
         default = "openai-codex/gpt-6-astra:medium";
-        slow = "openai-codex/gpt-5.6-sol:xhigh";
+        slow = "openai-codex/gpt-6-astra:high";
         plan = "openai-codex/gpt-6-astra:high";
         task = "openai-codex/gpt-5.6-sol:high";
-        smol = "openai-codex/gpt-5.6-luna:low";
+        smol = "openai-codex/gpt-5.6-luna:medium";
         fast = "openai-codex/gpt-5.6-terra:medium";
-        review = "openai-codex/gpt-6-astra:high";
         tiny = "nahsilabs/google/gemma-4-12B-it";
         advisor = "openai-codex/gpt-6-astra:high";
       };
@@ -131,7 +131,7 @@ in
         enableEffort = true;
         maxEffort = "high";
         isolation.enabled = true;
-        agentModelOverrides.security-reviewer = "@review";
+        agentModelOverrides.security-reviewer = "@slow";
         showResolvedModelBadge = true;
       };
 

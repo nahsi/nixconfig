@@ -53,7 +53,7 @@ Inspect when relevant:
 
 ## OMP review panel
 
-For a consequential change where independent contexts add information, read `skill://prime-delegate`. Use the read-only `reviewer` profile for ordinary spec, standards, safety, and proof lenses. Use `security-reviewer` only when the artifact specifically warrants its specialized security method; a routine safety lens stays with `reviewer`.
+For a consequential change where independent contexts add information, read `skill://prime-delegate` and use its profile selection for each review assignment. Use `security-reviewer` only when the artifact specifically warrants its specialized security method.
 
 Choose only the lenses the change needs, give them the same immutable artifact and intent, and name `skill://contract-review` as the method when this rubric governs their work. Under this method, each finding includes:
 

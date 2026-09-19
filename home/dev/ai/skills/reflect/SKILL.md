@@ -28,15 +28,13 @@ Order candidates by modification time. Read the physical title slot, session hea
 
 ### 2. Spawn three reviewers in parallel
 
-Use one OMP `task` batch with three read-only review items. Set `agent: reviewer` on every item, name the corresponding reference below as the parent-supplied method and lens, and state that the reference's numbered-list contract controls the result format. Forbid writes and subdelegation; the coordinator owns synthesis and edits.
+Use one OMP `task` batch with three read-only review items. Select each item's review profile through `skill://prime-delegate`, name the corresponding reference below as the parent-supplied method and lens, and state that the reference's numbered-list contract controls the result format. Forbid writes and subdelegation; the coordinator owns synthesis and edits.
 
-| Lens | Profile | Assigned method and lens |
-|---|---|---|
-| Judgment | `reviewer` | `skill://reflect/references/judgment-reviewer.md` |
-| Tooling | `reviewer` | `skill://reflect/references/tooling-reviewer.md` |
-| Divergent | `reviewer` | `skill://reflect/references/divergent-reviewer.md` |
-
-These are independent lenses using the same configured reviewer profile. The lens reference is the only intended difference; model routing stays in profile configuration.
+| Lens | Assigned method and lens |
+|---|---|
+| Judgment | `skill://reflect/references/judgment-reviewer.md` |
+| Tooling | `skill://reflect/references/tooling-reviewer.md` |
+| Divergent | `skill://reflect/references/divergent-reviewer.md` |
 
 Pass each reference verbatim, substituting the transcript path or digest where marked. Reviewers return findings through their native task results and `agent://` artifacts.
 

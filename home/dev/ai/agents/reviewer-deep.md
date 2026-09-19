@@ -1,7 +1,7 @@
 ---
-name: reviewer
+name: reviewer-deep
 description: Independently evaluate code, plans, decisions, or other artifacts against an assigned rubric; report evidence without editing.
-model: "@fast"
+model: "@slow"
 tools: [read, grep, glob]
 spawns: []
 ---

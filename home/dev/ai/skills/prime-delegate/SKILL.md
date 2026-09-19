@@ -33,8 +33,9 @@ Choose the role for the work first, then choose its configured tier from difficu
 | Local evidence | `scout-deep` | Deep | Ambiguous or cross-cutting local investigation |
 | External evidence | `researcher` | Standard | Focused published-source research |
 | External evidence | `researcher-deep` | Deep | Difficult synthesis or disputed external evidence |
-| General evaluation | `reviewer` | Review | Read-only evaluation under the assigned method and lens |
-| Security evaluation | `security-reviewer` | Review | Security work requiring the specialized bundled method |
+| General evaluation | `reviewer` | Standard | Default review against assigned criteria |
+| General evaluation | `reviewer-deep` | Deep | Complex reasoning across interacting behavior or conflicting evidence |
+| Security evaluation | `security-reviewer` | Deep | Security work requiring the specialized bundled method |
 
 Prefer the lower tier only when its contract is genuinely bounded. Start high when failure impact, ambiguity, or cross-boundary coupling warrants it. Escalate to the corresponding high-tier profile only after an evidenced capability blocker; do not automatically retry the same assignment.
 
@@ -95,7 +96,7 @@ Give every candidate the same goal, constraints, and verification target. Keep c
 
 ### Review panel
 
-Reviewers are read-only. Assign each a distinct lens and a governing review method; that method owns its rubric, evidence requirements, and result shape. Use `contract-review` for its contract rubric, or another named method when the assignment needs a different evaluation. Select `security-reviewer` only for specifically warranted security work; ordinary independent lenses use `reviewer`. The coordinator decides which findings are accepted.
+Reviewers are read-only. Select each profile using the table above, then assign its lens and governing method; both reviewer tiers follow the same review contract. Use `contract-review` for its contract rubric, or another named method when the assignment needs a different evaluation. Select `security-reviewer` only for specifically warranted security work. The coordinator decides which findings are accepted.
 
 ### Pipeline
 
