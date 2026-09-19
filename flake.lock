@@ -389,11 +389,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1787372347,
-        "narHash": "sha256-Foo41OtooHMiBITAFKdOhitmjrMZqcGy1epJNz7sNQ4=",
+        "lastModified": 1789370898,
+        "narHash": "sha256-QBlvSGth1NfAWw7iePOzFlrz0/pX6CfkFCcPALdySNI=",
         "owner": "ryoppippi",
         "repo": "nix-bun",
-        "rev": "fee8f233ad9409be44259b4f428f83ecb2812e37",
+        "rev": "48e887d7955c1c05b8d4627ed39bafe4bf2455a7",
         "type": "github"
       },
       "original": {
@@ -561,16 +561,16 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1789164289,
-        "narHash": "sha256-uozt9mvCE+s5qDDmq+detqwa9JPFFzrHH7JsscMbQ/8=",
-        "ref": "refs/tags/v18.1.18",
-        "rev": "25fd85bb7b05744d1aec77c2b93cdfc90474e43b",
-        "revCount": 489,
+        "lastModified": 1789689949,
+        "narHash": "sha256-PAHZqKtEMiTqCjopbRGzsEkHuHCbzLynCWO52Lxl/40=",
+        "ref": "refs/tags/v18.2.5",
+        "rev": "3af79570e247aad163ea91da774c40b99531b441",
+        "revCount": 519,
         "type": "git",
         "url": "https://git.molez.org/mandlm/omp-nix"
       },
       "original": {
-        "ref": "refs/tags/v18.1.18",
+        "ref": "refs/tags/v18.2.5",
         "type": "git",
         "url": "https://git.molez.org/mandlm/omp-nix"
       }
@@ -585,16 +585,16 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1789160418,
-        "narHash": "sha256-nS/0+RVX5BBqlA6Zi9c52sazk3ukK3StG9xtnupA0/A=",
+        "lastModified": 1789684455,
+        "narHash": "sha256-p32S9awDdTK+HZt/bzB/DDSEQM1GV/ey5gevkZq1+PM=",
         "owner": "can1357",
         "repo": "oh-my-pi",
-        "rev": "00085d4e7dfdcfbf302c122fa2682b410a0f43d1",
+        "rev": "37273117021129e96bd05d8277b140ec3fd61990",
         "type": "github"
       },
       "original": {
         "owner": "can1357",
-        "ref": "v18.1.18",
+        "ref": "v18.2.5",
         "repo": "oh-my-pi",
         "type": "github"
       }

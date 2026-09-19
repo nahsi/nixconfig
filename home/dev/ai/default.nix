@@ -14,9 +14,7 @@ let
 
   localPkgs = inputs.self.packages.${system};
   yamlFormat = pkgs.formats.yaml { };
-  ompConfig = yamlFormat.generate "omp-config.yml" (
-    { setupVersion = 1; } // config.oh-my-pi.settings
-  );
+  ompConfig = yamlFormat.generate "omp-config.yml" config.oh-my-pi.settings;
 
   localSkillNames = [
     "architect"
@@ -162,7 +160,6 @@ in
         "opencode"
         "gemini"
         "github"
-        "agents-md"
       ];
 
       tools.approvalMode = "always-ask";
@@ -170,7 +167,8 @@ in
       ttsr.repeatMode = "after-gap";
       secrets.enabled = true;
       task.maxConcurrency = 4;
-      task.isolation.mode = "auto";
+      task.isolation.enabled = true;
+      task.showResolvedModelBadge = true;
       task.agentModelOverrides = {
         scout = "openai-codex/gpt-5.6-luna:high";
         reviewer = "openai-codex/gpt-6-astra:high";
@@ -178,15 +176,8 @@ in
       };
 
       bash.autoBackground.enabled = true;
-      browser.enabled = true;
+      bashInterceptor.enabled = true;
       computer.enabled = true;
-      astEdit.enabled = false;
-      eval = {
-        py = false;
-        js = true;
-      };
-
-      edit.mode = "hashline";
 
       providers = {
         webSearchOrder = [ "exa" ];
@@ -202,7 +193,6 @@ in
           "shake"
           "soft"
         ];
-        thresholdPercent = 87.5;
       };
 
       branchSummary.enabled = true;
