@@ -66,13 +66,11 @@ in
     inherit skills;
     agents = {
       scout = ./agents/scout.md;
-      scout-deep = ./agents/scout-deep.md;
       task = ./agents/task.md;
+      task-local = ./agents/task-local.md;
       sonic = ./agents/sonic.md;
       reviewer = ./agents/reviewer.md;
-      reviewer-deep = ./agents/reviewer-deep.md;
       researcher = ./agents/researcher.md;
-      researcher-deep = ./agents/researcher-deep.md;
     };
     mcp.mcpServers = {
       codebase-memory.command = lib.getExe pkgs-unstable.codebase-memory-mcp;
@@ -104,11 +102,12 @@ in
         default = "openai-codex/gpt-6-astra:medium";
         slow = "openai-codex/gpt-6-astra:high";
         plan = "openai-codex/gpt-6-astra:high";
-        task = "openai-codex/gpt-5.6-sol:high";
-        smol = "openai-codex/gpt-5.6-luna:medium";
+        task = "openai-codex/gpt-6-astra:medium";
+        smol = "openai-codex/gpt-5.6-luna:high";
         fast = "openai-codex/gpt-5.6-terra:medium";
         tiny = "nahsilabs/google/gemma-4-12B-it";
         advisor = "openai-codex/gpt-6-astra:high";
+        local = "nahsilabs/Qwen/Qwen3.8-27B:medium";
       };
       defaultThinkingLevel = "medium";
       disabledProviders = [

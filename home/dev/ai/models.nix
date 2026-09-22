@@ -36,6 +36,7 @@
           thinkingFormat = "openai";
           qwenTemplateReasoningEffort = false;
           reasoningContentField = "reasoning_content";
+          replayReasoningContent = true;
           maxTokensField = "max_tokens";
           supportsForcedToolChoice = false;
           supportsStrictMode = false;

@@ -1,7 +1,7 @@
 ---
-name: sonic
-description: Low-reasoning agent for strictly mechanical updates or data collection only
-model: "@smol:medium"
+name: task-local
+description: Execute bounded work on the local model
+model: "@local:low"
 tools: [read, grep, glob, bash, edit, write, eval]
 spawns: []
 ---

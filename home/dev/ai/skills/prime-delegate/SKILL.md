@@ -29,19 +29,17 @@ Choose the role for the work first, then choose its configured tier from difficu
 |---|---|---|---|
 | General execution | `sonic` | Mechanical | Prescribed work with an obvious correctness check |
 | General execution | `task` | Deep | Difficult, coupled, or judgment-heavy execution |
+| General execution | `task-local` | Local | Bounded work on the local model |
 | Local evidence | `scout` | Standard | Bounded repository or transcript discovery |
-| Local evidence | `scout-deep` | Deep | Ambiguous or cross-cutting local investigation |
-| External evidence | `researcher` | Standard | Focused published-source research |
-| External evidence | `researcher-deep` | Deep | Difficult synthesis or disputed external evidence |
-| General evaluation | `reviewer` | Standard | Default review against assigned criteria |
-| General evaluation | `reviewer-deep` | Deep | Complex reasoning across interacting behavior or conflicting evidence |
+| External evidence | `researcher` | Deep | Source-backed external research and synthesis |
+| General evaluation | `reviewer` | Deep | Review artifacts against assigned criteria; trace evidence and downstream effects |
 | Security evaluation | `security-reviewer` | Deep | Security work requiring the specialized bundled method |
 
 Prefer the lower tier only when its contract is genuinely bounded. Start high when failure impact, ambiguity, or cross-boundary coupling warrants it. Escalate to the corresponding high-tier profile only after an evidenced capability blocker; do not automatically retry the same assignment.
 
 After selecting the profile, set per-item effort to `lo`, `med`, or `hi` only when the live `task` schema exposes that field and `task.enableEffort` is enabled. Otherwise omit it and preserve the profile default. There is no per-call model selector.
 
-All profiles except `task` are leaf profiles. `task` may spawn descendants only when its assignment explicitly grants a budget, relay contract, and cleanup responsibility. An explicitly assigned PrimeStack workflow is allowed within that scope; loading a skill alone never grants broader authority.
+`reviewer` may delegate evidence gathering to `scout`. All profiles except `task` and `reviewer` are leaf profiles. `task` may spawn descendants only when its assignment explicitly grants a budget, relay contract, and cleanup responsibility. An explicitly assigned PrimeStack workflow is allowed within that scope; loading a skill alone never grants broader authority.
 
 ## Assignment contract
 
