@@ -329,23 +329,6 @@
         "type": "github"
       }
     },
-    "mattpocock-skills": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1789726349,
-        "narHash": "sha256-L3CpIT2DeI+fUFl9fcygojtQo2DzEen69rMD1XqR1vM=",
-        "owner": "mattpocock",
-        "repo": "skills",
-        "rev": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
-        "type": "github"
-      },
-      "original": {
-        "owner": "mattpocock",
-        "repo": "skills",
-        "rev": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
-        "type": "github"
-      }
-    },
     "mcp-servers-nix": {
       "inputs": {
         "nixpkgs": [
@@ -561,16 +544,16 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1789689949,
-        "narHash": "sha256-PAHZqKtEMiTqCjopbRGzsEkHuHCbzLynCWO52Lxl/40=",
-        "ref": "refs/tags/v18.2.5",
-        "rev": "3af79570e247aad163ea91da774c40b99531b441",
-        "revCount": 519,
+        "lastModified": 1789960066,
+        "narHash": "sha256-2H8WAURLRzX1kFqY56UkzMkpETG7ZnvU2CBYsYTYqLE=",
+        "ref": "refs/tags/v18.2.7",
+        "rev": "dbb679f0f112df7b2eaf98bf0b67395f79f3ff91",
+        "revCount": 526,
         "type": "git",
         "url": "https://git.molez.org/mandlm/omp-nix"
       },
       "original": {
-        "ref": "refs/tags/v18.2.5",
+        "ref": "refs/tags/v18.2.7",
         "type": "git",
         "url": "https://git.molez.org/mandlm/omp-nix"
       }
@@ -585,16 +568,16 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1789684455,
-        "narHash": "sha256-p32S9awDdTK+HZt/bzB/DDSEQM1GV/ey5gevkZq1+PM=",
+        "lastModified": 1790009911,
+        "narHash": "sha256-651o7v60Zg6gfHJwpsyhxgKmGFNuDzARMyBjdToD474=",
         "owner": "can1357",
         "repo": "oh-my-pi",
-        "rev": "37273117021129e96bd05d8277b140ec3fd61990",
+        "rev": "5e0fc867f8a58dfe8812b5e99b2e7b6a0313da6c",
         "type": "github"
       },
       "original": {
         "owner": "can1357",
-        "ref": "v18.2.5",
+        "ref": "v18.2.8",
         "repo": "oh-my-pi",
         "type": "github"
       }
@@ -651,7 +634,6 @@
         "catppuccin": "catppuccin",
         "home-manager": "home-manager",
         "lanzaboote": "lanzaboote",
-        "mattpocock-skills": "mattpocock-skills",
         "mcp-servers-nix": "mcp-servers-nix",
         "nix-index-database": "nix-index-database",
         "nixos-hardware": "nixos-hardware",

@@ -44,43 +44,6 @@
         };
       }
       {
-        id = "deepseek-ai/DeepSeek-V4-Flash";
-        name = "DeepSeek V4 Flash";
-        reasoning = true;
-        tokenizer = "deepseek-v3";
-        input = [ "text" ];
-        contextWindow = 1048576;
-        maxTokens = 32768;
-        cost = {
-          input = 0.10;
-          output = 0.20;
-          cacheRead = 0.02;
-          cacheWrite = 0;
-        };
-        thinking = {
-          mode = "effort";
-          efforts = [
-            "low"
-            "medium"
-            "high"
-          ];
-        };
-        compat = {
-          supportsDeveloperRole = false;
-          supportsReasoningEffort = true;
-          reasoningContentField = "reasoning_content";
-          maxTokensField = "max_tokens";
-          reasoningEffortMap = {
-            high = "high";
-            xhigh = "max";
-          };
-          supportsToolChoice = false;
-          requiresReasoningContentForToolCalls = true;
-          requiresAssistantContentForToolCalls = true;
-          extraBody.thinking.type = "enabled";
-        };
-      }
-      {
         id = "google/gemma-4-12B-it";
         name = "Gemma 4 12B IT";
         reasoning = false;

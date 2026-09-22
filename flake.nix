@@ -46,13 +46,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    mattpocock-skills = {
-      url = "github:mattpocock/skills/c55ee46073ed923f86ce59a5eb3b6d895095d1b7";
-      flake = false;
-    };
-
-    omp-nix.url = "git+https://git.molez.org/mandlm/omp-nix?ref=refs/tags/v18.2.5";
-    omp-upstream.url = "github:can1357/oh-my-pi/v18.2.5";
+    omp-nix.url = "git+https://git.molez.org/mandlm/omp-nix?ref=refs/tags/v18.2.7";
+    omp-upstream.url = "github:can1357/oh-my-pi/v18.2.8";
   };
 
   outputs =

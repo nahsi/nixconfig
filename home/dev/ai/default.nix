@@ -13,47 +13,6 @@ let
   };
 
   localPkgs = inputs.self.packages.${system};
-  yamlFormat = pkgs.formats.yaml { };
-  ompConfig = yamlFormat.generate "omp-config.yml" config.oh-my-pi.settings;
-
-  localSkillNames = [
-    "architect-work"
-    "context-map"
-    "contract-review"
-    "create-skill"
-    "implement"
-    "in-depth-research"
-    "prime-delegate"
-    "primestack"
-    "proof-repair"
-    "prototype"
-    "recall"
-    "reflect"
-    "resolving-merge-conflicts"
-    "shape-work"
-    "tdd"
-    "technical-writing"
-    "unslop"
-    "verticalize-work"
-  ];
-
-  skills =
-    lib.genAttrs localSkillNames (name: {
-      src = ./skills;
-      subdir = name;
-    })
-    // (lib.mapAttrs
-      (_: path: {
-        src = "${inputs.mattpocock-skills}/skills/${path}";
-        subdir = "";
-      })
-      {
-        to-questionnaire = "productivity/to-questionnaire";
-        wait-what = "productivity/wait-what";
-        wizard = "engineering/wizard";
-        writing-for-agents = "productivity/writing-for-agents";
-      }
-    );
 in
 {
   imports = [
@@ -62,16 +21,27 @@ in
 
   oh-my-pi = {
     enable = true;
-    package = inputs.omp-upstream.packages.${system}.default;
-    inherit skills;
-    agents = {
-      scout = ./agents/scout.md;
-      task = ./agents/task.md;
-      task-local = ./agents/task-local.md;
-      sonic = ./agents/sonic.md;
-      reviewer = ./agents/reviewer.md;
-      researcher = ./agents/researcher.md;
-    };
+    package = inputs.omp-upstream.packages.${system}.default.overrideAttrs (old: {
+      patches = (old.patches or [ ]) ++ [ ./patches/omp-mode-badges.patch ];
+    });
+
+    skills = lib.pipe (builtins.readDir ./skills) [
+      (lib.filterAttrs (
+        name: type: type == "directory" && builtins.pathExists (./skills + "/${name}/SKILL.md")
+      ))
+      (lib.mapAttrs (
+        name: _: {
+          src = ./skills;
+          subdir = name;
+        }
+      ))
+    ];
+
+    agents = lib.pipe (builtins.readDir ./agents) [
+      (lib.filterAttrs (name: type: type == "regular" && lib.hasSuffix ".md" name))
+      (lib.mapAttrs' (name: _: lib.nameValuePair (lib.removeSuffix ".md" name) (./agents + "/${name}")))
+    ];
+
     mcp.mcpServers = {
       codebase-memory.command = lib.getExe pkgs-unstable.codebase-memory-mcp;
     };
@@ -97,14 +67,15 @@ in
       Long-term memory retention is prohibited. Never invoke retain.
     '';
 
+    models = import ./models.nix;
+
     settings = {
       modelRoles = {
         default = "openai-codex/gpt-6-astra:medium";
         slow = "openai-codex/gpt-6-astra:high";
         plan = "openai-codex/gpt-6-astra:high";
-        task = "openai-codex/gpt-6-astra:medium";
+        task = "openai-codex/gpt-5.6-terra:high";
         smol = "openai-codex/gpt-5.6-luna:high";
-        fast = "openai-codex/gpt-5.6-terra:medium";
         tiny = "nahsilabs/google/gemma-4-12B-it";
         advisor = "openai-codex/gpt-6-astra:high";
         local = "nahsilabs/Qwen/Qwen3.8-27B:medium";
@@ -119,11 +90,14 @@ in
         "github"
       ];
 
-      tools = {
-        approvalMode = "yolo";
-        approval.retain = "deny";
+      theme = {
+        dark = "dark-catppuccin";
+        light = "light-catppuccin";
       };
-      secrets.enabled = true;
+      symbolPreset = "nerd";
+      display.showTokenUsage = true;
+
+      composer.shape = "box";
 
       task = {
         maxConcurrency = 4;
@@ -133,6 +107,12 @@ in
         agentModelOverrides.security-reviewer = "@slow";
         showResolvedModelBadge = true;
       };
+
+      tools = {
+        approvalMode = "yolo";
+        approval.retain = "deny";
+      };
+      secrets.enabled = true;
 
       bash.autoBackground.enabled = true;
       bashInterceptor.enabled = true;
@@ -159,15 +139,6 @@ in
       followUpMode = "all";
       ttsr.repeatMode = "after-gap";
 
-      theme = {
-        dark = "dark-catppuccin";
-        light = "light-catppuccin";
-      };
-      symbolPreset = "nerd";
-      display.showTokenUsage = true;
-
-      composer.shape = "box";
-
       setupVersion = 2;
       startup = {
         checkUpdate = false;
@@ -175,18 +146,9 @@ in
       };
     };
 
-    models = import ./models.nix;
   };
 
   home = {
-    # omp-nix installs config.yml as a Nix store symlink, but OMP resolves the
-    # link before atomically saving settings. Install a writable copy instead.
-    file.".omp/agent/config.yml".enable = lib.mkForce false;
-    activation.ompWritableConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      $DRY_RUN_CMD mkdir -p "$HOME/.omp/agent"
-      $DRY_RUN_CMD install -m 600 ${ompConfig} "$HOME/.omp/agent/config.yml"
-    '';
-
     packages = [
       pkgs-unstable.codebase-memory-mcp
       pkgs.terraform-mcp-server
@@ -194,9 +156,12 @@ in
       pkgs.fluxcd-operator-mcp
       localPkgs.mcp-victorialogs
       localPkgs.mcp-victoriametrics
+
       pkgs.python3Packages.trafilatura
+
       pkgs.nixd
       pkgs.rust-analyzer
+      pkgs.pyright
       pkgs.yaml-language-server
       pkgs.terraform-ls
       pkgs.bash-language-server
@@ -205,5 +170,28 @@ in
       pkgs.lua-language-server
       pkgs.marksman
     ];
+
+    file =
+      lib.mapAttrs' (
+        name: type:
+        lib.nameValuePair ".omp/agent/extensions/${name}" {
+          source = ./extensions + "/${name}";
+          recursive = type == "directory";
+        }
+      ) (builtins.readDir ./extensions)
+      // {
+        ".omp/agent/config.yml".enable = lib.mkForce false;
+      };
+
+    # OMP resolves config.yml before saving, so it needs a writable copy, not a store symlink.
+    activation.ompWritableConfig =
+      let
+        yamlFormat = pkgs.formats.yaml { };
+        ompConfig = yamlFormat.generate "omp-config.yml" config.oh-my-pi.settings;
+      in
+      lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        $DRY_RUN_CMD mkdir -p "$HOME/.omp/agent"
+        $DRY_RUN_CMD install -m 600 ${ompConfig} "$HOME/.omp/agent/config.yml"
+      '';
   };
 }

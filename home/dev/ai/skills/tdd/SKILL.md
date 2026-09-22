@@ -1,71 +1,44 @@
 ---
 name: tdd
-description: Deliver behavior changes through one vertical red-green-refactor slice at a time, testing through stable public seams. Use when the user requests TDD/test-first work, a regression test is cheap and representative, or a shaped contract names test seams.
-license: MIT
+description: "Use only when the user explicitly asks for TDD, a failing test, or a regression test, OR when the bug has an obvious cheap local test target. Skip when the test path is unclear, expensive, integration-heavy, or not requested."
+disable-model-invocation: true
 ---
 
-# TDD
+# TDD Bug Fix
 
-Use tests as an executable behavior contract, not implementation surveillance.
+When fixing a bug with a clear, cheap test path, make the broken behavior executable before changing production code. The goal is a focused regression test that fails before the fix and passes after it.
 
-## Entry gate
+Do not force a test when it would be impractical. If the available test would require broad harness setup, brittle mocks, slow end-to-end infrastructure, production-only state, vague reproduction steps, or large unrelated fixture churn, skip adding a new test and use the closest useful verification instead.
 
-Before writing a test, name:
+## Workflow
 
-- the observable behavior;
-- the stable public seam or closest real boundary;
-- why this test would fail if the behavior is absent or broken;
-- the cheapest command that runs it.
+1. **Understand the bug.** Identify the intended behavior, current behavior, affected path, and smallest observable reproduction.
+2. **Choose the narrowest executable check.** Prefer the closest unit, component, integration, or regression test already used for that codepath. If no practical test path is obvious, do not create one from scratch just to satisfy the workflow.
+3. **Write the failing test first.** Add the smallest focused test that would have caught the bug. The test should encode intended behavior, not mirror the current implementation.
+4. **Run the new test before fixing.** Confirm it fails for the intended reason. If it passes or fails for an unrelated reason, correct the test or reproduction before editing the implementation.
+5. **Fix the bug.** Make the smallest production change that satisfies the intended behavior while preserving nearby contracts.
+6. **Rerun the regression test.** Confirm the test now passes.
+7. **Run nearby validation.** Run relevant adjacent tests, type checks, lint, or scenario checks when the change has broader risk.
 
-If the only possible test is tautological, brittle, or much more expensive than the change, use the closest executable proof and state why. Do not build a large harness merely to claim TDD.
+## If a Failing Test Is Impractical
 
-## Loop
+Do not silently skip the regression step. Before fixing, explicitly explain why a failing test is impossible or not worth the cost, then choose the closest executable regression check available. Examples include a targeted script, manual reproduction command, browser automation, snapshot comparison, log assertion, or focused integration check.
 
-For each vertical behavior slice:
-
-1. **Red**
-   - Write one focused behavior test through the agreed seam.
-   - Derive expected values independently from the implementation.
-   - Run the narrowest command.
-   - Confirm it fails for the expected missing behavior, not setup noise.
-2. **Green**
-   - Make the smallest coherent production change that satisfies the behavior.
-   - Run the focused test until green.
-   - Do not pre-build later slices.
-3. **Refactor while green**
-   - Remove duplication and improve names/shape without changing behavior.
-   - Keep the focused test green after each meaningful change.
-4. **Broaden by risk**
-   - Run adjacent tests, typecheck/build/lint where relevant, then the real surface.
-5. **Preserve the proof story**
-   - Leave the slice green and independently reviewable before advancing. Create a Git commit only when the user requested or authorized repository-history changes.
-
-## Test quality
-
-Prefer tests that:
-
-- exercise a public interface, observable effect, or real adapter boundary;
-- survive internal refactors;
-- cover an important example or invariant;
-- fail with a useful signal;
-- avoid mocks unless the boundary itself is the contract.
-
-For bugs, use `skill://proof-repair` first to minimize the actual failure, then preserve it at the correct seam.
+Prefer no new test over a bad test. A bad test is one that mostly tests mocks, encodes current implementation details, depends on timing or unrelated global state, needs expensive infrastructure for a small fix, or would be deleted immediately after proving the fix.
 
 ## Guardrails
 
-- No production code before a meaningful red signal when operating test-first.
-- No test written to match the current implementation line-for-line.
-- No broad batch of red tests before implementation feedback.
-- No hidden horizontal “all tests later” slice.
-- No weakening assertions to obtain green.
-- No completion based only on the unit test when integration or user-surface risk remains.
+- Do not change tests merely to match a wrong implementation.
+- Do not weaken existing assertions unless the expected behavior has genuinely changed and the reason is clear.
+- Keep the regression test focused on the bug. Avoid broad fixture churn or unrelated coverage expansion.
+- Do not add tests when the practical signal is weak. Use manual or scripted verification and say why.
+- If the bug is flaky, make the test deterministic where possible and document the signal being locked down.
+- If the bug exposes a broader class of failures, first land the focused regression path, then consider additional sibling coverage.
 
-## Output
+## Final Response
 
-- `Behavior and seam`
-- `Red command and expected failure`
-- `Green implementation`
-- `Refactor`
-- `Broader verification`
-- `Remaining risk/next slice`
+Report the evidence, not just the outcome:
+
+- Name the failing-before test or executable check and the failure it produced.
+- Name the passing-after test run and any nearby validation performed.
+- If failing-before evidence could not be demonstrated, state why and describe the closest regression check used instead.

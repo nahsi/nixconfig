@@ -1,0 +1,308 @@
+--- a/packages/coding-agent/src/extensibility/extensions/runner.ts
++++ b/packages/coding-agent/src/extensibility/extensions/runner.ts
+@@ -411,6 +411,7 @@
+ 	notify: () => {},
+ 	onTerminalInput: () => () => {},
+ 	setStatus: () => {},
++	setModeBadge: () => {},
+ 	setWorkingMessage: () => {},
+ 	setWidget: () => {},
+ 	setFooter: () => {},
+--- a/packages/coding-agent/src/extensibility/extensions/types.ts
++++ b/packages/coding-agent/src/extensibility/extensions/types.ts
+@@ -262,6 +262,9 @@
+ 	/** Set status text in the footer/status bar. Pass undefined to clear. */
+ 	setStatus(key: string, text: string | undefined): void;
+ 
++	/** Set text in the native mode segment. Pass undefined to clear. */
++	setModeBadge(key: string, text: string | undefined): void;
++
+ 	/** Set the working/loading message shown during streaming. Call with no argument to restore default. */
+ 	setWorkingMessage(message?: string): void;
+ 
+--- a/packages/coding-agent/src/modes/acp/acp-agent.ts
++++ b/packages/coding-agent/src/modes/acp/acp-agent.ts
+@@ -575,6 +575,7 @@
+ 		},
+ 		onTerminalInput: () => () => {},
+ 		setStatus: () => {},
++		setModeBadge: () => {},
+ 		setWorkingMessage: () => {},
+ 		setWidget: () => {},
+ 		setFooter: () => {},
+--- a/packages/coding-agent/src/modes/controllers/extension-ui-controller.ts
++++ b/packages/coding-agent/src/modes/controllers/extension-ui-controller.ts
+@@ -117,6 +117,7 @@
+ 			notify: (message, type) => this.showHookNotify(message, type),
+ 			onTerminalInput: handler => this.addExtensionTerminalInputListener(handler),
+ 			setStatus: (key, text) => this.setHookStatus(key, text),
++			setModeBadge: (key, text) => this.setModeBadge(key, text),
+ 			setWorkingMessage: message => this.ctx.setWorkingMessage(message),
+ 			setWidget: (key, content, options) => this.setHookWidget(key, content, options),
+ 			setTitle: title => setExtensionTerminalTitle(title),
+@@ -152,6 +153,7 @@
+ 			setToolsExpanded: expanded => this.ctx.setToolsExpanded(expanded),
+ 		};
+ 		this.ctx.setToolUIContext(uiContext, true);
++		this.clearModeBadges();
+ 		this.#toolUIContext = uiContext;
+ 		this.ctx.session.setUsageFallbackConfirmer?.((confirmation, signal) => {
+ 			const reserve =
+@@ -402,6 +404,7 @@
+ 		if (!extensionRunner) {
+ 			return;
+ 		}
++		this.clearModeBadges();
+ 
+ 		const actions: ExtensionActions = {
+ 			sendMessage: (message, options) => {
+@@ -579,6 +582,16 @@
+ 	 */
+ 	setHookStatus(key: string, text: string | undefined): void {
+ 		this.ctx.statusLine.setHookStatus(key, text);
++		this.ctx.ui.requestRender();
++	}
++
++	setModeBadge(key: string, text: string | undefined): void {
++		this.ctx.statusLine.setModeBadge(key, text);
++		this.ctx.ui.requestRender();
++	}
++
++	clearModeBadges(): void {
++		this.ctx.statusLine.clearModeBadges();
+ 		this.ctx.ui.requestRender();
+ 	}
+ 
+@@ -1208,6 +1221,7 @@
+ 		this.#hookWidgetsAbove.clear();
+ 		this.#hookWidgetsBelow.clear();
+ 		this.#rebuildHookWidgets();
++		this.clearModeBadges();
+ 	}
+ 
+ 	clearExtensionTerminalInputListeners(): void {
+--- a/packages/coding-agent/src/modes/interactive-mode.ts
++++ b/packages/coding-agent/src/modes/interactive-mode.ts
+@@ -1099,6 +1099,7 @@
+ 		this.lastAssistantUsage = undefined;
+ 		this.servedModelTracker = new ServedModelTracker();
+ 		this.pendingTools.clear();
++		this.#extensionUiController.clearModeBadges();
+ 	}
+ 	readonly #uiHelpers: UiHelpers;
+ 	#sttController: STTController | undefined;
+--- a/packages/coding-agent/src/modes/rpc/rpc-mode.ts
++++ b/packages/coding-agent/src/modes/rpc/rpc-mode.ts
+@@ -954,6 +954,17 @@
+ 			} as RpcExtensionUIRequest);
+ 		}
+ 
++		setModeBadge(key: string, text: string | undefined): void {
++			// Fire and forget - no response needed
++			this.output({
++				type: "extension_ui_request",
++				id: Snowflake.next() as string,
++				method: "setModeBadge",
++				statusKey: key,
++				statusText: text,
++			} as RpcExtensionUIRequest);
++		}
++
+ 		setWorkingMessage(_message?: string): void {
+ 			// Not supported in RPC mode
+ 		}
+--- a/packages/coding-agent/src/modes/rpc/rpc-types.ts
++++ b/packages/coding-agent/src/modes/rpc/rpc-types.ts
+@@ -414,6 +414,13 @@
+ 	| {
+ 			type: "extension_ui_request";
+ 			id: string;
++			method: "setModeBadge";
++			statusKey: string;
++			statusText: string | undefined;
++	  }
++	| {
++			type: "extension_ui_request";
++			id: string;
+ 			method: "setWidget";
+ 			widgetKey: string;
+ 			widgetLines: string[] | undefined;
+--- a/packages/coding-agent/src/session/agent-session.ts
++++ b/packages/coding-agent/src/session/agent-session.ts
+@@ -433,6 +433,7 @@
+ 	notify: () => {},
+ 	onTerminalInput: () => () => {},
+ 	setStatus: () => {},
++	setModeBadge: () => {},
+ 	setWorkingMessage: () => {},
+ 	setWidget: () => {},
+ 	setTitle: () => {},
+--- a/packages/coding-agent/test/extensions-runner.test.ts
++++ b/packages/coding-agent/test/extensions-runner.test.ts
+@@ -2348,6 +2348,7 @@
+ 					notify: () => {},
+ 					onTerminalInput: () => () => {},
+ 					setStatus: () => {},
++					setModeBadge: () => {},
+ 					setWorkingMessage: () => {},
+ 					setWidget: () => {},
+ 					setFooter: () => {},
+--- a/packages/coding-agent/test/status-line-settings-cache.test.ts
++++ b/packages/coding-agent/test/status-line-settings-cache.test.ts
+@@ -235,13 +235,22 @@
+ 		expect(content).not.toContain("agents");
+ 	});
+ 
+-	it("keeps plan and hook state dynamic without settings invalidation", () => {
++	it("keeps plan, hook, and mode badge state dynamic without settings invalidation", () => {
+ 		const component = makeComponent({ preset: "custom", leftSegments: ["mode"], rightSegments: [] });
+ 		const effective = component.getEffectiveSettingsForTest();
+ 		expect(component.getTopBorder(80).content).toBe("");
+ 
++		component.setModeBadge("poteto-mode", "🥔");
++		expect(stripVTControlCharacters(component.getTopBorder(80).content)).toContain("🥔");
++
+ 		component.setPlanModeStatus({ enabled: true, paused: false });
++		const content = stripVTControlCharacters(component.getTopBorder(80).content);
++		expect(content).toContain("Plan");
++		expect(content).toContain("🥔");
++
++		component.setModeBadge("poteto-mode", undefined);
+ 		expect(stripVTControlCharacters(component.getTopBorder(80).content)).toContain("Plan");
++		expect(stripVTControlCharacters(component.getTopBorder(80).content)).not.toContain("🥔");
+ 		expect(component.getEffectiveSettingsForTest()).toBe(effective);
+ 
+ 		component.setHookStatus("hook", "hook running");
+--- a/packages/tui/src/status-line/component.ts
++++ b/packages/tui/src/status-line/component.ts
+@@ -493,6 +493,8 @@
+ 	#pricingTransition: number | undefined;
+ 	#hookStatuses: Map<string, string> = new Map();
+ 	#sortedHookStatuses: readonly string[] = [];
++	#modeBadges: Map<string, string> = new Map();
++	#sortedModeBadges: readonly string[] = [];
+ 	#subagentCount: number = 0;
+ 	#runningSubagentIds = new Set<string>();
+ 	/**
+@@ -937,6 +939,26 @@
+ 		this.#sortedHookStatuses = Array.from(this.#hookStatuses.entries())
+ 			.sort(([a], [b]) => a.localeCompare(b))
+ 			.map(([, status]) => status);
++		this.#invalidateStatusLineRenderCache();
++	}
++
++	setModeBadge(key: string, text: string | undefined): void {
++		if (text === undefined) {
++			if (!this.#modeBadges.delete(key)) return;
++		} else {
++			if (this.#modeBadges.get(key) === text) return;
++			this.#modeBadges.set(key, text);
++		}
++		this.#sortedModeBadges = Array.from(this.#modeBadges.entries())
++			.sort(([a], [b]) => a.localeCompare(b))
++			.map(([, badge]) => badge);
++		this.#invalidateStatusLineRenderCache();
++	}
++
++	clearModeBadges(): void {
++		if (this.#modeBadges.size === 0) return;
++		this.#modeBadges.clear();
++		this.#sortedModeBadges = [];
+ 		this.#invalidateStatusLineRenderCache();
+ 	}
+ 
+@@ -2119,6 +2141,7 @@
+ 			options: segmentOptions ?? {},
+ 			compactThinkingLevel: this.#resolveSettings().compactThinkingLevel ?? false,
+ 			hookStatuses: this.#sortedHookStatuses,
++			modeBadges: this.#sortedModeBadges,
+ 			planMode: this.#planModeStatus,
+ 			loopMode: this.#loopModeStatus,
+ 			prewalk:
+--- a/packages/tui/src/status-line/segments.ts
++++ b/packages/tui/src/status-line/segments.ts
+@@ -357,6 +357,25 @@
+ 	return `${seconds}s left`;
+ }
+ 
++function renderModeBadges(ctx: SegmentContext): string {
++	let text = "";
++	for (const badge of ctx.modeBadges ?? []) {
++		const sanitized = sanitizeStatusText(badge);
++		if (!sanitized) continue;
++		text += text ? `${theme.sep.dot}${sanitized}` : sanitized;
++	}
++	return text;
++}
++
++function withModeBadges(ctx: SegmentContext, native: RenderedSegment): RenderedSegment {
++	const badges = renderModeBadges(ctx);
++	if (!badges) return native;
++	if (!native.visible) {
++		return { content: badges, visible: true };
++	}
++	return { content: `${native.content}${theme.sep.dot}${badges}`, visible: true };
++}
++
+ const modeSegment: StatusLineSegment = {
+ 	id: "mode",
+ 	render(ctx) {
+@@ -366,27 +385,27 @@
+ 		if (plan && (plan.enabled || plan.paused)) {
+ 			const label = plan.paused ? `Plan${pauseSuffix}` : "Plan";
+ 			const content = withIcon(theme.icon.plan, label);
+-			return {
++			return withModeBadges(ctx, {
+ 				content: plan.paused ? theme.fg("warning", content) : accentFg(ctx, "accent", content),
+ 				visible: true,
+-			};
++			});
+ 		}
+ 
+ 		const prewalk = ctx.prewalk;
+ 		if (prewalk?.enabled) {
+ 			const content = withIcon(theme.icon.prewalk, "Prewalk");
+-			return { content: accentFg(ctx, "accent", content), visible: true };
++			return withModeBadges(ctx, { content: accentFg(ctx, "accent", content), visible: true });
+ 		}
+ 
+ 		const goal = ctx.goalMode;
+ 		if (goal && (goal.enabled || goal.paused)) {
+-			return renderGoalMode(ctx, goal);
++			return withModeBadges(ctx, renderGoalMode(ctx, goal));
+ 		}
+ 
+ 		const vibe = ctx.vibeMode;
+ 		if (vibe?.enabled) {
+ 			const content = withIcon(theme.icon.agents, "Vibe");
+-			return { content: accentFg(ctx, "accent", content), visible: true };
++			return withModeBadges(ctx, { content: accentFg(ctx, "accent", content), visible: true });
+ 		}
+ 
+ 		const loop = ctx.loopMode;
+@@ -399,10 +418,10 @@
+ 			if (loop.condition) {
+ 				parts.push(statusValue(ctx, summarizeLoopCondition(loop.condition, TRUNCATE_LENGTHS.SHORT)));
+ 			}
+-			return { content: theme.fg(color, parts.join(" ")), visible: true };
+-		}
+-
+-		return { content: "", visible: false };
++			return withModeBadges(ctx, { content: theme.fg(color, parts.join(" ")), visible: true });
++		}
++
++		return withModeBadges(ctx, { content: "", visible: false });
+ 	},
+ };
+ 
+--- a/packages/tui/src/status-line/types.ts
++++ b/packages/tui/src/status-line/types.ts
+@@ -93,6 +93,8 @@
+ 	compactThinkingLevel: boolean;
+ 	/** Key-sorted extension/hook status values. Segment renderers sanitize before display. */
+ 	hookStatuses?: readonly string[];
++	/** Key-sorted extension mode badges. Segment renderers sanitize before display. */
++	modeBadges?: readonly string[];
+ 	planMode: {
+ 		enabled: boolean;
+ 		paused: boolean;
