@@ -90,6 +90,7 @@
         mcp-victorialogs = pkgs.callPackage ./pkgs/mcp-victorialogs { };
         mcp-victoriametrics = pkgs.callPackage ./pkgs/mcp-victoriametrics { };
         tanin = pkgs.callPackage ./pkgs/tanin { };
+        wayfinder-maps = pkgs.callPackage ./pkgs/wayfinder-maps { };
       };
 
       formatter.${system} = treefmtEval.config.build.wrapper;

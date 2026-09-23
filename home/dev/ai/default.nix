@@ -158,6 +158,7 @@ in
       localPkgs.mcp-victoriametrics
 
       pkgs.python3Packages.trafilatura
+      localPkgs.wayfinder-maps
 
       pkgs.nixd
       pkgs.rust-analyzer

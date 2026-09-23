@@ -151,28 +151,6 @@ items onto keep-alive workers, `eval.workpool.freshAgents` opts into a new agent
 pool name doubles as the async job id you pass to `hub` `op: "wait"`. A fixed coverage matrix stays
 one `task` call.
 
-## multi-phase-plan
-
-The plan template's read list points at the install path, `~/.omp/plugins/node_modules/pstack/`,
-because the skill is installed here and not vendored in the product repo. One `git show
-origin/main:` line stays in the list for docs the product repo vendors itself, which is also what
-`scripts/check-plan.mjs` looks for.
-
-For the control-surface line, the omp doc for that surface is the artifact to read, such as
-`omp://tools/browser.md`. Read **Control surfaces** below before writing the line, because the
-artifact describes an eval prelude and not a tool.
-
-## orchestrate
-
-The root starts every participant through `skill://pstack-omp`. Track owners return briefs for
-the root to dispatch; ordinary children never spawn children. Concurrency and isolation depend
-on the live schema and runtime, not on a fixed nesting depth.
-
-`hub` messaging reaches this omp process's agent tree and nothing outside it. `send`, `wait`, and
-`inbox` are the sanctioned coordination primitives. `collab.autoStart` and `omp collab link` host a
-session for a human to watch or drive, which is not an agent-to-agent channel and gives a
-coordinator no way to reach another session's workers.
-
 ## Control surfaces
 
 `browser` and `computer` are not tools and have no schema of their own. Since 18.1.9 both are
@@ -222,5 +200,3 @@ These stay as upstream wrote them, because the port has nothing to substitute.
   included.
 - **worktree-cleanup** step 6 lists `~/Library/Application Support/Cursor` among macOS reclaimers.
   There is no omp equivalent worth pruning, and the rest of that step is Xcode and package caches.
-- **orchestrate** names Graphite (`gt`) for stack operations. `command -v gt` finds nothing on this
-  machine, so every `gt` step is unexecutable as written and `gh` covers single-PR flows.

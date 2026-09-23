@@ -97,7 +97,7 @@ You own every subagent's work. Review the diff and write your own summary, don't
 
 Spawn workers with a fresh-context brief: goal, scope, writable paths, verification, and report contract. Point at files and artifacts instead of inlining history. Use the result and history resources the active adapter actually exposes; do not construct `agent://` resources for vibe sessions.
 
-The root keeps user interaction, external writes, merges, deletions, and final verification. A worker's report never verifies its own work. Delegate subagents with `skill://pstack-omp`; it maps canonical roles to the live worker surface. For a standing multi-week program, follow `skill://poteto-mode/playbooks/orchestrate.md`.
+The root keeps user interaction, external writes, merges, deletions, and final verification. A worker's report never verifies its own work. Delegate subagents with `skill://pstack-omp`; it maps canonical roles to the live worker surface.
 
 
 ## Writing the reply
@@ -122,7 +122,7 @@ Comments follow the same rule as the reply. Write them clean as you go. Keep a c
 
 In the main session, `todo` holds the concrete work for this task. Each item names an action and its target, such as "Fix expired-token handling in the session loader". Playbook steps, principles, and skill reads govern how you work and never appear as todos. Add only work in the requested scope. Mark an item done when its outcome exists, and revise the list when the approach changes. Skip the list for trivial tasks. Delegates report requested transitions to the lead and never mutate parent state.
 
-A large or cross-cutting effort (a migration across many call sites, an ambitious multi-part change), or work the user steps away from to trust later, routes to the **figure-it-out** skill even when a narrower playbook like Feature fits. Use **figure-it-out** whenever no bundled playbook fits. It designs a bespoke, rigorous playbook for the task. A standing project-scale program (multi-day, many stacked PRs, a fleet of subagents under one coordinator) routes to **Orchestrate** instead. figure-it-out designs one bespoke run, orchestrate runs the program.
+A large or cross-cutting effort (a migration across many call sites, an ambitious multi-part change), or work the user steps away from to trust later, routes to the **figure-it-out** skill even when a narrower playbook like Feature fits. Use **figure-it-out** whenever no bundled playbook fits. It designs a bespoke, rigorous playbook for the task.
 
 - **Investigation.** Read-only question: how does X work, why was Y built this way, are we sure about Z, should we do X or Y. `skill://poteto-mode/playbooks/investigation.md`.
 - **Bug fix.** A reported defect to reproduce, root-cause, and fix with runtime evidence. `skill://poteto-mode/playbooks/bug-fix.md`.
@@ -139,11 +139,9 @@ A large or cross-cutting effort (a migration across many call sites, an ambitiou
 - **Babysit.** Driving a PR or a stack to merge-ready: conflicts, review threads, CI. `skill://poteto-mode/playbooks/babysit.md`.
 - **Shipping.** The half after Babysit. Independently verifying a green stack, then landing the contiguous verified run bottom-up through `gh` by default or Origin when its CLI is available. `skill://poteto-mode/playbooks/shipping.md`.
 - **Autonomous run.** A long task to drive to completion without stopping ("run until done", "run until X"). `skill://poteto-mode/playbooks/autonomous-run.md`.
-- **Orchestrate.** A standing project handed to one coordinator chat: multi-day, many stacked PRs, dozens to hundreds of subagents, minimal human turns ("run this whole project", "own this migration until it lands"). Distinct from Autonomous run, which drives one task to a predicate. Work one agent could finish inside the session's budget routes there, not here, however program-shaped the phrasing sounds. `skill://poteto-mode/playbooks/orchestrate.md`.
 - **Autopilot-full.** A queue of independent PRs run to merged with full autonomy. One owner per PR carries build through merge, and the root swarm-verifies each merge-ready head before its owner merges ("autopilot this queue", "full autopilot", one-owner-per-PR programs). `skill://poteto-mode/playbooks/autopilot-full.md`.
 - **Autopilot-stack.** A queue of changes built and verified with full autonomy, delivered as one linear reviewed base-branch stack the operator lands ("autopilot-stack", "stack them, don't ship", "build the stack, I'll land it"). `skill://poteto-mode/playbooks/autopilot-stack.md`.
 - **Session pickup.** Resuming or taking over a prior agent's in-flight work from a transcript, prior agent's `history://<id>` or `agent://<id>`, or pushed branch. `skill://poteto-mode/playbooks/session-pickup.md`.
 - **Pause safely.** Suspending in-flight work cleanly so it can be resumed, on an explicit pause, going offline, an omp restart, or imminent context compaction. The complement to Session pickup. Full steps: `skill://poteto-mode/playbooks/pause-safely.md`.
-- **Multi-phase or multi-PR plan.** Work that spans phases or stacked PRs. `skill://poteto-mode/playbooks/multi-phase-plan.md`.
 - **Worktree and simulator cleanup.** Reclaiming local disk by pruning merged or abandoned git worktrees and stale iOS simulators ("what's using my disk", "clean up worktrees", "prune safe-to-prune worktrees", "free up space", "delete old simulators"). `skill://poteto-mode/playbooks/worktree-cleanup.md`.
 - **Opening a PR.** Invoke this playbook only at the end of a code-producing playbook whose delivery includes a PR. Read-only work and local delivery do not need forge work. `skill://poteto-mode/playbooks/opening-a-pr.md`.
