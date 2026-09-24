@@ -14,6 +14,13 @@ numbered step.
 The port preserves its runtime adapters through `omp-port/owned.txt`. Read
 `skill://pstack-omp` before dispatch; its live-tool contract overrides task-specific examples here and in imported references. These examples apply only when the corresponding surface is exposed, not to vibe workers.
 
+## Reading skills
+
+The system's skill list shows model-discoverable skills, not the complete installation.
+Skills with `disable-model-invocation: true` remain readable through explicit
+`skill://<name>` references. Read a referenced skill before declaring it unavailable;
+absence from the displayed list is not a failed lookup.
+
 ## Every task call
 
 These hold for every `task` spawn any pstack skill asks for. `references/task-wire-on-omp.md` holds
@@ -76,12 +83,12 @@ the item shape, the per-agent lever table, the isolation lifecycle, and the budg
   broadcast does not. An isolated agent ends parked with no reviver, so only its transcript
   survives. `op: "wait"` blocks, so never call it inside an agent that still owes its parent a
   turn. A finished agent's output artifact is at `agent://<id>`, a nested child's at
-  `agent://<parent>/<child>`, one field at `agent://<id>?q=.<field>`, and the transcript at
+  `agent://<parent>.<child>`, one field at `agent://<id>/<field>`, and the transcript at
   `history://<id>`. Job rows expire about five minutes after settling, and reading a settled one
   consumes its automatic delivery, so address the agent by id after that.
 - **Proving a claim.** Run the check under `hub` `op: "start"`, wait on it with `op: "wait"` and a
-  `name`, read the output with `op: "logs"`. That wait takes `timeout` in seconds. The message and
-  job wait is the other one and takes `timeoutMs`. Supplying both `ready.log` and `ready.port`
+  `name`, read the output with `op: "logs"`. That wait takes `timeout` in seconds. For message and
+  job waits, use the live `hub` schema rather than the obsolete `timeoutMs` field. Supplying both `ready.log` and `ready.port`
   requires both to pass. Every pattern field here is a JavaScript regex compiled with `u`, so
   `(?i)` is rejected and `[Rr]eady` is the spelling. A readiness timeout leaves the process running
   and reports its state rather than killing it, so read the logs before calling it a fail. Nothing
@@ -94,11 +101,11 @@ through `skill://pstack-omp`; never require extra agent files or operator config
 Use configured model diversity when available and record resolved-model/fallback evidence.
 When only one family is available, keep the independent participant count and report weaker
 model diversity. When independent execution itself is unavailable, report the blocked gate.
-- **arena** Phase C and **interrogate**: the judge's and reviewers' read-only grant is posture per
+- [**arena**](skill://arena) Phase C and [**interrogate**](skill://interrogate): the judge's and reviewers' read-only grant is posture per
   **Every task call**, not a sandbox.
-- **reflect** step 3: keep Divergent on a different family from Judgment. The lens earns its name
-  from different priors, not a different prompt.
-- **interrogate** step 2: Reviewer A with no override entry runs on the parent chat model, which is
+- [**reflect**](skill://reflect) step 3: prefer a different model family for Divergent and Judgment when configured.
+  Otherwise keep independent contexts and report the missing model diversity.
+- [**interrogate**](skill://interrogate) step 2: Reviewer A with no override entry runs on the parent chat model, which is
   the case where the family spread collapses first.
 - A retry can move a slot off the model its entry named, because `retry.fallbackChains` is keyed by
   the same role names and an aliased spawn inherits that role's chain instead of `default`. Record
@@ -193,7 +200,7 @@ decide whether a glob finds anything.
 
 These stay as upstream wrote them, because the port has nothing to substitute.
 
-- **poteto-mode** routers and **babysit** step 0 warn against Cursor's built-in `babysit` skill.
+- [**poteto-mode**](skill://poteto-mode) routers and **babysit** step 0 warn against Cursor's built-in `babysit` skill.
   omp ships no such skill, so the warning is inert and the playbook is the only route anyway.
 - **bugbot-triage** rates Bugbot, which is Cursor's hosted review product. On a repository without
   it, apply the rubric to whatever review bot posts on your PRs, omp's own `security-reviewer`

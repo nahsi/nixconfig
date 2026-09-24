@@ -1,13 +1,6 @@
 const ENTRY = "poteto-mode";
 
-const REMINDER =
-  "poteto-mode is PINNED for this session.\n" +
-  "Before acting on a new task: read `skill://poteto-mode` in full (including its Principles index), " +
-  "then read `skill://omp-mechanics` for the omp-specific levers every pstack skill assumes.\n" +
-  "Match exactly one primary playbook before editing.\n" +
-  "Playbook steps, principles, and skill reads govern how you work and never appear as todos.\n" +
-  "Route delegation through `skill://pstack-omp` using the live tool schema and available roster. " +
-  "Casual turns, or an explicit opt-out, do not need the playbook.";
+const PIN = "poteto-mode is PINNED for this session.";
 
 export default function potetomode(pi) {
   let pinned = false;
@@ -69,8 +62,11 @@ export default function potetomode(pi) {
 
   pi.on("before_agent_start", async (event) => {
     if (!pinned) return;
+    const skill = pi.pi.getActiveSkills().find((skill) => skill.name === ENTRY);
+    if (!skill) throw new Error("Pinned poteto-mode skill is unavailable");
+    const { message } = await pi.pi.buildSkillPromptMessage(skill, { args: "" }, "autoload");
     // systemPrompt is an ordered block list; interpolating it comma-joins the
     // blocks and collapses the provider's cache segmentation.
-    return { systemPrompt: [...event.systemPrompt, REMINDER] };
+    return { systemPrompt: [...event.systemPrompt, `${PIN}\n\n${message}`] };
   });
 }

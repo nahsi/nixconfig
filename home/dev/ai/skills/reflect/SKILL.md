@@ -44,7 +44,7 @@ One `Task` call, `agent`: `task` (omp's general-purpose bundled agent), using yo
 
 ### 4. Structural enforcement check
 
-Sanity-check the synthesizer's Accepted list. For any item that would be enforced more reliably by a lint rule, script, metadata flag, or runtime check, move it from Accepted to Backlog. See the **encode-lessons-in-structure** principle skill.
+Sanity-check the synthesizer's Accepted list. For any item that would be enforced more reliably by a lint rule, script, metadata flag, or runtime check, move it from Accepted to Backlog. See the [**encode-lessons-in-structure**](skill://principle-encode-lessons-in-structure) principle skill.
 
 ### 5. Apply
 

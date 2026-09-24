@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 Investigate the motivation and intent behind code.
 
-Companion to the `how` skill. `how` answers what the code does and how it works. `why` answers what forces led to its shape.
+Companion to the [`how`](skill://how) skill. [`how`](skill://how) answers what the code does and how it works. `why` answers what forces led to its shape.
 
 ## Operating Posture
 

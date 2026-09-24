@@ -17,6 +17,11 @@ Inspect the tools and schemas exposed in this session, not a version number or a
 
 ## Canonical roles
 
+With the `task` tool, select `agent: "poteto-agent"` for subtasks dispatched
+directly by a playbook step, including code-writing delegates and ad-hoc helpers.
+Routed workflow skills prescribe their own agent selection. Follow that selection
+through the role mappings below rather than overriding it with `poteto-agent`.
+
 | Role | Task preference, if listed | Vibe tier | Brief posture |
 |---|---|---|---|
 | explorer | scout | fast | Read-only repository reconnaissance and artifact reduction. |
@@ -27,11 +32,14 @@ Inspect the tools and schemas exposed in this session, not a version number or a
 | security reviewer | security-reviewer | good | Read-only security lane, separate from ordinary review. |
 | researcher | librarian | fast | Source-verified external research. |
 | synthesizer | reviewer | good | Adjudicate frozen evidence, not new implementation. |
-| implementer | default worker | good | Bounded implementation with explicit write ownership. |
-| owner | default worker | good | Retain context for one coupled workstream. |
+| implementer | poteto-agent | good | Bounded implementation with explicit write ownership. |
+| owner | poteto-agent | good | Retain context for one coupled workstream. |
 | mechanical | sonic | fast | Fully specified low-judgment edits. |
 
-The live roster is authoritative. Never invent missing specialists. When a preferred specialist is absent, use an available worker with the role explicitly in its brief; omit `agent` for the default worker. `poteto-agent` and `comment-sicko` are optional bundled custom agents. Use their exact names only when discovered. Otherwise include their skill/agent instructions as file pointers in an available worker's brief.
+The live roster is authoritative. Never invent missing agents. When a preferred
+specialist is absent, use an available worker with the role explicitly in its
+brief. If a required agent is unavailable, include its skill/agent instructions
+as file pointers in the available worker's brief.
 
 Agent selection is not model selection. `modelRoles` and `task.agentModelOverrides` are operator configuration, not task payload fields. Vibe's `fast` and `good` are runtime tiers, not model names. Claim independence of models or providers only when returned resolved-model/fallback metadata proves it. Independent contexts remain useful when only one model is available; report that limitation.
 
