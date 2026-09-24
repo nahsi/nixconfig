@@ -23,7 +23,7 @@ main_wt=$(printf '%s\n' "$worktree_records" | awk '/^worktree /{sub(/^worktree /
 git fetch origin main --quiet 2>/dev/null || echo "warn: could not fetch origin/main; merged column may be stale" >&2
 
 # PR state by branch, fetched once. Empty if gh is unavailable.
-scratch_dir="${TMPDIR:-$repo/.pstack-scratch}/worktree-audit"
+scratch_dir="${TMPDIR:-$repo/.scratch}/worktree-audit"
 mkdir -p "$scratch_dir"
 prs=$(mktemp "$scratch_dir/prs.XXXXXX")
 trap 'rm -f "$prs"' EXIT INT TERM
