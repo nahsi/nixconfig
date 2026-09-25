@@ -44,7 +44,7 @@ in
     enable = true;
     package = inputs.nixpkgs-unstable.legacyPackages.${system}.qutebrowser;
     searchEngines = {
-      "DEFAULT" = "https://search.nahsi.dev/search?q={}";
+      "DEFAULT" = "https://duckduckgo.com/?q={}";
       "ddg" = "https://duckduckgo.com/?q={}";
       "yt" = "https://yt.nahsi.dev/search/{}";
       "gg" = "http://www.google.com/search?hl=en&q={}";
