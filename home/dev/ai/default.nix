@@ -85,7 +85,13 @@ in
         advisor = "openai-codex/gpt-6-astra:medium";
         local = "nahsilabs/Qwen/Qwen3.8-27B:medium";
         judge = "openrouter/~typesafe/jev-latest";
+        web = "web/parallel";
       };
+      retry.fallbackChains.web = [
+        "web/exa"
+        "web/duckduckgo"
+        "openai-codex/gpt-6-luna"
+      ];
       defaultThinkingLevel = "medium";
       disabledProviders = [
         "claude"
@@ -138,7 +144,6 @@ in
 
       providers = {
         autoThinkingMaxEffort = "xhigh";
-        webSearchOrder = [ "exa" ];
         fetch = "trafilatura";
         streamFirstEventTimeoutSeconds = 300;
       };
