@@ -47,7 +47,7 @@
     };
 
     omp-nix.url = "git+https://git.molez.org/mandlm/omp-nix?ref=refs/tags/v18.2.7";
-    omp-upstream.url = "github:can1357/oh-my-pi/v18.2.8";
+    omp-upstream.url = "github:can1357/oh-my-pi/v18.3.1";
   };
 
   outputs =

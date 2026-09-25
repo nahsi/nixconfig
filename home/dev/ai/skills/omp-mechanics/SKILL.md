@@ -21,78 +21,10 @@ Skills with `disable-model-invocation: true` remain readable through explicit
 `skill://<name>` references. Read a referenced skill before declaring it unavailable;
 absence from the displayed list is not a failed lookup.
 
-## Every task call
+## Coordination
 
-These hold for every `task` spawn any pstack skill asks for. `references/task-wire-on-omp.md` holds
-the item shape, the per-agent lever table, the isolation lifecycle, and the budgets.
-
-- **No `model` field.** The `task` tool takes no per-call model. Four settings records in
-  `~/.omp/agent/config.yml` carry model, service tier, prewalk, and advisor, all keyed by exact
-  agent name, and a record entry beats the agent file's frontmatter. They are
-  `task.agentModelOverrides`, whose value may be a `@role` alias the operator binds in
-  `modelRoles`, `task.agentServiceTierOverrides`, `task.agentPrewalk`, and `task.agentAdvisor`. A
-  role with no entry runs on the parent chat model, which is the correct default. A role that needs
-  its own model needs its own thin agent file plus its own entry, so a four-arm model race is four
-  agent files. `inherit-parent` and `auto` mean "leave this role out of the map".
-- **No `readonly` field.** A read-only worker is posture carried in the brief, never a wire field.
-  Name the tools the worker may use and forbid writes. The per-item `tools` field exposes only
-  kernel tools the parent defined in an `eval` cell with `@tool` or `tool(fn, …)`, gated by
-  `eval.tools.enabled`, so it is not a tool grant. The one per-spawn restriction omp enforces is
-  `tools` in an agent's frontmatter, which binds to an agent definition and not to a task call, and
-  even there omp keeps `hub` and adds `yield` regardless of what the list says.
-- **One call, many items.** Every parallel spawn goes in one `task` call with all items in
-  `tasks[]`. `context` is required and is rendered into every spawn's system prompt, so the shared
-  contract goes there once instead of per item. `task.maxConcurrency` caps how many run at once.
-  Eval holds the second fan-out primitive. `workpool()` queues items onto keep-alive workers and
-  `agent()` returns a handle, both under the same cap, and a pool's name is its async job id, so
-  poll it from outside the cell with `hub` `op: "wait"` and `ids: [pool.name]`. There is no
-  `pool.wait()`. Unlike a task item, eval's `agent()` takes `apply` and `merge`.
-- **`effort` is gated.** The per-spawn `effort` field is `"lo"`, `"med"`, or `"hi"`, it reaches the
-  schema only while `task.enableEffort` is true, which is off by default, and `task.maxEffort` caps
-  it. Check `omp config list | grep task.enableEffort` before a brief depends on it.
-- **`isolated: true` is opt-in and gated.** It gives the worker its own worktree, and it reaches the
-  tool only while `task.isolation.enabled` is true **and** plan mode is disabled, so check both
-  (`omp config list | grep task.isolation`). Without the flag a worker shares the parent checkout,
-  so switching branches there is not isolation. The parent must run from inside a git checkout. The
-  worktree is a clone of the current checkout, uncommitted work included, not a checkout of `HEAD`.
-  `task.isolation.apply`, default true, lands its changes automatically. Turn it off when the
-  coordinator must review each patch first. When the gate is off, give each worker its own
-  `git worktree` or its own `/tmp/<slug>/worker-<n>/` directory instead. Cursor's `environment` and
-  cloud-base-branch arguments are rejected outright.
-- **In plan mode a spawn can only read.** Every subagent is restricted to `read`, `grep`, `glob`,
-  and `web_search`, and `isolated` and `tools` are rejected. A fan-out whose workers edit, or whose
-  workers nest, runs outside plan mode.
-- **A subagent starts blank.** No conversation history, and an isolated one cannot see its
-  siblings. It does inherit the workspace tree, the skills, the context files, and the parent's
-  `local://` root, so a large shared payload goes to `local://<name>.md` and the brief names that
-  path. Otherwise inline what it needs or point at absolute paths.
-- **Yield first.** End every brief with a yield-first line. Tell the worker to call the yield tool
-  with its result as `data`, or a failure as `error`, both top-level arguments, and to write no text
-  outside that call. Thinking models default to answering in prose and skipping the call, which
-  costs three reminder prompts and then a `SYSTEM WARNING` with no structured output. Measured 13 of
-  20 without the line, 20 of 20 with it, same model, same width. A reviewer that accumulates
-  findings passes a non-empty `type` array to submit each as an incremental section, then a `type`
-  string to finalize, which is what replaced the removed `report_finding` tool.
-- **Budgets stop a long worker.** `task.softRequestBudget`, default 200 assistant requests, warns
-  on crossing and force-stops the run at 1.5 times the budget. `task.maxRuntimeMs` is a hard
-  per-spawn wall clock in milliseconds, 0 disabled. Brief a long worker to yield partial findings.
-- **Reaching a running agent.** `hub` `op: "list"` and `op: "jobs"` are the read-only probes, and
-  they cover this omp process's whole agent tree rather than one project. `op: "list"` returns
-  running and idle peers plus counts, so parked archaeology needs `status: "parked"`. An `idle`
-  agent parks after `task.agentIdleTtlMs`. A direct `op: "send"` revives a parked peer and a
-  broadcast does not. An isolated agent ends parked with no reviver, so only its transcript
-  survives. `op: "wait"` blocks, so never call it inside an agent that still owes its parent a
-  turn. A finished agent's output artifact is at `agent://<id>`, a nested child's at
-  `agent://<parent>.<child>`, one field at `agent://<id>/<field>`, and the transcript at
-  `history://<id>`. Job rows expire about five minutes after settling, and reading a settled one
-  consumes its automatic delivery, so address the agent by id after that.
-- **Proving a claim.** Run the check under `hub` `op: "start"`, wait on it with `op: "wait"` and a
-  `name`, read the output with `op: "logs"`. That wait takes `timeout` in seconds. For message and
-  job waits, use the live `hub` schema rather than the obsolete `timeoutMs` field. Supplying both `ready.log` and `ready.port`
-  requires both to pass. Every pattern field here is a JavaScript regex compiled with `u`, so
-  `(?i)` is rejected and `[Rr]eady` is the spelling. A readiness timeout leaves the process running
-  and reports its state rather than killing it, so read the logs before calling it a fail. Nothing
-  notifies the session when a supervised process exits. Non-zero exit is a fail.
+Use `skill://pstack-omp` for dispatch. Never block inside an agent that still owes its parent a turn.
+Run verification checks to completion and inspect their results. Non-zero exit is a fail.
 
 ## architect, arena, interrogate, reflect
 
@@ -101,8 +33,7 @@ through `skill://pstack-omp`; never require extra agent files or operator config
 Use configured model diversity when available and record resolved-model/fallback evidence.
 When only one family is available, keep the independent participant count and report weaker
 model diversity. When independent execution itself is unavailable, report the blocked gate.
-- [**arena**](skill://arena) Phase C and [**interrogate**](skill://interrogate): the judge's and reviewers' read-only grant is posture per
-  **Every task call**, not a sandbox.
+- [**arena**](skill://arena) Phase C and [**interrogate**](skill://interrogate): the judge's and reviewers' read-only grant is posture, not a sandbox.
 - [**reflect**](skill://reflect) step 3: prefer a different model family for Divergent and Judgment when configured.
   Otherwise keep independent contexts and report the missing model diversity.
 - [**interrogate**](skill://interrogate) step 2: Reviewer A with no override entry runs on the parent chat model, which is
@@ -146,34 +77,6 @@ files. Both actions apply by default, so pass `apply: false` to preview one. Run
 literals, prose, and back-references by hand, which a symbol rename never touches. With the tool
 off, or in a worker spawned while `task.enableLsp` is false, a project-wide grep of the symbol name
 is the whole guard.
-
-## swarm
-
-Amends steps 3 through 6. Every worker already runs on this machine. Read **Every task call** for
-the `isolated: true` gate, the per-worker output fallback, and the yield-first line, all of which
-this skill depends on.
-
-For a long open-ended item stream, eval's `workpool()` beats a fixed `tasks[]` array. It queues
-items onto keep-alive workers, `eval.workpool.freshAgents` opts into a new agent per item, and the
-pool name doubles as the async job id you pass to `hub` `op: "wait"`. A fixed coverage matrix stays
-one `task` call.
-
-## Control surfaces
-
-`browser` and `computer` are not tools and have no schema of their own. Since 18.1.9 both are
-preludes inside the `eval` runtime, gated by `browser.enabled` and `computer.enabled`, so every
-call is code in an `eval` cell, as in
-`const tab = await browser.open({ name: "main", url }); await tab.close();`. Element handles come
-from `tab.observe()` through `tab.id(n)` and from `tab.ariaSnapshot()` through `tab.ref("e5")`, and
-a navigation invalidates both, so re-observe and act in the same cell. `computer` drives native
-desktop the same way, through `computer.window(...)`, `win.ax()`, and element handles. Prefer the
-accessibility tree over pixel coordinates, and never mix accessibility coordinates with screenshot
-pixels.
-
-omp freezes its own headless tabs when a turn settles (`browser.freezeOnTurnEnd`) and closes them
-after `browser.idleCloseSec` idle seconds, so a login or any flow that must survive across turns
-passes `persist: true` to `browser.open`. A prelude call emits no tool call and no tool result, so
-a verification claim resting on one cites the cell's own output as its evidence.
 
 ## typescript-best-practices
 

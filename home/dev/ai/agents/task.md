@@ -1,7 +1,6 @@
 ---
 name: task
 description: Execute bounded implementation, analysis, or artifact-producing work that needs substantial reasoning; use sonic for prescribed mechanical work.
-model: "@task"
 tools: [read, grep, glob, bash, edit, write, eval]
 spawns: "*"
 ---

@@ -11,7 +11,10 @@ description: "Translate poteto-mode roles and lifecycle protocols to the live OM
 
 Inspect the tools and schemas exposed in this session, not a version number or a remembered roster.
 
-- With `task`, use the task contract below. Only pass fields actually exposed. Use `hub` operations only when their live schema exposes them.
+- With `task`, use the task contract below. Only pass fields actually exposed.
+  OMP maps agent discovery to `history://`, messaging to `agent://`,
+  process control to named `bash` and `proc://`, and blocking to `wait`.
+  Follow the live tool instructions for their usage.
 - Without `task`, when `vibe_spawn`, `vibe_send`, `vibe_wait`, `vibe_list`, and `vibe_kill` are exposed, use the vibe contract below. Do not try to enable task or escape director restrictions.
 - With neither surface, do bounded work directly only when the current mode permits it. If independent review or unavailable execution is required, report the exact missing capability. Never claim a panel ran locally as one session.
 
@@ -61,7 +64,7 @@ When `tasks[]` is exposed, start all independent participants in one batch. Give
 
 Give concurrent writers disjoint paths or separate worktrees. If `isolated` is exposed, inspect returned isolation metadata to learn where changes landed. Otherwise arrange explicit worktrees through available execution, or serialize a genuinely shared write. Never switch branches in a shared checkout and call that isolation.
 
-Record returned agent and job identifiers. Results auto-deliver. Read complete output at `agent://<id>` when the runtime exposes it, and otherwise the delivered report; inspect `history://<id>` for incomplete or suspicious reports. `hub` jobs/wait uses job IDs; peer list/send uses agent IDs. Use only the live operation schema. Reuse a session only when the host reports it can be resumed. Cancel superseded jobs by exact ID; do not infer liveness from transcript timestamps.
+Record returned agent and job identifiers. Results auto-deliver. Read complete output at `agent://<id>` when the runtime exposes it, and otherwise the delivered report; inspect `history://<id>` for incomplete or suspicious reports. Use only the live operation schema. Reuse a session only when the host reports it can be resumed. Cancel superseded jobs by exact ID; do not infer liveness from transcript timestamps.
 
 ## Vibe contract
 

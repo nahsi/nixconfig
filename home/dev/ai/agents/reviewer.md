@@ -3,7 +3,6 @@ name: reviewer
 description: Review code, plans, designs, decisions, and other artifacts for correctness, risks, and gaps against the assigned criteria.
 tools: read, grep, glob, bash, lsp, web_search, ast_grep
 spawns: scout
-model: "@slow"
 output:
   properties:
     overall_assessment:

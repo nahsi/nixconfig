@@ -68,6 +68,5 @@ material the previous agent could no longer see.
 For a prior agent in this process, the internal URIs beat globbing. Bare `history://` lists every
 agent with its status and its parent. `history://<id>` renders one transcript and takes line
 selectors, as in `history://<id>:1-50`. `agent://<id>` serves that agent's final output artifact,
-`agent://<parent>/<child>` a nested child's, and `agent://<id>?q=.<field>` one field of a structured
-result. Prefer `?q=` for a field, because the slash resolves a child agent first and only falls back
-to JSON extraction.
+`agent://<parent>.<child>` a nested child's, and `agent://<id>/<field>` one field of a structured
+result.

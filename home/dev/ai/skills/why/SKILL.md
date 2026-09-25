@@ -78,9 +78,8 @@ Aim for a complete **coverage map**, not a minimal one. Document the null, don't
 Launch all matching investigators in a single message so they run concurrently. Don't ask one agent to cover multiple MCPs.
 
 Subagent config (each):
-- `agent`: `task` (omp's general-purpose bundled agent)
-- `model`: your configured why-investigators model (default your fast code model)
-- Full tools per spawn. There is no `readonly` field and no Ask mode on omp's task wire, so nothing strips MCP access, which would otherwise disable MCP-backed investigators entirely. Investigators still shouldn't write anything.
+- Resolve a worker through `skill://pstack-omp` whose tools cover the assigned evidence source.
+- Keep the investigation read-only. MCP-backed lanes need a worker with access to the assigned MCP.
 
 Each investigator gets:
 1. The base prompt from `references/investigator-prompt.md`
@@ -122,9 +121,7 @@ If your scope assessment suggests a single-commit trivial target where the PR de
 
 Spawn one synthesizer subagent:
 
-- `agent`: `task` (omp's general-purpose bundled agent)
-- `model`: your configured why-synthesizer model (default your strongest judgment model)
-- Full tools per spawn. The synthesizer's quality check spot-verifies citations, which can require MCP access. There is no such mode on omp's task wire, so nothing strips MCPs.
+- Resolve the synthesizer through `skill://pstack-omp` with the tools needed to spot-check citations.
 
 The synthesizer gets:
 1. The investigator findings, including any null results and any categories skipped with justification

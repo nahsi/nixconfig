@@ -21,8 +21,7 @@ When in doubt, take the simple path.
 
 Decompose the question into 2 to 4 exploration angles, each a distinct slice of the subsystem. Spawn all explorers in a single message:
 
-- `agent`: `task` (omp's general-purpose bundled agent)
-- `model`: your configured how-explorer model (default your fast code model)
+- Resolve the explorer role through `skill://pstack-omp`.
 - read-only posture. The brief grants only Glob, Grep, and Read, and forbids writes
 
 Each explorer gets the prompt in `references/explorer-prompt.md` with its angle filled in. Then go to Step 3.
@@ -31,8 +30,7 @@ Each explorer gets the prompt in `references/explorer-prompt.md` with its angle 
 
 Spawn one Task subagent that explores and explains in one pass:
 
-- `agent`: `task` (omp's general-purpose bundled agent)
-- `model`: your configured how-explainer model (default your strongest judgment model)
+- Resolve the explainer role through `skill://pstack-omp`.
 - read-only posture. The brief grants only Glob, Grep, and Read, and forbids writes
 
 Build its prompt from `references/explainer-prompt.md` without the explorer-findings section. Go to Step 4.
@@ -41,8 +39,7 @@ Build its prompt from `references/explainer-prompt.md` without the explorer-find
 
 Once all explorers have returned, spawn one Task subagent to synthesize their findings into one explanation:
 
-- `agent`: `task` (omp's general-purpose bundled agent)
-- `model`: your configured how-explainer model (default your strongest judgment model)
+- Resolve the synthesizer role through `skill://pstack-omp`.
 - read-only posture. The brief grants only Glob, Grep, and Read, and forbids writes
 
 Build its prompt from `references/explainer-prompt.md` with every explorer's findings filled in.

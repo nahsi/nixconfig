@@ -20,12 +20,12 @@ Fan out N parallel workers. They may cover separate slices, race the same brief,
 1. State the done predicate and the artifact or report the swarm must return.
 2. Choose the shape. Partition into slices, race N workers on identical briefs, or mix both. For a race or mixed shape, declare `first pass`, `rank all`, or `best-of` before spawning.
 3. Set N from the user or derive it from the shape. N is total workers. `task.maxConcurrency` in `~/.omp/agent/config.yml` caps how many run at once.
-4. Pick the worker model from `swarm workers` in `task.agentModelOverrides` in `~/.omp/agent/config.yml` when present. Otherwise use your fast code model. For a model race, give each arm its own agent file and its own `task.agentModelOverrides` entry.
+4. Resolve workers through `skill://pstack-omp`. A model race uses discovered agents with distinct configured models.
 5. Give each worker its own writable output when it writes.
 
 ## Phase B: Fan out
 
-Spawn all N workers in one `task` call with all items in `tasks[]`, each item `agent`: `task` (omp's general-purpose bundled agent) with `isolated: true`. Every worker runs on this machine, so read `skill://omp-mechanics` for the isolation gate and the per-worker output fallback.
+Spawn all N workers through `skill://pstack-omp`. Give concurrent writers disjoint paths or separate worktrees.
 
 When a worker must start from a non-default base, create its `git worktree` on that base first and point the worker at that path.
 

@@ -22,7 +22,10 @@ in
   oh-my-pi = {
     enable = true;
     package = inputs.omp-upstream.packages.${system}.default.overrideAttrs (old: {
-      patches = (old.patches or [ ]) ++ [ ./patches/omp-mode-badges.patch ];
+      patches = (old.patches or [ ]) ++ [
+        ./patches/omp-mode-badges.patch
+        ./patches/omp-task-effort-levels.patch
+      ];
     });
 
     skills = lib.pipe (builtins.readDir ./skills) [
@@ -53,6 +56,8 @@ in
 
       Prefer codebase-memory for codebase-wide structural exploration and relationship tracing.
       Treat its graph as an index: verify current source before editing or making exact claims.
+
+      Conventional commits style applied only to PR title, commits inside branch do not use conventional commits.
     '';
 
     rules.prohibit-memory-retention = ''
@@ -71,14 +76,15 @@ in
 
     settings = {
       modelRoles = {
-        default = "openai-codex/gpt-6-astra:low";
+        default = "openai-codex/gpt-6-sol:auto";
         slow = "openai-codex/gpt-6-astra:medium";
-        plan = "openai-codex/gpt-6-astra:high";
-        task = "openai-codex/gpt-5.6-terra:medium";
-        smol = "openai-codex/gpt-5.6-luna:medium";
+        plan = "openai-codex/gpt-6-astra:medium";
+        task = "openai-codex/gpt-6-luna:high";
+        smol = "openai-codex/gpt-6-luna:medium";
         tiny = "nahsilabs/google/gemma-4-12B-it";
-        advisor = "openai-codex/gpt-6-astra:high";
+        advisor = "openai-codex/gpt-6-astra:medium";
         local = "nahsilabs/Qwen/Qwen3.8-27B:medium";
+        judge = "openrouter/~typesafe/jev-latest";
       };
       defaultThinkingLevel = "medium";
       disabledProviders = [
@@ -102,9 +108,20 @@ in
       task = {
         maxConcurrency = 4;
         enableEffort = true;
+        enableLsp = true;
         maxEffort = "high";
         isolation.enabled = true;
-        agentModelOverrides.security-reviewer = "@slow";
+        agentModelOverrides = {
+          task = "@task";
+          poteto-agent = "@task";
+          scout = "@smol";
+          sonic = "@smol:low";
+          reviewer = "@slow";
+          security-reviewer = "@slow";
+          comment-sicko = "@slow:low";
+          grunt = "@local";
+          poteto-grunt = "@local";
+        };
         showResolvedModelBadge = true;
       };
 
@@ -115,10 +132,12 @@ in
       secrets.enabled = true;
 
       bash.autoBackground.enabled = true;
+      eval.autoBackground.enabled = true;
       bashInterceptor.enabled = true;
       computer.enabled = true;
 
       providers = {
+        autoThinkingMaxEffort = "xhigh";
         webSearchOrder = [ "exa" ];
         fetch = "trafilatura";
         streamFirstEventTimeoutSeconds = 300;

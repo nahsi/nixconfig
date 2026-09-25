@@ -1,7 +1,6 @@
 ---
 name: comment-sicko
 description: "Compatibility target for the imported no-comments workflow. Audits comments and suppressions within an explicit scope and returns deletion or refactor findings without editing files."
-model: "@slow:low"
 tools:
   - read
   - grep
@@ -10,7 +9,6 @@ tools:
   - lsp
   - ast_grep
   - yield
-thinkingLevel: low
 read-summarize: false
 ---
 

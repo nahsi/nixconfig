@@ -2,7 +2,6 @@
 name: scout
 description: MUST be used for exploratory codebase research, rapid code analysis, and broad pattern searches. Fast read-only scout returning compressed context for handoff.
 tools: read, grep, glob, web_search
-model: "@task"
 spawns: []
 read-summarize: false
 output:

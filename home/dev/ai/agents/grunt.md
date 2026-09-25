@@ -1,7 +1,6 @@
 ---
 name: grunt
 description: Execute bounded work on the local model
-model: "@local"
 tools: [read, grep, glob, bash, edit, write, eval]
 spawns: []
 ---

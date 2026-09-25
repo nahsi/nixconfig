@@ -28,19 +28,19 @@ The first line of an omp transcript is a fixed-width `type:title` slot and the s
 
 ### 2. Spawn three reviewers in parallel
 
-One `task` call with three items in `tasks[]`, each `agent`: `task` (omp's general-purpose bundled agent) pinned by its own agent name, full tools per spawn. Run the three lenses on three different model families where `omp models` offers them, and keep Divergent on a different model family from Judgment, since the lens earns its name from different priors and not a different prompt. Reviewers need MCP access for context lookups (tickets, chat threads, observability traces referenced in the transcript). There is no such field on omp's task wire, so nothing strips MCPs.
+Resolve three reviewers through `skill://pstack-omp` and run them concurrently. Prefer three distinct configured model families, with Divergent on a different family from Judgment. Report unavailable diversity. Each reviewer needs the tools for the evidence referenced in the transcript, including MCP access where applicable.
 
-| Lens | `model` | Prompt template |
+| Lens | Model preference | Prompt template |
 |---|---|---|
-| Judgment | your configured reflect-judgment model (default your strongest judgment model) | `references/judgment-reviewer.md` |
-| Tooling | your configured reflect-tooling model (default your strongest instruction-following model) | `references/tooling-reviewer.md` |
-| Divergent | your configured reflect-judgment model (default your strongest judgment model) | `references/divergent-reviewer.md` |
+| Judgment | strongest available judgment model | `references/judgment-reviewer.md` |
+| Tooling | strongest available instruction-following model | `references/tooling-reviewer.md` |
+| Divergent | strongest available judgment model from a different family | `references/divergent-reviewer.md` |
 
 Pass each template verbatim, substituting the transcript path or digest where marked. Reviewers return findings in the `Task` response body.
 
 ### 3. Synthesize
 
-One `Task` call, `agent`: `task` (omp's general-purpose bundled agent), using your configured reflect-judgment model (default your strongest judgment model), full tools per spawn. The synthesizer's quality check includes spot-verifying citations, which can require MCP access. There is no such field on omp's task wire, so nothing strips MCPs. Use `references/synthesizer.md` verbatim, with each reviewer's full output inlined where marked. The synthesizer returns a structured Accepted / Rejected / Backlog list.
+Resolve the synthesizer through `skill://pstack-omp` with the tools needed to spot-check citations, including MCP access where applicable. Use `references/synthesizer.md` verbatim, with each reviewer's full output inlined where marked. The synthesizer returns a structured Accepted / Rejected / Backlog list.
 
 ### 4. Structural enforcement check
 

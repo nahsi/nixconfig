@@ -1,0 +1,158 @@
+--- a/packages/tui/src/thinking.ts
++++ b/packages/tui/src/thinking.ts
+@@ -275,11 +275,16 @@ export const TASK_EFFORTS = ["lo", "med", "hi"] as const;
+-/** Coarse task-spawn effort: the lowest, middle, or highest thinking level the target model supports. */
++/** Coarse task-spawn effort selectors that map to literal low, medium, or high thinking levels. */
+ export type TaskEffort = (typeof TASK_EFFORTS)[number];
+ 
++const TASK_EFFORT_LEVELS: Readonly<Record<TaskEffort, Effort>> = {
++	lo: Effort.Low,
++	med: Effort.Medium,
++	hi: Effort.High,
++};
++
+ /**
+- * Maps a coarse task effort onto the model's supported thinking range:
+- * `lo` = lowest supported level, `hi` = highest (whatever the model tops out
+- * at — high, xhigh, or max), `med` = the middle (lower of the two middles for
+- * an even-sized range). Without a model, maps over the full canonical range.
++ * Maps a coarse task effort to its literal thinking level, then normalizes it
++ * to the target model's supported range. Without a model, returns the literal
++ * level.
+  * Returns `undefined` when the model has no controllable effort surface, so
+  * callers fall back to their default selector (e.g. `auto`). Throws when the
+  * configured ceiling is below the model's lowest supported effort.
+@@ -289,21 +294,10 @@ export function resolveTaskEffortLevel(
+ 	effort: TaskEffort,
+ 	maxEffort?: Effort,
+ ): Effort | undefined {
+-	const supported = model ? getSupportedEfforts(model) : THINKING_EFFORTS;
+-	if (supported.length === 0) return undefined;
+-	let resolved: Effort;
+-	switch (effort) {
+-		case "lo":
+-			resolved = supported[0];
+-			break;
+-		case "med":
+-			resolved = supported[(supported.length - 1) >> 1];
+-			break;
+-		case "hi":
+-			resolved = supported[supported.length - 1];
+-			break;
+-	}
++	const resolved = clampThinkingLevelForModel(model, TASK_EFFORT_LEVELS[effort]);
++	if (resolved === undefined) return undefined;
+ 	if (maxEffort === undefined) return resolved;
++	const supported = model ? getSupportedEfforts(model) : THINKING_EFFORTS;
+ 	const maxIndex = THINKING_EFFORTS.indexOf(maxEffort);
+ 	const ceiling = supported.findLast(candidate => THINKING_EFFORTS.indexOf(candidate) <= maxIndex);
+ 	if (ceiling === undefined) {
+--- a/packages/coding-agent/src/task/executor.ts
++++ b/packages/coding-agent/src/task/executor.ts
+@@ -467,7 +467,7 @@ export interface SpawnTaskOptions {
+ 	 */
+ 	parentActiveModelPattern?: string;
+ 	thinkingLevel?: ConfiguredThinkingLevel;
+-	/** Caller-requested coarse effort (`lo`/`med`/`hi`); maps onto the resolved model's supported thinking range and wins over {@link thinkingLevel}. */
++	/** Caller-requested coarse effort (`lo`/`med`/`hi`); maps to literal low, medium, or high, then normalizes for the resolved model and wins over {@link thinkingLevel}. */
+ 	effort?: TaskEffort;
+ 	/** Schema used to validate the final structured completion. */
+ 	outputSchema?: unknown;
+@@ -3692,8 +3692,8 @@ export async function executeTask(
+ 			if (model?.contextWindow && model.contextWindow > 0) {
+ 				progress.contextWindow = model.contextWindow;
+ 			}
+-			// Caller-requested coarse effort maps onto the resolved model's
+-			// supported range, then respects the operator-configured ceiling.
++			// Caller-requested coarse effort maps to a literal thinking level,
++			// normalizes it for the resolved model, then respects the operator-configured ceiling.
+ 			// Undefined (no effort, or no controllable effort surface) falls
+ 			// through to the normal selectors below.
+ 			// The ceiling outlives initial resolution: it rides into the session so
+--- a/packages/coding-agent/src/task/structured-subagent.ts
++++ b/packages/coding-agent/src/task/structured-subagent.ts
+@@ -107,7 +107,7 @@ export interface StructuredSubagentRequest {
+	/** Presence, rather than truthiness, makes this the highest-priority schema. */
+	outputSchema?: unknown;
+	schemaMode?: StructuredSubagentSchemaMode;
+-	/** Per-spawn thinking effort mapped onto the resolved model's supported range; overrides the agent's default selector. */
++	/** Per-spawn thinking effort mapped to literal low, medium, or high, then normalized for the resolved model; overrides the agent's default selector. */
+	effort?: TaskEffort;
+	identity?: StructuredSubagentIdentity;
+	index?: number;
+--- a/packages/coding-agent/test/auto-thinking-classifier.test.ts
++++ b/packages/coding-agent/test/auto-thinking-classifier.test.ts
+@@ -397,1 +397,1 @@ describe("auto thinking classifier helpers", () => {
+-	it("maps task effort selectors onto each model's supported thinking range", () => {
++	it("maps task effort selectors to literal levels and normalizes unsupported levels", () => {
+ 		const xhighCeilingModel = buildModel({
+ 			id: "mock-xhigh-ceiling",
+ 			name: "Mock XHigh Ceiling",
+@@ -409,18 +409,29 @@ describe("auto thinking classifier helpers", () => {
+ 			maxTokens: 4096,
+ 		});
+ 
+-		// hi = whatever the model tops out at; lo = its floor; med = middle of
+-		// the supported range (lower-middle for an even-sized range).
+-		expect(resolveTaskEffortLevel(xhighCeilingModel, "hi")).toBe(Effort.XHigh);
++		// The caller's three values always request literal low, medium, or high.
++		expect(resolveTaskEffortLevel(xhighCeilingModel, "hi")).toBe(Effort.High);
+ 		expect(resolveTaskEffortLevel(xhighCeilingModel, "lo")).toBe(Effort.Low);
+ 		expect(resolveTaskEffortLevel(xhighCeilingModel, "med")).toBe(Effort.Medium);
++		expect(resolveTaskEffortLevel(xhighCeilingModel, "hi", Effort.High)).toBe(Effort.High);
++
++		const sparseModel = buildModel({
++			id: "mock-sparse-efforts",
++			name: "Mock Sparse Efforts",
++			api: "openai-completions",
++			provider: "mock",
++			baseUrl: "https://example.com",
++			reasoning: true,
++			thinking: { mode: "effort", efforts: [Effort.Low, Effort.High, Effort.XHigh] },
++			input: ["text"],
++			cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 },
++			contextWindow: 128_000,
++			maxTokens: 4096,
++		});
++		expect(resolveTaskEffortLevel(sparseModel, "lo")).toBe(Effort.Low);
++		expect(resolveTaskEffortLevel(sparseModel, "med")).toBe(Effort.Low);
++		expect(resolveTaskEffortLevel(sparseModel, "hi")).toBe(Effort.High);
+ 
+-		const sonnet = getBundledModel("anthropic", "claude-sonnet-4-6");
+-		if (!sonnet) throw new Error("Expected bundled Claude Sonnet 4.6 model");
+-		const sonnetEfforts = sonnet.thinking?.efforts ?? [];
+-		expect(resolveTaskEffortLevel(sonnet, "hi")).toBe(sonnetEfforts[sonnetEfforts.length - 1]);
+-		expect(resolveTaskEffortLevel(sonnet, "lo")).toBe(sonnetEfforts[0]);
+-
+ 		const highOnlyModel = buildModel({
+ 			id: "mock-high-only",
+ 			name: "Mock High Only",
+@@ -454,7 +465,8 @@ describe("auto thinking classifier helpers", () => {
+ 		expect(resolveTaskEffortLevel(devinModel, "hi")).toBeUndefined();
+ 
+-		// No model at all → full canonical range.
+-		expect(resolveTaskEffortLevel(undefined, "lo")).toBe(Effort.Minimal);
+-		expect(resolveTaskEffortLevel(undefined, "hi")).toBe(Effort.Max);
++		// No model at all preserves the caller's literal request.
++		expect(resolveTaskEffortLevel(undefined, "lo")).toBe(Effort.Low);
++		expect(resolveTaskEffortLevel(undefined, "med")).toBe(Effort.Medium);
++		expect(resolveTaskEffortLevel(undefined, "hi")).toBe(Effort.High);
+ 	});
+--- a/docs/tools/task.md
++++ b/docs/tools/task.md
+@@ -41 +41 @@
+-| `effort` | `"lo" \| "med" \| "hi"` | No | Present only with `task.enableEffort=true`. Per-spawn thinking effort, mapped onto the resolved model's supported range (lowest/middle/highest level it tops out at, e.g. `high`/`xhigh`/`max`). Overrides the agent's default selector, including `auto`; omitting it keeps the agent's configured selector — automatic per-prompt classification only for agents configured `auto` (e.g. the bundled `task`); `scout`/`sonic` configure `medium`. Item field in batch shape, top-level in flat shape. |
++| `effort` | `"lo" \| "med" \| "hi"` | No | Present only with `task.enableEffort=true`. Requests `low`, `medium`, or `high`, respectively. Unsupported levels normalize to the highest supported level below the request, or the model's minimum when none is lower. `task.maxEffort` caps the result. Overrides the agent's default selector, including `auto`. Omitting it preserves the configured selector. Automatic per-prompt classification applies only to agents configured with `auto`. Item field in batch shape, top-level in flat shape. |
+--- a/docs/task-agent-discovery.md
++++ b/docs/task-agent-discovery.md
+@@ -43 +43 @@
+-- `thinking-level` / `thinking` selects the agent's configured effort. When `task.enableEffort` (default `false`) exposes it, a task item's coarse `effort` (`lo`, `med`, `hi`) takes precedence at launch. OMP maps that hint to the selected model's lowest, middle, or highest supported effort, then clamps it to `task.maxEffort` (default `max`). The ceiling is carried across retry-fallback model switches. If the selected model has no supported effort at or below the ceiling, the spawn fails; models without a controllable effort surface instead fall back to their normal selector.
++- `thinking-level` / `thinking` selects the agent's configured effort. When `task.enableEffort` exposes it, a task item's `effort` takes precedence at launch. `lo`, `med`, and `hi` request `low`, `medium`, and `high`, respectively. Unsupported levels normalize to the highest supported level below the request, or the model's minimum when none is lower. `task.maxEffort` caps the result and remains in effect across retry-fallback model switches. If no supported effort is at or below the ceiling, the spawn fails. Models without controllable effort fall back to their normal selector.
+--- a/packages/tui/src/tools/task.ts
++++ b/packages/tui/src/tools/task.ts
+@@ -1729 +1729 @@
+-	/** Per-spawn thinking effort: lowest/middle/highest level the resolved model supports. Overrides the agent's default selector (e.g. `auto`). */
++	/** Requests low, medium, or high effort, normalized for the model. Overrides the agent's default selector. */
+@@ -1754 +1754 @@
+-	/** Per-spawn thinking effort (flat form): lowest/middle/highest level the resolved model supports. */
++	/** Requests low, medium, or high effort in the flat form, normalized for the model. */
