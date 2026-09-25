@@ -43,28 +43,6 @@
           extraBody.chat_template_kwargs.preserve_thinking = true;
         };
       }
-      {
-        id = "google/gemma-4-12B-it";
-        name = "Gemma 4 12B IT";
-        reasoning = false;
-        input = [ "text" ];
-        contextWindow = 16384;
-        maxTokens = 16384;
-        cost = {
-          input = 0;
-          output = 0;
-          cacheRead = 0;
-          cacheWrite = 0;
-        };
-        compat = {
-          supportsStore = false;
-          supportsDeveloperRole = false;
-          supportsReasoningEffort = false;
-          supportsReasoningParams = false;
-          maxTokensField = "max_tokens";
-          supportsForcedToolChoice = false;
-        };
-      }
     ];
   };
 }

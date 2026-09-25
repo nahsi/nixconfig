@@ -81,7 +81,7 @@ in
         plan = "openai-codex/gpt-6-astra:medium";
         task = "openai-codex/gpt-6-luna:high";
         smol = "openai-codex/gpt-6-luna:medium";
-        tiny = "nahsilabs/google/gemma-4-12B-it";
+        tiny = "local/lfm2.5-230m";
         advisor = "openai-codex/gpt-6-astra:medium";
         local = "nahsilabs/Qwen/Qwen3.8-27B:medium";
         judge = "openrouter/~typesafe/jev-latest";
@@ -92,6 +92,7 @@ in
         "web/duckduckgo"
         "openai-codex/gpt-6-luna"
       ];
+      retry.fallbackChains.tiny = [ ];
       defaultThinkingLevel = "medium";
       disabledProviders = [
         "claude"
