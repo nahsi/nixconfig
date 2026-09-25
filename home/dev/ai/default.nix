@@ -71,11 +71,11 @@ in
 
     settings = {
       modelRoles = {
-        default = "openai-codex/gpt-6-astra:medium";
-        slow = "openai-codex/gpt-6-astra:high";
+        default = "openai-codex/gpt-6-astra:low";
+        slow = "openai-codex/gpt-6-astra:medium";
         plan = "openai-codex/gpt-6-astra:high";
-        task = "openai-codex/gpt-5.6-terra:high";
-        smol = "openai-codex/gpt-5.6-luna:high";
+        task = "openai-codex/gpt-5.6-terra:medium";
+        smol = "openai-codex/gpt-5.6-luna:medium";
         tiny = "nahsilabs/google/gemma-4-12B-it";
         advisor = "openai-codex/gpt-6-astra:high";
         local = "nahsilabs/Qwen/Qwen3.8-27B:medium";
