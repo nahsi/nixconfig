@@ -76,7 +76,7 @@ in
 
     settings = {
       modelRoles = {
-        default = "openai-codex/gpt-6-sol:auto";
+        default = "openai-codex/gpt-6-astra:low";
         slow = "openai-codex/gpt-6-astra:medium";
         plan = "openai-codex/gpt-6-astra:medium";
         task = "openai-codex/gpt-6-luna:high";
