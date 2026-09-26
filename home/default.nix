@@ -27,6 +27,11 @@
   };
 
   services = {
+    home-manager.autoExpire = {
+      enable = true;
+      timestamp = "-30 days";
+      frequency = "weekly";
+    };
     mpris-proxy.enable = true;
   };
 }
