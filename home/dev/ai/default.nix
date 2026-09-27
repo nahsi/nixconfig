@@ -44,23 +44,6 @@ in
       }
     );
 
-    skills = lib.pipe (builtins.readDir ./skills) [
-      (lib.filterAttrs (
-        name: type: type == "directory" && builtins.pathExists (./skills + "/${name}/SKILL.md")
-      ))
-      (lib.mapAttrs (
-        name: _: {
-          src = ./skills;
-          subdir = name;
-        }
-      ))
-    ];
-
-    agents = lib.pipe (builtins.readDir ./agents) [
-      (lib.filterAttrs (name: type: type == "regular" && lib.hasSuffix ".md" name))
-      (lib.mapAttrs' (name: _: lib.nameValuePair (lib.removeSuffix ".md" name) (./agents + "/${name}")))
-    ];
-
     mcp.mcpServers = {
       codebase-memory.command = lib.getExe pkgs-unstable.codebase-memory-mcp;
     };
@@ -193,6 +176,15 @@ in
     ];
 
     file.".omp/agent/config.yml".enable = false;
+
+    file.".omp/agent/skills" = {
+      source = ./skills;
+      recursive = false;
+    };
+    file.".omp/agent/agents" = {
+      source = ./agents;
+      recursive = false;
+    };
 
     # OMP resolves config.yml before saving, so it needs a writable copy, not a store symlink.
     activation.ompWritableConfig =
