@@ -2,12 +2,11 @@
 name: typescript-best-practices
 description: TypeScript best practices. Use when reading or editing any .ts or .tsx file.
 globs: ["**/*.ts", "**/*.tsx"]
-disable-model-invocation: true
 ---
 
 # TypeScript best practices
 
-Apply the [**type-system-discipline**](skill://principle-type-system-discipline) principle skill first.
+Apply the [**type-system-discipline**](skill://primestack/principles/type-system-discipline.md) principle first.
 
 | Rule | Summary |
 |------|---------|

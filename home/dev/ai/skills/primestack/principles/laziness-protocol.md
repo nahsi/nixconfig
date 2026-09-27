@@ -1,0 +1,14 @@
+# Laziness Protocol
+
+Apply when refactoring, evaluating diff size, or considering new abstractions, layers, or signal threading.
+
+Aim for the most result with the least code and complexity.
+
+- **Prefer deletion.** When asked to refactor or improve, look for removals before additions.
+- **Reduce unnecessary indirection.** A rich interface that hides substantial work can reduce reader effort. Collapse pass-through layers when they add tracing without hiding meaningful complexity or enforcing a boundary.
+- **Consolidate decisions.** Do not repeat the same choice in several places. Put it behind one source of truth and pass the result as a simple flag.
+- **Minimize the diff.** Make the smallest change that solves the problem. Fewer lines beat "elegant" boilerplate.
+- **Question the threading.** If a task asks you to pass a new signal through types, schemas, pipelines, or similar layers, stop and look for a more direct path.
+- **Sweat the small leaks.** Remove tiny pass-throughs, representation leaks, and duplicated choices before they spread. Small leaks compound into permanent coordination costs.
+
+**The test:** If a human developer would find the code exhausting to maintain, it is a bad solution.

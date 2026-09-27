@@ -21,12 +21,28 @@ in
 
   oh-my-pi = {
     enable = true;
-    package = inputs.omp-upstream.packages.${system}.default.overrideAttrs (old: {
-      patches = (old.patches or [ ]) ++ [
-        ./patches/omp-mode-badges.patch
-        ./patches/omp-task-effort-levels.patch
-      ];
-    });
+    # Use the Nix-native build so broker workers can re-exec OMP directly.
+    package = inputs.omp-upstream.packages.${system}.default.overrideAttrs (
+      old:
+      assert lib.assertMsg (
+        old.version == "18.3.5"
+      ) "Revisit the OMP native-stamp workaround on version bump; see PR #13506.";
+      {
+        # REMOVE on the next OMP version bump once upstream includes this fix:
+        # https://github.com/can1357/oh-my-pi/pull/13506
+        # v18.3.5's Nix build skips post-link native version stamping.
+        buildPhase =
+          lib.replaceStrings
+            [ ''echo "Compiling OMP"'' ]
+            [
+              ''
+                bun scripts/stamp-native-version.ts packages/natives/native/*.node
+                echo "Compiling OMP"
+              ''
+            ]
+            old.buildPhase;
+      }
+    );
 
     skills = lib.pipe (builtins.readDir ./skills) [
       (lib.filterAttrs (
@@ -57,19 +73,7 @@ in
       Prefer codebase-memory for codebase-wide structural exploration and relationship tracing.
       Treat its graph as an index: verify current source before editing or making exact claims.
 
-      Conventional commits style applied only to PR title, commits inside branch do not use conventional commits.
-    '';
-
-    rules.prohibit-memory-retention = ''
-      ---
-      name: prohibit-memory-retention
-      description: "Prohibit writes to long-term memory"
-      condition: "xd://retain"
-      scope: "tool:write"
-      interruptMode: always
-      ---
-
-      Long-term memory retention is prohibited. Never invoke retain.
+      Conventional commits style applied only to PR title and commits to main, commits inside branch do not use conventional commits.
     '';
 
     models = import ./models.nix;
@@ -77,22 +81,16 @@ in
     settings = {
       modelRoles = {
         default = "openai-codex/gpt-6-astra:low";
-        slow = "openai-codex/gpt-6-astra:medium";
+        slow = "openai-codex/gpt-6-astra:auto";
         plan = "openai-codex/gpt-6-astra:medium";
-        task = "openai-codex/gpt-6-luna:high";
-        smol = "openai-codex/gpt-6-luna:medium";
+        task = "openai-codex/gpt-6-luna";
+        smol = "openai-codex/gpt-6-luna";
         tiny = "local/lfm2.5-230m";
         advisor = "openai-codex/gpt-6-astra:medium";
-        local = "nahsilabs/Qwen/Qwen3.8-27B:medium";
+        local = "nahsilabs/Qwen/Qwen3.8-27B";
         judge = "openrouter/~typesafe/jev-latest";
         web = "web/parallel";
       };
-      retry.fallbackChains.web = [
-        "web/exa"
-        "web/duckduckgo"
-        "openai-codex/gpt-6-luna"
-      ];
-      retry.fallbackChains.tiny = [ ];
       defaultThinkingLevel = "medium";
       disabledProviders = [
         "claude"
@@ -102,66 +100,64 @@ in
         "gemini"
         "github"
       ];
+      providers.streamFirstEventTimeoutSeconds = 300;
+      retry.fallbackChains = {
+        web = [
+          "web/exa"
+          "web/duckduckgo"
+          "openai-codex/gpt-6-luna"
+        ];
+        tiny = [ ];
+      };
 
+      personality = "pragmatic";
       theme = {
         dark = "dark-catppuccin";
         light = "light-catppuccin";
       };
       symbolPreset = "nerd";
       display.showTokenUsage = true;
-
-      composer.shape = "box";
-
-      task = {
-        maxConcurrency = 4;
-        enableEffort = true;
-        enableLsp = true;
-        maxEffort = "high";
-        isolation.enabled = true;
-        agentModelOverrides = {
-          task = "@task";
-          poteto-agent = "@task";
-          scout = "@smol";
-          sonic = "@smol:low";
-          reviewer = "@slow";
-          security-reviewer = "@slow";
-          comment-sicko = "@slow:low";
-          grunt = "@local";
-          poteto-grunt = "@local";
-        };
-        showResolvedModelBadge = true;
-      };
+      tui.vimMode = true;
+      composer.tokenRate = true;
+      completion.notify = "off";
 
       tools = {
         approvalMode = "yolo";
         approval.retain = "deny";
       };
       secrets.enabled = true;
-
-      bash.autoBackground.enabled = true;
       eval.autoBackground.enabled = true;
       bashInterceptor.enabled = true;
-      computer.enabled = true;
-
-      providers = {
-        autoThinkingMaxEffort = "xhigh";
-        fetch = "trafilatura";
-        streamFirstEventTimeoutSeconds = 300;
-      };
+      astGrep.enabled = true;
+      find.enabled = "on";
+      computer.enabled = false;
       searxng.endpoint = "https://search.nahsi.dev";
 
-      extendedContext = true;
-      compaction = {
-        methodOrder = [
-          "snapcompact"
-          "handoff"
-          "shake"
-          "soft"
+      task = {
+        disabledAgents = [
+          "sonic"
+          "security-reviewer"
         ];
+        maxConcurrency = 4;
+        enableEffort = true;
+        enableLsp = true;
+        maxEffort = "high";
+        isolation.enabled = true;
+        showResolvedModelBadge = true;
       };
-      branchSummary.enabled = true;
+      plan.enabled = false;
+      goal.enabled = false;
       steeringMode = "all";
       followUpMode = "all";
+
+      extendedContext = true;
+      compaction.methodOrder = [
+        "snapcompact"
+        "handoff"
+        "shake"
+        "soft"
+      ];
+      branchSummary.enabled = true;
       ttsr.repeatMode = "after-gap";
 
       setupVersion = 2;
@@ -170,7 +166,6 @@ in
         setupWizard = false;
       };
     };
-
   };
 
   home = {
@@ -197,17 +192,7 @@ in
       pkgs.marksman
     ];
 
-    file =
-      lib.mapAttrs' (
-        name: type:
-        lib.nameValuePair ".omp/agent/extensions/${name}" {
-          source = ./extensions + "/${name}";
-          recursive = type == "directory";
-        }
-      ) (builtins.readDir ./extensions)
-      // {
-        ".omp/agent/config.yml".enable = lib.mkForce false;
-      };
+    file.".omp/agent/config.yml".enable = false;
 
     # OMP resolves config.yml before saving, so it needs a writable copy, not a store symlink.
     activation.ompWritableConfig =

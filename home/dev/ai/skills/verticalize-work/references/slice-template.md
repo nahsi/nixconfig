@@ -51,9 +51,9 @@ Expected signal: `<what proves this slice works>`
 - Blocker: <human/product/architecture decision that must not be guessed>
 - Residual risk: <what this slice cannot prove alone>
 
-## Work record
+## Child completion contract
 
-Record here:
+Reply to the parent with:
 
 - status: done | blocked | failed
 - changed files or artifact paths

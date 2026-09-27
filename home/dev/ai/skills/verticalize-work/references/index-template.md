@@ -28,8 +28,6 @@ S02 ──► S03 ──► S04
 
 ## Status
 
-This table summarizes the slice files. Refresh it from their status and evidence.
-
 | Slice | Value | Status | Owner | Blocked by | Verification |
 |---|---|---|---|---|---|
 | [S01](slices/01-example.md) | <observable value> | ready | unassigned | none | `<command/surface>` |
@@ -43,9 +41,6 @@ This table summarizes the slice files. Refresh it from their status and evidence
 - <decision that must not be guessed>
 
 ## Integration verification
-
-Completing every slice does not complete the effort.
-Run the integration checks below before marking the effort verified.
 
 - [ ] <end-to-end acceptance condition and exact surface>
 - [ ] <cross-slice/shared-boundary check>

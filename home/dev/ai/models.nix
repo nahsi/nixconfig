@@ -27,7 +27,6 @@
           efforts = [
             "low"
             "medium"
-            "xhigh"
           ];
         };
         compat = {

@@ -1,7 +1,8 @@
 ---
 name: verticalize-work
-description: Split an agreed plan into implementation slices.
+description: Own decomposition of a plan or backlog into independently executable vertical slices, a local task pack, dependency frontier, and worker contracts. Use before execution; prime-delegate is only the optional dispatch mechanism. Never create tracker issues unless explicitly requested.
 disable-model-invocation: true
+license: MIT
 ---
 
 # Verticalize Work
@@ -11,10 +12,10 @@ Turn intent into independently useful, agent-grabbable slices. **Default to chat
 ## Choose the output surface
 
 1. **Chat checklist** — small plan, immediate execution, no durable coordination needed.
-2. **Local task pack** — recommended for multi-session work or delegated execution. Confirm file-write intent when the request is planning-only; otherwise keep the same contract in chat:
+2. **Local task pack** — recommended for multi-session work or delegation. Confirm file-write intent when the request is planning-only; otherwise keep the same contract in chat:
 
 ```text
-.work/<effort>/
+.scratch/work/<work-slug>/
   index.md
   slices/
     01-<slice>.md
@@ -23,7 +24,7 @@ Turn intent into independently useful, agent-grabbable slices. **Default to chat
 
 3. **External tracker** — only on explicit request. Preview the payload first, obtain create authority, then save local-slice ↔ external-id links in the index. Make retries idempotent; do not make the tracker the source of the plan.
 
-For a local pack, start from [the index template](references/index-template.md) and [the slice template](references/slice-template.md). The parent/coordinator alone owns `index.md`; children may update only their assigned slice files. Never overwrite an existing slug implicitly: inspect it, confirm resumption when the outcome matches, or choose a new slug. Reconcile index status against actual artifacts and verification on resume. Automated index rewrites use a temporary file plus atomic replace.
+For a local pack, start from [the index template](skill://verticalize-work/references/index-template.md) and [the slice template](skill://verticalize-work/references/slice-template.md). The parent/coordinator alone owns `index.md`; children may update only their assigned slice files. Never overwrite an existing slug implicitly: inspect it, confirm resumption when the outcome matches, or choose a new slug. Reconcile index status against actual artifacts and verification on resume. Automated index rewrites use a temporary file plus atomic replace.
 
 ## Workflow
 
@@ -57,7 +58,7 @@ Keep a horizontal slice only when it creates a standalone, reusable, verifiable 
 
 ## Slice contract
 
-Every durable slice uses [the slice template](references/slice-template.md). At minimum:
+Every durable slice uses [the slice template](skill://verticalize-work/references/slice-template.md). At minimum:
 
 ```markdown
 # S01 — <outcome-oriented title>
@@ -78,19 +79,15 @@ Every durable slice uses [the slice template](references/slice-template.md). At 
 <slice ids or none>
 ```
 
-## Implementation
+## Dispatch
 
-For planning-only requests, save the slices, report the ready frontier, and stop.
-
-When the user authorizes implementation, execute ready slices through the matching pstack playbooks. Read `skill://pstack-omp` before delegating. Implementation may span multiple workers and sessions.
-
-On resume, read the work index, active slices, and recorded evidence. Reconcile unfinished work before selecting the next ready slices; do not take over another active session's work.
+When the user wants execution, read the [prime-delegate](skill://prime-delegate) skill before spawning children.
 
 - Schedule slices in dependency waves.
 - One child owns one slice and its declared files/worktree.
 - Parallel children may not share mutable files, branches, keys, or state.
 - Put the slice-file path and original outcome in the child prompt; do not paste the entire planning conversation.
-- Require an explicit parent reply with status, evidence, changed paths, blockers, and any artifact path. When a slice file exists, the child updates it **and** replies; artifact-only completion is a diagnosed fallback, not the normal signal.
+- Require a report with status, evidence, changed paths, blockers, and any artifact path. When a slice file exists, the child updates it **and** returns the report.
 - The coordinator verifies integration and the whole outcome; “all children replied” is not completion.
 - If a slice reveals a hidden decision, mark it blocked and reshape locally. Do not create an issue as a reflex.
 
