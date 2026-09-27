@@ -36,6 +36,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -74,11 +79,7 @@
 
       treefmtEval = treefmt-nix.lib.evalModule pkgs {
         projectRootFile = "flake.nix";
-        programs = {
-          nixfmt.enable = true;
-          statix.enable = true;
-          deadnix.enable = true;
-        };
+        programs.nixfmt.enable = true;
       };
     in
     {
@@ -95,9 +96,24 @@
 
       formatter.${system} = treefmtEval.config.build.wrapper;
 
-      checks.${system}.formatting = treefmtEval.config.build.check self;
+      # Keep formatting separate from lint warnings that have no automatic fix.
+      checks.${system} = {
+        formatting = treefmtEval.config.build.check self;
+        lint = inputs.git-hooks.lib.${system}.run {
+          src = self;
+          hooks = {
+            statix.enable = true;
+            deadnix.enable = true;
+          };
+        };
+      };
 
       devShells.${system}.default = pkgs.mkShell {
+        packages = [
+          treefmtEval.config.build.wrapper
+        ]
+        ++ self.checks.${system}.lint.enabledPackages;
+
         shellHook = ''
           nix-store --add-root .mcp.json --indirect --realise ${mcpConfig}
         '';

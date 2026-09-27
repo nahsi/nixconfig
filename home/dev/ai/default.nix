@@ -175,15 +175,17 @@ in
       pkgs.marksman
     ];
 
-    file.".omp/agent/config.yml".enable = false;
+    file = {
+      ".omp/agent/config.yml".enable = false;
 
-    file.".omp/agent/skills" = {
-      source = ./skills;
-      recursive = false;
-    };
-    file.".omp/agent/agents" = {
-      source = ./agents;
-      recursive = false;
+      ".omp/agent/skills" = {
+        source = ./skills;
+        recursive = false;
+      };
+      ".omp/agent/agents" = {
+        source = ./agents;
+        recursive = false;
+      };
     };
 
     # OMP resolves config.yml before saving, so it needs a writable copy, not a store symlink.

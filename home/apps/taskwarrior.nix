@@ -88,13 +88,15 @@ in
     config = {
       hooks.location = "${config.xdg.configHome}/task/hooks";
 
-      urgency.tags.coefficient = 0;
-      urgency."inherit" = 1;
-      urgency.blocking.coefficient = 0;
-      urgency.blocked.coefficient = 0;
-      urgency.due.coefficient = 4;
-      urgency.project.coefficient = 0;
-      urgency.user.tag.inprogress.coefficient = 2.5;
+      urgency = {
+        tags.coefficient = 0;
+        "inherit" = 1;
+        blocking.coefficient = 0;
+        blocked.coefficient = 0;
+        due.coefficient = 4;
+        project.coefficient = 0;
+        user.tag.inprogress.coefficient = 2.5;
+      };
 
       context.work.read = "project:bidpoint";
       context.personal.read = "project.not:bidpoint";

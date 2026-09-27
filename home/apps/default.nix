@@ -9,12 +9,14 @@
     ./tomat.nix
   ];
 
-  programs.imv.enable = true;
-  programs.element-desktop.enable = true;
-  programs.anki.enable = true;
-  programs.zathura.enable = true;
-  programs.ferrosonic.enable = true;
-  programs.tanin.enable = true;
+  programs = {
+    imv.enable = true;
+    element-desktop.enable = true;
+    anki.enable = true;
+    zathura.enable = true;
+    ferrosonic.enable = true;
+    tanin.enable = true;
+  };
 
   xdg.mimeApps = {
     enable = true;

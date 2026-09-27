@@ -11,15 +11,22 @@
     ../orgs
   ];
 
-  programs.nix-ld.enable = true;
-  programs.zsh.enable = true;
+  programs = {
+    nix-ld.enable = true;
+    zsh.enable = true;
 
-  programs.bandwhich.enable = true;
-  programs.sniffnet.enable = true;
-  programs.wireshark = {
-    enable = true;
-    package = pkgs.wireshark-cli;
-    dumpcap.enable = true;
+    bandwhich.enable = true;
+    sniffnet.enable = true;
+    wireshark = {
+      enable = true;
+      package = pkgs.wireshark-cli;
+      dumpcap.enable = true;
+    };
+    neovim = {
+      enable = true;
+      vimAlias = true;
+      defaultEditor = true;
+    };
   };
 
   hardware.keyboard.zsa.enable = true;
@@ -119,12 +126,6 @@
     pavucontrol
     ddcutil
   ];
-
-  programs.neovim = {
-    enable = true;
-    vimAlias = true;
-    defaultEditor = true;
-  };
 
   environment.variables = {
     EDITOR = "nvim";
