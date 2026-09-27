@@ -1,6 +1,25 @@
+# Sources and notices
+
+## Sources
+
+| Local material | Upstream repository |
+| --- | --- |
+| `SKILL.md`, `TRACKER-MARKDOWN.md` | [wayfinder-maps](https://github.com/rengwu/wayfinder-maps) |
+
+## Licenses and attribution
+
+```text
 MIT License
 
-Copyright (c) 2026 Erik Kroon
+These skills are adapted from Matt Pocock's skills repository
+(https://github.com/mattpocock/skills), Copyright (c) 2026 Matt Pocock,
+and redistributed under the same MIT License. Modifications: decoupled
+from the matt-pocock-skills framework, made language- and harness-agnostic,
+and retargeted to local file conventions (`.plan/`). The `wayfinder` skill
+diverges from upstream in three deliberate ways beyond that retargeting:
+a ticket is never deleted, only closed; `undermined_by` marks a decision
+whose premise a later ticket broke; and `out_of_scope` satisfies no
+blocking edge.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,3 +38,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+```

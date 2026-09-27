@@ -1,13 +1,41 @@
-# Third-party notices
+# Sources and notices
 
-This skill is part of PrimeStack, an independently maintained Prime Agent-native derivative.
-No upstream author or vendor endorsement is implied. Exact source pins and the per-skill derivation map live at https://github.com/erik-kroon/primestack.
+No endorsement by upstream authors or vendors is implied.
 
-## pstack
+## Sources
 
-https://github.com/cursor/plugins/tree/main/pstack
+| Local material | Upstream repository |
+| --- | --- |
+| `SKILL.md` | [PrimeStack](https://github.com/erik-kroon/primestack) |
 
-```text
+## Licenses and attribution
+
+### PrimeStack
+
+MIT License
+
+Copyright (c) 2026 Erik Kroon
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+### pstack
+
 MIT License
 
 Copyright (c) 2026 Lauren Tan
@@ -29,13 +57,9 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-```
 
-## Matt Pocock's skills
+### Matt Pocock's skills
 
-https://github.com/mattpocock/skills
-
-```text
 MIT License
 
 Copyright (c) 2026 Matt Pocock
@@ -57,13 +81,9 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-```
 
-## Ronin portability reference
+### Ronin portability reference
 
-https://github.com/drrius/ronin
-
-```text
 MIT License
 
 Copyright (c) 2026 Lauren Tan
@@ -85,4 +105,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-```
