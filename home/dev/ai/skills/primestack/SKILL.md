@@ -64,7 +64,9 @@ When several match, pick the playbook for the current uncertainty. A feature wit
 
 ### Selecting additional principles
 
-Before starting work, use `find` on `skill://primestack/principles` to select guidance for the current task. Include the outcome, current phase, upcoming decision, and relevant known facts in the query. Read selected documents in full before applying them; relevance scores are not instructions to apply every result. Repeat the search when new facts or a phase change alter which guidance applies. An empty directory or no applicable principles does not block work.
+Before starting work, use `find` on `skill://primestack/principles`. Describe the engineering concern you need guidance on in one short sentence, not the whole task. Keep details that change which guidance applies; omit project names, workflow narration, and unrelated constraints. For example: "Multiple sessions competing to control one shared device."
+
+Read selected documents in full before applying them. Scores are retrieval hints, not instructions to apply every result. If nothing matches, try one simpler formulation of the concern, then continue if no principle applies. Search again when the engineering concern changes.
 
 ## Delegation
 
