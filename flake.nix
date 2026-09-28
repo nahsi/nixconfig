@@ -53,6 +53,11 @@
 
     omp-nix.url = "git+https://git.molez.org/mandlm/omp-nix?ref=refs/tags/v18.3.5";
     omp-upstream.url = "github:can1357/oh-my-pi/v18.3.5";
+
+    led-matrix-monitoring = {
+      url = "github:MidnightJava/led-matrix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

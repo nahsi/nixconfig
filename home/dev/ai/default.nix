@@ -186,6 +186,10 @@ in
         source = ./agents;
         recursive = false;
       };
+      ".omp/agent/extensions" = {
+        source = ./extensions;
+        recursive = false;
+      };
     };
 
     # OMP resolves config.yml before saving, so it needs a writable copy, not a store symlink.
