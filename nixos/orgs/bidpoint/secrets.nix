@@ -22,8 +22,8 @@
       mode = "400";
     };
 
-    bidpointBidpoint = {
-      file = secrets/bidpoint-bidpoint.age;
+    bidpointShared = {
+      file = secrets/bidpoint.age;
       owner = config.users.users.nahsi.name;
       inherit (config.users.users.nahsi) group;
       mode = "400";
@@ -34,6 +34,6 @@
     BIDPOINT_SECRETS_infra = "${config.age.secrets.bidpointInfra.path}";
     BIDPOINT_SECRETS_staging = "${config.age.secrets.bidpointStaging.path}";
     BIDPOINT_SECRETS_production = "${config.age.secrets.bidpointProduction.path}";
-    BIDPOINT_SECRETS_bidpoint = "${config.age.secrets.bidpointBidpoint.path}";
+    BIDPOINT_SECRETS_shared = "${config.age.secrets.bidpointShared.path}";
   };
 }
