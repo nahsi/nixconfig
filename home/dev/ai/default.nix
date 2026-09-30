@@ -22,27 +22,8 @@ in
   oh-my-pi = {
     enable = true;
     # Use the Nix-native build so broker workers can re-exec OMP directly.
-    package = inputs.omp-upstream.packages.${system}.default.overrideAttrs (
-      old:
-      assert lib.assertMsg (
-        old.version == "18.3.5"
-      ) "Revisit the OMP native-stamp workaround on version bump; see PR #13506.";
-      {
-        # REMOVE on the next OMP version bump once upstream includes this fix:
-        # https://github.com/can1357/oh-my-pi/pull/13506
-        # v18.3.5's Nix build skips post-link native version stamping.
-        buildPhase =
-          lib.replaceStrings
-            [ ''echo "Compiling OMP"'' ]
-            [
-              ''
-                bun scripts/stamp-native-version.ts packages/natives/native/*.node
-                echo "Compiling OMP"
-              ''
-            ]
-            old.buildPhase;
-      }
-    );
+    # Upstream 18.4.0+ stamps the native addon; no local build override is needed.
+    package = inputs.omp-upstream.packages.${system}.default;
 
     mcp.mcpServers = {
       codebase-memory.command = lib.getExe pkgs-unstable.codebase-memory-mcp;

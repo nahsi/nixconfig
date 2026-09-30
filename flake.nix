@@ -51,8 +51,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    omp-nix.url = "git+https://git.molez.org/mandlm/omp-nix?ref=refs/tags/v18.3.5";
-    omp-upstream.url = "github:can1357/oh-my-pi/v18.3.5";
+    omp-nix.url = "git+https://git.molez.org/mandlm/omp-nix?ref=refs/tags/v18.4.4";
+    omp-upstream.url = "github:can1357/oh-my-pi/v18.4.4";
 
     led-matrix-monitoring = {
       url = "github:MidnightJava/led-matrix";

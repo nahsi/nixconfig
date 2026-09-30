@@ -620,16 +620,16 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1790517851,
-        "narHash": "sha256-KaFeeaQ/UB3a1t9wa6SJLdJedCY+AgyVEHiiBFW6Lq8=",
-        "ref": "refs/tags/v18.3.5",
-        "rev": "97954a45684b1bfcf94d0f4561249a03ac9185a7",
-        "revCount": 556,
+        "lastModified": 1790712352,
+        "narHash": "sha256-lCmw/FZVHm7zXCo7FlWiei5NVMkGrVIK+7f2zoTJDhQ=",
+        "ref": "refs/tags/v18.4.4",
+        "rev": "264bee93451063d9a12c9164e3ba77374171f5ee",
+        "revCount": 571,
         "type": "git",
         "url": "https://git.molez.org/mandlm/omp-nix"
       },
       "original": {
-        "ref": "refs/tags/v18.3.5",
+        "ref": "refs/tags/v18.4.4",
         "type": "git",
         "url": "https://git.molez.org/mandlm/omp-nix"
       }
@@ -644,16 +644,16 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1790515585,
-        "narHash": "sha256-qk2+OKX974NeXtOv7K+NwZrgpbuE+LSBIHZv+Pq96P8=",
+        "lastModified": 1790709775,
+        "narHash": "sha256-S8Oz/xYEJCIc36S9u2UWXqYYQhjFxKMMzgFiB9PRVcY=",
         "owner": "can1357",
         "repo": "oh-my-pi",
-        "rev": "ab2dcbd2abf299139db818330a94777e47d51f68",
+        "rev": "8ac1309bd8adaddc891eeb389c545345073875be",
         "type": "github"
       },
       "original": {
         "owner": "can1357",
-        "ref": "v18.3.5",
+        "ref": "v18.4.4",
         "repo": "oh-my-pi",
         "type": "github"
       }
