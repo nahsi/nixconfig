@@ -84,6 +84,7 @@ in
       tui.vimMode = true;
       composer.tokenRate = true;
       completion.notify = "off";
+      ask.notify = "off";
 
       tools = {
         approvalMode = "yolo";
