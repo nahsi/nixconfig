@@ -21,8 +21,6 @@ in
 
   oh-my-pi = {
     enable = true;
-    # Use the Nix-native build so broker workers can re-exec OMP directly.
-    # Upstream 18.4.0+ stamps the native addon; no local build override is needed.
     package = inputs.omp-upstream.packages.${system}.default;
 
     mcp.mcpServers = {
@@ -44,10 +42,10 @@ in
 
     settings = {
       modelRoles = {
-        default = "openai-codex/gpt-6-astra:low";
+        default = "openai-codex/gpt-6.1-sol:medium";
         slow = "openai-codex/gpt-6-astra:auto";
         plan = "openai-codex/gpt-6-astra:medium";
-        task = "openai-codex/gpt-6-luna";
+        task = "openai-codex/gpt-6.1-sol";
         smol = "openai-codex/gpt-6-luna";
         tiny = "local/lfm2.5-230m";
         advisor = "openai-codex/gpt-6-astra:medium";
