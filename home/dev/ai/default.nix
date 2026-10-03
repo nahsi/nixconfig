@@ -78,7 +78,10 @@ in
         light = "light-catppuccin";
       };
       symbolPreset = "nerd";
-      display.showTokenUsage = true;
+      display = {
+        showTokenUsage = true;
+        cacheMissMarker = true;
+      };
       tui.vimMode = true;
       composer.tokenRate = true;
       completion.notify = "off";
