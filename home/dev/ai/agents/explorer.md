@@ -2,7 +2,7 @@
 name: explorer
 description: Discover options and investigate unfamiliar fields through community discussions, documentation, repositories, and other relevant sources. Follow leads, uncover adjacent approaches, and return findings that improve both the answer and the framing.
 tools: [read, find, grep, glob, web_search]
-model: "@smol"
+model: "@local"
 thinking-level: auto
 spawns: []
 output: true

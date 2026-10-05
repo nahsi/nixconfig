@@ -43,6 +43,69 @@
         };
       }
       {
+        id = "Qwen/Qwen3.8-Flash-Next";
+        name = "Qwen3.8 Flash Next";
+        reasoning = true;
+        input = [
+          "text"
+          "image"
+        ];
+        contextWindow = 262144;
+        maxTokens = 16384;
+        cost = {
+          input = 0;
+          output = 0;
+          cacheRead = 0;
+          cacheWrite = 0;
+        };
+        thinking = {
+          mode = "effort";
+          efforts = [
+            "low"
+            "medium"
+            "xhigh"
+          ];
+          defaultLevel = "medium";
+          requiresEffort = false;
+        };
+        compat = {
+          supportsDeveloperRole = false;
+          supportsMultipleSystemMessages = false;
+          supportsReasoningEffort = true;
+          thinkingFormat = "qwen-chat-template";
+          qwenTemplateReasoningEffort = true;
+          reasoningEffortMap = {
+            minimal = "low";
+            high = "xhigh";
+            max = "xhigh";
+          };
+          reasoningContentField = "reasoning_content";
+          replayReasoningContent = true;
+          maxTokensField = "max_tokens";
+          alwaysSendMaxTokens = true;
+          supportsForcedToolChoice = false;
+          supportsStrictMode = false;
+          # Flash-Next's non-thinking profile; whenThinking overrides it below.
+          # Send sampling explicitly because Halogen otherwise defaults to greedy.
+          # https://huggingface.co/Qwen/Qwen3.8-Flash-Next
+          extraBody = {
+            chat_template_kwargs.preserve_thinking = true;
+            temperature = 0.7;
+            top_p = 0.8;
+            top_k = 20;
+            min_p = 0.0;
+            presence_penalty = 1.5;
+            frequency_penalty = 0.0;
+            repetition_penalty = 1.0;
+          };
+          whenThinking.extraBody = {
+            temperature = 1.0;
+            top_p = 0.95;
+            presence_penalty = 0.0;
+          };
+        };
+      }
+      {
         id = "dealignai/Bonsai-2-27B";
         name = "Bonsai 2 27B";
         reasoning = true;

@@ -45,11 +45,12 @@ in
         default = "openai-codex/gpt-6.1-sol:medium";
         slow = "openai-codex/gpt-6-astra:auto";
         plan = "openai-codex/gpt-6-astra:medium";
-        task = "openai-codex/gpt-6.1-sol";
+        task = "nahsilabs/Qwen/Qwen3.8-Flash-Next";
+        musle = "openai-codex/gpt-6.1-sol";
         smol = "openai-codex/gpt-6-luna";
         tiny = "local/lfm2.5-230m";
         advisor = "openai-codex/gpt-6-astra:medium";
-        local = "nahsilabs/Qwen/Qwen3.8-27B";
+        local = "nahsilabs/Qwen/Qwen3.8-Flash-Next";
         judge = "openrouter/~typesafe/jev-latest";
         web = "web/parallel";
       };

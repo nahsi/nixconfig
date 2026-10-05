@@ -2,7 +2,7 @@
 name: reviewer
 description: Review code, plans, designs, decisions, documents, and evidence for correctness, risks, and gaps against the assigned purpose and criteria.
 tools: [read, find, grep, glob, bash, web_search]
-model: "@slow"
+model: "@muscle"
 thinking-level: auto
 spawns: [scout]
 output: true
