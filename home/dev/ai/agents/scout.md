@@ -2,7 +2,7 @@
 name: scout
 description: Investigate specific questions across code, documentation, and other source material. Locate, trace, summarize, compare, or extract information and return findings with precise references.
 tools: [read, find, grep, glob, web_search]
-model: "@local"
+model: "@smol"
 thinking-level: auto
 spawns: []
 read-summarize: false
