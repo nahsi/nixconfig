@@ -28,7 +28,7 @@
       "inputs": {
         "flake-parts": "flake-parts",
         "nixpkgs": [
-          "omp-upstream",
+          "omp",
           "nixpkgs"
         ],
         "systems": "systems_2",
@@ -52,7 +52,7 @@
       "inputs": {
         "flake-parts": "flake-parts_2",
         "nixpkgs": [
-          "omp-upstream",
+          "omp",
           "nixpkgs-darwin-x64"
         ],
         "systems": "systems_3",
@@ -197,7 +197,7 @@
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
-          "omp-upstream",
+          "omp",
           "bun2nix",
           "nixpkgs"
         ]
@@ -219,7 +219,7 @@
     "flake-parts_2": {
       "inputs": {
         "nixpkgs-lib": [
-          "omp-upstream",
+          "omp",
           "bun2nix-darwin-x64",
           "nixpkgs"
         ]
@@ -443,7 +443,7 @@
     "nix-bun": {
       "inputs": {
         "nixpkgs": [
-          "omp-upstream",
+          "omp",
           "nixpkgs"
         ]
       },
@@ -563,22 +563,6 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1774709303,
-        "narHash": "sha256-D3Q07BbIA2KnTcSXIqqu9P586uWxN74zNoCH3h2ESHg=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "8110df5ad7abf5d4c0f6fb0f8f978390e77f9685",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_4": {
-      "locked": {
         "lastModified": 1786384358,
         "narHash": "sha256-RzPPiWeUtuvymnpuEWsdtzli5w4kjZs49FqEs3/1u+I=",
         "owner": "NixOS",
@@ -615,45 +599,26 @@
         "type": "github"
       }
     },
-    "omp-nix": {
-      "inputs": {
-        "nixpkgs": "nixpkgs_3"
-      },
-      "locked": {
-        "lastModified": 1790712352,
-        "narHash": "sha256-lCmw/FZVHm7zXCo7FlWiei5NVMkGrVIK+7f2zoTJDhQ=",
-        "ref": "refs/tags/v18.4.4",
-        "rev": "264bee93451063d9a12c9164e3ba77374171f5ee",
-        "revCount": 571,
-        "type": "git",
-        "url": "https://git.molez.org/mandlm/omp-nix"
-      },
-      "original": {
-        "ref": "refs/tags/v18.4.4",
-        "type": "git",
-        "url": "https://git.molez.org/mandlm/omp-nix"
-      }
-    },
-    "omp-upstream": {
+    "omp": {
       "inputs": {
         "bun2nix": "bun2nix",
         "bun2nix-darwin-x64": "bun2nix-darwin-x64",
         "nix-bun": "nix-bun",
-        "nixpkgs": "nixpkgs_4",
+        "nixpkgs": "nixpkgs_3",
         "nixpkgs-darwin-x64": "nixpkgs-darwin-x64",
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1790709775,
-        "narHash": "sha256-S8Oz/xYEJCIc36S9u2UWXqYYQhjFxKMMzgFiB9PRVcY=",
+        "lastModified": 1791128622,
+        "narHash": "sha256-w0rntDqWRfqz5T8Y8XOJSGKrgzVsgPyAJEaIsnljTzQ=",
         "owner": "can1357",
         "repo": "oh-my-pi",
-        "rev": "8ac1309bd8adaddc891eeb389c545345073875be",
+        "rev": "2a2c6dcbbb558c0f8145f67f28b3370984f2bf60",
         "type": "github"
       },
       "original": {
         "owner": "can1357",
-        "ref": "v18.4.4",
+        "ref": "v18.6.1",
         "repo": "oh-my-pi",
         "type": "github"
       }
@@ -718,8 +683,7 @@
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nvf": "nvf",
-        "omp-nix": "omp-nix",
-        "omp-upstream": "omp-upstream",
+        "omp": "omp",
         "ragenix": "ragenix",
         "treefmt-nix": "treefmt-nix_3"
       }
@@ -748,7 +712,7 @@
     "rust-overlay_2": {
       "inputs": {
         "nixpkgs": [
-          "omp-upstream",
+          "omp",
           "nixpkgs"
         ]
       },
@@ -865,7 +829,7 @@
     "treefmt-nix": {
       "inputs": {
         "nixpkgs": [
-          "omp-upstream",
+          "omp",
           "bun2nix",
           "nixpkgs"
         ]
@@ -887,7 +851,7 @@
     "treefmt-nix_2": {
       "inputs": {
         "nixpkgs": [
-          "omp-upstream",
+          "omp",
           "bun2nix-darwin-x64",
           "nixpkgs"
         ]

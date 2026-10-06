@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   lib,
   inputs,
@@ -13,40 +12,22 @@ let
   };
 
   localPkgs = inputs.self.packages.${system};
+  yamlFormat = pkgs.formats.yaml { };
 in
 {
   imports = [
-    inputs.omp-nix.homeManagerModules.omp
+    inputs.omp.homeManagerModules.omp
   ];
 
-  oh-my-pi = {
+  programs.omp = {
     enable = true;
-    package = inputs.omp-upstream.packages.${system}.default;
-
-    mcp.mcpServers = {
-      codebase-memory.command = lib.getExe pkgs-unstable.codebase-memory-mcp;
-    };
-
-    appendSystemPrompt = ''
-      Delegation transfers execution ownership of that work slice to the subagent.
-      Until it finishes, the parent MUST NOT investigate, edit, validate, or redelegate the same scope.
-      The parent may work only on explicitly disjoint slices; if none exist, it MUST wait.
-
-      Prefer codebase-memory for codebase-wide structural exploration and relationship tracing.
-      Treat its graph as an index: verify current source before editing or making exact claims.
-
-      Conventional commits style applied only to PR title and commits to main, commits inside branch do not use conventional commits.
-    '';
-
-    models = import ./models.nix;
-
     settings = {
       modelRoles = {
         default = "openai-codex/gpt-6.1-sol:medium";
         slow = "openai-codex/gpt-6-astra:auto";
         plan = "openai-codex/gpt-6-astra:medium";
         task = "nahsilabs/Qwen/Qwen3.8-Flash-Next";
-        musle = "openai-codex/gpt-6.1-sol";
+        strong = "openai-codex/gpt-6.1-sol";
         smol = "openai-codex/gpt-6-luna";
         tiny = "local/lfm2.5-230m";
         advisor = "openai-codex/gpt-6-astra:medium";
@@ -82,6 +63,7 @@ in
       display = {
         showTokenUsage = true;
         cacheMissMarker = true;
+        subagentLivePreview = true;
       };
       tui.vimMode = true;
       composer.tokenRate = true;
@@ -160,7 +142,20 @@ in
     ];
 
     file = {
-      ".omp/agent/config.yml".enable = false;
+      ".omp/agent/models.yml".source = yamlFormat.generate "omp-models.yml" (import ./models.nix);
+      ".omp/agent/mcp.json".text = builtins.toJSON {
+        mcpServers.codebase-memory.command = lib.getExe pkgs-unstable.codebase-memory-mcp;
+      };
+      ".omp/agent/APPEND_SYSTEM.md".text = ''
+        Delegation transfers execution ownership of that work slice to the subagent.
+        Until it finishes, the parent MUST NOT investigate, edit, validate, or redelegate the same scope.
+        The parent may work only on explicitly disjoint slices; if none exist, it MUST wait.
+
+        Prefer codebase-memory for codebase-wide structural exploration and relationship tracing.
+        Treat its graph as an index: verify current source before editing or making exact claims.
+
+        Conventional commits style applied only to PR title and commits to main, commits inside branch do not use conventional commits.
+      '';
 
       ".omp/agent/skills" = {
         source = ./skills;
@@ -176,15 +171,5 @@ in
       };
     };
 
-    # OMP resolves config.yml before saving, so it needs a writable copy, not a store symlink.
-    activation.ompWritableConfig =
-      let
-        yamlFormat = pkgs.formats.yaml { };
-        ompConfig = yamlFormat.generate "omp-config.yml" config.oh-my-pi.settings;
-      in
-      lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-        $DRY_RUN_CMD mkdir -p "$HOME/.omp/agent"
-        $DRY_RUN_CMD install -m 600 ${ompConfig} "$HOME/.omp/agent/config.yml"
-      '';
   };
 }
