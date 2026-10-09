@@ -40,7 +40,6 @@ in
     (bind (modKey "Q") (exec "qutebrowser"))
     (bind (modKey "C") (mkLuaInline "hl.dsp.window.close()"))
     (bind (modKey "SHIFT + M") (mkLuaInline "hl.dsp.exit()"))
-    (bind (modKey "E") (exec "dolphin"))
     (bind (modKey "V") (mkLuaInline ''hl.dsp.window.float({ action = "toggle" })''))
     (bind (modKey "R") (exec "fuzzel"))
     (bind (modKey "P") (mkLuaInline "hl.dsp.window.pseudo()"))

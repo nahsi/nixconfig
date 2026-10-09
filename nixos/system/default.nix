@@ -16,7 +16,6 @@
     zsh.enable = true;
 
     bandwhich.enable = true;
-    sniffnet.enable = true;
     wireshark = {
       enable = true;
       package = pkgs.wireshark-cli;

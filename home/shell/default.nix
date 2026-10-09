@@ -180,6 +180,4 @@
     };
     nix-index-database.comma.enable = true;
   };
-
-  services.pueue.enable = true;
 }

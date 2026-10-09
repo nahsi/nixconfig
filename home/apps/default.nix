@@ -15,7 +15,6 @@
     anki.enable = true;
     zathura.enable = true;
     ferrosonic.enable = true;
-    tanin.enable = true;
   };
 
   xdg.mimeApps = {

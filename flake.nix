@@ -51,7 +51,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    omp.url = "github:can1357/oh-my-pi/v18.6.1";
+    omp.url = "github:can1357/oh-my-pi/v18.8.7";
 
     led-matrix-monitoring = {
       url = "github:MidnightJava/led-matrix";
@@ -88,13 +88,11 @@
     in
     {
       packages.${system} = {
-        ketch = pkgs.callPackage ./pkgs/ketch { };
         negpy = pkgs.callPackage ./pkgs/negpy { };
         kroki-cli = pkgs.callPackage ./pkgs/kroki-cli { };
         ferrosonic-ng = pkgs.callPackage ./pkgs/ferrosonic-ng { };
         mcp-victorialogs = pkgs.callPackage ./pkgs/mcp-victorialogs { };
         mcp-victoriametrics = pkgs.callPackage ./pkgs/mcp-victoriametrics { };
-        tanin = pkgs.callPackage ./pkgs/tanin { };
         wayfinder-maps = pkgs.callPackage ./pkgs/wayfinder-maps { };
       };
 
