@@ -155,6 +155,7 @@ in
         battery_format = "IconAndPercentage";
         remove_airplane_btn = true;
         remove_idle_btn = true;
+        keyboard_backlight_slider = true;
         indicators = [
           "PowerProfile"
           "Audio"
