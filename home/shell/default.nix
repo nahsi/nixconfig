@@ -5,8 +5,11 @@
   ...
 }:
 {
+  imports = [ ./navi ];
+
   home.packages = with pkgs; [
     jq
+    fx
     yq-go
     fd
     file
@@ -25,7 +28,7 @@
     openssl
     skopeo
 
-    atool
+    ouch
     p7zip
     zip
     unzip

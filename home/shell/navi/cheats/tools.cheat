@@ -1,0 +1,102 @@
+; Ctrl-G in Zsh selects a recipe for editing before execution.
+; Search by task or tool. Paths with spaces are quoted in the recipes.
+; Plain navi executes the selection; navi --print only prints it.
+
+% storage, disk, duf, dust
+
+# Check free space on mounted filesystems
+duf
+
+# Find the largest directories under a path
+dust -n 20 "<directory>"
+
+$ directory: printf '.\n'; fd --type d --hidden --exclude .git
+
+% files, search, fd, ripgrep
+
+# Find files by a name pattern, including hidden files
+fd --type f --hidden --exclude .git -- "<pattern>"
+
+# Search file contents for literal text
+rg --fixed-strings --line-number -- "<text>" .
+
+# Search file contents with a regular expression
+rg --line-number -- "<pattern>" .
+
+# Browse files and directories interactively
+yazi
+
+% json, data, fx, jq, yq
+
+# Explore a JSON file interactively
+fx "<json_file>"
+
+# Explore JSON output from a command interactively
+<json_command> | fx
+
+# Extract or transform fields in a JSON file
+jq '<filter>' "<json_file>"
+
+# Convert a YAML file to JSON for interactive exploration
+yq -o=json '.' "<yaml_file>" | fx
+
+$ json_file: fd --type f --extension json --hidden --exclude .git
+$ yaml_file: fd --type f --extension yaml --extension yml --hidden --exclude .git
+
+% archives, compression, ouch
+
+# List the contents of an archive without extracting it
+ouch list "<archive>"
+
+# Extract an archive into a destination directory
+ouch decompress "<archive>" --dir "<destination>"
+
+# Compress a file or directory; the output extension chooses the format
+ouch compress "<source>" "<output_archive>"
+
+$ archive: fd --type f --hidden --exclude .git --extension zip --extension tar --extension gz --extension xz --extension bz2 --extension zst --extension 7z --extension rar
+$ source: fd --hidden --exclude .git
+
+% network, dns, http, doggo, xh, gping
+
+# Query DNS records for a domain
+doggo "<domain>" <record_type>
+
+# Send an HTTP GET request and inspect the response
+xh GET "<url>"
+
+# Graph latency to a host
+gping "<host>"
+
+$ record_type: printf 'A\nAAAA\nMX\nTXT\nNS\nCNAME\n'
+
+% processes, monitoring, procs, btop, viddy
+
+# Find processes by name
+procs "<process>"
+
+# Monitor CPU, memory, disks, and processes interactively
+btop
+
+# Repeat a command and highlight changes
+viddy --differences '<command>'
+
+% performance, benchmarks, hyperfine
+
+# Compare the execution time of two commands
+hyperfine --warmup 3 '<first_command>' '<second_command>'
+
+% containers, images, dive
+
+# Inspect container image layers and wasted space
+dive "<image>"
+
+% help, reference, tldr, glow
+
+# Look up practical command examples
+tldr "<tool>"
+
+# Read a Markdown document in the terminal
+glow "<markdown_file>"
+
+$ markdown_file: fd --type f --extension md --hidden --exclude .git

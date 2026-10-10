@@ -1,0 +1,29 @@
+; Inspection recipes adapted from https://github.com/denisidoro/cheats/blob/master/container/kubernetes.cheat
+; Upstream license: CC0-1.0, https://github.com/denisidoro/cheats/blob/master/LICENSE
+; Namespace and resource names are prompted; no kubens dependency.
+
+% kubernetes, k8s, kubectl, k9s
+
+# Browse Kubernetes resources interactively
+k9s
+
+# Show Kubernetes contexts and the active context
+kubectl config get-contexts
+
+# Show the current Kubernetes context
+kubectl config current-context
+
+# List Kubernetes pods across all namespaces
+kubectl get pods --all-namespaces
+
+# List Kubernetes pods in a namespace with node and IP details
+kubectl get pods --namespace "<namespace>" -o wide
+
+# Inspect details of a Kubernetes resource
+kubectl describe "<resource>/<name>" --namespace "<namespace>"
+
+# Follow logs from a Kubernetes pod
+kubectl logs --follow "<pod>" --namespace "<namespace>"
+
+# Look up Kubernetes resource fields and documentation
+kubectl explain "<resource>"

@@ -1,0 +1,20 @@
+; Inspection recipes adapted from https://github.com/denisidoro/cheats/blob/master/code/git.cheat
+; Upstream license: CC0-1.0, https://github.com/denisidoro/cheats/blob/master/LICENSE
+; Local additions: lazygit and the configured delta pager.
+
+% git, review, lazygit, delta
+
+# Review and stage changes interactively
+lazygit
+
+# Review unstaged changes with the configured delta pager
+git diff
+
+# Inspect working tree and staging status
+git status
+
+# Show the commit graph across all branches
+git log --all --decorate --oneline --graph
+
+# List repository remotes and their URLs
+git remote --verbose
