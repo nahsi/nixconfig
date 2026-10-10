@@ -72,10 +72,10 @@ in
     (bind (modKey "mouse_up") (mkLuaInline ''hl.dsp.focus({ workspace = "e-1" })''))
 
     # Screenshots
-    (bind (modKey "PRINT") (exec "hyprshot -m output --clipboard-only"))
-    (bind (secondModKey "SHIFT + P") (exec "hyprshot -m output --clipboard-only"))
-    (bind "PRINT" (exec "hyprshot -m region --clipboard-only"))
-    (bind (secondModKey "P") (exec "hyprshot -m region --clipboard-only"))
+    (bind (modKey "PRINT") (exec "hyprshot -m output --clipboard-only -s"))
+    (bind (secondModKey "SHIFT + P") (exec "hyprshot -m output --clipboard-only -s"))
+    (bind "PRINT" (exec "hyprshot -m region --clipboard-only -s"))
+    (bind (secondModKey "P") (exec "hyprshot -m region --clipboard-only -s"))
   ]
   # Workspace bindings 1-9
   ++ (builtins.map (
