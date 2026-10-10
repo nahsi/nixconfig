@@ -172,4 +172,6 @@ in
     };
 
   };
+
+  programs.zsh.zsh-abbr.abbreviations.ompl = "omp --model nahsilabs/Qwen/Qwen3.8-Flash-Next";
 }
