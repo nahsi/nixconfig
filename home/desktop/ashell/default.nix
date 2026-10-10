@@ -178,7 +178,15 @@ in
       animations.enabled = true;
 
       appearance = {
-        bar.surface = "solid";
+        bar = {
+          surface = "solid";
+          padding = [
+            0
+            0
+            0
+            0
+          ];
+        };
         scale_factor = 1.2;
         success_color = "#a6e3a1";
         warning_color = "#f9e2af";
