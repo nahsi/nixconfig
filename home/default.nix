@@ -11,6 +11,7 @@
     ./ragenix.nix
 
     ./modules
+    ./ai
     ./desktop
     ./dev
     ./apps

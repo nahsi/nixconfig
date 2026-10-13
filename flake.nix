@@ -52,6 +52,7 @@
     };
 
     omp.url = "github:can1357/oh-my-pi/v18.8.7";
+    hermes-agent.url = "github:NousResearch/hermes-agent";
 
     led-matrix-monitoring = {
       url = "github:MidnightJava/led-matrix";
