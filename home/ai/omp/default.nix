@@ -33,6 +33,11 @@ in
       localPkgs.mcp-victorialogs
       localPkgs.mcp-victoriametrics
 
+      (pkgs.python3.withPackages (ps: [
+        ps.pyyaml
+        ps.razdel
+        ps.pymorphy3
+      ]))
       pkgs.python3Packages.trafilatura
       localPkgs.wayfinder-maps
 
