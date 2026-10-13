@@ -26,8 +26,7 @@ in
         default = "openai-codex/gpt-6.1-sol:medium";
         slow = "openai-codex/gpt-6-astra:auto";
         plan = "openai-codex/gpt-6-astra:medium";
-        task = "nahsilabs/Qwen/Qwen3.8-Flash-Next";
-        strong = "openai-codex/gpt-6.1-sol";
+        task = "openai-codex/gpt-6.1-sol";
         smol = "openai-codex/gpt-6-luna";
         tiny = "local/lfm2.5-230m";
         advisor = "openai-codex/gpt-6-astra:medium";
