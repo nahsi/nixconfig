@@ -25,18 +25,22 @@ _: {
       workspace = "special:music silent";
     }
 
-    # Pin apps to workspaces
+    # Workspaces: Hermes 3, Super Productivity 4, Element 5, Slack 6.
     {
-      match.class = "^superproductivity$";
+      match.class = "^hermes$";
       workspace = "3 silent";
     }
     {
-      match.class = "^element$";
+      match.class = "^superproductivity$";
       workspace = "4 silent";
     }
     {
-      match.class = "^slack$";
+      match.class = "^element$";
       workspace = "5 silent";
+    }
+    {
+      match.class = "^slack$";
+      workspace = "6 silent";
     }
   ];
 }
