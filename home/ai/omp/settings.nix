@@ -4,7 +4,7 @@
     slow = "openai-codex/gpt-6-astra:auto";
     plan = "openai-codex/gpt-6-astra:medium";
     task = "openai-codex/gpt-6.1-sol";
-    smol = "openai-codex/gpt-6-luna";
+    smol = "openai-codex/gpt-6.1-sol:low";
     tiny = "local/lfm2.5-230m";
     advisor = "openai-codex/gpt-6-astra:medium";
     local = "nahsilabs/Qwen/Qwen3.8-Flash-Next";
@@ -51,7 +51,6 @@
     approval.retain = "deny";
   };
   secrets.enabled = true;
-  # Home Manager replaces runtime settings, so preserve the Auto-QA opt-out.
   dev.autoqaConsent = "denied";
   eval.autoBackground.enabled = true;
   bashInterceptor.enabled = true;
@@ -59,6 +58,28 @@
   find.enabled = "on";
   computer.enabled = false;
   searxng.endpoint = "https://search.nahsi.dev";
+
+  memory.backend = "hindsight";
+  hindsight = {
+    apiUrl = "https://hindsight.nahsi.dev";
+    bankId = "oh-my-pi";
+    scoping = "per-project-tagged";
+    # Leave bankMission and retainMission unset; the shared bank owns policy.
+    autoRetain = true;
+    retainMode = "full-session";
+    retainEveryNTurns = 3;
+    autoRecall = true;
+    recallTypes = [
+      "world"
+      "experience"
+      "observation"
+    ];
+    recallBudget = "mid";
+    recallMaxTokens = 1024;
+    mentalModelsEnabled = true;
+    mentalModelAutoSeed = false;
+    mentalModelMaxRenderChars = 16000;
+  };
 
   task = {
     disabledAgents = [
