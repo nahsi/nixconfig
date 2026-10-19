@@ -8,7 +8,7 @@
     tiny = "local/lfm2.5-230m";
     advisor = "openai-codex/gpt-6-astra:medium";
     local = "nahsilabs/Qwen/Qwen3.8-Flash-Next";
-    judge = "openrouter/~typesafe/jev-latest";
+    judge = "openrouter/typesafe/jev-1.14";
     web = "web/parallel";
   };
   defaultThinkingLevel = "medium";
@@ -51,6 +51,8 @@
     approval.retain = "deny";
   };
   secrets.enabled = true;
+  # Home Manager replaces runtime settings, so preserve the Auto-QA opt-out.
+  dev.autoqaConsent = "denied";
   eval.autoBackground.enabled = true;
   bashInterceptor.enabled = true;
   astGrep.enabled = true;

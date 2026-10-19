@@ -51,7 +51,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    omp.url = "github:can1357/oh-my-pi/v18.8.7";
+    omp.url = "github:can1357/oh-my-pi/v18.12.2";
     hermes-agent.url = "github:NousResearch/hermes-agent";
 
     led-matrix-monitoring = {
