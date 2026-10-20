@@ -64,6 +64,8 @@
     apiUrl = "https://hindsight.nahsi.dev";
     bankId = "oh-my-pi";
     scoping = "per-project-tagged";
+    recallTimeoutMs = 120000;
+    reflectTimeoutMs = 660000;
     # Leave bankMission and retainMission unset; the shared bank owns policy.
     autoRetain = true;
     retainMode = "full-session";
