@@ -20,7 +20,10 @@
     "gemini"
     "github"
   ];
-  providers.streamFirstEventTimeoutSeconds = 300;
+  providers = {
+    streamFirstEventTimeoutSeconds = 300;
+    autoThinkingMaxEffort = "high";
+  };
   retry.fallbackChains = {
     web = [
       "web/exa"
@@ -89,9 +92,8 @@
       "security-reviewer"
     ];
     maxConcurrency = 4;
-    enableEffort = true;
+    enableEffort = false;
     enableLsp = true;
-    maxEffort = "high";
     isolation.enabled = true;
     showResolvedModelBadge = true;
   };
