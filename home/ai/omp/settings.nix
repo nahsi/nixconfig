@@ -1,6 +1,6 @@
 {
   modelRoles = {
-    default = "openai-codex/gpt-6.1-sol:medium";
+    default = "anthropic/claude-opus-5-5:auto";
     slow = "openai-codex/gpt-6-astra:auto";
     plan = "openai-codex/gpt-6-astra:medium";
     task = "openai-codex/gpt-6.1-sol";
