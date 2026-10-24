@@ -7,6 +7,7 @@
     ./kdeconnect.nix
     ./taskwarrior.nix
     ./tomat.nix
+    ./sendspin.nix
   ];
 
   programs = {

@@ -95,6 +95,7 @@
         mcp-victorialogs = pkgs.callPackage ./pkgs/mcp-victorialogs { };
         mcp-victoriametrics = pkgs.callPackage ./pkgs/mcp-victoriametrics { };
         wayfinder-maps = pkgs.callPackage ./pkgs/wayfinder-maps { };
+        sendspin = inputs.nixpkgs-unstable.legacyPackages.${system}.callPackage ./pkgs/sendspin { };
       };
 
       formatter.${system} = treefmtEval.config.build.wrapper;
