@@ -43,6 +43,10 @@
       (pkgs.writeTextDir "lib/udev/rules.d/70-framework-led-matrix.rules" ''
         SUBSYSTEM=="tty", ATTRS{idVendor}=="32ac", ATTRS{idProduct}=="0020", MODE="0660", TAG+="uaccess"
       '')
+      # Office dock NIC as office_dock.device; Sendspin runs only while docked.
+      (pkgs.writeTextDir "lib/udev/rules.d/70-office-dock.rules" ''
+        SUBSYSTEM=="net", ATTR{address}=="00:e0:4c:f3:b3:f5", TAG+="systemd", ENV{SYSTEMD_ALIAS}+="/office_dock"
+      '')
     ];
   };
 

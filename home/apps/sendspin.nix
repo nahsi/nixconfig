@@ -3,6 +3,7 @@
   services.sendspin = {
     enable = true;
     package = inputs.self.packages.${system}.sendspin;
+    bindToDevice = "office_dock.device";
     extraArgs = [
       "--name"
       "Framework"

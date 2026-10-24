@@ -43,6 +43,13 @@ in
         starting at boot also requires user lingering outside Home Manager.
       '';
     };
+
+    bindToDevice = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = null;
+      example = "office_dock.device";
+      description = "Systemd device unit the daemon runs only while present.";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -56,8 +63,9 @@ in
       Unit = {
         Description = "Sendspin audio player";
         Documentation = [ "https://github.com/Sendspin/sendspin-python-cli" ];
-        After = [ cfg.systemdTarget ];
+        After = [ cfg.systemdTarget ] ++ lib.optional (cfg.bindToDevice != null) cfg.bindToDevice;
         PartOf = [ cfg.systemdTarget ];
+        BindsTo = lib.optional (cfg.bindToDevice != null) cfg.bindToDevice;
       };
       Service = {
         ExecStart = escapeExecArgs (
@@ -70,7 +78,10 @@ in
         Restart = "on-failure";
         RestartSec = 5;
       };
-      Install.WantedBy = [ cfg.systemdTarget ];
+      Install.WantedBy = [
+        cfg.systemdTarget
+      ]
+      ++ lib.optional (cfg.bindToDevice != null) cfg.bindToDevice;
     };
   };
 }
