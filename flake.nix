@@ -12,7 +12,7 @@
     };
 
     lanzaboote = {
-      url = "github:nix-community/lanzaboote/v1.1.0";
+      url = "github:nix-community/lanzaboote/v1.2.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -22,7 +22,7 @@
     };
 
     catppuccin = {
-      url = "github:catppuccin/nix/v26.05";
+      url = "github:catppuccin/nix/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -51,7 +51,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    omp.url = "github:can1357/oh-my-pi/v18.12.5";
+    omp.url = "github:can1357/oh-my-pi/v18.12.6";
     hermes-agent.url = "github:NousResearch/hermes-agent";
 
     led-matrix-monitoring = {
