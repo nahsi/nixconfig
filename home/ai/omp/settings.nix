@@ -65,7 +65,7 @@
   memory.backend = "hindsight";
   hindsight = {
     apiUrl = "https://hindsight.nahsi.dev";
-    bankId = "oh-my-pi";
+    bankId = "personal";
     scoping = "per-project-tagged";
     recallTimeoutMs = 120000;
     reflectTimeoutMs = 660000;
