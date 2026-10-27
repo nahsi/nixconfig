@@ -59,7 +59,6 @@ in
     wl-clipboard
     brightnessctl
     playerctl
-    chromium
     slack
     keymapp
     inputs.nixpkgs-unstable.legacyPackages.${system}.super-productivity
