@@ -51,7 +51,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    omp.url = "github:can1357/oh-my-pi/v18.12.6";
+    omp.url = "github:can1357/oh-my-pi/v18.16.0";
     hermes-agent.url = "github:NousResearch/hermes-agent";
 
     led-matrix-monitoring = {
@@ -96,6 +96,7 @@
         mcp-victoriametrics = pkgs.callPackage ./pkgs/mcp-victoriametrics { };
         wayfinder-maps = pkgs.callPackage ./pkgs/wayfinder-maps { };
         sendspin = inputs.nixpkgs-unstable.legacyPackages.${system}.callPackage ./pkgs/sendspin { };
+        tern = pkgs.callPackage ./pkgs/tern { };
       };
 
       formatter.${system} = treefmtEval.config.build.wrapper;
