@@ -27,6 +27,12 @@ up:
 upp i:
   nix flake update {{i}}
 
+# Add a signed-in download of Tern to the store and print its hash for pkgs/tern
+# usage: just tern ~/Downloads/Tern-0.9.11-linux-x86_64.tar.gz
+tern file:
+  nix-store --add-fixed sha256 {{file}}
+  nix hash file --type sha256 --sri {{file}}
+
 history:
   nix profile history --profile /nix/var/nix/profiles/system
 

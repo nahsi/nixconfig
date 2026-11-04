@@ -8,6 +8,7 @@
     ./taskwarrior.nix
     ./tomat.nix
     ./sendspin.nix
+    ./tern.nix
   ];
 
   programs = {
