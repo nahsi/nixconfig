@@ -168,6 +168,16 @@
           };
         };
       }
+      {
+        id = "Qwen/Qwen3-TTS";
+        name = "Qwen3 TTS";
+        api = "openai-speech";
+      }
+      {
+        id = "nvidia/nemotron-3.5-asr-streaming-0.6b";
+        name = "Nemotron 3.5 ASR";
+        api = "openai-transcriptions";
+      }
     ];
   };
 }

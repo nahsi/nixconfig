@@ -8,7 +8,10 @@
     tiny = "local/lfm2.5-230m";
     advisor = "openai-codex/gpt-6-astra:medium";
     local = "nahsilabs/Qwen/Qwen3.8-Flash-Next";
+    commit = "@local";
     judge = "openrouter/typesafe/jev-1.14";
+    speech = "nahsilabs/Qwen/Qwen3-TTS";
+    dictation = "nahsilabs/nvidia/nemotron-3.5-asr-streaming-0.6b";
     web = "web/parallel";
   };
   defaultThinkingLevel = "medium";
@@ -31,6 +34,8 @@
       "openai-codex/gpt-6-luna"
     ];
     tiny = [ ];
+    speech = [ ];
+    dictation = [ ];
   };
 
   personality = "pragmatic";
@@ -47,6 +52,8 @@
   tui.vimMode = true;
   composer.tokenRate = true;
   completion.notify = "off";
+  stt.enabled = true;
+  speechgen.enabled = true;
   ask.notify = "off";
 
   tools = {
