@@ -9,7 +9,7 @@
     advisor = "openai-codex/gpt-6-astra:medium";
     local = "nahsilabs/Qwen/Qwen3.8-Flash-Next";
     commit = "@local";
-    judge = "openrouter/typesafe/jev-1.14";
+    judge = "nahsilabs/LiquidAI/d1-Omni-2B";
     speech = "nahsilabs/Qwen/Qwen3-TTS";
     dictation = "nahsilabs/nvidia/nemotron-3.5-asr-streaming-0.6b";
     web = "web/parallel";
@@ -33,10 +33,12 @@
       "web/duckduckgo"
       "openai-codex/gpt-6-luna"
     ];
+    judge = [ "openrouter/typesafe/jev-1.14" ];
     tiny = [ ];
     speech = [ ];
     dictation = [ ];
   };
+  judgment.attemptTimeoutMs = 15000;
 
   personality = "pragmatic";
   theme = {

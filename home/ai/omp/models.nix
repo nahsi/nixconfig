@@ -169,6 +169,50 @@
         };
       }
       {
+        id = "LiquidAI/LFM3-Omni-2B";
+        name = "LFM3 Omni 2B";
+        reasoning = false;
+        input = [
+          "text"
+          "image"
+        ];
+        contextWindow = 32768;
+        maxTokens = 4096;
+        cost = {
+          input = 0;
+          output = 0;
+          cacheRead = 0;
+          cacheWrite = 0;
+        };
+        compat.extraBody.temperature = 0;
+      }
+      {
+        id = "LiquidAI/d1-Omni-2B";
+        name = "Liquid d1 Omni 2B";
+        api = "typesafe";
+        baseUrl = "https://ai.nahsi.dev";
+        reasoning = false;
+        input = [ "text" ];
+        contextWindow = 32768;
+        cost = {
+          input = 0;
+          output = 0;
+          cacheRead = 0;
+          cacheWrite = 0;
+        };
+      }
+      {
+        id = "LiquidAI/LFM3-Omni-2B-TTS";
+        name = "LFM3 Omni 2B TTS";
+        api = "openai-speech";
+        cost = {
+          input = 0;
+          output = 0;
+          cacheRead = 0;
+          cacheWrite = 0;
+        };
+      }
+      {
         id = "Qwen/Qwen3-TTS";
         name = "Qwen3 TTS";
         api = "openai-speech";
