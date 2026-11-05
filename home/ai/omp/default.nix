@@ -13,6 +13,7 @@ let
 
   localPkgs = inputs.self.packages.${system};
   yamlFormat = pkgs.formats.yaml { };
+  incognito = yamlFormat.generate "omp-incognito.yml" { memory.backend = "off"; };
 in
 {
   imports = [
@@ -85,5 +86,8 @@ in
 
   };
 
-  programs.zsh.zsh-abbr.abbreviations.ompl = "omp --model nahsilabs/Qwen/Qwen3.8-Flash-Next";
+  programs.zsh = {
+    zsh-abbr.abbreviations.ompl = "omp --model nahsilabs/Qwen/Qwen3.8-Flash-Next";
+    shellAliases.ompi = "omp --no-session --no-title --config ${incognito} --model nahsilabs/Qwen/Qwen3.8-Flash-Next";
+  };
 }
