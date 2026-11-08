@@ -1,12 +1,13 @@
 {
   modelRoles = {
-    default = "anthropic/claude-opus-5-5:auto";
-    slow = "openai-codex/gpt-6-astra:auto";
-    plan = "openai-codex/gpt-6-astra:medium";
+    default = "anthropic/claude-opus-5-5";
+    slow = "openai-codex/gpt-6-astra";
+    plan = "openai-codex/gpt-6-astra";
     task = "openai-codex/gpt-6.1-sol";
-    smol = "openai-codex/gpt-6.1-sol:low";
+    reviewer = "anthropic/claude-fable-5-1";
+    smol = "openai-codex/gpt-6.1-sol";
     tiny = "local/lfm2.5-230m";
-    advisor = "openai-codex/gpt-6-astra:medium";
+    advisor = "openai-codex/gpt-6-astra";
     local = "nahsilabs/Qwen/Qwen3.8-Flash-Next";
     commit = "@local";
     judge = "nahsilabs/LiquidAI/d1-Omni-2B";
@@ -14,7 +15,7 @@
     dictation = "nahsilabs/nvidia/nemotron-3.5-asr-streaming-0.6b";
     web = "web/parallel";
   };
-  defaultThinkingLevel = "medium";
+  defaultThinkingLevel = "auto";
   disabledProviders = [
     "claude"
     "codex"
@@ -102,6 +103,7 @@
     ];
     maxConcurrency = 4;
     enableEffort = false;
+    perCallModel = "on";
     enableLsp = true;
     isolation.enabled = true;
     showResolvedModelBadge = true;
