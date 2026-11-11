@@ -4,7 +4,7 @@
     slow = "openai-codex/gpt-6-astra";
     plan = "openai-codex/gpt-6-astra";
     task = "openai-codex/gpt-6.1-sol";
-    reviewer = "anthropic/claude-fable-5-1";
+    reviewer = "anthropic/claude-fable-5-2";
     smol = "openai-codex/gpt-6.1-sol";
     tiny = "local/lfm2.5-230m";
     advisor = "openai-codex/gpt-6-astra";
