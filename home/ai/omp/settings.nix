@@ -1,13 +1,13 @@
 {
   modelRoles = {
     default = "anthropic/claude-opus-5-5";
-    slow = "openai-codex/gpt-6-astra";
-    plan = "openai-codex/gpt-6-astra";
-    task = "openai-codex/gpt-6.1-sol";
+    slow = "openai-codex/gpt-6.2-astra";
+    plan = "openai-codex/gpt-6.2-astra";
+    task = "openai-codex/gpt-6.2-sol";
     reviewer = "anthropic/claude-fable-5-2";
-    smol = "openai-codex/gpt-6.1-sol";
+    smol = "openai-codex/gpt-6.2-sol";
     tiny = "local/lfm2.5-230m";
-    advisor = "openai-codex/gpt-6-astra";
+    advisor = "openai-codex/gpt-6.2-astra";
     local = "nahsilabs/Qwen/Qwen3.8-Flash-Next";
     commit = "@local";
     judge = "nahsilabs/LiquidAI/d1-Omni-2B";
