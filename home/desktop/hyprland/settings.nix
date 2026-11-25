@@ -164,7 +164,7 @@
       }
     ];
 
-    # Suspend if an external monitor disconnects while lid is closed.
+    # Suspend on undock with the lid closed.
     on = [
       {
         _args = [
@@ -173,13 +173,19 @@
             function(data)
               local name = tostring(data):match("HL%.Monitor%(%d+:([^)]+)%)")
               if name == "eDP-1" then return end
-              local f = io.open("/proc/acpi/button/lid/LID0/state", "r")
-              if f then
+
+              local function read(path)
+                local f = io.open(path, "r")
+                if not f then return "" end
                 local s = f:read("*a")
                 f:close()
-                if s:match("closed") then
-                  hl.exec_cmd("systemctl suspend-then-hibernate")
-                end
+                return s
+              end
+
+              local lid_closed = read("/proc/acpi/button/lid/LID0/state"):match("closed")
+              local on_ac = read("/sys/class/power_supply/ACAD/online"):match("1")
+              if lid_closed and not on_ac then
+                hl.exec_cmd("systemctl suspend-then-hibernate")
               end
             end
           '')

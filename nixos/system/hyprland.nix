@@ -12,6 +12,8 @@
   boot.kernelParams = [ "console=tty1" ];
   boot.consoleLogLevel = 0;
 
+  security.pam.services.hyprlock = { };
+
   services.greetd = {
     enable = true;
     settings = {

@@ -60,10 +60,11 @@
       percentageAction = 5;
     };
 
+    # The docked monitor drops off in standby, so on AC hypridle owns sleep.
     logind.settings.Login = {
       HandleLidSwitch = "suspend-then-hibernate";
       HandleLidSwitchDocked = "ignore";
-      HandleLidSwitchExternalPower = "suspend-then-hibernate";
+      HandleLidSwitchExternalPower = "ignore";
     };
 
     pipewire = {
